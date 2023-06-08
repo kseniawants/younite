@@ -16,6 +16,7 @@ target/
 .gitignore
 .
 .
+.
 ### IntelliJ IDEA ###
 .idea
 *.iws
