@@ -12,7 +12,13 @@ target/
 .settings
 .springBeans
 .sts4-cache
-
+.DS_Store
+.gitignore
+.
+.
+.
+.
+.
 ### IntelliJ IDEA ###
 .idea
 *.iws
