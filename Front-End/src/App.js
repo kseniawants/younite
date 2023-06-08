@@ -32,6 +32,7 @@ const App = () => {
           element={<Personalinfo />}
         />
         <Route path="/dateweb/src/pages/Home.js" element={<Home />} />
+        <Route path="/dateweb/src/pages/Home.js" element={<Home />} />
       </Routes>
     </Router>
   );
