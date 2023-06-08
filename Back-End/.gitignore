@@ -15,6 +15,7 @@ target/
 .DS_Store
 .gitignore
 .
+.
 ### IntelliJ IDEA ###
 .idea
 *.iws
