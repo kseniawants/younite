@@ -1,0 +1,148 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Noto Sans TC", "Inter", "Poppins";
+}
+
+
+.overlay {
+  background-image: url("./img/landingPage.png");
+  background-size: 100vw 800px;
+}
+
+.logo {
+  color: #fff;
+  margin: 12px 0 0 12px;
+  width: -webkit-fill-available;
+  width: -moz-available;
+  width: stretch;
+  z-index: 100;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: -1;
+}
+
+.buttonArea {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+}
+.buttonArea .registerBtn {
+  font-size: 38px;
+  line-height: 46px;
+  width: 204px;
+  height: 62px;
+  margin-right: 6px;
+  background-color: transparent;
+  color: #fff;
+  border: 5px solid #fa6b6b;
+}
+.buttonArea .registerBtn:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 5px solid #fa6b6b;
+  color: #fa6b6b;
+}
+.buttonArea .loginBtn {
+  font-size: 38px;
+  line-height: 46px;
+  width: 204px;
+  height: 62px;
+  margin-left: 6px;
+  background-color: #fa6b6b;
+}
+.buttonArea .loginBtn:hover {
+  background-color: rgb(255, 134, 134);
+}
+
+.loginBody {
+  overflow: hidden;
+  background-image: none;
+}
+
+.loginMain {
+  width: 100%;
+  background-image: none;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+}
+.loginMain .imageArea {
+  width: 720px;
+  height: 100vh;
+  display: flex;
+  z-index: 99;
+}
+.loginMain .imageArea .loginImage {
+  width: 720px;
+  height: 100vh;
+}
+.loginMain .loginFormArea {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 3;
+  overflow: hidden;
+}
+.loginMain .loginFormArea .bgGradient {
+  display: flex;
+  position: absolute;
+  bottom: -30%;
+  left: 40%;
+}
+.loginMain .loginFormArea .bgGradient2 {
+  display: flex;
+  position: absolute;
+  top: -50%;
+  left: 80%;
+}
+.loginMain .loginFormArea .loginForm {
+  width: 560px;
+  height: 92%;
+  background-color: rgba(255, 255, 255, 0.15);
+  -webkit-backdrop-filter: blur(100px);
+          backdrop-filter: blur(100px);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.loginMain .loginFormArea .loginForm h1 {
+  font-weight: 500;
+}
+.loginMain .loginFormArea .loginForm .loginFormContent {
+  position: relative;
+  background-color: #f4f3fd;
+  width: 400px;
+  padding: 40px;
+  border-radius: 12px;
+  justify-content: center;
+  align-items: center;
+}
+.loginMain .loginFormArea .loginForm .loginFormContent p {
+  color: #c41717;
+  font-size: 10px;
+  position: absolute;
+  right: 0px;
+}
+.loginMain .loginFormArea .loginForm .loginFormContent .ant-form-item {
+  width: 400px;
+  margin: 8px;
+}
+.loginMain .loginFormArea .loginForm .loginFormContent .orDivider {
+  position: relative;
+  width: 400px;
+}
+.loginMain .loginFormArea .loginForm .loginFormContent .orDivider p {
+  position: absolute;
+  left: 48%;
+  color: #000;
+}/*# sourceMappingURL=date.css.map */

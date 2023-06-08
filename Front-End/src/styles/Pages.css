@@ -1,0 +1,14 @@
+.peInfo {
+  background-color: #f4f3fd;
+}
+.peInfo h1 {
+  text-align: center;
+  padding: 48px 0 40px 0;
+}
+.peInfo .from {
+  display: flex;
+  justify-content: center;
+}
+.peInfo .from h3 {
+  padding-bottom: 20px;
+}/*# sourceMappingURL=Pages.css.map */
