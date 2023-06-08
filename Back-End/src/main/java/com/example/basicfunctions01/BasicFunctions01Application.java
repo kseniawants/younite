@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan("com.example.basicfunctions01.mapper")
-public class BasicFunctions01Application {
+public class BasicFunctions01Application gg{
 
 	public static void main(String[] args) {
 		SpringApplication.run(BasicFunctions01Application.class, args);
