@@ -7,11 +7,21 @@
 
 @import './_utilities';
 
-/* 字體引入 */
+/* Google Noto字體引入 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;500&display=swap');
 
 * {
   padding: 0;
   margin: 0;
   font-family: 'Noto Sans TC', 'Inter', 'Poppins', 'sans-serif';
+}
+
+button,
+a {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+img {
+  max-width: 100%;
 }
