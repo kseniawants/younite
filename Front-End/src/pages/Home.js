@@ -1,11 +1,11 @@
 import React from 'react';
-import Nav from '../component/Nav';
+import '../styles/home.scss';
 
 const Home = () => {
   return (
-    <>
-      <Nav />
-    </>
+    <div>
+      <h1>哈哈哈哈</h1>
+    </div>
   );
 };
 

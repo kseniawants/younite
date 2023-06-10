@@ -3,7 +3,10 @@
 }
 
 .badge {
+  font-size: 0.25rem;
   position: absolute;
-  top: -8px;
-  right: -40px;
+  top: -0.25rem;
+  left: 0.75rem;
+  border-radius: 100%;
+  padding: 0.2rem 0.35rem;
 }
