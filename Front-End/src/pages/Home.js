@@ -1,12 +1,11 @@
 import React from 'react';
-import Nav from '../component/Nav';
 
-const Home = () => {
+function Home() {
   return (
     <>
-      <Nav />
+      <h1>嗨</h1>
     </>
   );
-};
+}
 
 export default Home;
