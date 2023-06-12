@@ -1,44 +1,24 @@
-<<<<<<< HEAD
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import React from 'react';
-import Home from './pages/Home';
-
-function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LandingPage />} exact />
-        <Route path="/dateweb/src/pages/login.js" element={<Login />} />
-        <Route
-          path="/dateweb/src/pages/Personalinfo.js"
-          element={<Personalinfo />}
-        />
-        <Route
-          path="/dateweb/src/pages/Personalinfo.js"
-          element={<Personalinfo />}
-        />
-        <Route path="/dateweb/src/pages/Home.js" element={<Home />} />
-        <Route path="/dateweb/src/pages/Home.js" element={<Home />} />
-      </Routes>
-    </Router>
-  );
-}
-
-export default App;
-=======
 import { Routes, Route } from 'react-router-dom';
-import React from 'react';
-import PersonalInfo from './pages/PersonalInfo';
-
+import SideNav from './component/SideNav';
+import Home from './pages/Home';
+import UserInfo from './pages/UserInfo';
 function App() {
   return (
-    <div>
-      <Routes>
-        <Route path="/" element={<PersonalInfo />} />
-      </Routes>
+    <div className='App container-fluid'>
+      <div className='row'>
+        <div className='col-2 p-0'>
+          <SideNav />
+        </div>
+        <div className='col-10'>
+          <Routes>
+            <Route path='/home' element={<Home />}></Route>
+            <Route path='/userinfo' element={<UserInfo />}></Route>
+          </Routes>
+        </div>
+      </div>
     </div>
   );
 }
 
 export default App;
->>>>>>> 1cae526f2ee27dc1cd33762cf9928750fddac248
