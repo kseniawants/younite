@@ -19,3 +19,8 @@ body {
 img {
   max-width: 100%;
 }
+
+// 設置FormElements.js裡Input的placeholder
+.form-control::placeholder {
+  color: var(--placeholder-color);
+}
