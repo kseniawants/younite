@@ -8,7 +8,7 @@ const PersonalInfo = () => {
         <h3 >建立帳號</h3>
       </div>
         <Info/>
-      <div className='d-flex flex-column-reverse flex-md-row py-4 justify-content-center align-items-md-center align-items-end w-100'>
+      <div className='d-flex flex-column-reverse flex-md-row py-4 justify-content-center align-items-md-center align-items-center w-100'>
         <button
         type='submit'
         className='btn btn-primary rounded text-white'
