@@ -1,18 +1,22 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import SideNav from './component/SideNav';
 import Home from './pages/Home';
-
+import UserInfo from './pages/UserInfo';
 function App() {
   return (
-    <div className='App'>
-      <Router>
-        <Routes>
-          <Route path='/' element={<SideNav />}>
-            <Route path='' element={<Home />}></Route>
-          </Route>
-        </Routes>
-      </Router>
+    <div className='App container-fluid'>
+      <div className='row'>
+        <div className='col-4 '>
+          <SideNav />
+        </div>
+        <div className='col-8'>
+          <Routes>
+            <Route path='/home' element={<Home />}></Route>
+            <Route path='/userinfo' element={<UserInfo />}></Route>
+          </Routes>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,9 +1,14 @@
+nav {
+  height: 100vh;
+  overflow-y: auto;
+}
+
 .fa-layers.fa-fw {
   position: relative;
 }
 
 .badge {
-  font-size: 0.25rem;
+  font-size: 12px;
   position: absolute;
   top: -0.25rem;
   left: 0.75rem;
@@ -11,13 +16,18 @@
   padding: 0.2rem 0.35rem;
 }
 
-nav img {
-  height: 50px;
-}
 .nav-bottom i {
   color: #c3c3c3;
 }
 
-.nav-userName {
-  font-size: 8px;
+.nav-text {
+  font-size: 12px;
+}
+
+.container-fluid {
+  position: relative;
+}
+
+h1 {
+  padding-left: 100px;
 }
