@@ -10,7 +10,7 @@
 /* Google Noto字體引入 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;500&display=swap');
 
-* {
+body {
   padding: 0;
   margin: 0;
   font-family: 'Noto Sans TC', 'Inter', 'Poppins', 'sans-serif';
@@ -18,4 +18,9 @@
 
 img {
   max-width: 100%;
+}
+
+// 設置FormElements.js裡Input的placeholder
+.form-control::placeholder {
+  color: var(--placeholder-color);
 }
