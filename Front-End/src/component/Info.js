@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/nav.scss';
+import '../styles/all.scss';
 import { useForm } from 'react-hook-form';
 import { Input  } from './FormElements';
 import { DatePicker, Button, Divider } from 'antd';
@@ -69,7 +69,7 @@ function Info() {
                 key={idx}
                 id={`radio-gender-${idx}`}
                 type="radio"
-                variant={'outline-info'}
+                variant={'outline-radio'}
                 name="radio-gender"
                 className='mt-2 me-4 px-4 rounded shadow-sm bg-white'
                 value={radio.value}
@@ -92,7 +92,7 @@ function Info() {
                 key={idx}
                 id={`radio-orientation-${idx}`}
                 type="radio"
-                variant={'outline-info'}
+                variant={'outline-radio'}
                 name="radio-orientation"
                 className='mt-2 me-4 px-3 rounded shadow-sm bg-white'
                 value={radio.value}
@@ -115,7 +115,7 @@ function Info() {
                 key={idx}
                 id={`radio-display-${idx}`}
                 type="radio"
-                variant={'outline-info'}
+                variant={'outline-radio'}
                 name="radio-display"
                 className='mt-2 me-4 px-4 rounded shadow-sm bg-white'
                 value={radio.value}
@@ -150,8 +150,7 @@ function Info() {
         <Divider plain style={{color: '#BBBBBB'}}>選填</Divider>
         <div className='d-flex pb-4'>
           <div className='mb-2 pe-5'>
-            <i className="fa-solid fa-heart-circle-plus text-black"></i>
-            <span className="text-danger p-1">*</span>
+            <i className="fa-solid fa-heart-circle-plus text-black pe-2"></i>
             <label className='mb-2'>興趣</label>
             <br />
             <Button type="dashed" >
@@ -159,8 +158,7 @@ function Info() {
             </Button>
           </div>
           <div className='mb-2'>
-            <i className="fa-solid fa-volume-low text-black"></i>
-            <span className="text-danger p-1">*</span>
+            <i className="fa-solid fa-volume-low text-black pe-2"></i>
             <label className='mb-2'>語音自我介紹</label>
             <br />
             <Button type="dashed d-flex col align-items-center" >
@@ -172,8 +170,7 @@ function Info() {
           </div>
         </div>
         <div className='pb-4'>
-          <i className="fa-solid fa-pen-to-square text-black"/>
-          <span className="text-danger p-1">*</span>
+          <i className="fa-solid fa-pen-to-square text-black pe-2"/>
           <label htmlFor="exampleFormControlTextarea1" className="form-label mb-2">文字自我介紹</label>
           <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
