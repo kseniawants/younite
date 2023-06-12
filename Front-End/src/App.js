@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import React from 'react';
 import Home from './pages/Home';
@@ -24,3 +25,20 @@ function App() {
 }
 
 export default App;
+=======
+import { Routes, Route } from 'react-router-dom';
+import React from 'react';
+import PersonalInfo from './pages/PersonalInfo';
+
+function App() {
+  return (
+    <div>
+      <Routes>
+        <Route path="/" element={<PersonalInfo />} />
+      </Routes>
+    </div>
+  );
+}
+
+export default App;
+>>>>>>> 1cae526f2ee27dc1cd33762cf9928750fddac248
