@@ -7,7 +7,7 @@ import '../styles/component/nav.scss';
 function Nav() {
   return (
     <>
-      <nav className='bg-secondary d-flex justify-content-between flex-column align-items-center'>
+      <nav className='bg-secondary d-flex p-0 justify-content-between flex-column align-items-center'>
         <div className='text-decoration-none mt-4 d-flex flex-column align-items-center'>
           <img src={Logo} alt='YouNite-Logo' className='mb-5' style={{ height: '30px' }} />
           <Image src={Logo} roundedCircle className='bg-white' style={{ height: '50px' }} />

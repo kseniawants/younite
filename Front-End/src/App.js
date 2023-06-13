@@ -6,7 +6,7 @@ import UserInfo from './pages/UserInfo';
 
 function App() {
   return (
-    <div className='App container-fluid'>
+    <div className='App'>
       <Routes>
         <Route path='/' element={<PersonalInfo />} />
         <Route path='/home' element={<Home />}></Route>

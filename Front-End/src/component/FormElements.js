@@ -1,16 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-export const CheckboxRadio = ({
-  id,
-  labelText,
-  register,
-  type,
-  errors,
-  rules,
-  value,
-  name,
-}) => {
+export const CheckboxRadio = ({ id, labelText, register, type, errors, rules, value, name }) => {
   return (
     <>
       <div className='form-check'>
@@ -26,9 +17,7 @@ export const CheckboxRadio = ({
         <label className='form-check-label' htmlFor={id}>
           {labelText}
         </label>
-        {errors[name] && (
-          <div className='invalid-feedback'>{errors[name]?.message}</div>
-        )}
+        {errors[name] && <div className='invalid-feedback'>{errors[name]?.message}</div>}
       </div>
     </>
   );
@@ -57,11 +46,12 @@ export const Input = ({ id, labelText, placeholder, register, type, errors, rule
         placeholder={placeholder}
         className={`form-control ${errors[id] && 'is-invalid'}`}
         {...register(id, rules)}
-        style={{ '--placeholder-color': 'rgba(0, 0, 0, 0.2)',boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.08)' }}
+        style={{
+          '--placeholder-color': 'rgba(0, 0, 0, 0.2)',
+          boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.08)',
+        }}
       />
-      {errors[id] && (
-        <div className='invalid-feedback'>{errors[id]?.message}</div>
-      )}
+      {errors[id] && <div className='invalid-feedback'>{errors[id]?.message}</div>}
     </>
   );
 };
@@ -116,4 +106,3 @@ Input.propTypes = {
 //   ariaLabel: PropTypes.string.isRequired,
 //   value: PropTypes.string,
 // };
-
