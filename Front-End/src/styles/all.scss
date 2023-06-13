@@ -24,3 +24,8 @@ img {
 .form-control::placeholder {
   color: var(--placeholder-color);
 }
+
+/* 聊天室的hover */
+#userChat:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}

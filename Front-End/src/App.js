@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import PersonalInfo from './pages/PersonalInfo';
+import ChatRoom from './pages/ChatRoom';
 import Home from './pages/Home';
 import UserInfo from './pages/UserInfo';
 
@@ -8,7 +8,7 @@ function App() {
   return (
     <div className='App'>
       <Routes>
-        <Route path='/' element={<PersonalInfo />} />
+        <Route path='/' element={<ChatRoom />} />
         <Route path='/home' element={<Home />}></Route>
         <Route path='/userinfo' element={<UserInfo />}></Route>
       </Routes>
