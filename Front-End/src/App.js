@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import PersonalInfo from './pages/PersonalInfo';
@@ -13,20 +12,6 @@ function App() {
         <Route path='/home' element={<Home />}></Route>
         <Route path='/userinfo' element={<UserInfo />}></Route>
       </Routes>
-=======
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import React from 'react';
-import ChatRoom from './pages/ChatRoom';
-
-function App() {
-  return (
-    <div>
-      <Router>
-        <Routes>
-          <Route path="/" element={<ChatRoom />} />
-        </Routes>
-      </Router>
->>>>>>> origin/dev
     </div>
   );
 }
