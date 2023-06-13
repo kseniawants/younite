@@ -5,7 +5,7 @@ import MessageBar from '../component/Message/MessageBar'
 const ChatRoom = () => {
   return (
     <div className="">
-        <div className="row full-width">
+        <div className="row mw-100">
             <div className="col-2 text-white bg-dark">
                 Column
             </div>
