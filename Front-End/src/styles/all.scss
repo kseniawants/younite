@@ -10,17 +10,36 @@
 /* Google Noto字體引入 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;500&display=swap');
 
-body {
+body,
+html {
   padding: 0;
   margin: 0;
+  height: 100vh;
+}
+
+body {
   font-family: 'Noto Sans TC', 'Inter', 'Poppins', 'sans-serif';
+  transition: 0.25s;
+  align-items: center;
+  justify-content: center;
 }
 
 img {
-  max-width: 100%;
+  background-size: cover;
+  background-position: center;
 }
 
-// 設置FormElements.js裡Input的placeholder
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* 設置FormElements.js裡Input的placeholder */
 .form-control::placeholder {
   color: var(--placeholder-color);
 }

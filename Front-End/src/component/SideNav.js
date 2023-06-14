@@ -1,17 +1,17 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Logo from '../assets/logo/logo.png';
-import Image from 'react-bootstrap/Image';
 import '../styles/component/nav.scss';
+import UserImage from '../assets/images/sia.png';
 
 function Nav() {
   return (
     <>
       <nav className='bg-secondary d-flex p-0 justify-content-between flex-column align-items-center'>
-        <div className='text-decoration-none mt-4 d-flex flex-column align-items-center'>
+        <div className='text-decoration-none mt-5 d-flex flex-column align-items-center'>
           <img src={Logo} alt='YouNite-Logo' className='mb-5' style={{ height: '30px' }} />
-          <Image src={Logo} roundedCircle className='bg-white' style={{ height: '50px' }} />
-          <span className='text-black nav-text'>Cindy 24</span>
+          <img src={UserImage} alt='Your Picture' className='mb-1 round-image user-image' />
+          <h6 className='text-black nav-text mt-2'>Cindy 24</h6>
         </div>
         <ul className='nav flex-column fs-5'>
           <li className='nav-item'>
