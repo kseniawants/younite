@@ -5,7 +5,7 @@ import '../../styles/messageItem.scss'
 
 const Messages = () => {
   return (
-    <div className='bg-dark p-2 overflow-auto' id='messages' style={{ height: 'calc(100vh - 130px)' }}>
+    <div className='p-2 overflow-auto border-bottom' id='messages' style={{ height: 'calc(100vh - 130px)' }}>
       <MessageItem/>
       <MessageItem/>
       <MessageItem/>
