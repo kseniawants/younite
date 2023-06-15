@@ -7,10 +7,10 @@ function HomeLayout() {
     <div>
       <div className='container-fluid'>
         <div className='row'>
-          <div className='p-0 col-1'>
+          <div className='p-0'>
             <SideNav />
           </div>
-          <div className='bg-page col-11'>
+          <div className='bg-page'>
             <Outlet />
           </div>
         </div>
