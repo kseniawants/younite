@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Input  } from './FormElements';
 import { DatePicker, Button, Divider } from 'antd';
 import { ButtonGroup, ToggleButton } from 'react-bootstrap';
+import Hobbies from './Hobbies';
 
 function Info() {
     const {
@@ -49,6 +50,24 @@ function Info() {
               required: '姓名為必填',
             }}
             
+          ></Input>
+        </div>
+        <div className='pb-4 w-50'>
+          <i className="fa-solid fa-phone text-black"/>
+          <span className="text-danger p-1">*</span>
+          <Input
+            id='tel'
+            labelText='電話'
+            type='tel'
+            errors={errors}
+            register={register}
+            rules={{
+              required: '電話為必填',
+              pattern: {
+                value: /^[0-9]{10}$/,
+                message: '電話必須是 10 位數字',
+              },
+            }}
           ></Input>
         </div>
         <div className='pb-4'>
@@ -127,6 +146,13 @@ function Info() {
             ))}
           </ButtonGroup>
         </div>
+        <div className='pb-4'>
+          <i className="fa-solid fa-heart-circle-plus text-black"></i>
+          <span className="text-danger p-1">*</span>
+          <label className='mb-2'>興趣</label>
+          <br />
+          <Hobbies/>
+        </div>
         <div className='d-flex pb-4'>
           <div className='mb-2 pe-5'>
             <i className="fa-solid fa-magnifying-glass text-black"></i>
@@ -137,7 +163,7 @@ function Info() {
                 +新增交友目標
             </Button>
           </div>
-          <div className='mb-2'>
+          <div className='mb-2 ps-5'>
             <i className="fa-solid fa-location-dot text-black"></i>
             <span className="text-danger p-1">*</span>
             <label className='mb-2'>出沒地點</label>
@@ -148,26 +174,17 @@ function Info() {
           </div>
         </div>
         <Divider plain style={{color: '#BBBBBB'}}>選填</Divider>
-        <div className='d-flex pb-4'>
-          <div className='mb-2 pe-5'>
-            <i className="fa-solid fa-heart-circle-plus text-black pe-2"></i>
-            <label className='mb-2'>興趣</label>
-            <br />
-            <Button type="dashed" >
-                +新增興趣
-            </Button>
-          </div>
-          <div className='mb-2'>
-            <i className="fa-solid fa-volume-low text-black pe-2"></i>
-            <label className='mb-2'>語音自我介紹</label>
-            <br />
-            <Button type="dashed d-flex col align-items-center" >
-              <i className="fa-solid fa-volume-high text-black pe-1"></i>
-              <div className='circle rounded-circle me-1' style={{backgroundColor:"#D3D3D3", width:"4px", height:"4px"}}></div>
-              <div className='circle rounded-circle me-1' style={{backgroundColor:"#D3D3D3", width:"4px", height:"4px"}}></div>
-              <div className='circle rounded-circle me-1' style={{backgroundColor:"#D3D3D3", width:"4px", height:"4px"}}></div>
-            </Button>
-          </div>
+        
+        <div className='pb-4'>
+          <i className="fa-solid fa-volume-low text-black pe-2"></i>
+          <label className='mb-2'>語音自我介紹</label>
+          <br />
+          <Button type="dashed d-flex col align-items-center" >
+            <i className="fa-solid fa-volume-high text-black pe-1"></i>
+            <div className='circle rounded-circle me-1' style={{backgroundColor:"#D3D3D3", width:"4px", height:"4px"}}></div>
+            <div className='circle rounded-circle me-1' style={{backgroundColor:"#D3D3D3", width:"4px", height:"4px"}}></div>
+            <div className='circle rounded-circle me-1' style={{backgroundColor:"#D3D3D3", width:"4px", height:"4px"}}></div>
+          </Button>
         </div>
         <div className='pb-4'>
           <i className="fa-solid fa-pen-to-square text-black pe-2"/>
