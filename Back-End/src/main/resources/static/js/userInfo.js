@@ -9,23 +9,28 @@ window.onload = function () {
     buildUserInfoBtn.addEventListener("click", function (event) {
         event.preventDefault();
         let fullName = document.getElementById("fullName").value;
+        // let birthday = new Date(document.getElementById("birthday").value).toISOString();
         let birthday = document.getElementById("birthday").value;
         let gender = document.getElementById("gender").value;
         let sexualOrientation = document.getElementById("sexualOrientation").value;
         let location = document.getElementById("location").value;
         let self_intro = document.getElementById("self_intro").value;
+        let fileInput = document.getElementById("file");
+        let file = fileInput.files[0];
+        let formData = new FormData();
+        formData.append("fullName", fullName);
+        formData.append("birthday", formatDate(birthday));
+        formData.append("gender", gender);
+        formData.append("sexualOrientation", sexualOrientation);
+        formData.append("location", location);
+        formData.append("self_intro", self_intro);
+        formData.append("file", file);
+        console.log(file);
         $.post({
             url: apiUrl.userInfoUrl,
-            contentType: "application/json;charset=UTF-8",
-            data: JSON.stringify({
-                "fullName": fullName,
-                "birthday": birthday,
-                "gender": gender,
-                "sexualOrientation": sexualOrientation,
-                "location": location,
-                "self_intro": self_intro
-            }),
-            dataType: "JSON",
+            contentType: false,
+            processData: false,
+            data: formData,
             success: function (json) {
                 if (json.state == 200) {
                     alert("用戶資料建立成功!");
@@ -44,5 +49,16 @@ window.onload = function () {
         });
     })
 }
+
+function formatDate(dateStr) {
+    // 將日期字串轉換為指定格式（例如：yyyy-MM-dd）
+    let dateObj = new Date(dateStr);
+    let year = dateObj.getFullYear();
+    let month = String(dateObj.getMonth() + 1).padStart(2, '0');
+    let day = String(dateObj.getDate()).padStart(2, '0');
+    let formattedDate = `${year}-${month}-${day}`;
+    return formattedDate;
+}
+
 
 

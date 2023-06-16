@@ -27,8 +27,8 @@ public class LoginInterceptorConfig implements WebMvcConfigurer {
         whiteLists.add("/register.html");
         whiteLists.add("/login.html");
         whiteLists.add("/index.html");
-        whiteLists.add("/register");
-        whiteLists.add("/login");
+        whiteLists.add("/users/register");
+        whiteLists.add("/users/login");
 
         //黑名單(用戶不可隨意訪問的url), param: String
         registry.addInterceptor(interceptor)
