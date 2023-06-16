@@ -1,19 +1,21 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import '../styles/component/bdGradient.scss';
+import '../styles/home.scss';
 import PeoplePhoto from '../component/User/PeoplePhoto';
 
 function Home() {
   return (
     <>
-      <div className='bg-pageMain'>
-        <div className='bg-pageTitle'>
+      <section className='bg-pageMain row d-flex'>
+        <div className='bg-pageTitle d-flex'>
           <h5>你可能喜歡</h5>
           <Button>
             <i className='fa-solid fa-filter text-white'> 篩選</i>
           </Button>
         </div>
-        <div className='bg-pagePhoto'>
+        <div className='bg-pagePhoto d-flex'>
+          <PeoplePhoto />
           <PeoplePhoto />
           <PeoplePhoto />
           <PeoplePhoto />
@@ -21,11 +23,11 @@ function Home() {
           <PeoplePhoto />
           <PeoplePhoto />
         </div>
-        <div className='bg-pageMore'>
+        <div className='bg-pageMore d-flex'>
           <a href=''>顯示更多...</a>
         </div>
-      </div>
-      <div className='homPageBottom'>
+      </section>
+      <section className='homPageBottom'>
         <div className='bg-pageBottomCard'>
           <h6>你可能喜歡</h6>
         </div>
@@ -35,7 +37,7 @@ function Home() {
         <div className='bg-pageBottomCard'>
           <h6>你可能喜歡</h6>
         </div>
-      </div>
+      </section>
     </>
   );
 }

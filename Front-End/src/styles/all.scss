@@ -29,6 +29,7 @@ img {
   background-position: center;
 }
 
+/* 把 margin、padding會被border吃掉的設定取消 */
 *,
 *:before,
 *:after {
@@ -47,4 +48,13 @@ a {
 /* 聊天室的hover */
 #userChat:hover {
   background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Nav的hover */
+.router-link-active {
+  @apply bg-indigo-800;
+}
+
+.home-layout-container {
+  position: relative;
 }

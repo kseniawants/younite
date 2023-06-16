@@ -7,7 +7,7 @@ import UserInfo from './pages/UserInfo';
 
 function App() {
   return (
-    <div className='App'>
+    <>
       <Routes>
         <Route path='/personal' element={<PersonalInfo />}></Route>
         <Route path='/' element={<HomeLayout />}>
@@ -15,7 +15,7 @@ function App() {
           <Route path='/userinfo' element={<UserInfo />}></Route>
         </Route>
       </Routes>
-    </div>
+    </>
   );
 }
 
