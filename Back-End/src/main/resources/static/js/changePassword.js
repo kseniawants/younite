@@ -1,9 +1,9 @@
 let apiUrl = {
-    changePasswordUrl: "/passwordUpdate",
+    changePasswordUrl: "/users/passwordUpdate",
     //TODO: 修改密碼成功跳轉頁面需要更新
     changePasswordSuccess: "index.html",
     //TODO: 登入失敗跳轉頁面需要更新
-    changePasswordFailure: "/login"
+    changePasswordFailure: "/users/login"
 
 }
 
