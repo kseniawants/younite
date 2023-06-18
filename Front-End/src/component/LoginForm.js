@@ -19,6 +19,10 @@ function LoginForm () {
     const onSubmit = async () => {
       try {
         setSubmitting(true);
+  
+        // const { name, email, tel, password, confirmPassword } = data;
+        // Perform form submission operations
+        // ...
       } catch (error) {
         console.error(error);
       } finally {
@@ -34,18 +38,18 @@ function LoginForm () {
     };
   
     return (
-      <div className='bg-light full-height'>
-        <div className='container vh-100 vw-50 d-flex'>
-          <div className='row  justify-content-center align-items-center'>
+       <div className='container p-0'>
+        <div className='bg-light vh-100 d-flex justify-content-center align-items-center'>
+          <div className='row'>
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className='shadow py-4 px-4 rounded-3 justify-content-center align-items-center bg-light bg-opacity-25'
+              className='shadow rounded-3 bg-light bg-opacity-25 p-3'
               style={{ zIndex: '1' }}
             >
-              <h4 className='fw-bold text-center mb-3'>登入</h4>
+              <h4 className='fw-bold text-center'>登入</h4>
               <div
-                className='bg-secondary px-4 py-3 rounded-3'
-                style={{ width: '495px', height: '480px' }}
+                className='bg-secondary px-4 py-3 rounded-3 w-35'
+                // style={{ width: '495px', height: '610px' }}
               >
                 <div className='mb-1'>
                   <Input
@@ -84,7 +88,7 @@ function LoginForm () {
                     disabled={submitting}
                     style={{ color: '#fff', width: '113px', height: '38px' }}
                   >
-                    {submitting ? '正在註冊...' : '註冊'}
+                    {submitting ? '正在登入...' : '登入'}
                   </button>
                 </div>
                 <div className='pt-3 pb-1 d-flex flex-column align-items-center justify-content-center'>

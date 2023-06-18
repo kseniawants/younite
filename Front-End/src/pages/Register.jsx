@@ -1,5 +1,4 @@
-import React, { useEffect, } from "react";
-import registerImage from "../assets/images/register.png";
+import React, {useEffect} from "react";
 import Gradient from "../assets/images/bgc.png";
 // import { Link } from "react-router-dom";
 import Form from "../component/RegisterForm";
@@ -13,14 +12,18 @@ function Register() {
   }, []);
 
   return (
-    <main className="container-fluid">
-      <div className="loginMain d-flex row overflow-hidden bg-white flex-row ">
-        <div className="imageArea d-flex position-relative col">
-          <img src={registerImage} alt="registerImage" className="registerImage position-absolute t-50 start-0" />
+    <main className="">
+      <div className="row mw-100">
+        <div className="col-6 p-0">
+          <img src="https://images.unsplash.com/photo-1570750034176-c65eba795ad8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80" 
+            alt="registerImage" 
+            className="w-100 vh-100"
+            style={{objectFit: "cover"}}
+            />
         </div>
-        <div className="registerFormArea position-relative d-flex justify-content-center align-items-center w-50% col">
+        <div className="col-6 overflow-hidden p-0 position-relative">
           <Form />
-          <img src={Gradient} alt="bgGradient" className=" d-flex position-absolute top-100 start-5 translate-middle" />
+          <img src={Gradient} alt="bgGradient" className=" d-flex position-absolute top-100 start-0 translate-middle" />
           <img src={Gradient} alt="bgGradient" className=" d-flex position-absolute top-0 start-100 translate-middle" />
         </div>
       </div>

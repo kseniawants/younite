@@ -7,12 +7,25 @@ import { ButtonGroup, ToggleButton } from 'react-bootstrap';
 import Hobbies from './Hobbies';
 
 function Info() {
+  const [submitting, setSubmitting] = useState(false);
     const {
       register,
+      handleSubmit,
       formState: { errors },
     } = useForm({
       mode: 'onTouched',
     });
+
+    const onSubmit = async () => {
+      try {
+        setSubmitting(true);
+        // navigate('/src/pages/PersonalInfo.jsx');
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setSubmitting(false);
+      }
+    };
 
     const onChange = (date, dateString) => {
         console.log(date, dateString);
@@ -59,6 +72,7 @@ function Info() {
             id='tel'
             labelText='電話'
             type='tel'
+            placeholder='輸入手機號碼'
             errors={errors}
             register={register}
             rules={{
@@ -201,6 +215,11 @@ function Info() {
         </div>
       </div>
     </form>
+    <div className='d-flex flex-column-reverse flex-md-row py-4 justify-content-center align-items-md-center align-items-center w-100'>
+        <button type='submit' className='btn btn-primary rounded text-white' disabled={submitting} onClick={handleSubmit(onSubmit)}>
+          {submitting ? '正在送出表單...' : '送出表單'}
+        </button>
+      </div>
     </div>
   );
 }

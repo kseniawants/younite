@@ -36,18 +36,18 @@ function RegisterForm() {
   };
 
   return (
-    <div className='bg-light full-height'>
-      <div className='container vh-100 vw-50 d-flex'>
-        <div className='row  justify-content-center align-items-center'>
+    <div className='container p-0'>
+      <div className='bg-light vh-100 d-flex justify-content-center align-items-center'>
+        <div className='row'>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className='shadow py-3 px-4 rounded-3 justify-content-center align-items-center bg-light bg-opacity-25'
+            className='shadow rounded-3 bg-light bg-opacity-25 p-3'
             style={{ zIndex: '1' }}
           >
-            <h4 className='fw-bold text-center '>註冊</h4>
+            <h4 className='fw-bold text-center'>註冊</h4>
             <div
-              className='bg-secondary px-4 py-3 rounded-3'
-              style={{ width: '495px', height: '610px' }}
+              className='bg-secondary px-4 py-3 rounded-3 w-35'
+              // style={{ width: '495px', height: '610px' }}
             >
               <div className='mb-1'>
                 <Input
@@ -79,26 +79,6 @@ function RegisterForm() {
                   }}
                 ></Input>
               </div>
-              {/* <div className='mb-1'>
-                <Input
-                  id='tel'
-                  labelText='手機號碼'
-                  type='tel'
-                  errors={errors}
-                  register={register}
-                  rules={{
-                    required: '手機號碼為必填',
-                    minLength: {
-                      value: 6,
-                      message: '手機號碼不少於 6 碼',
-                    },
-                    maxLength: {
-                      value: 12,
-                      message: '手機號碼不超過 12 碼',
-                    },
-                  }}
-                ></Input>
-              </div> */}
               <div className='mb-1'>
                 <Input
                   id='password'
@@ -189,6 +169,7 @@ function RegisterForm() {
         </div>
       </div>
     </div>
+    
   );
 }
 
