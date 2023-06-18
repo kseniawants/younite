@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import PersonalInfo from './pages/PersonalInfo';
 import HomeLayout from './component/HomeLayout';
 import Home from './pages/Home';
-import UserInfo from './pages/UserInfo';
+import SettingPersonal from './pages/SettingPersonal';
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
         <Route path='/personal' element={<PersonalInfo />}></Route>
         <Route path='/' element={<HomeLayout />}>
           <Route path='/home' element={<Home />}></Route>
-          <Route path='/userinfo' element={<UserInfo />}></Route>
+          <Route path='/setting' element={<SettingPersonal />}></Route>
         </Route>
       </Routes>
     </>

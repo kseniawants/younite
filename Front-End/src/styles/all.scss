@@ -29,13 +29,6 @@ img {
   background-position: center;
 }
 
-/* 把 margin、padding會被border吃掉的設定取消 */
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-}
-
 a {
   text-decoration: none;
 }
@@ -53,8 +46,4 @@ a {
 /* Nav的hover */
 .router-link-active {
   @apply bg-indigo-800;
-}
-
-.home-layout-container {
-  position: relative;
 }

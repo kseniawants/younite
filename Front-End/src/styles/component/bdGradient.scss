@@ -1,7 +1,7 @@
 .bg-page-gradient {
-  padding: 2.75rem 5rem;
+  padding: 1.25rem 5rem;
   min-height: 100vh;
-
+  margin-left: 10%;
   background-image: url('../../assets/images/bgc.png'), url('../../assets/images/bgc.png');
   background-repeat: no-repeat, no-repeat;
   /* background-position: calc(100% - 50rem) calc(100% - 20rem), calc(100% + 60rem) calc(100% + 50rem); */
@@ -10,7 +10,7 @@
   /* background-size: cover, cover; */
 
   .bg-pageMain {
-    padding: 2rem;
+    padding: 1.25rem;
     background-color: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(100px);
     -webkit-backdrop-filter: blur(100px);

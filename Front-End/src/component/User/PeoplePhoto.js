@@ -7,7 +7,7 @@ const PeoplePhoto = () => {
   return (
     <>
       <Image
-        style={{ margin: '1.25rem 1.25rem 1.25rem 0', padding: '0 1.25rem 0 0' }}
+        style={{ padding: '0 1.25rem 0 0' }}
         preview={{ visible: false }}
         width={180}
         src='https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp'

@@ -1,11 +1,11 @@
 nav {
   box-shadow: 15px 0px 10px -15px rgba(0, 0, 0, 0.1);
   min-height: 100vh;
-  /* max-width: 200px; */
-  /* position: sticky; */
+  min-width: 10%;
+  position: fixed;
 }
 
-.user-image {
+.nav-user-image {
   height: 80px;
   width: 80px;
   border-radius: 50%;

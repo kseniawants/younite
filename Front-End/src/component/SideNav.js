@@ -10,10 +10,10 @@ function Nav() {
       <nav className='bg-secondary d-flex p-0 justify-content-between flex-column align-items-center'>
         <div className='text-decoration-none mt-5 d-flex flex-column align-items-center'>
           <img src={Logo} alt='YouNite-Logo' className='mb-5' style={{ height: '20px' }} />
-          <img src={UserImage} alt='Your Picture' className='mb-1 round-image user-image' />
+          <img src={UserImage} alt='Your Picture' className='mb-1 nav-user-image' />
           <h6 className='text-black nav-text mt-2'>Cindy 24</h6>
         </div>
-        <ul className='nav flex-column fs-5'>
+        <ul className='nav flex-column fs-5 align-items-center'>
           <li className='nav-item'>
             <NavLink to='/home' className='nav-link' aria-current='page'>
               <i className='fa-solid fa-house text-black'></i>
@@ -33,12 +33,12 @@ function Nav() {
             </NavLink>
           </li>
           <li className='nav-item'>
-            <NavLink to='/friends' className='nav-link'>
-              <i className='fa-solid fa-heart text-black'></i>
+            <NavLink to='/robot' className='nav-link'>
+              <i className='fa-solid fa-robot text-black'></i>
             </NavLink>
           </li>
           <li className='nav-item'>
-            <NavLink to='/userinfo' className='nav-link'>
+            <NavLink to='/setting' className='nav-link'>
               <i className='fa-solid fa-gear text-black'></i>
             </NavLink>
           </li>
