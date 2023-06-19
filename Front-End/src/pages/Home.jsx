@@ -1,5 +1,4 @@
 import React from 'react';
-
 import '../styles/component/bdGradient.scss';
 import '../styles/home.scss';
 import PeoplePhoto from '../component/User/PeoplePhoto';
