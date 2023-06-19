@@ -4,18 +4,12 @@ import SideNav from '../component/SideNav';
 
 function HomeLayout() {
   return (
-    <div>
-      <div className='container-fluid'>
-        <div className='row'>
-          <div className='p-0'>
-            <SideNav />
-          </div>
-          <div className='bg-page'>
-            <Outlet />
-          </div>
-        </div>
-      </div>
-    </div>
+    <>
+      <SideNav />
+      <main className='bg-page-gradient'>
+        <Outlet />
+      </main>
+    </>
   );
 }
 
