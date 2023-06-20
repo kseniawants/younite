@@ -1,7 +1,9 @@
 package com.example.basicfunctions01.controller;
 
 import com.example.basicfunctions01.service.exception.*;
+import com.example.basicfunctions01.service.uploadException.*;
 import com.example.basicfunctions01.util.JSONResult;
+import org.apache.tomcat.util.http.fileupload.impl.FileUploadIOException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.servlet.http.HttpSession;
@@ -40,6 +42,24 @@ public class BaseController {
         } else if (e instanceof InsertProfileException) {
             result.setState(5003);
             result.setMessage("伺服器異常，無法新增個人資料，請稍後再嘗試!");
+        } else if (e instanceof FileTypeException) {
+            result.setState(6001);
+            result.setMessage("文件格式錯誤，無法上傳");
+        } else if (e instanceof FileEmptyException) {
+            result.setState(6002);
+            result.setMessage("文件為空，無法上傳");
+        } else if (e instanceof FileSizeException) {
+            result.setState(6003);
+            result.setMessage("文件檔案過大，無法上傳");
+        } else if (e instanceof FileStateException) {
+            result.setState(6004);
+            result.setMessage("文件狀態異常");
+        } else if (e instanceof FileUploadIOException) {
+            result.setState(6005);
+            result.setMessage("文件IO異常");
+        } else if (e instanceof FileUploadException) {
+            result.setState(6006);
+            result.setMessage("文件上傳時發生異常!");
         }
         return result;
     }

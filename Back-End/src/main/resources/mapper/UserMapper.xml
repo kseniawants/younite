@@ -52,15 +52,15 @@
         INSERT INTO PROFILES
         (`profile_id`, `user_id`, `full_name`, `birthday`, `profile_pic`,
          `gender`, `sexual_orientation`, `preferred_gender`,
-         `dating_goal`, `self_intro`, `location`, `blocked_id`)
+         `dating_goal`, `self_intro`, `location`, `blocked_id`, `profile_avatar`)
         VALUES (#{profileId}, #{id}, #{fullName}, #{birthday}, #{profilePic}, #{gender}, #{sexualOrientation}, #{preferredGender},
-                #{datingGoal}, #{selfIntro}, #{location}, #{blockId})
+                #{datingGoal}, #{selfIntro}, #{location}, #{blockId}, #{profileAvatar})
     </insert>
 
     <update id="updatePasswordByID">
         UPDATE `USERS` SET
-        password = #{password},
-        modified_at = #{modifiedAt}
+                           password = #{password},
+                           modified_at = #{modifiedAt}
         WHERE `id` = ${id}
     </update>
 

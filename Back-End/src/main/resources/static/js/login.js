@@ -1,9 +1,9 @@
 let apiUrl = {
-    loginUrl: "/login",
+    loginUrl: "/users/login",
     //TODO: 登入成功跳轉頁面需要更新
     loginSuccess: "index.html",
     //TODO: 登入失敗跳轉頁面需要更新
-    loginFailure: "/login"
+    loginFailure: "/users/login"
 
 }
 
@@ -50,5 +50,4 @@ window.onload = function () {
         const data = parseJwt(response.credential);
         console.log(data);
     }
-
 }
