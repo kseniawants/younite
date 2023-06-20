@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/landing.scss';
 import { Link } from 'react-router-dom';
-import Logo from "../assets/LOGO/text.png";
+import Logo from "../assets/logo/whit-logo-type.png";
 
 
 function landingPage() {

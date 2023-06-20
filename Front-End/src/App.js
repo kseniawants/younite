@@ -4,7 +4,6 @@ import PersonalInfo from './pages/PersonalInfo';
 import HomeLayout from './component/HomeLayout';
 import Home from './pages/Home';
 import SettingPersonal from './pages/SettingPersonal';
-import UserInfo from './pages/UserInfo';
 import LandingPage from './pages/LandingPage';
 import Register from './pages/Register';
 import Login from './pages/Login';
