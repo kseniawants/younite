@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import Logo from '../assets/logo/logo-type.png';
 import '../styles/component/nav.scss';
+import Logo from '../assets/logo/logo-type.png';
 import UserImage from '../assets/images/sia.png';
 
 function Nav() {
@@ -16,37 +16,37 @@ function Nav() {
         <ul className='nav flex-column fs-5 align-items-center'>
           <li className='nav-item'>
             <NavLink to='/home' className='nav-link' aria-current='page'>
-              <i className='fa-solid fa-house text-black'></i>
+              <i className='fa-solid fa-house'></i>
             </NavLink>
           </li>
           <li className='nav-item'>
             <NavLink to='/notice' className='nav-link'>
               <span className='fa-layers fa-fw'>
-                <i className='fa-solid fa-bell text-black'></i>
+                <i className='fa-solid fa-bell'></i>
                 <span className='bg-primary text-white rounded-5 p-1 badge'>1</span>
               </span>
             </NavLink>
           </li>
           <li className='nav-item'>
             <NavLink to='/chatroom' className='nav-link'>
-              <i className='fa-solid fa-comment-dots text-black'></i>
+              <i className='fa-solid fa-comment-dots'></i>
             </NavLink>
           </li>
           <li className='nav-item'>
             <NavLink to='/robot' className='nav-link'>
-              <i className='fa-solid fa-robot text-black'></i>
+              <i className='fa-solid fa-robot'></i>
             </NavLink>
           </li>
           <li className='nav-item'>
-            <NavLink to='/setting' className='nav-link'>
-              <i className='fa-solid fa-gear text-black'></i>
+            <NavLink to='/vip' className='nav-link'>
+              <i className='fa-solid fa-crown'></i>
             </NavLink>
           </li>
         </ul>
-        <ul className='nav flex-column mb-5 fs-5 nav-bottom'>
+        <ul className='nav flex-column mb-5 fs-5 nav-bottom align-items-center'>
           <li className='nav-item'>
-            <NavLink to='/question' className='nav-link'>
-              <i className='fa-solid fa-circle-question'></i>
+            <NavLink to='/setting' className='nav-link'>
+              <i className='fa-solid fa-gear '></i>
             </NavLink>
           </li>
           <li className='nav-item'>
