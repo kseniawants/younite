@@ -12,8 +12,8 @@ function App() {
       <Routes>
         <Route path='/personal' element={<PersonalInfo />}></Route>
         <Route path='/chatroom' element={<ChatRoom />}></Route>
-        <Route path='/' element={<HomeLayout />}>
-          <Route path='/home' element={<Home />}></Route>
+        <Route element={<HomeLayout />}>
+          <Route path='/' element={<Home />}></Route>
           <Route path='/setting' element={<SettingPersonal />}></Route>
         </Route>
       </Routes>

@@ -1,21 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import '../styles/component/nav.scss';
 import Logo from '../assets/logo/logo-type.png';
 import UserImage from '../assets/images/sia.png';
+import DraggableModal from './DraggableModal';
 
 function Nav() {
+  const [openModal, setOpenModal] = useState(false);
+
   return (
     <>
       <nav className='bg-secondary d-flex p-0 justify-content-between flex-column align-items-center'>
-        <div className='text-decoration-none mt-5 d-flex flex-column align-items-center'>
+        <figure className='text-decoration-none mt-5 d-flex flex-column align-items-center'>
           <img src={Logo} alt='YouNite-Logo' className='mb-5' style={{ height: '20px' }} />
-          <img src={UserImage} alt='Your Picture' className='mb-1 nav-user-image' />
+          {/* 使用者圖片 要串API */}
+          <img src={UserImage} alt='Picture' className='mb-1 nav-user-image' />
+          {/* 使用者名稱 要串API*/}
           <h6 className='text-black nav-text mt-2'>Cindy 24</h6>
-        </div>
+        </figure>
+
         <ul className='nav flex-column fs-5 align-items-center'>
           <li className='nav-item'>
-            <NavLink to='/home' className='nav-link' aria-current='page'>
+            <NavLink to='/' className='nav-link' aria-current='page'>
               <i className='fa-solid fa-house'></i>
             </NavLink>
           </li>
@@ -33,7 +39,13 @@ function Nav() {
             </NavLink>
           </li>
           <li className='nav-item'>
-            <NavLink to='/robot' className='nav-link'>
+            <NavLink
+              to='#'
+              className='nav-link'
+              onClick={() => {
+                setOpenModal(true);
+              }}
+            >
               <i className='fa-solid fa-robot'></i>
             </NavLink>
           </li>
@@ -56,6 +68,7 @@ function Nav() {
           </li>
         </ul>
       </nav>
+      {openModal && <DraggableModal closeModal={setOpenModal} />}
     </>
   );
 }
