@@ -5,7 +5,7 @@ import Logo from '../assets/logo/logo-type.png';
 import UserImage from '../assets/images/sia.png';
 import DraggableModal from './DraggableModal';
 
-function Nav() {
+function SideNav() {
   const [openModal, setOpenModal] = useState(false);
 
   return (
@@ -73,4 +73,4 @@ function Nav() {
   );
 }
 
-export default Nav;
+export default SideNav;
