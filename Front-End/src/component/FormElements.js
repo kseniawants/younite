@@ -69,11 +69,11 @@ Input.propTypes = {
 export const RadioButtonGroup = ({ name, options, register, errors, rules }) => {
   return (
     <div>
-      <div className="btn-group" role="group" aria-label="Basic radio toggle button group">
+      <div className='btn-group' role='group' aria-label='Basic radio toggle button group'>
         {options.map((option, index) => (
           <React.Fragment key={index}>
             <input
-              type="radio"
+              type='radio'
               id={`${name}${index}`}
               className={`btn-check ${errors[name] && 'is-invalid'}`}
               {...register(name, rules)}
@@ -81,7 +81,9 @@ export const RadioButtonGroup = ({ name, options, register, errors, rules }) => 
             />
             <label
               htmlFor={`${name}${index}`}
-              className={`btn btn-outline-radio mt-2 me-4 px-4 rounded shadow-sm bg-white ${errors[name] && 'is-invalid'}`}
+              className={`btn btn-outline-radio mt-2 me-4 px-4 rounded shadow-sm bg-white ${
+                errors[name] && 'is-invalid'
+              }`}
             >
               {option.label}
             </label>
@@ -89,7 +91,7 @@ export const RadioButtonGroup = ({ name, options, register, errors, rules }) => 
         ))}
       </div>
       {errors[name] && (
-        <div className="d-block invalid-feedback" style={{ marginTop: '10px' }}>
+        <div className='d-block invalid-feedback' style={{ marginTop: '10px' }}>
           {errors[name]?.message}
         </div>
       )}
@@ -97,17 +99,15 @@ export const RadioButtonGroup = ({ name, options, register, errors, rules }) => 
   );
 };
 
-
 RadioButtonGroup.propTypes = {
   name: PropTypes.string.isRequired,
   options: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired
-    })
+      label: PropTypes.string.isRequired,
+    }),
   ).isRequired,
   register: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
-  rules: PropTypes.object.isRequired
+  rules: PropTypes.object.isRequired,
 };
-

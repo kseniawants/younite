@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Logo from '../assets/logo/logo-type.png';
 import '../styles/component/nav.scss';
-import Logo from '../assets/logo/logo-type.png';
 import UserImage from '../assets/images/sia.png';
 import DraggableModal from './DraggableModal';
 
@@ -63,7 +62,7 @@ function SideNav() {
             </NavLink>
           </li>
           <li className='nav-item'>
-            <NavLink to='/signout' className='nav-link'>
+            <NavLink to='/landing' className='nav-link'>
               <i className='fa-solid fa-right-from-bracket'></i>
             </NavLink>
           </li>
