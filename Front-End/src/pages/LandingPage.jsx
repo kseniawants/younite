@@ -1,8 +1,7 @@
 import React from 'react';
 import '../styles/landing.scss';
 import { Link } from 'react-router-dom';
-import Logo from "../assets/logo/whit-logo-type.png";
-
+import Logo from '../assets/logo/whit-logo-type.png';
 
 function landingPage() {
   return (
@@ -14,9 +13,8 @@ function landingPage() {
             註冊
           </button>
         </Link>
-
-        <Link to="/src/pages/Login.jsx">
-          <button type="button" className="btn btn-primary btn-lg m-2" style={{ color: '#fff' }}>
+        <Link to='/login'>
+          <button type='button' className='btn btn-primary btn-lg m-2' style={{ color: '#fff' }}>
             登入
           </button>
         </Link>

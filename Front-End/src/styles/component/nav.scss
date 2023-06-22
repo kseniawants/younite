@@ -25,6 +25,26 @@ nav {
   padding: 0.35rem;
 }
 
+li i {
+  color: black;
+  &:hover {
+    color: #fa6b6b;
+    transform: translateX(1px) translateY(-1px);
+    transition: transform 0.2s;
+    cursor: pointer;
+  }
+}
+
 .nav-bottom i {
   color: #c3c3c3;
+  &:hover {
+    color: #fa6b6b;
+    transform: translateX(1px) translateY(-1px);
+    transition: transform 0.2s;
+    cursor: pointer;
+  }
+}
+
+.active i {
+  color: #fa6b6b;
 }

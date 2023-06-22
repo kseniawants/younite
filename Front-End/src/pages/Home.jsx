@@ -7,7 +7,7 @@ import UserCard from '../component/User/UserCard';
 function Home() {
   return (
     <>
-      <section className='container'>
+      <section className='container mt-4'>
         <section className='bg-pageMain row d-flex'>
           <div className='bg-pageTitle d-flex'>
             <h6>你可能喜歡</h6>
@@ -33,7 +33,6 @@ function Home() {
             <h6>你可能喜歡</h6>
             <UserCard />
             <UserCard />
-            <UserCard />
             <div className='bg-pageMore d-flex mt-3'>
               <a href=''>顯示更多...</a>
             </div>
@@ -44,12 +43,10 @@ function Home() {
             <div className='user-lock'>
               <UserCard />
               <UserCard />
-              <UserCard />
             </div>
           </div>
           <div className='bg-pageMain col ms-3'>
             <h6>類似職業</h6>
-            <UserCard />
             <UserCard />
             <UserCard />
             <div className='bg-pageMore d-flex mt-3'>
