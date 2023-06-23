@@ -6,6 +6,7 @@ import { DatePicker, Button, Divider } from 'antd';
 import Hobbies from './InfoElements/Hobbies';
 import Avatar from './InfoElements/Avatar';
 import PhotoWall from './InfoElements/PhotoWall';
+import LocationModal from './InfoElements/Location';
 
 function Info() {
   const [submitting, setSubmitting] = useState(false);
@@ -14,6 +15,7 @@ function Info() {
       handleSubmit,
       control,
       formState: { errors },
+      reset,
     } = useForm({
       mode: 'onTouched',
     });
@@ -46,6 +48,25 @@ function Info() {
       { label: '女生', value: 'women' },
       { label: '所有人', value: 'all' }
     ];
+
+    const [dialogVisible, setDialogVisible] = useState(false);
+    const [isLocationSelected, setLocationSelected] = useState(false);
+
+    const handleButtonClick = () => {
+      setDialogVisible(true);
+    };
+  
+    const handleDialogCancel = () => {
+      setDialogVisible(false);
+    };
+  
+    const handleDialogOk = (selectedLocation) => {
+      setDialogVisible(false);
+      reset({
+        address: selectedLocation
+      });
+      setLocationSelected(true);
+    };
 
   return (
     <div className='container'>
@@ -193,12 +214,19 @@ function Info() {
                   type="dashed"
                   {...field}
                   className={` ${errors.address && 'is-invalid'}`}
+                  onClick={handleButtonClick}
                 >
                    +地點
                 </Button>
               )}
             />
+            {isLocationSelected && <div className="completed-tag"><i className="fa-solid fa-check text-danger"/>已選擇地點</div>}
             {errors.address && <div className="invalid-feedback">請選擇地點</div>}
+            <LocationModal
+              visible={dialogVisible}
+              onCancel={handleDialogCancel}
+              onOk={handleDialogOk}
+            />
           </div>
         </div>
         <Divider plain style={{color: '#BBBBBB'}}>選填</Divider>
