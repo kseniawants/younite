@@ -17,7 +17,8 @@
 </head>
 <body>
 <div id="form-change-password">
-    <form class="form-signin">
+    <form class="form-signin"
+          enctype="multipart/form-data">
         <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">建立帳號</h1>
         <input type="text" id="fullName" class="form-control" placeholder="請輸入姓名" required=""
                autofocus="">
@@ -47,6 +48,8 @@
 
         <textarea id="self_intro" class="form-control" placeholder="自我介紹" required="">
         </textarea>
+
+        上傳頭像<input type="file" id="file" name="file">
 
         <button class="btn btn-success btn-block" type="submit" id="buildUserInfoBtn"><i
                 class="fas fa-sign-in-alt"></i> Submit

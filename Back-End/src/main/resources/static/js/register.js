@@ -1,5 +1,5 @@
 let apiUrl = {
-    registerUrl: "/register",
+    registerUrl: "/users/register",
     registerSuccess: "/userInfo.html",
     registerError: "/error"
 }
