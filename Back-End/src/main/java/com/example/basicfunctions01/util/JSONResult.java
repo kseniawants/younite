@@ -3,7 +3,7 @@ package com.example.basicfunctions01.util;
 import lombok.Data;
 
 import java.io.Serializable;
-
+//序列化
 @Data
 public class JSONResult<E> implements Serializable {
     private Integer state;
@@ -15,10 +15,12 @@ public class JSONResult<E> implements Serializable {
     public JSONResult() {
     }
     public JSONResult(Integer state) {
+
         this.state = state;
     }
 
     public JSONResult(Throwable eMessage) {
+
         this.message = eMessage.getMessage();
     }
 

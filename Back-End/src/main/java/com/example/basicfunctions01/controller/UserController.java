@@ -1,6 +1,7 @@
 package com.example.basicfunctions01.controller;
 
 
+import com.example.basicfunctions01.entity.Item;
 import com.example.basicfunctions01.entity.User;
 import com.example.basicfunctions01.entity.UserProfile;
 import com.example.basicfunctions01.service.IUserService;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.annotation.RequestScope;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * @RestController = @Controller + @ResponseBody(JSON傳輸用)
@@ -24,9 +26,9 @@ import javax.servlet.http.HttpSession;
 @RestController
 @CrossOrigin(origins = "*")
 public class UserController extends BaseController {
-
     @Autowired
     private IUserService iUserService;
+
 
 //    @ApiOperation(value = "註冊用戶", notes = "註冊帳號，傳User實體")
     @PostMapping("/register")
@@ -61,6 +63,8 @@ public class UserController extends BaseController {
         iUserService.changePassword(id, username, oldPassword, newPassword);
         return new JSONResult<Void>(OK);
     }
+
+
 
     @RequestMapping("register")
     public JSONResult<Void> reg(User user) {
