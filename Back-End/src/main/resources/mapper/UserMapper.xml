@@ -20,6 +20,7 @@
         <result column="dating_goal" property="datingGoal"></result>
         <result column="self_intro" property="selfIntro"></result>
         <result column="blocked_id" property="blockId"></result>
+        <result column="voice_intro" property="voiceIntro"></result>
     </resultMap>
     <select id="getByUsername" resultMap="UserEntityMap">
         SELECT *
@@ -83,12 +84,13 @@
             id="insertProfile"
             useGeneratedKeys="true" keyProperty="profileId">
         INSERT INTO PROFILES
-        (`profile_id`, `user_id`, `full_name`, `birthday`, `profile_pic`,
+        (`profile_id`, `user_id`, `full_name`, `profile_pic`,
          `gender`, `sexual_orientation`, `preferred_gender`,
-         `dating_goal`, `self_intro`, `location`, `blocked_id`, `profile_avatar`)
-        VALUES (#{profileId}, #{id}, #{fullName}, #{birthday}, #{profilePic}, #{gender}, #{sexualOrientation},
-                #{preferredGender},
-                #{datingGoal}, #{selfIntro}, #{location}, #{blockId}, #{profileAvatar})
+         `dating_goal`, `self_intro`, `location`, `blocked_id`,`profile_avatar`, `birthday`, `voice_intro`)
+        VALUES (#{profileId}, #{id}, #{fullName},
+                #{profilePic}, #{gender}, #{sexualOrientation},
+                #{preferredGender}, #{datingGoal}, #{selfIntro},
+                #{location}, #{blockId}, #{profileAvatar}, #{birthday}, #{voiceIntro})
     </insert>
 
     <update id="updatePasswordByID">
@@ -109,7 +111,9 @@
             `dating_goal` = #{datingGoal},
             `location` = #{location},
             `self_intro` = #{selfIntro},
-            `profile_avatar` = #{profileAvatar}
+            `preferred_gender` = #{preferredGender},
+            `profile_avatar` = #{profileAvatar},
+            `voice_intro` = #{voiceIntro}
         WHERE `user_id` = ${userId}
     </update>
 

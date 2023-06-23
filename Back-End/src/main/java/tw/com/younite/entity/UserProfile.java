@@ -2,6 +2,7 @@ package tw.com.younite.entity;
 
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import java.io.Serializable;
@@ -23,18 +24,7 @@ public class UserProfile extends User implements Serializable {
     private String location;
     private String blockId;
     private String profileAvatar;
+    private String voiceIntro;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
-
-    public void setBirthdayString(String birthdayString) {
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-            this.birthday = dateFormat.parse(birthdayString);
-        } catch (ParseException e) {
-            // 转换失败时的处理逻辑
-            e.printStackTrace();
-        }
-    }
-
-
 }
