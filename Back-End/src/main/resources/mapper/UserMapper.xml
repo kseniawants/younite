@@ -22,6 +22,7 @@
         <result column="blocked_id" property="blockId"></result>
         <result column="voice_intro" property="voiceIntro"></result>
     </resultMap>
+
     <select id="getByUsername" resultMap="UserEntityMap">
         SELECT *
         FROM `users`

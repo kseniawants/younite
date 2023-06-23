@@ -20,7 +20,7 @@ window.onload = function () {
             data: JSON.stringify({"username": username, "password": password, "phone": phone, "email": email}),
             dataType: "JSON",
             success: function (json) {
-                if (json.state == 200) {
+                if (json.state == 201) {
                     alert("註冊成功!");
                     window.location.href = apiUrl.registerSuccess;
                 } else if (json.state == 4000) {
