@@ -15,8 +15,14 @@ window.onload = function () {
         let sexualOrientation = document.getElementById("sexualOrientation").value;
         let location = document.getElementById("location").value;
         let self_intro = document.getElementById("self_intro").value;
-        let fileInput = document.getElementById("file");
-        let file = fileInput.files[0];
+        //Avatar Upload
+        let avatarInput = document.getElementById("file");
+        let avatar = avatarInput.files[0];
+        //User Profile Pics Upload
+        let profilePicInput = document.querySelectorAll("input[name='profile_pic']");
+        let profilePics = [];
+        let avatarImg = document.getElementById("avatarImg");
+
         let formData = new FormData();
         formData.append("fullName", fullName);
         formData.append("birthday", formatDate(birthday));
@@ -24,8 +30,8 @@ window.onload = function () {
         formData.append("sexualOrientation", sexualOrientation);
         formData.append("location", location);
         formData.append("self_intro", self_intro);
-        formData.append("file", file);
-        console.log(file);
+        formData.append("file", avatar);
+
         $.post({
             url: apiUrl.userInfoUrl,
             contentType: false,
@@ -34,6 +40,7 @@ window.onload = function () {
             success: function (json) {
                 if (json.state == 200) {
                     alert("用戶資料建立成功!");
+                    avatarImg.src = json.data;
                     window.location.href = apiUrl.userInfoBuildSuccess;
                 } else if (json.state == 4001) {
                     alert("暱稱重複，請重新輸入!")
