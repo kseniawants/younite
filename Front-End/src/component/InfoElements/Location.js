@@ -56,5 +56,5 @@ LocationModal.propTypes = {
 };
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyDEQ4Rf5sExPchgOPBZVeyhIVs1IVwagUw'
+  apiKey: 'YOUR_API_KEY'
 })(LocationModal); 
