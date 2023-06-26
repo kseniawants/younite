@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Draggable from 'react-draggable';
-import '../styles/component/draggableModal.scss';
+import '../../styles/Modal/draggableModal.scss';
 
 function DraggableModal({ closeModal }) {
   const [position, setPosition] = useState({ x: 0, y: 0 });

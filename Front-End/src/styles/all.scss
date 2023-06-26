@@ -8,7 +8,7 @@
 @import './_utilities';
 
 /* Google Noto字體引入 */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;500&family=Roboto&display=swap');
 
 body,
 html {
@@ -18,7 +18,7 @@ html {
 }
 
 body {
-  font-family: 'Noto Sans TC', 'Inter', 'Poppins', 'sans-serif';
+  font-family: 'Roboto', 'Noto Sans TC', 'Inter', 'Poppins', 'sans-serif';
   transition: 0.25s;
   align-items: center;
   justify-content: center;
