@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import Logo from '../assets/logo/logo-type.png';
 import '../styles/component/nav.scss';
 import UserImage from '../assets/images/sia.png';
@@ -7,6 +7,17 @@ import DraggableModal from './Modal/DraggableModal';
 
 function SideNav() {
   const [openModal, setOpenModal] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+
+  const handleClick = () => {
+    setOpenModal(true);
+    setIsActive(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    setIsActive(false);
+  };
 
   return (
     <>
@@ -39,18 +50,12 @@ function SideNav() {
             </NavLink>
           </li>
           <li className='nav-item'>
-            <NavLink
-              to='#'
-              className='nav-link'
-              onClick={() => {
-                setOpenModal(true);
-              }}
-            >
+            <Link to='#' className={`nav-link ${isActive ? 'active' : ''}`} onClick={handleClick}>
               <i className='fa-solid fa-robot'></i>
-            </NavLink>
+            </Link>
           </li>
           <li className='nav-item'>
-            <NavLink to='/vip' className='nav-link'>
+            <NavLink to='/store' className='nav-link'>
               <i className='fa-solid fa-crown'></i>
             </NavLink>
           </li>
@@ -68,7 +73,7 @@ function SideNav() {
           </li>
         </ul>
       </nav>
-      {openModal && <DraggableModal closeModal={setOpenModal} />}
+      {openModal && <DraggableModal closeModal={handleCloseModal} />}
     </>
   );
 }
