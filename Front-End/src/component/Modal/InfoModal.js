@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Draggable from 'react-draggable';
-import '../../styles/component/draggableModal.scss';
+import '../../styles/Modal/draggableModal.scss';
 import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 
 function InfoModal({ closeModal, setSelectedButtonLabel }) {
