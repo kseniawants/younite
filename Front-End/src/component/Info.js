@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import '../styles/all.scss';
 import { useForm, Controller } from 'react-hook-form';
 import { Input, RadioButtonGroup } from './FormElements';
@@ -7,8 +7,10 @@ import Hobbies from './InfoElements/Hobbies';
 import Avatar from './InfoElements/Avatar';
 import PhotoWall from './InfoElements/PhotoWall';
 import LocationModal from './InfoElements/Location';
+import InfoModal from './Modal/InfoModal';
 
 function Info() {
+  const ref = useRef();
   const [submitting, setSubmitting] = useState(false);
     const {
       register,
@@ -49,23 +51,35 @@ function Info() {
       { label: '所有人', value: 'all' }
     ];
 
-    const [dialogVisible, setDialogVisible] = useState(false);
+    const [isInfoModalVisible, setInfoModalVisible] = useState(false);
+    const [isLocationModalVisible, setLocationModalVisible] = useState(false);
     const [isLocationSelected, setLocationSelected] = useState(false);
+    const [selectedButtonLabel, setSelectedButtonLabel] = useState(null); // 新增选中的按钮标签状态
 
-    const handleButtonClick = () => {
-      setDialogVisible(true);
+    const handleInfoModalButtonClick = () => {
+      setInfoModalVisible(true);
     };
-  
+    
+    const handleLocationModalButtonClick = () => {
+      setLocationModalVisible(true);
+    };
+    
     const handleDialogCancel = () => {
-      setDialogVisible(false);
+      setInfoModalVisible(false);
+      setLocationModalVisible(false);
     };
-  
-    const handleDialogOk = (selectedLocation) => {
-      setDialogVisible(false);
+    
+    const handleDialogOk = (selectedLocation) => { // 传入选中按钮的标签
+      setLocationModalVisible(false);
       reset({
         address: selectedLocation
       });
       setLocationSelected(true);
+    };
+
+    const handleDialogOk1 = (selectedButtonLabel) => { // 传入选中按钮的标签
+      setInfoModalVisible(false);
+      setSelectedButtonLabel(selectedButtonLabel); // 更新选中按钮的标签
     };
 
   return (
@@ -172,17 +186,29 @@ function Info() {
           />
         </div>
         <div className='pb-4'>
-          <i className="fa-solid fa-heart-circle-plus text-black"></i>
-          <span className="text-danger p-1">*</span>
-          <label className='mb-2'>興趣</label>
-          <br />
-          <Hobbies/>
-        </div>
+      <i className="fa-solid fa-heart-circle-plus text-black"></i>
+      <span className="text-danger p-1">*</span>
+      <label className='mb-2'>興趣</label>
+      <br />
+      <Controller
+        control={control}
+        name="goal"
+        rules={{ required: true }}
+        render={({ field }) => (
+          <Hobbies
+            {...field}
+            className={` ${errors.goal && 'is-invalid'}`}
+            ref={ref}
+          />
+        )}
+      />
+      {errors.goal && <div className="invalid-feedback d-block">請填寫興趣</div>}
+    </div>
         <div className='d-flex pb-4'>
           <div className='mb-2 pe-5'>
             <i className="fa-solid fa-magnifying-glass text-black"></i>
             <span className="text-danger p-1">*</span>
-            <label className='mb-2' >我想找尋</label>
+            <label className='mb-2'>我想找尋</label>
             <br />
             <Controller
               control={control}
@@ -193,12 +219,24 @@ function Info() {
                   type="dashed"
                   {...field}
                   className={` ${errors.goal && 'is-invalid'}`}
+                  onClick={handleInfoModalButtonClick}
                 >
-                    +新增交友目標
+                  +新增交友目標
                 </Button>
               )}
             />
-            {errors.goal && <div className="invalid-feedback">請選擇交友目標</div>}
+            {errors.goal && !selectedButtonLabel && (
+              <div className="invalid-feedback">請選擇交友目標</div>
+            )}
+            {isInfoModalVisible && (
+              <InfoModal
+                visible={isInfoModalVisible}
+                closeModal={handleDialogCancel}
+                onOk={handleDialogOk1}
+                setSelectedButtonLabel={setSelectedButtonLabel} // 传递 setSelectedButtonLabel 函数
+              />
+            )}
+            {selectedButtonLabel && <div className="completed-tag">{selectedButtonLabel}</div>}
           </div>
           <div className='mb-2 ps-4'>
             <i className="fa-solid fa-location-dot text-black"></i>
@@ -214,7 +252,7 @@ function Info() {
                   type="dashed"
                   {...field}
                   className={` ${errors.address && 'is-invalid'}`}
-                  onClick={handleButtonClick}
+                  onClick={handleLocationModalButtonClick}
                 >
                    +地點
                 </Button>
@@ -223,7 +261,7 @@ function Info() {
             {isLocationSelected && <div className="completed-tag"><i className="fa-solid fa-check text-danger"/>已選擇地點</div>}
             {errors.address && <div className="invalid-feedback">請選擇地點</div>}
             <LocationModal
-              visible={dialogVisible}
+              visible={isLocationModalVisible}
               onCancel={handleDialogCancel}
               onOk={handleDialogOk}
             />
@@ -251,7 +289,18 @@ function Info() {
       <div className='col-md-5'>
         <div className='p-4 mb-4'>
           <label className='mb-4'>大頭貼照片</label>
-          <Avatar/>
+          <Controller
+              control={control}
+              name="goal"
+              rules={{ required: true }}
+              render={({ field }) => (
+            <Avatar
+              {...field}
+              className={` ${errors.goal && 'is-invalid'}`}
+            />
+            )}
+            />
+            {errors.goal && <div className="invalid-feedback d-block">請上傳大頭照</div>}
         </div>
         <div className='p-4 mb-4'>
           <label className='mb-4'>個人檔案照片</label>

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import Logo from '../assets/logo/logo-type.png';
 import '../styles/component/nav.scss';
 import UserImage from '../assets/images/sia.png';
-import DraggableModal from './DraggableModal';
+import DraggableModal from './Modal/DraggableModal';
 
 function SideNav() {
   const [openModal, setOpenModal] = useState(false);
