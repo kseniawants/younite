@@ -5,8 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import tw.com.younite.entity.UserPhotos;
-import tw.com.younite.entity.UserProfile;
+import tw.com.younite.entity.UserPhotosEntity;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -16,7 +15,7 @@ public class UserPhotosTestCase {
     UserPhotosMapper userPhotosMapper;
     @Test
     public void testAddPhotos() {
-        UserPhotos userPhotos = new UserPhotos();
+        UserPhotosEntity userPhotos = new UserPhotosEntity();
         userPhotos.setProfileID(43);
         userPhotos.setFirstPhotoPath("Hello.jpg");
         userPhotos.setThirdPhotoPath("HelloWorld.jpg");

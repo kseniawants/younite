@@ -1,9 +1,9 @@
 package tw.com.younite.service.inter;
 
-import tw.com.younite.entity.UserProfile;
+import tw.com.younite.entity.UserProfileEntity;
 
 public interface IUserProfileService {
-    void insertProfile(UserProfile userProfile);
-    void resetUserProfile(UserProfile userprofile);
-    UserProfile getUserProfile(Integer id);
+    void insertProfile(UserProfileEntity userProfile);
+    void resetUserProfile(UserProfileEntity userprofile);
+    UserProfileEntity getUserProfile(Integer id);
 }

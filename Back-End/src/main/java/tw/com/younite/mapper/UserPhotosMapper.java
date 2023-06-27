@@ -1,7 +1,7 @@
 package tw.com.younite.mapper;
 
-import tw.com.younite.entity.UserPhotos;
+import tw.com.younite.entity.UserPhotosEntity;
 
 public interface UserPhotosMapper {
-    Integer addPhotos(UserPhotos userPhotos);
+    Integer addPhotos(UserPhotosEntity userPhotos);
 }

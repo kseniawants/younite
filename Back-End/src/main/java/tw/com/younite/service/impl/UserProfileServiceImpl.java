@@ -1,6 +1,6 @@
 package tw.com.younite.service.impl;
 
-import tw.com.younite.entity.UserProfile;
+import tw.com.younite.entity.UserProfileEntity;
 import tw.com.younite.mapper.UserMapper;
 import tw.com.younite.service.exception.FullNameDuplicatedException;
 import tw.com.younite.service.exception.InsertProfileException;
@@ -16,7 +16,7 @@ public class UserProfileServiceImpl implements IUserProfileService {
     private UserMapper userMapper;
 
     @Override
-    public void insertProfile(UserProfile userProfile) {
+    public void insertProfile(UserProfileEntity userProfile) {
         //檢查暱稱是否重複
         String fullName = userProfile.getFullName();
         if (userMapper.getByFullName(fullName) != null) {
@@ -28,7 +28,7 @@ public class UserProfileServiceImpl implements IUserProfileService {
         }
     }
     @Override
-    public UserProfile getUserProfile(Integer id) {
+    public UserProfileEntity getUserProfile(Integer id) {
         if (userMapper.getUserByID(id) == null) {
             throw new UserNotFoundException("使用者帳號不存在!");
         }
@@ -36,7 +36,7 @@ public class UserProfileServiceImpl implements IUserProfileService {
     }
 
     @Override
-    public void resetUserProfile(UserProfile userprofile) {
+    public void resetUserProfile(UserProfileEntity userprofile) {
         Integer row = userMapper.updateUserProfileByID(userprofile);
         if (row != 1) {
             throw new UpdateException();

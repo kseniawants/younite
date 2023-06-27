@@ -1,6 +1,6 @@
 package tw.com.younite.mapper;
 
-import tw.com.younite.entity.UserProfile;
+import tw.com.younite.entity.UserProfileEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class UserProfileMapperTestCase {
 
     @Test
     public void testInsertProfile() {
-        UserProfile userProfile = new UserProfile();
+        UserProfileEntity userProfile = new UserProfileEntity();
         userProfile.setProfileId(1);
         userProfile.setId(2);
         userProfile.setBirthday(new Date());
@@ -32,13 +32,13 @@ public class UserProfileMapperTestCase {
 
     @Test
     public void testGetProfileByID() {
-        UserProfile userProfile = userMapper.getProfileByID(98);
+        UserProfileEntity userProfile = userMapper.getProfileByID(98);
         System.out.println("userProfile = " + userProfile);
     }
 
     @Test
     public void testUpdateProfileByID() throws ParseException {
-        UserProfile userProfile = userMapper.getProfileByID(98);
+        UserProfileEntity userProfile = userMapper.getProfileByID(98);
         Integer id = userProfile.getUserId();
         userProfile.setFullName("Hello你好嗎");
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -57,7 +57,7 @@ public class UserProfileMapperTestCase {
 
     @Test
     public void testInsertProfileWrong() {
-        UserProfile userProfile = new UserProfile();
+        UserProfileEntity userProfile = new UserProfileEntity();
         userProfile.setProfileId(2);
         userProfile.setId(3);
         userProfile.setBirthday(new Date());

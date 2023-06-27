@@ -2,16 +2,13 @@ package tw.com.younite.entity;
 
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.multipart.MultipartFile;
 
 
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Data
-public class UserProfile extends User implements Serializable {
+public class UserProfileEntity extends UserEntity implements Serializable {
     private Integer profileId;
     private Integer userId;
     private String fullName;
@@ -25,6 +22,7 @@ public class UserProfile extends User implements Serializable {
     private String blockId;
     private String profileAvatar;
     private String voiceIntro;
+    private String professions;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 }

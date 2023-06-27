@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tw.com.younite.mapper.UserMapper">
-    <resultMap id="UserEntityMap" type="tw.com.younite.entity.User">
+    <resultMap id="UserEntityMap" type="tw.com.younite.entity.UserEntity">
         <id column="id" property="id"></id>
         <result column="created_at" property="createdAt"></result>
         <result column="modified_at" property="modifiedAt"></result>
@@ -10,7 +10,7 @@
         <result column="facebook_user" property="facebookUser"></result>
         <result column="google_user" property="googleUser"></result>
     </resultMap>
-    <resultMap id="UserProfileEntityMap" type="tw.com.younite.entity.UserProfile">
+    <resultMap id="UserProfileEntityMap" type="tw.com.younite.entity.UserProfileEntity">
         <id column="profile_id" property="profileId"></id>
         <result column="user_id" property="userId"></result>
         <result column="full_name" property="fullName"></result>
@@ -21,6 +21,12 @@
         <result column="self_intro" property="selfIntro"></result>
         <result column="blocked_id" property="blockId"></result>
         <result column="voice_intro" property="voiceIntro"></result>
+    </resultMap>
+
+    <resultMap id="UserLikeEntityMap" type="tw.com.younite.entity.UserLikeEntity">
+        <id column="liked_user_id" property="likedUserId"></id>
+        <result column="user_id" property="userID"></result>
+        <result column="created_at" property="createAt"></result>
     </resultMap>
 
     <select id="getByUsername" resultMap="UserEntityMap">
@@ -87,11 +93,19 @@
         INSERT INTO PROFILES
         (`profile_id`, `user_id`, `full_name`, `profile_pic`,
          `gender`, `sexual_orientation`, `preferred_gender`,
-         `dating_goal`, `self_intro`, `location`, `blocked_id`,`profile_avatar`, `birthday`, `voice_intro`)
+         `dating_goal`, `self_intro`, `location`, `blocked_id`,`profile_avatar`, `birthday`, `voice_intro`, `phone`, `professions`)
         VALUES (#{profileId}, #{id}, #{fullName},
                 #{profilePic}, #{gender}, #{sexualOrientation},
                 #{preferredGender}, #{datingGoal}, #{selfIntro},
-                #{location}, #{blockId}, #{profileAvatar}, #{birthday}, #{voiceIntro})
+                #{location}, #{blockId}, #{profileAvatar}, #{birthday}, #{voiceIntro}, #{phone}, #{professions})
+    </insert>
+
+    <insert
+            id="insertLike"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO LIKES
+        (`user_id`, `liked_user_id`, `created_at`)
+        VALUES (#{userID}, #{likedUserId}, #{createdAt})
     </insert>
 
     <update id="updatePasswordByID">
@@ -114,7 +128,9 @@
             `self_intro` = #{selfIntro},
             `preferred_gender` = #{preferredGender},
             `profile_avatar` = #{profileAvatar},
-            `voice_intro` = #{voiceIntro}
+            `voice_intro` = #{voiceIntro},
+            `phone` = #{phone},
+            `professions` = #{professions}
         WHERE `user_id` = ${userId}
     </update>
 

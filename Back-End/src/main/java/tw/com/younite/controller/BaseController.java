@@ -43,6 +43,9 @@ public class BaseController {
         } else if (e instanceof FullNameDuplicatedException) {
             result.setState(CONFLICT_ERROR);
             result.setMessage("暱稱已被註冊!");
+        } else if(e instanceof UserProfileDuplicatedException) {
+            result.setState(CONFLICT_ERROR);
+            result.setMessage("個人資料已經存在!");
         } else if (e instanceof UserNotFoundException) {
             result.setState(NOT_FOUND_ERROR);
             result.setMessage("帳號不存在!");
