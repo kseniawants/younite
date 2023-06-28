@@ -28,7 +28,7 @@ const LocationModal = (props) => {
       onOk={handleModalOk}
       className='w-30'
     >
-      <div style={{ height: '400px', marginBottom: '20px' }} className='ms-4'>
+      <div style={{ height: '50vh', marginBottom: '20px' }} className='ms-4'>
         <Map
           google={props.google}
           onClick={handleMapClick}
@@ -37,7 +37,7 @@ const LocationModal = (props) => {
             lng: 121.5654177 // 初始中心點經度
           }}
           zoom={14}
-          style={{ width: '420px', height: '400px' }}
+          style={{ width: '28vw', height: '52vh' }}
         >
           {selectedLocation && (
             <Marker position={selectedLocation} />
@@ -56,5 +56,5 @@ LocationModal.propTypes = {
 };
 
 export default GoogleApiWrapper({
-  apiKey: 'YOUR_API_KEY'
+  apiKey: 'AIzaSyDEQ4Rf5sExPchgOPBZVeyhIVs1IVwagUw'
 })(LocationModal); 

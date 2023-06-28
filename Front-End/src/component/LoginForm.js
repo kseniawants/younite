@@ -74,6 +74,7 @@ function LoginForm() {
                 ></Input>
               </div>
               <div className='d-flex justify-content-center mt-4'>
+              <Link to='/home'>
                 <button
                   type='submit'
                   className='btn btn-primary py-3 px-7 rounded-2 d-flex align-items-center justify-content-center'
@@ -82,11 +83,12 @@ function LoginForm() {
                 >
                   {submitting ? '正在登入...' : '登入'}
                 </button>
+                </Link>
               </div>
               <div className='pt-3 pb-1 d-flex flex-column align-items-center justify-content-center'>
                 <LoginSocialGoogle
                   client_id={
-                    ''
+                    '234241802651-ngs8vhu4c0d2u72nmot9kbt799scpoh9.apps.googleusercontent.com'
                   }
                   scope='openid profile email'
                   discoveryDocs='claims_supported'

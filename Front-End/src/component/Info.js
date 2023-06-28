@@ -17,15 +17,15 @@ function Info() {
       handleSubmit,
       control,
       formState: { errors },
-      reset,
     } = useForm({
       mode: 'onTouched',
     });
 
-    const onSubmit = async () => {
+    const onSubmit = async (data) => {
       try {
         setSubmitting(true);
         // navigate('/src/pages/PersonalInfo.jsx');
+        console.log(data.goal);
       } catch (error) {
         console.error(error);
       } finally {
@@ -69,11 +69,8 @@ function Info() {
       setLocationModalVisible(false);
     };
     
-    const handleDialogOk = (selectedLocation) => { // 传入选中按钮的标签
+    const handleDialogOk = () => { // 传入选中按钮的标签
       setLocationModalVisible(false);
-      reset({
-        address: selectedLocation
-      });
       setLocationSelected(true);
     };
 
@@ -141,6 +138,13 @@ function Info() {
         {errors.birthday && <div className="invalid-feedback">請選擇生日</div>}
         </div>
         <div className='pb-4'>
+          <i className="fa-solid fa-briefcase text-black"></i>
+          <span className="text-danger p-1">*</span>
+          <label htmlFor="">職業</label>
+          <br />
+          
+        </div>
+        <div className='pb-4'>
           <i className="fa-solid fa-venus-mars text-black"></i>
           <span className="text-danger p-1">*</span>
           <label>性別</label>
@@ -186,24 +190,25 @@ function Info() {
           />
         </div>
         <div className='pb-4'>
-      <i className="fa-solid fa-heart-circle-plus text-black"></i>
-      <span className="text-danger p-1">*</span>
-      <label className='mb-2'>興趣</label>
-      <br />
-      <Controller
-        control={control}
-        name="goal"
-        rules={{ required: true }}
-        render={({ field }) => (
-          <Hobbies
-            {...field}
-            className={` ${errors.goal && 'is-invalid'}`}
-            ref={ref}
+          <i className="fa-solid fa-heart-circle-plus text-black"></i>
+          <span className="text-danger p-1">*</span>
+          <label className='mb-2'>興趣</label>
+          <br />
+          <Controller
+            control={control}
+            name="goal"
+            rules={{ required: true }}
+            render={({ field }) => (
+              <Hobbies
+                {...field}
+                className={` ${errors.goal && 'is-invalid'}`}
+                ref={ref}
+                onChange={([selected]) => selected}
+              />
+            )}
           />
-        )}
-      />
-      {errors.goal && <div className="invalid-feedback d-block">請填寫興趣</div>}
-    </div>
+          {errors.goal && <div className="invalid-feedback">請填寫興趣</div>}
+        </div>
         <div className='d-flex pb-4'>
           <div className='mb-2 pe-5'>
             <i className="fa-solid fa-magnifying-glass text-black"></i>
@@ -259,7 +264,7 @@ function Info() {
               )}
             />
             {isLocationSelected && <div className="completed-tag"><i className="fa-solid fa-check text-danger"/>已選擇地點</div>}
-            {errors.address && <div className="invalid-feedback">請選擇地點</div>}
+            {errors.address && !isLocationSelected && <div className="invalid-feedback">請選擇地點</div>}
             <LocationModal
               visible={isLocationModalVisible}
               onCancel={handleDialogCancel}
@@ -288,6 +293,7 @@ function Info() {
       </div>
       <div className='col-md-5'>
         <div className='p-4 mb-4'>
+          <span className="text-danger p-1">*</span>
           <label className='mb-4'>大頭貼照片</label>
           <Controller
               control={control}
@@ -300,7 +306,7 @@ function Info() {
             />
             )}
             />
-            {errors.goal && <div className="invalid-feedback d-block">請上傳大頭照</div>}
+            {errors.goal && <div className="invalid-feedback ">請上傳大頭照</div>}
         </div>
         <div className='p-4 mb-4'>
           <label className='mb-4'>個人檔案照片</label>
