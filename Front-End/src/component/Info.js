@@ -22,34 +22,34 @@ function Info() {
       mode: 'onTouched',
     });
 
-    const onSubmit = async () => {
-      try {
-        setSubmitting(true);
-        // navigate('/src/pages/PersonalInfo.jsx');
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setSubmitting(false);
-      }
-    };
+  const onSubmit = async () => {
+    try {
+      setSubmitting(true);
+      // navigate('/src/pages/PersonalInfo.jsx');
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
-    const radioGender = [
-      { label: '男生', value: 'male' },
-      { label: '女生', value: 'female' },
-      { label: '其他', value: 'other' }
-    ];
+  const radioGender = [
+    { label: '男生', value: 'male' },
+    { label: '女生', value: 'female' },
+    { label: '其他', value: 'other' },
+  ];
 
-    const radioSO = [
-      { label: '生理男', value: 'man' },
-      { label: '生理女', value: 'woman' },
-      { label: '雙性戀', value: 'bisexual' }
-    ];
-    
-    const radioShow = [
-      { label: '男生', value: 'men' },
-      { label: '女生', value: 'women' },
-      { label: '所有人', value: 'all' }
-    ];
+  const radioSO = [
+    { label: '生理男', value: 'man' },
+    { label: '生理女', value: 'woman' },
+    { label: '雙性戀', value: 'bisexual' },
+  ];
+
+  const radioShow = [
+    { label: '男生', value: 'men' },
+    { label: '女生', value: 'women' },
+    { label: '所有人', value: 'all' },
+  ];
 
     const [isInfoModalVisible, setInfoModalVisible] = useState(false);
     const [isLocationModalVisible, setLocationModalVisible] = useState(false);
@@ -212,11 +212,10 @@ function Info() {
             <br />
             <Controller
               control={control}
-              name="goal"
+              name='birthday'
               rules={{ required: true }}
               render={({ field }) => (
-                <Button
-                  type="dashed"
+                <DatePicker
                   {...field}
                   className={` ${errors.goal && 'is-invalid'}`}
                   onClick={handleInfoModalButtonClick}
@@ -238,10 +237,10 @@ function Info() {
             )}
             {selectedButtonLabel && <div className="completed-tag">{selectedButtonLabel}</div>}
           </div>
-          <div className='mb-2 ps-4'>
-            <i className="fa-solid fa-location-dot text-black"></i>
-            <span className="text-danger p-1">*</span>
-            <label className='mb-2'>出沒地點</label>
+          <div className='pb-4'>
+            <i className='fa-solid fa-venus-mars text-black'></i>
+            <span className='text-danger p-1'>*</span>
+            <label>性別</label>
             <br />
             <Controller
               control={control}
@@ -306,10 +305,14 @@ function Info() {
           <label className='mb-4'>個人檔案照片</label>
           <PhotoWall/>
         </div>
-      </div>
-    </form>
-    <div className='d-flex flex-column-reverse flex-md-row py-4 justify-content-center align-items-md-center align-items-center w-100'>
-        <button type='submit' className='btn btn-primary rounded text-white' disabled={submitting} onClick={handleSubmit(onSubmit)}>
+      </form>
+      <div className='d-flex flex-column-reverse flex-md-row py-4 justify-content-center align-items-md-center align-items-center w-100'>
+        <button
+          type='submit'
+          className='btn btn-primary rounded text-white'
+          disabled={submitting}
+          onClick={handleSubmit(onSubmit)}
+        >
           {submitting ? '正在送出表單...' : '送出表單'}
         </button>
       </div>
@@ -317,6 +320,4 @@ function Info() {
   );
 }
 
-
 export default Info;
-

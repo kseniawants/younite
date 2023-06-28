@@ -8,31 +8,42 @@ function DraggableModal({ closeModal }) {
 
   const handleDrag = (e, ui) => {
     const { x, y } = position;
-    setPosition({ x: x + ui.deltaX, y: y + ui.deltaY });
+    const { deltaX, deltaY } = ui;
+
+    // 調整速度限制
+    const speedFactor = 0.2; // 調整此數值以改變速度
+    const newPosition = {
+      x: x + deltaX * speedFactor,
+      y: y + deltaY * speedFactor,
+    };
+
+    setPosition(newPosition);
   };
 
   return (
     <>
-      <Draggable handle='.title' onDrag={handleDrag}>
+      {/* 宣告 Draggable handle 選擇抓取的物件範圍 */}
+      <Draggable handle='.modal-bg' onDrag={handleDrag}>
         <section className='modal-bg container-fluid' style={{ top: position.y, left: position.x }}>
-          <div className='modalContainer row'>
-            <div className='col-12 d-flex p-0'>
-              <button onClick={() => closeModal(false)} className=''>
-                X
-              </button>
+          <div className='row p-3'>
+            <div className='col-12 d-flex p-0 justify-content-end'>
+              <button
+                type='button'
+                className='btn-close'
+                aria-label='Close'
+                onClick={() => closeModal(false)}
+              ></button>
             </div>
-            <div className='title col-12'>
-              <h1>Hi Wow</h1>
-            </div>
-            <div className='body'>
-              <p>this is text zone</p>
-            </div>
+            {/* ↓↓↓ 下面可以隨意更改，區塊直接用 col 來寫  ↓↓↓*/}
+            <h1 className='col-12'>Hi Wow</h1>
+            <p>this is text zone</p>
             <div className='footer d-flex'>
               <button className='col-5'>確定</button>
               <button className='col-5' onClick={() => closeModal(false)}>
                 取消
               </button>
             </div>
+            {/* ↑↑↑ 上面可以隨意更改，區塊直接用 col 來寫 ↑↑↑ */}
           </div>
         </section>
       </Draggable>
