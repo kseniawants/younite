@@ -4,14 +4,20 @@ import Logo from '../assets/logo/logo-type.png';
 import '../styles/component/nav.scss';
 import UserImage from '../assets/images/sia.png';
 import DraggableModal from './Modal/DraggableModal';
+import NotificationCollapse from '../pages/NotificationCollapse';
 
 function SideNav() {
   const [openModal, setOpenModal] = useState(false);
   const [isActive, setIsActive] = useState(false);
+  const [isCollapseOpen, setIsCollapseOpen] = useState(false);
 
-  const handleClick = () => {
+  const handleModalClick = () => {
     setOpenModal(true);
     setIsActive(true);
+  };
+
+  const handleCollapseClick = () => {
+    setIsCollapseOpen(!isCollapseOpen);
   };
 
   const handleCloseModal = () => {
@@ -24,9 +30,7 @@ function SideNav() {
       <nav className='bg-secondary d-flex p-0 justify-content-between flex-column align-items-center'>
         <figure className='text-decoration-none mt-5 d-flex flex-column align-items-center'>
           <img src={Logo} alt='YouNite-Logo' className='mb-5' style={{ height: '20px' }} />
-          {/* 使用者圖片 要串API */}
           <img src={UserImage} alt='Picture' className='mb-1 nav-user-image' />
-          {/* 使用者名稱 要串API*/}
           <h6 className='text-black nav-text mt-2'>Cindy 24</h6>
         </figure>
 
@@ -37,12 +41,12 @@ function SideNav() {
             </NavLink>
           </li>
           <li className='nav-item'>
-            <NavLink to='/notice' className='nav-link'>
+            <Link to='#' className='nav-link' onClick={handleCollapseClick}>
               <span className='fa-layers fa-fw'>
                 <i className='fa-solid fa-bell'></i>
                 <span className='bg-primary text-white rounded-5 p-1 badge'>1</span>
               </span>
-            </NavLink>
+            </Link>
           </li>
           <li className='nav-item'>
             <NavLink to='/chatroom' className='nav-link'>
@@ -50,7 +54,11 @@ function SideNav() {
             </NavLink>
           </li>
           <li className='nav-item'>
-            <Link to='#' className={`nav-link ${isActive ? 'active' : ''}`} onClick={handleClick}>
+            <Link
+              to='#'
+              className={`nav-link ${isActive ? 'active' : ''}`}
+              onClick={handleModalClick}
+            >
               <i className='fa-solid fa-robot'></i>
             </Link>
           </li>
@@ -73,6 +81,7 @@ function SideNav() {
           </li>
         </ul>
       </nav>
+      {isCollapseOpen && <NotificationCollapse />}
       {openModal && <DraggableModal closeModal={handleCloseModal} />}
     </>
   );
