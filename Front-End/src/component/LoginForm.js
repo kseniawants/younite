@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Input } from './FormElements';
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-import { LoginSocialFacebook } from 'reactjs-social-login';
-import { FacebookLoginButton } from 'react-social-login-buttons';
+import { LoginSocialFacebook, LoginSocialGoogle } from 'reactjs-social-login';
+import { FacebookLoginButton, GoogleLoginButton } from 'react-social-login-buttons';
 import { Link } from 'react-router-dom';
 
 function LoginForm() {
@@ -28,13 +27,6 @@ function LoginForm() {
     } finally {
       setSubmitting(false);
     }
-  };
-
-  const responseMessage = (response) => {
-    console.log(response);
-  };
-  const errorMessage = (error) => {
-    console.log(error);
   };
 
   return (
@@ -92,20 +84,27 @@ function LoginForm() {
                 </button>
               </div>
               <div className='pt-3 pb-1 d-flex flex-column align-items-center justify-content-center'>
-                <GoogleOAuthProvider clientId='234241802651-ngs8vhu4c0d2u72nmot9kbt799scpoh9.apps.googleusercontent.com'>
-                  <GoogleLogin
-                    // className='w-100%'
-                    theme='outline'
-                    logo_alignment='center'
-                    width='396px'
-                    size='large'
-                    shape='rectangular'
-                    text='Login with Google'
-                    context='login'
-                    onSuccess={responseMessage}
-                    onError={errorMessage}
-                  />
-                </GoogleOAuthProvider>
+                <LoginSocialGoogle
+                  client_id={
+                    ''
+                  }
+                  scope='openid profile email'
+                  discoveryDocs='claims_supported'
+                  access_type='offline'
+                  onResolve={({ provider, data }) => {
+                    console.log(provider, data);
+                  }}
+                  onReject={(err) => {
+                    console.log(err);
+                  }}
+                >
+                  <GoogleLoginButton
+                    className='mt-2 d-flex justify-content-center'
+                    style={{ width: '396px', height: '40px' }}
+                  >
+                    <span className='fs-6 fw-light'>使用 Google 帳戶登入</span>
+                  </GoogleLoginButton>
+                </LoginSocialGoogle>
                 <LoginSocialFacebook
                   appId='672335331385748'
                   onResolve={(response) => {
