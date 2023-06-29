@@ -1,0 +1,35 @@
+.userImg {
+    background-image: url('https://images.unsplash.com/photo-1574015974293-817f0ebebb74?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=373&q=80');
+    background-position: center;
+    background-size: cover;
+    z-index: 999;
+    display: flex;
+    position: fixed;
+    background-color: white;
+    height: 70vh;
+    width: 30vw;
+    padding: 2rem;
+    /* margin: 2rem 5rem; */
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 5px 10px;
+}
+
+.button1 {
+    border: 3px solid lightgray;
+    border-radius: 50%;
+    background-color: transparent;
+    width: 4vw;
+    height: 8vh;
+}
+
+.button2 {
+    border: none;
+    border-radius: 50%;
+    background: #FF451C;
+    width: 4vw;
+    height: 8vh;
+}
+

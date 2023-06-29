@@ -1,37 +1,38 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import '../styles/all.scss';
+import Select from 'react-select';
 import { useForm, Controller } from 'react-hook-form';
 import { Input, RadioButtonGroup } from './FormElements';
 import { DatePicker, Button, Divider } from 'antd';
-import Hobbies from './InfoElements/Hobbies';
 import Avatar from './InfoElements/Avatar';
 import PhotoWall from './InfoElements/PhotoWall';
 import LocationModal from './InfoElements/Location';
 import InfoModal from './Modal/InfoModal';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Info() {
-  const ref = useRef();
   const [submitting, setSubmitting] = useState(false);
+  const navigate = useNavigate();
     const {
       register,
       handleSubmit,
       control,
       formState: { errors },
-      reset,
     } = useForm({
       mode: 'onTouched',
     });
 
-  const onSubmit = async () => {
-    try {
-      setSubmitting(true);
-      // navigate('/src/pages/PersonalInfo.jsx');
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setSubmitting(false);
-    }
-  };
+    const onSubmit = async (data) => {
+      try {
+        setSubmitting(true);
+        console.log(data.goal);
+        navigate('/home');
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setSubmitting(false);
+      }
+    };
 
   const radioGender = [
     { label: '男生', value: 'male' },
@@ -51,6 +52,23 @@ function Info() {
     { label: '所有人', value: 'all' },
   ];
 
+    const hobbies = [
+      { value: 'swim', label: '游泳' },
+      { value: 'cook', label: '烹飪' },
+      { value: 'drama', label: '韓劇' },
+      { value: 'game', label: '手遊' }
+    ]
+
+    const profession = [
+      { value: 'doctor', label: '醫生' },
+      { value: 'police', label: '警察' },
+      { value: 'teacher', label: '老師' },
+      { value: 'engineer', label: '工程師' },
+      { value: 'accountant', label: '會計師' },
+      { value: 'business', label: '商人' },
+      { value: 'nurse', label: '護士' }
+    ]
+
     const [isInfoModalVisible, setInfoModalVisible] = useState(false);
     const [isLocationModalVisible, setLocationModalVisible] = useState(false);
     const [isLocationSelected, setLocationSelected] = useState(false);
@@ -69,11 +87,8 @@ function Info() {
       setLocationModalVisible(false);
     };
     
-    const handleDialogOk = (selectedLocation) => { // 传入选中按钮的标签
+    const handleDialogOk = () => { // 传入选中按钮的标签
       setLocationModalVisible(false);
-      reset({
-        address: selectedLocation
-      });
       setLocationSelected(true);
     };
 
@@ -141,6 +156,36 @@ function Info() {
         {errors.birthday && <div className="invalid-feedback">請選擇生日</div>}
         </div>
         <div className='pb-4'>
+          <i className="fa-solid fa-briefcase text-black"></i>
+          <span className="text-danger p-1">*</span>
+          <label className='mb-2'>興趣</label>
+          <br />
+          <Controller
+            name="profession"
+            control={control}
+            rules={{ required: '請選擇職業' }}
+            defaultValue={[]}
+            render={({ field }) => (
+              <Select
+                {...field}
+                options={profession}
+                className="basic-multi-select w-50 rounded-3"
+                classNamePrefix="select"
+                styles={{
+                  placeholder: (provided) => ({
+                    ...provided,
+                    color: '#BBBBBB',
+                  }),
+                }}
+                placeholder="選擇職業"
+              />
+            )}
+          />
+          {errors.profession && (
+            <div className="error-message text-danger mt-2" style={{fontSize: '0.9rem'}}>{errors.profession.message}</div>
+          )}
+        </div>
+        <div className='pb-4'>
           <i className="fa-solid fa-venus-mars text-black"></i>
           <span className="text-danger p-1">*</span>
           <label>性別</label>
@@ -186,24 +231,36 @@ function Info() {
           />
         </div>
         <div className='pb-4'>
-      <i className="fa-solid fa-heart-circle-plus text-black"></i>
-      <span className="text-danger p-1">*</span>
-      <label className='mb-2'>興趣</label>
-      <br />
-      <Controller
-        control={control}
-        name="goal"
-        rules={{ required: true }}
-        render={({ field }) => (
-          <Hobbies
-            {...field}
-            className={` ${errors.goal && 'is-invalid'}`}
-            ref={ref}
+          <i className="fa-solid fa-heart-circle-plus text-black"></i>
+          <span className="text-danger p-1">*</span>
+          <label className='mb-2'>興趣</label>
+          <br />
+          <Controller
+            name="hobbies"
+            control={control}
+            rules={{ required: '請選擇興趣' }}
+            defaultValue={[]}
+            render={({ field }) => (
+              <Select
+                {...field}
+                isMulti
+                options={hobbies}
+                className="basic-multi-select w-75 rounded-3"
+                classNamePrefix="select"
+                styles={{
+                  placeholder: (provided) => ({
+                    ...provided,
+                    color: '#BBBBBB',
+                  }),
+                }}
+                placeholder="新增興趣"
+              />
+            )}
           />
-        )}
-      />
-      {errors.goal && <div className="invalid-feedback d-block">請填寫興趣</div>}
-    </div>
+          {errors.hobbies && (
+            <div className="error-message text-danger mt-2" style={{fontSize: '0.9rem'}}>{errors.hobbies.message}</div>
+          )}
+        </div>
         <div className='d-flex pb-4'>
           <div className='mb-2 pe-5'>
             <i className="fa-solid fa-magnifying-glass text-black"></i>
@@ -258,7 +315,7 @@ function Info() {
               )}
             />
             {isLocationSelected && <div className="completed-tag"><i className="fa-solid fa-check text-danger"/>已選擇地點</div>}
-            {errors.address && <div className="invalid-feedback">請選擇地點</div>}
+            {errors.address && !isLocationSelected && <div className="invalid-feedback">請選擇地點</div>}
             <LocationModal
               visible={isLocationModalVisible}
               onCancel={handleDialogCancel}
@@ -287,6 +344,7 @@ function Info() {
       </div>
       <div className='col-md-5'>
         <div className='p-4 mb-4'>
+          <span className="text-danger p-1">*</span>
           <label className='mb-4'>大頭貼照片</label>
           <Controller
               control={control}
@@ -299,23 +357,20 @@ function Info() {
             />
             )}
             />
-            {errors.goal && <div className="invalid-feedback d-block">請上傳大頭照</div>}
+            {errors.goal && <div className="invalid-feedback ">請上傳大頭照</div>}
         </div>
         <div className='p-4 mb-4'>
           <label className='mb-4'>個人檔案照片</label>
           <PhotoWall/>
         </div>
       </div>
-      </form>
-      <div className='d-flex flex-column-reverse flex-md-row py-4 justify-content-center align-items-md-center align-items-center w-100'>
-        <button
-          type='submit'
-          className='btn btn-primary rounded text-white'
-          disabled={submitting}
-          onClick={handleSubmit(onSubmit)}
-        >
-          {submitting ? '正在送出表單...' : '送出表單'}
-        </button>
+    </form>
+    <div className='d-flex flex-column-reverse flex-md-row py-4 justify-content-center align-items-md-center align-items-center w-100'>
+    <Link to='/home'>
+      <button type='submit' className='btn btn-primary rounded text-white' disabled={submitting} onClick={handleSubmit(onSubmit)}>
+        {submitting ? '正在送出表單...' : '送出表單'}
+      </button>
+      </Link>
       </div>
     </div>
   );

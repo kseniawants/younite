@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Draggable from 'react-draggable';
-import '../../styles/Modal/draggableModal.scss';
+import '../../styles/Modal/Info.scss';
 import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 
 function InfoModal({ closeModal, setSelectedButtonLabel }) {
-  const [position, setPosition] = useState({ x: 500, y: 100 });
+  const [position, setPosition] = useState({ x: 300, y: 100 });
   const [selectedButton, setSelectedButton] = useState(null);
 
   const handleDrag = (e, ui) => {
@@ -24,10 +24,10 @@ function InfoModal({ closeModal, setSelectedButtonLabel }) {
   return (
     <>
       <Draggable handle=".title" onDrag={handleDrag}>
-        <section className='modal-bg container-fluid' style={{ top: position.y, left: position.x, width: "35vw", height: "70vh" }}>
+        <section className='info container-fluid' style={{ top: position.y, left: position.x }}>
           <div className='modalContainer row'>
             <div className='col-12 d-flex p-0'>
-              <button onClick={() => closeModal(false)} className='position-absolute top-0 end-0 me-4 mt-4'>
+              <button onClick={() => closeModal(false)} className='position-absolute top-0 end-0 me-4 mt-4 bg-transparent'>
                 X
               </button>
             </div>
@@ -44,7 +44,7 @@ function InfoModal({ closeModal, setSelectedButtonLabel }) {
                       variant={selectedButton === 'btnradio1' ? 'outline-primary' : 'outline-radio'}
                       onClick={() => handleButtonClick('btnradio1', '長期伴侶')}
                       autoComplete="off"
-                      style={{ height: '9rem', width: '8rem' }}
+                      className="btnradio"
                     >
                       長期伴侶
                     </Button>
@@ -54,7 +54,7 @@ function InfoModal({ closeModal, setSelectedButtonLabel }) {
                       variant={selectedButton === 'btnradio2' ? 'outline-primary' : 'outline-radio'}
                       onClick={() => handleButtonClick('btnradio2', '短期關係')}
                       autoComplete="off"
-                      style={{ height: "9rem", width: "8rem" }}
+                      className="btnradio"
                     >
                       <span>短期關係</span><br />
                       <span>但不排斥長期</span>
@@ -65,7 +65,7 @@ function InfoModal({ closeModal, setSelectedButtonLabel }) {
                       variant={selectedButton === 'btnradio3' ? 'outline-primary' : 'outline-radio'}
                       onClick={() => handleButtonClick('btnradio3', '長期關係')}
                       autoComplete="off"
-                      style={{ height: "9rem", width: "8rem" }}
+                      className="btnradio"
                     >
                       <span>長期關係</span><br />
                       <span>但不排斥短期</span>
@@ -79,7 +79,7 @@ function InfoModal({ closeModal, setSelectedButtonLabel }) {
                       variant={selectedButton === 'btnradio4' ? 'outline-primary' : 'outline-radio'}
                       onClick={() => handleButtonClick('btnradio4', '短暫的享樂')}
                       autoComplete="off"
-                      style={{ height: "9rem", width: "8rem" }}
+                      className="btnradio"
                     >
                       短暫的享樂
                     </Button>
@@ -89,7 +89,7 @@ function InfoModal({ closeModal, setSelectedButtonLabel }) {
                       variant={selectedButton === 'btnradio5' ? 'outline-primary' : 'outline-radio'}
                       onClick={() => handleButtonClick('btnradio5', '新朋友')}
                       autoComplete="off"
-                      style={{ height: "9rem", width: "8rem" }}
+                      className="btnradio"
                     >
                       新朋友
                     </Button>
@@ -99,7 +99,7 @@ function InfoModal({ closeModal, setSelectedButtonLabel }) {
                       variant={selectedButton === 'btnradio6' ? 'outline-primary' : 'outline-radio'}
                       onClick={() => handleButtonClick('btnradio6', '我還在思考')}
                       autoComplete="off"
-                      style={{ height: "9rem", width: "8rem" }}
+                      className="btnradio"
                     >
                       我還在思考
                     </Button>

@@ -20,7 +20,7 @@ function App() {
         <Route path='/personal' element={<PersonalInfo />}></Route>
         <Route path='/chatroom' element={<ChatRoom />}></Route>
         <Route path='/' element={<HomeLayout />}>
-          <Route path='/' element={<Home />}></Route>
+          <Route path='/home' element={<Home />}></Route>
           <Route path='/setting' element={<SettingPersonal />}></Route>
           <Route path='/store' element={<Store />}></Route>
         </Route>
