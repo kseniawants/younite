@@ -4,32 +4,46 @@ import Draggable from 'react-draggable';
 import '../../styles/Modal/Info.scss';
 import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 
-function InfoModal({ closeModal, setSelectedButtonLabel }) {
+function InfoModal({ closeModal, setSelectedButtonLabel, onOk }) {
   const [position, setPosition] = useState({ x: 300, y: 100 });
   const [selectedButton, setSelectedButton] = useState(null);
 
   const handleDrag = (e, ui) => {
     const { x, y } = position;
-    setPosition({ x: x + ui.deltaX, y: y + ui.deltaY });
+    const { deltaX, deltaY } = ui;
+
+    // 調整速度限制
+    const speedFactor = 0.2; // 調整此數值以改變速度
+    const newPosition = {
+      x: x + deltaX * speedFactor,
+      y: y + deltaY * speedFactor,
+    };
+
+    setPosition(newPosition);
   };
 
   const handleButtonClick = (buttonId, buttonLabel) => {
+    console.log('選擇的目標:', buttonLabel);
     setSelectedButton(buttonId); // 更新选中状态
     setSelectedButtonLabel(buttonLabel); // 更新选中按钮文字
     setTimeout(() => {
       closeModal(); // 关闭窗口
-    }, 2000); // 延迟关闭窗口
+      onOk(buttonLabel); // 将选中的按钮标签传递给onOk回调函数
+    }, 1500); // 延迟关闭窗口
   };
 
   return (
     <>
       <Draggable handle=".title" onDrag={handleDrag}>
         <section className='info container-fluid' style={{ top: position.y, left: position.x }}>
-          <div className='modalContainer row'>
-            <div className='col-12 d-flex p-0'>
-              <button onClick={() => closeModal(false)} className='position-absolute top-0 end-0 me-4 mt-4 bg-transparent'>
-                X
-              </button>
+          <div className='row p-3'>
+          <div className='col-12 d-flex p-0 justify-content-end'>
+              <button
+                type='button'
+                className='btn-close'
+                aria-label='Close'
+                onClick={() => closeModal(false)}
+              ></button>
             </div>
             <div className='title col-12'>
               <h2>現在我想找尋...</h2>
@@ -117,6 +131,7 @@ function InfoModal({ closeModal, setSelectedButtonLabel }) {
 InfoModal.propTypes = {
   closeModal: PropTypes.func.isRequired,
   setSelectedButtonLabel: PropTypes.func.isRequired,
+  onOk: PropTypes.func.isRequired,
 };
 
 export default InfoModal;

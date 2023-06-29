@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal } from 'antd';
+import { Modal } from 'react-bootstrap';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import PropTypes from 'prop-types';
 
@@ -21,29 +21,36 @@ const LocationModal = (props) => {
   };
 
   return (
-    <Modal
-      title="選擇位置"
-      visible={props.visible}
-      onCancel={props.onCancel}
-      onOk={handleModalOk}
-      className='w-30'
-    >
-      <div style={{ height: '50vh', marginBottom: '20px' }} className='ms-4'>
-        <Map
-          google={props.google}
-          onClick={handleMapClick}
-          initialCenter={{
-            lat: 25.0329694, // 初始中心點緯度
-            lng: 121.5654177 // 初始中心點經度
-          }}
-          zoom={14}
-          style={{ width: '28vw', height: '52vh' }}
-        >
-          {selectedLocation && (
-            <Marker position={selectedLocation} />
-          )}
-        </Map>
-      </div>
+    <Modal show={props.visible} onHide={props.onCancel} className='w-30'>
+      <Modal.Header closeButton>
+        <Modal.Title>選擇位置</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <div style={{ height: '50vh', marginBottom: '20px' }} className='ms-4'>
+          <Map
+            google={props.google}
+            onClick={handleMapClick}
+            initialCenter={{
+              lat: 25.0329694, // 初始中心點緯度
+              lng: 121.5654177 // 初始中心點經度
+            }}
+            zoom={14}
+            style={{ width: '28vw', height: '52vh' }}
+          >
+            {selectedLocation && (
+              <Marker position={selectedLocation} />
+            )}
+          </Map>
+        </div>
+      </Modal.Body>
+      <Modal.Footer>
+        <button className="btn btn-secondary" onClick={props.onCancel}>
+          取消
+        </button>
+        <button className="btn btn-primary" onClick={handleModalOk}>
+          確定
+        </button>
+      </Modal.Footer>
     </Modal>
   );
 };

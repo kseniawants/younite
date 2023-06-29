@@ -4,7 +4,7 @@ import Select from 'react-select';
 import { useForm, Controller } from 'react-hook-form';
 import { Input, RadioButtonGroup } from './FormElements';
 import { DatePicker, Button, Divider } from 'antd';
-import Avatar from './InfoElements/Avatar';
+// import Avatar from './InfoElements/Avatar';
 import PhotoWall from './InfoElements/PhotoWall';
 import LocationModal from './InfoElements/Location';
 import InfoModal from './Modal/InfoModal';
@@ -17,6 +17,7 @@ function Info() {
       register,
       handleSubmit,
       control,
+      setValue,
       formState: { errors },
     } = useForm({
       mode: 'onTouched',
@@ -73,6 +74,7 @@ function Info() {
     const [isLocationModalVisible, setLocationModalVisible] = useState(false);
     const [isLocationSelected, setLocationSelected] = useState(false);
     const [selectedButtonLabel, setSelectedButtonLabel] = useState(null); // 新增选中的按钮标签状态
+    const [selectedLocation, setSelectedLocation] = useState(null);
 
     const handleInfoModalButtonClick = () => {
       setInfoModalVisible(true);
@@ -87,14 +89,17 @@ function Info() {
       setLocationModalVisible(false);
     };
     
-    const handleDialogOk = () => { // 传入选中按钮的标签
+    const handleDialogOk = (selectedLocation) => { // 传入选中按钮的标签
       setLocationModalVisible(false);
       setLocationSelected(true);
+      setSelectedLocation(selectedLocation); // 更新选中的按钮标签
+      setValue('address', selectedLocation); // 使用setValue更新Controller的值
     };
 
     const handleDialogOk1 = (selectedButtonLabel) => { // 传入选中按钮的标签
       setInfoModalVisible(false);
       setSelectedButtonLabel(selectedButtonLabel); // 更新选中按钮的标签
+      setValue('goal', selectedButtonLabel); // 使用setValue更新goal字段的值
     };
 
   return (
@@ -269,7 +274,7 @@ function Info() {
             <br />
             <Controller
               control={control}
-              name='birthday'
+              name='goal'
               rules={{ required: true }}
               render={({ field }) => (
                 <Button
@@ -290,14 +295,15 @@ function Info() {
                 closeModal={handleDialogCancel}
                 onOk={handleDialogOk1}
                 setSelectedButtonLabel={setSelectedButtonLabel} // 传递 setSelectedButtonLabel 函数
+                selectedButtonLabel={selectedButtonLabel}
               />
             )}
             {selectedButtonLabel && <div className="completed-tag">{selectedButtonLabel}</div>}
           </div>
-          <div className='pb-4'>
-            <i className='fa-solid fa-venus-mars text-black'></i>
+          <div className='mb-2 ps-5'>
+            <i className='fa-solid fa-location-dot text-black'></i>
             <span className='text-danger p-1'>*</span>
-            <label>性別</label>
+            <label className='mb-2'>地點</label>
             <br />
             <Controller
               control={control}
@@ -314,7 +320,7 @@ function Info() {
                 </Button>
               )}
             />
-            {isLocationSelected && <div className="completed-tag"><i className="fa-solid fa-check text-danger"/>已選擇地點</div>}
+            {isLocationSelected && selectedLocation && <div className="completed-tag"><i className="fa-solid fa-check text-danger"/>已選擇地點</div>}
             {errors.address && !isLocationSelected && <div className="invalid-feedback">請選擇地點</div>}
             <LocationModal
               visible={isLocationModalVisible}
@@ -343,7 +349,7 @@ function Info() {
         </div>
       </div>
       <div className='col-md-5'>
-        <div className='p-4 mb-4'>
+        {/* <div className='p-4 mb-4'>
           <span className="text-danger p-1">*</span>
           <label className='mb-4'>大頭貼照片</label>
           <Controller
@@ -358,7 +364,7 @@ function Info() {
             )}
             />
             {errors.goal && <div className="invalid-feedback ">請上傳大頭照</div>}
-        </div>
+        </div> */}
         <div className='p-4 mb-4'>
           <label className='mb-4'>個人檔案照片</label>
           <PhotoWall/>

@@ -1,13 +1,12 @@
-// 包住整個右邊的聊天室
 import React, {useState} from 'react'
 import Messages from './Messages'
 import Inputs from './Inputs'
-import { ChatDatas } from './ChatDatas';
 import Call from '../Modal/Call';
+import PropTypes from 'prop-types';
 
-const Chat = () => {
-  // 假設取第一筆聊天資料作為目前聊天的使用者
-  const user = ChatDatas[0].userInfo; 
+const Chat = ({ currentChat }) => {
+  // 使用從 props 中取得的 currentChat 代替從 ChatDatas 取得的 user
+  const user = currentChat.userInfo; 
   const [isCallModalVisible, setCallModalVisible] = useState(false);
 
   const handleCallButtonClick = () => {
@@ -21,7 +20,7 @@ const Chat = () => {
           <img className='rounded-circle bg-secondary' style={{height: '50px', width:'50px' , objectFit: 'cover'}} src={user.photoURL} alt="" />
           <div className='mx-3'>
             <span className='text-dark' style={{fontSize:'20px'}}>{user.displayName}</span>
-            <p className='text-radio' style={{fontSize:'12px'}}>1小時前上線</p>
+            <p className='text-radio' style={{fontSize:'12px'}}>{user.state}</p>
           </div>
         </div>
         <div className='d-flex' style={{gap: '20px'}}>
@@ -37,10 +36,25 @@ const Chat = () => {
           </div>
         </div>
       </div>
-      <Messages/>
+      <Messages currentChat={currentChat}/>
       <Inputs/>
     </div>
   )
 }
 
-export default Chat
+Chat.propTypes = {
+  currentChat: PropTypes.shape({
+    userInfo: PropTypes.shape({
+      photoURL: PropTypes.string,
+      displayName: PropTypes.string,
+      state: PropTypes.string,
+    }),
+    messages: PropTypes.arrayOf(
+      PropTypes.shape({
+        // 在此處填寫你的 message 物件的 shape
+      })
+    ),
+  }).isRequired,
+};
+
+export default Chat  
