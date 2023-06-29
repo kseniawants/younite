@@ -215,7 +215,7 @@ function Info() {
               name='birthday'
               rules={{ required: true }}
               render={({ field }) => (
-                <DatePicker
+                <Button
                   {...field}
                   className={` ${errors.goal && 'is-invalid'}`}
                   onClick={handleInfoModalButtonClick}
@@ -305,6 +305,7 @@ function Info() {
           <label className='mb-4'>個人檔案照片</label>
           <PhotoWall/>
         </div>
+      </div>
       </form>
       <div className='d-flex flex-column-reverse flex-md-row py-4 justify-content-center align-items-md-center align-items-center w-100'>
         <button
