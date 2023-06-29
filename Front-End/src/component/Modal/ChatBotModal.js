@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Draggable from 'react-draggable';
 import '../../styles/Modal/draggableModal.scss';
+import '../../styles/Modal/draggableModal.scss';
 
-function DraggableModal({ closeModal }) {
+function ChatBotModal({ closeModal }) {
   const [position, setPosition] = useState({ x: undefined, y: undefined });
   const [fadeIn, setFadeIn] = useState(false); // 追蹤是否需要淡入
   useEffect(() => {
@@ -50,7 +51,7 @@ function DraggableModal({ closeModal }) {
               ></button>
             </div>
             {/* ↓↓↓ 下面可以隨意更改，區塊直接用 col 來寫  ↓↓↓*/}
-            <h1 className='col-12'>Hi Wow</h1>
+            <h1 className='col-12'>Hi</h1>
             <p>this is text zone</p>
             <div className='footer d-flex'>
               <button className='col-5'>確定</button>
@@ -66,8 +67,8 @@ function DraggableModal({ closeModal }) {
   );
 }
 
-DraggableModal.propTypes = {
+ChatBotModal.propTypes = {
   closeModal: PropTypes.func.isRequired,
 };
 
-export default DraggableModal;
+export default ChatBotModal;

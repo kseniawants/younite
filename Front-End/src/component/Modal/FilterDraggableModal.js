@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Draggable from 'react-draggable';
 import '../../styles/Modal/draggableModal.scss';
 
-function DraggableModal({ closeModal }) {
+function FilterDraggableModal({ closeModal }) {
   const [position, setPosition] = useState({ x: undefined, y: undefined });
   const [fadeIn, setFadeIn] = useState(false); // 追蹤是否需要淡入
   useEffect(() => {
@@ -70,4 +70,4 @@ DraggableModal.propTypes = {
   closeModal: PropTypes.func.isRequired,
 };
 
-export default DraggableModal;
+export default FilterDraggableModal;

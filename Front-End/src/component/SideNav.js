@@ -3,17 +3,19 @@ import { NavLink, Link } from 'react-router-dom';
 import Logo from '../assets/logo/logo-type.png';
 import '../styles/component/nav.scss';
 import UserImage from '../assets/images/sia.png';
-import DraggableModal from './Modal/DraggableModal';
+import ChatBotModal from './Modal/ChatBotModal';
 import NotificationCollapse from '../pages/NotificationCollapse';
 
 function SideNav() {
-  const [openModal, setOpenModal] = useState(false);
-  const [isActive, setIsActive] = useState(false);
-  const [isCollapseOpen, setIsCollapseOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false); // Model 開關
+  const [isActive, setIsActive] = useState(false); // Modal 開關連動 nav icon 顏色切換
+  const [isCollapseOpen, setIsCollapseOpen] = useState(false); // 通知欄位開關
+  const [fadeInModal, setFadeInModal] = useState(false); // 追蹤是否需要淡入
 
   const handleModalClick = () => {
     setOpenModal(true);
     setIsActive(true);
+    setFadeInModal(true); // 設置淡入為 true，觸發淡入效果
   };
 
   const handleCollapseClick = () => {
@@ -82,7 +84,7 @@ function SideNav() {
         </ul>
       </nav>
       {isCollapseOpen && <NotificationCollapse />}
-      {openModal && <DraggableModal closeModal={handleCloseModal} />}
+      {openModal && <ChatBotModal closeModal={handleCloseModal} fadeIn={fadeInModal} />}
     </>
   );
 }
