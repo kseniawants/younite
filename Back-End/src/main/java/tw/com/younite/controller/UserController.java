@@ -13,13 +13,24 @@ import javax.servlet.http.HttpSession;
  * @RestController = @Controller + @ResponseBody(JSON傳輸用)
  */
 
-//@Api(tags = "Users")
+//@Api(tags = "Users")@RequestMapping("user")
 @RestController
 @CrossOrigin(origins = "*")
 public class UserController extends BaseController {
     @Autowired
-    private IUserService iUserService;
+    public IUserService iUserService;
     //    @ApiOperation(value = "註冊用戶", notes = "註冊帳號，傳User實體")
+
+//    @PostMapping("/user/googleLogin")
+//    public  void saveUser(@RequestParam("credential") String token){
+//        User user = iUserService.loginByGoogle(token);
+//        //users(email=raytheon1229@gmail.com, username=Lee ter, googleUser=true)˙3784563456
+//        System.out.println(user + "˙3784563456");
+//        iUserService.save(user);
+//
+//    }
+
+
     @PostMapping("/users/register")
     public JSONResult<Void> reg(@RequestBody User user, HttpSession session) {
         iUserService.reg(user);

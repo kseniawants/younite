@@ -1,11 +1,14 @@
 package tw.com.younite.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 import tw.com.younite.entity.User;
 import tw.com.younite.entity.UserProfile;
 
 import java.util.Date;
 
-public interface UserMapper {
+@Mapper
+public interface UserMapper extends BaseMapper<User> {
     /**
     * @param user
     * @return 受影響的數據(增、刪、改都有，可以根據返回值判斷)
