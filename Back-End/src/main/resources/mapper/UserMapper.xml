@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.basicfunctions01.mapper.UserMapper">
-    <resultMap id="UserEntityMap" type="com.example.basicfunctions01.entity.User">
+<mapper namespace="tw.com.younite.mapper.UserMapper">
+    <resultMap id="UserEntityMap" type="tw.com.younite.entity.User">
         <id column="id" property="id"></id>
         <result column="created_at" property="createdAt"></result>
         <result column="modified_at" property="modifiedAt"></result>
@@ -10,6 +10,19 @@
         <result column="facebook_user" property="facebookUser"></result>
         <result column="google_user" property="googleUser"></result>
     </resultMap>
+    <resultMap id="UserProfileEntityMap" type="tw.com.younite.entity.UserProfile">
+        <id column="profile_id" property="profileId"></id>
+        <result column="user_id" property="userId"></result>
+        <result column="full_name" property="fullName"></result>
+        <result column="profile_avatar" property="profileAvatar"></result>
+        <result column="sexual_orientation" property="sexualOrientation"></result>
+        <result column="preferred_gender" property="preferredGender"></result>
+        <result column="dating_goal" property="datingGoal"></result>
+        <result column="self_intro" property="selfIntro"></result>
+        <result column="blocked_id" property="blockId"></result>
+        <result column="voice_intro" property="voiceIntro"></result>
+    </resultMap>
+
     <select id="getByUsername" resultMap="UserEntityMap">
         SELECT *
         FROM `users`
@@ -34,6 +47,18 @@
         WHERE `full_name` = #{fullName}
     </select>
 
+    <select id="getUserByID" resultMap="UserEntityMap">
+        SELECT *
+        FROM `USERS`
+        WHERE `id` = #{id}
+    </select>
+
+    <select id="getProfileByID" resultMap="UserProfileEntityMap">
+        SELECT *
+        FROM `PROFILES`
+        WHERE `user_id` = #{userId}
+    </select>
+
     <insert
             id="register"
             useGeneratedKeys="true" keyProperty="id">
@@ -45,28 +70,53 @@
                 #{vipExpiry}, #{createdAt}, #{modifiedAt}, #{salt})
     </insert>
 
+    <insert
+            id="registerByOAuth"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO USERS
+        (`id`, `username`, `password`, `phone`, `email`, `third_party_login`, `facebook_user`, `google_user`,
+         `vip_expiry`, `created_at`, `modified_at`)
+        VALUES (#{id}, #{username}, #{password}, #{phone}, #{email}, #{thirdPartyLogin}, #{facebookUser}, #{googleUser},
+                #{vipExpiry}, #{createdAt}, #{modifiedAt})
+    </insert>
+
 
     <insert
             id="insertProfile"
             useGeneratedKeys="true" keyProperty="profileId">
         INSERT INTO PROFILES
-        (`profile_id`, `user_id`, `full_name`, `birthday`, `profile_pic`,
+        (`profile_id`, `user_id`, `full_name`, `profile_pic`,
          `gender`, `sexual_orientation`, `preferred_gender`,
-         `dating_goal`, `self_intro`, `location`, `blocked_id`, `profile_avatar`)
-        VALUES (#{profileId}, #{id}, #{fullName}, #{birthday}, #{profilePic}, #{gender}, #{sexualOrientation}, #{preferredGender},
-                #{datingGoal}, #{selfIntro}, #{location}, #{blockId}, #{profileAvatar})
+         `dating_goal`, `self_intro`, `location`, `blocked_id`,`profile_avatar`, `birthday`, `voice_intro`)
+        VALUES (#{profileId}, #{id}, #{fullName},
+                #{profilePic}, #{gender}, #{sexualOrientation},
+                #{preferredGender}, #{datingGoal}, #{selfIntro},
+                #{location}, #{blockId}, #{profileAvatar}, #{birthday}, #{voiceIntro})
     </insert>
 
     <update id="updatePasswordByID">
-        UPDATE `USERS` SET
-                           password = #{password},
-                           modified_at = #{modifiedAt}
+        UPDATE `USERS`
+        SET
+            password = #{password},
+            modified_at = #{modifiedAt}
         WHERE `id` = ${id}
     </update>
 
-    <select id="getUserByID" resultMap="UserEntityMap">
-        SELECT *
-        FROM `USERS`
-        WHERE `id` = #{id}
-    </select>
+    <update id="updateUserProfileByID">
+        UPDATE `PROFILES`
+        SET
+            `full_name` = #{fullName},
+            `birthday` = #{birthday},
+            `gender` = #{gender},
+            `sexual_orientation` = #{sexualOrientation},
+            `dating_goal` = #{datingGoal},
+            `location` = #{location},
+            `self_intro` = #{selfIntro},
+            `preferred_gender` = #{preferredGender},
+            `profile_avatar` = #{profileAvatar},
+            `voice_intro` = #{voiceIntro}
+        WHERE `user_id` = ${userId}
+    </update>
+
+
 </mapper>

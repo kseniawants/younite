@@ -1,12 +1,17 @@
-// 包住整個右邊的聊天室
-import React from 'react';
-import Messages from './Messages';
-import Inputs from './Inputs';
+import React, {useState} from 'react'
+import Messages from './Messages'
+import Inputs from './Inputs'
 import { ChatDatas } from './ChatDatas';
+import Call from '../Modal/Call';
 
 const Chat = () => {
   // 假設取第一筆聊天資料作為目前聊天的使用者
-  const user = ChatDatas[0].userInfo;
+  const user = ChatDatas[0].userInfo; 
+  const [isCallModalVisible, setCallModalVisible] = useState(false);
+
+  const handleCallButtonClick = () => {
+    setCallModalVisible(true);
+  };  
 
   return (
     <div className='' style={{ flex: '2' }}>
@@ -30,10 +35,17 @@ const Chat = () => {
             </p>
           </div>
         </div>
-        <div className='d-flex' style={{ gap: '20px' }}>
-          <i className='fa-solid fa-phone text-dark fa-lg' style={{ cursor: 'pointer' }}></i>
-          <i className='fa-solid fa-video text-dark fa-lg' style={{ cursor: 'pointer' }}></i>
-          <i className='fa-solid fa-ellipsis text-dark fa-lg' style={{ cursor: 'pointer' }}></i>
+        <div className='d-flex' style={{gap: '20px'}}>
+          <div>
+            <i className="fa-solid fa-phone text-dark fa-lg" style={{cursor: 'pointer'}} onClick={handleCallButtonClick}></i>
+            {isCallModalVisible && <Call closeModal={() => setCallModalVisible(false)} />}
+          </div>
+          <div>
+            <i className="fa-solid fa-video text-dark fa-lg" style={{ cursor: 'pointer' }}></i>
+          </div>
+          <div>
+            <i className="fa-solid fa-ellipsis text-dark fa-lg" style={{cursor: 'pointer'}}></i>
+          </div>
         </div>
       </div>
       <Messages />
