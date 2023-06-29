@@ -1,17 +1,18 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import '../styles/all.scss';
+import Select from 'react-select';
 import { useForm, Controller } from 'react-hook-form';
 import { Input, RadioButtonGroup } from './FormElements';
 import { DatePicker, Button, Divider } from 'antd';
-import Hobbies from './InfoElements/Hobbies';
 import Avatar from './InfoElements/Avatar';
 import PhotoWall from './InfoElements/PhotoWall';
 import LocationModal from './InfoElements/Location';
 import InfoModal from './Modal/InfoModal';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Info() {
-  const ref = useRef();
   const [submitting, setSubmitting] = useState(false);
+  const navigate = useNavigate();
     const {
       register,
       handleSubmit,
@@ -24,8 +25,8 @@ function Info() {
     const onSubmit = async (data) => {
       try {
         setSubmitting(true);
-        // navigate('/src/pages/PersonalInfo.jsx');
         console.log(data.goal);
+        navigate('/home');
       } catch (error) {
         console.error(error);
       } finally {
@@ -50,6 +51,23 @@ function Info() {
       { label: '女生', value: 'women' },
       { label: '所有人', value: 'all' }
     ];
+
+    const hobbies = [
+      { value: 'swim', label: '游泳' },
+      { value: 'cook', label: '烹飪' },
+      { value: 'drama', label: '韓劇' },
+      { value: 'game', label: '手遊' }
+    ]
+
+    const profession = [
+      { value: 'doctor', label: '醫生' },
+      { value: 'police', label: '警察' },
+      { value: 'teacher', label: '老師' },
+      { value: 'engineer', label: '工程師' },
+      { value: 'accountant', label: '會計師' },
+      { value: 'business', label: '商人' },
+      { value: 'nurse', label: '護士' }
+    ]
 
     const [isInfoModalVisible, setInfoModalVisible] = useState(false);
     const [isLocationModalVisible, setLocationModalVisible] = useState(false);
@@ -140,9 +158,32 @@ function Info() {
         <div className='pb-4'>
           <i className="fa-solid fa-briefcase text-black"></i>
           <span className="text-danger p-1">*</span>
-          <label htmlFor="">職業</label>
+          <label className='mb-2'>興趣</label>
           <br />
-          
+          <Controller
+            name="profession"
+            control={control}
+            rules={{ required: '請選擇職業' }}
+            defaultValue={[]}
+            render={({ field }) => (
+              <Select
+                {...field}
+                options={profession}
+                className="basic-multi-select w-50 rounded-3"
+                classNamePrefix="select"
+                styles={{
+                  placeholder: (provided) => ({
+                    ...provided,
+                    color: '#BBBBBB',
+                  }),
+                }}
+                placeholder="選擇職業"
+              />
+            )}
+          />
+          {errors.profession && (
+            <div className="error-message text-danger mt-2" style={{fontSize: '0.9rem'}}>{errors.profession.message}</div>
+          )}
         </div>
         <div className='pb-4'>
           <i className="fa-solid fa-venus-mars text-black"></i>
@@ -195,19 +236,30 @@ function Info() {
           <label className='mb-2'>興趣</label>
           <br />
           <Controller
+            name="hobbies"
             control={control}
-            name="goal"
-            rules={{ required: true }}
+            rules={{ required: '請選擇興趣' }}
+            defaultValue={[]}
             render={({ field }) => (
-              <Hobbies
+              <Select
                 {...field}
-                className={` ${errors.goal && 'is-invalid'}`}
-                ref={ref}
-                onChange={([selected]) => selected}
+                isMulti
+                options={hobbies}
+                className="basic-multi-select w-75 rounded-3"
+                classNamePrefix="select"
+                styles={{
+                  placeholder: (provided) => ({
+                    ...provided,
+                    color: '#BBBBBB',
+                  }),
+                }}
+                placeholder="新增興趣"
               />
             )}
           />
-          {errors.goal && <div className="invalid-feedback">請填寫興趣</div>}
+          {errors.hobbies && (
+            <div className="error-message text-danger mt-2" style={{fontSize: '0.9rem'}}>{errors.hobbies.message}</div>
+          )}
         </div>
         <div className='d-flex pb-4'>
           <div className='mb-2 pe-5'>
@@ -315,11 +367,13 @@ function Info() {
       </div>
     </form>
     <div className='d-flex flex-column-reverse flex-md-row py-4 justify-content-center align-items-md-center align-items-center w-100'>
-        <button type='submit' className='btn btn-primary rounded text-white' disabled={submitting} onClick={handleSubmit(onSubmit)}>
-          {submitting ? '正在送出表單...' : '送出表單'}
-        </button>
-      </div>
+    <Link to='/home'>
+      <button type='submit' className='btn btn-primary rounded text-white' disabled={submitting} onClick={handleSubmit(onSubmit)}>
+        {submitting ? '正在送出表單...' : '送出表單'}
+      </button>
+      </Link>
     </div>
+  </div>
   );
 }
 
