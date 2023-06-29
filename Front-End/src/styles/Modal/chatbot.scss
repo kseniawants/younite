@@ -1,0 +1,7 @@
+.modal-bg&::after {
+  content: '';
+  position: absolute;
+  width: 50%;
+  background-color: pink;
+  border-radius: 10px;
+}

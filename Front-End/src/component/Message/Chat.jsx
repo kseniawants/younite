@@ -1,4 +1,3 @@
-// 包住整個右邊的聊天室
 import React, {useState} from 'react'
 import Messages from './Messages'
 import Inputs from './Inputs'
@@ -15,13 +14,25 @@ const Chat = () => {
   };  
 
   return (
-    <div className='' style={{flex: '2'}}>
-      <div className='d-flex align-items-center justify-content-between p-3 border-bottom' style={{ height: '75px'}}>
+    <div className='' style={{ flex: '2' }}>
+      <div
+        className='d-flex align-items-center justify-content-between p-3 border-bottom'
+        style={{ height: '75px' }}
+      >
         <div className='d-flex mt-2'>
-          <img className='rounded-circle bg-secondary' style={{height: '50px', width:'50px' , objectFit: 'cover'}} src={user.photoURL} alt="" />
+          <img
+            className='rounded-circle bg-secondary'
+            style={{ height: '50px', width: '50px', objectFit: 'cover' }}
+            src={user.photoURL}
+            alt=''
+          />
           <div className='mx-3'>
-            <span className='text-dark' style={{fontSize:'20px'}}>{user.displayName}</span>
-            <p className='text-radio' style={{fontSize:'12px'}}>1小時前上線</p>
+            <span className='text-dark' style={{ fontSize: '20px' }}>
+              {user.displayName}
+            </span>
+            <p className='text-radio' style={{ fontSize: '12px' }}>
+              1小時前上線
+            </p>
           </div>
         </div>
         <div className='d-flex' style={{gap: '20px'}}>
@@ -37,10 +48,10 @@ const Chat = () => {
           </div>
         </div>
       </div>
-      <Messages/>
-      <Inputs/>
+      <Messages />
+      <Inputs />
     </div>
-  )
-}
+  );
+};
 
-export default Chat
+export default Chat;
