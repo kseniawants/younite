@@ -1,7 +1,7 @@
 package tw.com.younite.service.inter;
 
-import tw.com.younite.entity.UserPhotos;
+import tw.com.younite.entity.UserPhotosEntity;
 
 public interface IUserPhotosService {
-    void insertPhotos(UserPhotos userPhotos);
+    void insertPhotos(UserPhotosEntity userPhotos);
 }

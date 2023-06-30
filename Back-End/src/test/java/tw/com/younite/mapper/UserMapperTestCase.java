@@ -1,6 +1,6 @@
 package tw.com.younite.mapper;
 
-import tw.com.younite.entity.User;
+import tw.com.younite.entity.UserEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ public class UserMapperTestCase {
 
     @Test
     public void testRegister() {
-        User user = new User();
+        UserEntity user = new UserEntity();
         user.setId(1);
         user.setEmail("david.liu0206@gmail.com");
         user.setUsername("David");
@@ -29,7 +29,7 @@ public class UserMapperTestCase {
 
     @Test
     public void testRegisterByPAuth() {
-        User user = new User();
+        UserEntity user = new UserEntity();
         user.setId(102);
         user.setEmail("qoqo850206123@gmail.com");
         user.setUsername("David123");
@@ -41,7 +41,7 @@ public class UserMapperTestCase {
 
     @Test
     public void testGetByUsername() {
-        User user = userMapper.getByUsername("David");
+        UserEntity user = userMapper.getByUsername("David");
         System.out.println("user = " + user);
     }
 
@@ -53,7 +53,7 @@ public class UserMapperTestCase {
 
     @Test
     public void testGetByID() {
-        User user = userMapper.getUserByID(44);
+        UserEntity user = userMapper.getUserByID(44);
         System.out.println("user = " + user);
     }
 }

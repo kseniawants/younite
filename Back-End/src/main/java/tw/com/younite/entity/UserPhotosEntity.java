@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class UserPhotos implements Serializable {
+public class UserPhotosEntity implements Serializable {
     private int photoID;
     private int profileID;
     private String firstPhotoPath;

@@ -1,12 +1,14 @@
 package tw.com.younite.service.inter;
 
-import tw.com.younite.entity.User;
+import tw.com.younite.entity.UserEntity;
 
 public interface IUserService {
-    void reg(User user);
-    void regByOAuth(User user);
+    void reg(UserEntity user);
+    void regByOAuth(UserEntity user);
 
-    void resetPassword(Integer id, String username, String oldPassword, String newPassword);
-    User login(User user);
+    void resetPassword(Integer id, String oldPassword, String newPassword);
+    UserEntity login(UserEntity user);
+
+    UserEntity getUserByID(Integer id);
 
 }
