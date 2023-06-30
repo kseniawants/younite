@@ -12,8 +12,6 @@ public interface UserMapper {
     */
     Integer register(UserEntity user);
     Integer registerByOAuth(UserEntity user);
-    Integer insertProfile(UserProfileEntity userProfile);
-    UserProfileEntity getByFullName(String fullName);
     UserEntity getByUsername(String username);
     UserEntity getByUserEmail(String email);
     UserEntity getByUserPhone(String phone);
@@ -26,7 +24,7 @@ public interface UserMapper {
      * @return 受影響的行數
      * */
     Integer updatePasswordByID(Integer id, String password, Date modifiedAt);
-    Integer updateUserProfileByID(UserProfileEntity userProfile);
+
     /**
      * 根據users table / user id 來查詢用戶
      * @param id 用戶的id
@@ -38,5 +36,5 @@ public interface UserMapper {
      *  @param id 用戶的id
      *  @return Profile物件
      * */
-    UserProfileEntity getProfileByID(Integer id);
+
 }

@@ -8,7 +8,7 @@ import tw.com.younite.service.exception.InsertPhotosException;
 import tw.com.younite.service.inter.IUserPhotosService;
 
 @Service
-public class UserPhotosImpl implements IUserPhotosService {
+public class UserPhotosServiceImpl implements IUserPhotosService {
     @Autowired
     UserPhotosMapper userPhotosMapper;
     @Override

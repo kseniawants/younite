@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 public class UserLikeEntity implements Serializable {
     private String id;
-    private Integer likedUserId;
+    private Integer likedUserID;
     private Integer userID;
     private Date likedAt;
 }

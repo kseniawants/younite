@@ -32,6 +32,15 @@ public class UserController extends BaseController {
         return new JSONResult<UserEntity>(OK, user);
     }
 
+    @GetMapping("/users/getUser")
+    public JSONResult<UserEntity> getCurrentUser(HttpSession session) {
+        Integer userID = getIDFromSession(session);
+        UserEntity user = iUserService.getUserByID(userID);
+        return new JSONResult<UserEntity>(OK, user);
+    }
+
+
+
 
     @PostMapping("/users/register")
     public JSONResult<Void> reg(@RequestBody UserEntity user, HttpSession session) {
@@ -50,7 +59,7 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("/users/logout")
-    public JSONResult<Void> Logout(HttpSession session) {
+    public JSONResult<Void> Logout (HttpSession session) {
         session.removeAttribute("id");
         session.removeAttribute("username");
         return new JSONResult<>(OK);

@@ -3,7 +3,7 @@ package tw.com.younite.service.impl;
 import tw.com.younite.entity.UserEntity;
 import tw.com.younite.mapper.UserMapper;
 import tw.com.younite.service.inter.IUserService;
-import tw.com.younite.service.exception.UsernameDuplicatedException;
+import tw.com.younite.service.exception.DuplicatedUsernameException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -24,22 +24,16 @@ public class UserServiceImpl implements IUserService {
     public void reg(UserEntity user) {
         String username = user.getUsername();
         String email = user.getEmail();
-        String phone = user.getPhone();
         UserEntity result = userMapper.getByUsername(username);
 
         //驗證帳號是否重複
         if (result != null) {
-            throw new UsernameDuplicatedException("帳號重複!");
+            throw new DuplicatedUsernameException("帳號重複!");
         }
 
         //驗證信箱是否重複
         if (userMapper.getByUserEmail(email) != null) {
-            throw new EmailDuplicatedException("電子信箱重複!");
-        }
-
-        //驗證手機是否重複
-        if (userMapper.getByUserPhone(phone) != null) {
-            throw new PhoneDuplicatedException("電話重複!");
+            throw new DuplicatedEmailException("電子信箱重複!");
         }
 
 

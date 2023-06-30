@@ -31,53 +31,68 @@ public class BaseController {
     @ExceptionHandler(ServiceException.class)
     public JSONResult<Void> handleException(Throwable e) {
         JSONResult<Void> result = new JSONResult<>();
-        if (e instanceof UsernameDuplicatedException) {
-            result.setState(CONFLICT_ERROR);
+        if (e instanceof DuplicatedUsernameException) {
+            result.setStatus(CONFLICT_ERROR);
             result.setMessage("帳號已被註冊");
-        } else if (e instanceof EmailDuplicatedException) {
-            result.setState(CONFLICT_ERROR);
+        } else if (e instanceof DuplicatedEmailException) {
+            result.setStatus(CONFLICT_ERROR);
             result.setMessage("信箱已被註冊");
-        } else if (e instanceof PhoneDuplicatedException) {
-            result.setState(CONFLICT_ERROR);
+        } else if (e instanceof DuplicatedPhoneException) {
+            result.setStatus(CONFLICT_ERROR);
             result.setMessage("手機已被註冊");
-        } else if (e instanceof FullNameDuplicatedException) {
-            result.setState(CONFLICT_ERROR);
+        } else if (e instanceof DuplicatedFullNameException) {
+            result.setStatus(CONFLICT_ERROR);
             result.setMessage("暱稱已被註冊!");
-        } else if(e instanceof UserProfileDuplicatedException) {
-            result.setState(CONFLICT_ERROR);
+        } else if(e instanceof DuplicatedUserProfileException) {
+            result.setStatus(CONFLICT_ERROR);
             result.setMessage("個人資料已經存在!");
+        } else if (e instanceof DuplicatedLikedUserException) {
+            result.setStatus(CONFLICT_ERROR);
+            result.setMessage("喜歡的用戶已存在!");
+        } else if (e instanceof BlockedIDAlreadyExistsException) {
+            result.setStatus(CONFLICT_ERROR);
+            result.setMessage("此用戶已在黑名單內!");
         } else if (e instanceof UserNotFoundException) {
-            result.setState(NOT_FOUND_ERROR);
+            result.setStatus(NOT_FOUND_ERROR);
             result.setMessage("帳號不存在!");
+        } else if (e instanceof  LikedUserNotFoundException) {
+            result.setStatus(NOT_FOUND_ERROR);
+            result.setMessage("喜歡的用戶不存在或已被刪除!");
+        } else if (e instanceof BlockedUserNotFoundException) {
+            result.setStatus(NOT_FOUND_ERROR);
+            result.setMessage("封鎖的用戶不存在或已被解除封鎖!");
         } else if (e instanceof PasswordNotMatchException) {
-            result.setState(UNAUTHORIZED_ERROR);
+            result.setStatus(UNAUTHORIZED_ERROR);
             result.setMessage("密碼錯誤!");
+        } else if (e instanceof  LikedUserException) {
+            result.setStatus(INTERNAL_SERVER_ERROR);
+            result.setMessage("伺服器異常，無法添加喜歡用戶，請稍後再試!");
         } else if (e instanceof RegisterException) {
-            result.setState(INTERNAL_SERVER_ERROR);
+            result.setStatus(INTERNAL_SERVER_ERROR);
             result.setMessage("伺服器異常，無法註冊，請稍後再嘗試! ");
         } else if (e instanceof UpdateException) {
-            result.setState(INTERNAL_SERVER_ERROR);
+            result.setStatus(INTERNAL_SERVER_ERROR);
             result.setMessage("更新數據時產生未知的錯誤!");
         } else if (e instanceof InsertProfileException) {
-            result.setState(INTERNAL_SERVER_ERROR);
+            result.setStatus(INTERNAL_SERVER_ERROR);
             result.setMessage("伺服器異常，無法新增個人資料，請稍後再嘗試!");
         } else if (e instanceof FileTypeException) {
-            result.setState(UNSUPPORTED_FILE_TYPE_ERROR);
+            result.setStatus(UNSUPPORTED_FILE_TYPE_ERROR);
             result.setMessage("文件格式錯誤，無法上傳");
         } else if (e instanceof FileEmptyException) {
-            result.setState(BAD_REQUEST);
+            result.setStatus(BAD_REQUEST);
             result.setMessage("文件為空，無法上傳");
         } else if (e instanceof FileSizeException) {
-            result.setState(PAYLOAD_MAXIMUM_SIZE_ERROR);
+            result.setStatus(PAYLOAD_MAXIMUM_SIZE_ERROR);
             result.setMessage("文件檔案過大，無法上傳");
         } else if (e instanceof FileStateException) {
-            result.setState(CONFLICT_ERROR);
+            result.setStatus(CONFLICT_ERROR);
             result.setMessage("文件狀態異常");
         } else if (e instanceof FileUploadIOException) {
-            result.setState(INTERNAL_SERVER_ERROR);
+            result.setStatus(INTERNAL_SERVER_ERROR);
             result.setMessage("文件IO異常");
         } else if (e instanceof FileUploadException) {
-            result.setState(INTERNAL_SERVER_ERROR);
+            result.setStatus(INTERNAL_SERVER_ERROR);
             result.setMessage("文件上傳時發生異常!");
         }
         return result;

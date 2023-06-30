@@ -11,7 +11,6 @@ public class UserEntity extends BaseEntity implements Serializable {
     private String username;
     private String salt;
     private String email;
-    private String phone;
     private String password;
     private Boolean thirdPartyLogin;
     private String googleUser;

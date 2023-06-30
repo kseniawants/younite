@@ -2,7 +2,9 @@ package tw.com.younite.controller;
 
 import tw.com.younite.entity.UserPhotosEntity;
 import tw.com.younite.entity.UserProfileEntity;
-import tw.com.younite.service.exception.UserProfileDuplicatedException;
+import tw.com.younite.service.exception.BlockedIDAlreadyExistsException;
+import tw.com.younite.service.exception.BlockedUserNotFoundException;
+import tw.com.younite.service.exception.DuplicatedUserProfileException;
 import tw.com.younite.service.inter.IUserPhotosService;
 import tw.com.younite.service.inter.IUserProfileService;
 import tw.com.younite.util.DateUtil;
@@ -75,21 +77,24 @@ public class UserProfileController extends BaseController {
     public JSONResult<String> insertProfile(@ModelAttribute UserProfileEntity userProfile,
                                             HttpSession session,
                                             String birthday,
-                                            MultipartFile voice,
+                                            @RequestParam(required = false) MultipartFile voice,
                                             MultipartFile avatar,
                                             MultipartFile[] photos) {
         Integer userID = getIDFromSession(session);
         if (iUserProfileService.getUserProfile(userID) == null) {
             userProfile.setId(userID);
         } else {
-            throw new UserProfileDuplicatedException("個人檔案重複");
+            throw new DuplicatedUserProfileException("個人檔案重複");
         }
-        validateAvatar(avatar);
-        validateVoice(voice);
 
+        if (voice != null) {
+            validateVoice(voice);
+            userProfile.setVoiceIntro(fileUploadUtil.uploadFile(voice));
+        }
+
+        validateAvatar(avatar);
         String avatarPath = fileUploadUtil.uploadFile(avatar);
         userProfile.setProfileAvatar(avatarPath);
-        userProfile.setVoiceIntro(fileUploadUtil.uploadFile(voice));
 
         Date date = dateUtil.parseDate(birthday);
         userProfile.setBirthday(date);
@@ -101,9 +106,43 @@ public class UserProfileController extends BaseController {
         return new JSONResult<>(CREATE_OK, avatarPath);
     }
 
+    @PostMapping("/users/blockUser")
+    public JSONResult<Void> blockUser(HttpSession session, Integer blockedUserID) {
+        Integer userID = getIDFromSession(session);
+        if (iUserProfileService.getBlockedID(userID).contains(blockedUserID)) {
+            throw new BlockedIDAlreadyExistsException("此用戶已在黑名單內");
+        }
+        iUserProfileService.blockUser(userID, blockedUserID);
+        return new JSONResult<>(CREATE_OK, "已成功添加黑名單");
+    }
+
+    @PostMapping("/users/unblockUser")
+    public JSONResult<Void> unblockUser(HttpSession session, Integer unblockedUserID) {
+        Integer userID = getIDFromSession(session);
+        if (!iUserProfileService.getBlockedID(userID).contains(unblockedUserID)) {
+            throw new BlockedUserNotFoundException();
+        }
+        iUserProfileService.unblockUser(userID, unblockedUserID);
+        return new JSONResult<>(CREATE_OK, "已將用戶自黑名單中移除!");
+    }
+
+
+    @GetMapping("/users/getBlokedID")
+    public JSONResult<List<Integer>> getBlockedList(HttpSession session) {
+        Integer userID = getIDFromSession(session);
+        List<Integer> data = iUserProfileService.getBlockedID(userID);
+        return new JSONResult<>(OK, data);
+    }
+
     @GetMapping("/users/profile")
     public JSONResult<UserProfileEntity> getUserProfile(HttpSession session) {
         Integer userID = getIDFromSession(session);
+        UserProfileEntity data = iUserProfileService.getUserProfile(userID);
+        return new JSONResult<>(OK, data);
+    }
+
+    @GetMapping("/users/profile/{userID}")
+    public JSONResult<UserProfileEntity> getUserProfile(@PathVariable Integer userID) {
         UserProfileEntity data = iUserProfileService.getUserProfile(userID);
         return new JSONResult<>(OK, data);
     }

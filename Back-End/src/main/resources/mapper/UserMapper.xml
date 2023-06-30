@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tw.com.younite.mapper.UserMapper">
+
     <resultMap id="UserEntityMap" type="tw.com.younite.entity.UserEntity">
         <id column="id" property="id"></id>
         <result column="created_at" property="createdAt"></result>
@@ -10,24 +11,7 @@
         <result column="facebook_user" property="facebookUser"></result>
         <result column="google_user" property="googleUser"></result>
     </resultMap>
-    <resultMap id="UserProfileEntityMap" type="tw.com.younite.entity.UserProfileEntity">
-        <id column="profile_id" property="profileId"></id>
-        <result column="user_id" property="userId"></result>
-        <result column="full_name" property="fullName"></result>
-        <result column="profile_avatar" property="profileAvatar"></result>
-        <result column="sexual_orientation" property="sexualOrientation"></result>
-        <result column="preferred_gender" property="preferredGender"></result>
-        <result column="dating_goal" property="datingGoal"></result>
-        <result column="self_intro" property="selfIntro"></result>
-        <result column="blocked_id" property="blockId"></result>
-        <result column="voice_intro" property="voiceIntro"></result>
-    </resultMap>
 
-    <resultMap id="UserLikeEntityMap" type="tw.com.younite.entity.UserLikeEntity">
-        <id column="liked_user_id" property="likedUserId"></id>
-        <result column="user_id" property="userID"></result>
-        <result column="created_at" property="createAt"></result>
-    </resultMap>
 
     <select id="getByUsername" resultMap="UserEntityMap">
         SELECT *
@@ -41,17 +25,11 @@
         WHERE email = #{email}
     </select>
 
-    <select id="getByUserPhone" resultMap="UserEntityMap">
-        SELECT *
-        FROM `users`
-        WHERE phone = #{phone}
-    </select>
-
-    <select id="getByFullName" resultMap="UserEntityMap">
-        SELECT *
-        FROM `profiles`
-        WHERE `full_name` = #{fullName}
-    </select>
+<!--    <select id="getByUserPhone" resultMap="UserEntityMap">-->
+<!--        SELECT *-->
+<!--        FROM `users`-->
+<!--        WHERE phone = #{phone}-->
+<!--    </select>-->
 
     <select id="getUserByID" resultMap="UserEntityMap">
         SELECT *
@@ -59,20 +37,14 @@
         WHERE `id` = #{id}
     </select>
 
-    <select id="getProfileByID" resultMap="UserProfileEntityMap">
-        SELECT *
-        FROM `PROFILES`
-        WHERE `user_id` = #{userId}
-    </select>
-
     <insert
             id="register"
             useGeneratedKeys="true" keyProperty="id">
         INSERT INTO USERS
-        (`id`, `username`, `email`, `phone`, `password`,
+        (`id`, `username`, `email`, `password`,
          `third_party_login`, `facebook_user`, `google_user`,
          `vip_expiry`, `created_at`, `modified_at`, `salt`)
-        VALUES (#{id}, #{username}, #{email}, #{phone}, #{password}, #{thirdPartyLogin}, #{facebookUser}, #{googleUser},
+        VALUES (#{id}, #{username}, #{email}, #{password}, #{thirdPartyLogin}, #{facebookUser}, #{googleUser},
                 #{vipExpiry}, #{createdAt}, #{modifiedAt}, #{salt})
     </insert>
 
@@ -80,59 +52,17 @@
             id="registerByOAuth"
             useGeneratedKeys="true" keyProperty="id">
         INSERT INTO USERS
-        (`id`, `username`, `password`, `phone`, `email`, `third_party_login`, `facebook_user`, `google_user`,
+        (`id`, `username`, `password`, `email`, `third_party_login`, `facebook_user`, `google_user`,
          `vip_expiry`, `created_at`, `modified_at`)
-        VALUES (#{id}, #{username}, #{password}, #{phone}, #{email}, #{thirdPartyLogin}, #{facebookUser}, #{googleUser},
+        VALUES (#{id}, #{username}, #{password}, #{email}, #{thirdPartyLogin}, #{facebookUser}, #{googleUser},
                 #{vipExpiry}, #{createdAt}, #{modifiedAt})
-    </insert>
-
-
-    <insert
-            id="insertProfile"
-            useGeneratedKeys="true" keyProperty="profileId">
-        INSERT INTO PROFILES
-        (`profile_id`, `user_id`, `full_name`, `profile_pic`,
-         `gender`, `sexual_orientation`, `preferred_gender`,
-         `dating_goal`, `self_intro`, `location`, `blocked_id`,`profile_avatar`, `birthday`, `voice_intro`, `phone`, `professions`)
-        VALUES (#{profileId}, #{id}, #{fullName},
-                #{profilePic}, #{gender}, #{sexualOrientation},
-                #{preferredGender}, #{datingGoal}, #{selfIntro},
-                #{location}, #{blockId}, #{profileAvatar}, #{birthday}, #{voiceIntro}, #{phone}, #{professions})
-    </insert>
-
-    <insert
-            id="insertLike"
-            useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO LIKES
-        (`user_id`, `liked_user_id`, `created_at`)
-        VALUES (#{userID}, #{likedUserId}, #{createdAt})
     </insert>
 
     <update id="updatePasswordByID">
         UPDATE `USERS`
-        SET
-            password = #{password},
+        SET password    = #{password},
             modified_at = #{modifiedAt}
         WHERE `id` = ${id}
     </update>
-
-    <update id="updateUserProfileByID">
-        UPDATE `PROFILES`
-        SET
-            `full_name` = #{fullName},
-            `birthday` = #{birthday},
-            `gender` = #{gender},
-            `sexual_orientation` = #{sexualOrientation},
-            `dating_goal` = #{datingGoal},
-            `location` = #{location},
-            `self_intro` = #{selfIntro},
-            `preferred_gender` = #{preferredGender},
-            `profile_avatar` = #{profileAvatar},
-            `voice_intro` = #{voiceIntro},
-            `phone` = #{phone},
-            `professions` = #{professions}
-        WHERE `user_id` = ${userId}
-    </update>
-
 
 </mapper>

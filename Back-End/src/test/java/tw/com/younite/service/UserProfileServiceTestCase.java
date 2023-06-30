@@ -24,5 +24,29 @@ public class UserProfileServiceTestCase {
         iUserProfileService.resetUserProfile(userProfile);
     }
 
+    @Test
+    public void testBlockUserService() throws Exception{
+        iUserProfileService.blockUser(166, 127);
+        UserProfileEntity userProfileEntity = iUserProfileService.getUserProfile(166);
+        System.out.println("userProfileEntity = " + userProfileEntity);
+    }
+
+    @Test
+    public void testBlockUserService2() throws Exception{
+        iUserProfileService.blockUser(166, 128);
+        UserProfileEntity userProfileEntity = iUserProfileService.getUserProfile(166);
+        System.out.println("userProfileEntity = " + userProfileEntity);
+    }
+
+    @Test
+    public void testGetBlockedUsersIDService() throws Exception {
+        iUserProfileService.getBlockedID(166);
+    }
+
+    @Test
+    public void testUnblockService() {
+        iUserProfileService.unblockUser(165, 127);
+    }
+
 
 }
