@@ -19,6 +19,12 @@ public class LikedUserServiceTestCase {
     }
 
     @Test
+    public void testLikesTracker() {
+        List<Integer> results= userLikeService.likesTracker(126);
+        System.out.println("results = " + results);
+    }
+
+    @Test
     public void testDeleteLikedUsersException() {
         userLikeService.deleteLikedUser(126, 128);
     }

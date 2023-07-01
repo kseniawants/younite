@@ -35,6 +35,16 @@ public class UserLikeServiceImpl implements IUserLikeService {
     }
 
     @Override
+    public List<Integer> likesTracker(Integer likedUserID) {
+        List<UserLikeEntity> likedUserList = userLikeMapper.getLikedUsers(likedUserID);
+        List<Integer> dataList = new ArrayList<>();
+        for (UserLikeEntity userLikeEntity : likedUserList) {
+            dataList.add(userLikeEntity.getUserID());
+        }
+        return dataList;
+    }
+
+    @Override
     public void deleteLikedUser(Integer userID, Integer likedUserID) {
         List<UserLikeEntity> list = userLikeMapper.getLikedUsers(userID);
         boolean isFound = false;

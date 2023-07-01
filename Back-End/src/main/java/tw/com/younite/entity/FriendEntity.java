@@ -5,6 +5,7 @@ import java.util.Date;
 
 @Data
 public class FriendEntity {
+    private Integer id;
     private Integer firstUserID;
     private Integer secondUserID;
     private Boolean isMatched;

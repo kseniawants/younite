@@ -61,6 +61,9 @@ public class BaseController {
         } else if (e instanceof BlockedUserNotFoundException) {
             result.setStatus(NOT_FOUND_ERROR);
             result.setMessage("封鎖的用戶不存在或已被解除封鎖!");
+        } else if (e instanceof NoMatchedException) {
+            result.setStatus(NOT_FOUND_ERROR);
+            result.setMessage("目前尚未有成功配對的用戶!");
         } else if (e instanceof PasswordNotMatchException) {
             result.setStatus(UNAUTHORIZED_ERROR);
             result.setMessage("密碼錯誤!");

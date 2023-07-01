@@ -7,5 +7,6 @@ import java.util.List;
 public interface IUserLikeService {
     void insertLikedUser(UserLikeEntity userLikeEntity);
     List<Integer> getLikedUserList(Integer userID);
+    List<Integer> likesTracker(Integer likedUserID);
     void deleteLikedUser(Integer userID, Integer likedUserID);
 }

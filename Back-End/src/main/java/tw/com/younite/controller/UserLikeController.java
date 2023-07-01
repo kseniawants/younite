@@ -2,9 +2,12 @@ package tw.com.younite.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import tw.com.younite.entity.FriendEntity;
 import tw.com.younite.entity.UserLikeEntity;
 import tw.com.younite.service.exception.DuplicatedLikedUserException;
+import tw.com.younite.service.exception.FriendExceedLimitException;
 import tw.com.younite.service.exception.UserNotFoundException;
+import tw.com.younite.service.inter.IFriendService;
 import tw.com.younite.service.inter.IUserLikeService;
 import tw.com.younite.service.inter.IUserService;
 import tw.com.younite.util.JSONResult;
@@ -23,6 +26,9 @@ public class UserLikeController extends BaseController {
     @Autowired
     IUserService iUserService;
 
+    @Autowired
+    IFriendService iFriendService;
+
     @PostMapping("/users/like")
     public JSONResult<Void> insertLikedUsers(HttpSession session,
                                              @RequestBody UserLikeEntity userLikeEntity) {
@@ -38,6 +44,30 @@ public class UserLikeController extends BaseController {
         userLikeEntity.setLikedAt(new Date());
         iUserLikeService.insertLikedUser(userLikeEntity);
 
+        //好友配對
+        List<Integer> checkList = iUserLikeService.getLikedUserList(likedUserId);
+        Integer friendListSize = iFriendService.getFriendsList(userID).size();
+        int friendMaximum = 25;
+        //TODO: 確認count的方法
+        int count = 1;
+        if (iUserService.getUserByID(userID).getVipExpiry().after(new Date())) {
+            friendMaximum += 10 * count;
+        }
+        if (checkList.contains(userID)) {
+            if (friendListSize == friendMaximum) {
+                throw new FriendExceedLimitException("");
+            }
+            for (int i = 0; i < 2; i++) {
+                FriendEntity friendEntity = new FriendEntity();
+                friendEntity.setFirstUserID(i == 0? userID : likedUserId);
+                friendEntity.setSecondUserID(i == 0? likedUserId : userID);
+                friendEntity.setIsMatched(true);
+                friendEntity.setCreateAt(new Date());
+                iFriendService.insertFriend(friendEntity);
+            }
+
+        }
+
         return new JSONResult<>(OK, "新增資料成功");
     }
 
@@ -51,6 +81,12 @@ public class UserLikeController extends BaseController {
     public JSONResult<List<Integer>> getLikedUsers(HttpSession session) {
         Integer userID = getIDFromSession(session);
         List<Integer> data = iUserLikeService.getLikedUserList(userID);
+        return new JSONResult<>(OK, data);
+    }
+
+    @GetMapping("/users/likesTracker/{likedUserID}")
+    public JSONResult<List<Integer>> likesTracker(@PathVariable Integer likedUserID) {
+        List<Integer> data = iUserLikeService.likesTracker(likedUserID);
         return new JSONResult<>(OK, data);
     }
 
