@@ -15,4 +15,30 @@
         <result column="created_at" property="createAt"></result>
     </resultMap>
 
+    <insert id="insertFriend"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO MESSAGES
+            (user_id_1, user_id_2, is_matched)
+        VALUES (#{firstUserID}, #{secondUserID}, #{isMatched})
+    </insert>
+
+    <update id="setInvitationSent">
+        UPDATE `MESSAGES`
+        SET `invitation_sent` = #{isInvitationSent}
+        WHERE `user_id_1` = #{firstUserID}
+        AND `user_id_2` = #{secondUserID}
+    </update>
+
+    <select id="getFriend" resultMap="FriendEntityMap" >
+        SELECT *
+        FROM  `MESSAGES`
+        WHERE `user_id_1` =  #{firstUserID}
+    </select>
+
+    <select id="getSpecificFriend" resultMap="FriendEntityMap" >
+        SELECT *
+        FROM  `MESSAGES`
+        WHERE (`user_id_1` =  #{firstUserID}
+        AND `user_id_2` = #{secondUserID})
+    </select>
 </mapper>

@@ -38,4 +38,10 @@ public class LikedUserMapperTestCase {
     public void testDeleteLikesUsers() {
         Integer rows = userLikeMapper.removeLikedUsers(162, 162);
     }
+
+    @Test
+    public void testLikesTracker() {
+        List<UserLikeEntity> list = userLikeMapper.likesTracker(126);
+        System.out.println("list = " + list);
+    }
 }

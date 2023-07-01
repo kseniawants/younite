@@ -20,10 +20,18 @@
 
     <select
             id="getLikedUsers"
-            resultMap="UserLikeEntityMap" >
+            resultMap="UserLikeEntityMap">
         SELECT *
             FROM LIKES
         WHERE `user_id` = #{userID}
+    </select>
+
+    <select
+            id="likesTracker"
+            resultMap="UserLikeEntityMap" >
+        SELECT *
+        FROM LIKES
+        WHERE `liked_user_id` = #{likedUserID}
     </select>
 
     <delete id="removeLikedUsers">
