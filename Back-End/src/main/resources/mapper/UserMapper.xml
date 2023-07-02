@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.basicfunctions01.mapper.UserMapper">
-    <resultMap id="UserEntityMap" type="com.example.basicfunctions01.entity.User">
+<mapper namespace="tw.com.younite.mapper.UserMapper">
+
+    <resultMap id="UserEntityMap" type="tw.com.younite.entity.UserEntity">
         <id column="id" property="id"></id>
         <result column="created_at" property="createdAt"></result>
         <result column="modified_at" property="modifiedAt"></result>
@@ -10,6 +11,8 @@
         <result column="facebook_user" property="facebookUser"></result>
         <result column="google_user" property="googleUser"></result>
     </resultMap>
+
+
     <select id="getByUsername" resultMap="UserEntityMap">
         SELECT *
         FROM `users`
@@ -22,51 +25,44 @@
         WHERE email = #{email}
     </select>
 
-    <select id="getByUserPhone" resultMap="UserEntityMap">
-        SELECT *
-        FROM `users`
-        WHERE phone = #{phone}
-    </select>
-
-    <select id="getByFullName" resultMap="UserEntityMap">
-        SELECT *
-        FROM `profiles`
-        WHERE `full_name` = #{fullName}
-    </select>
-
-    <insert
-            id="register"
-            useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO USERS
-        (`id`, `username`, `email`, `phone`, `password`,
-         `third_party_login`, `facebook_user`, `google_user`,
-         `vip_expiry`, `created_at`, `modified_at`, `salt`)
-        VALUES (#{id}, #{username}, #{email}, #{phone}, #{password}, #{thirdPartyLogin}, #{facebookUser}, #{googleUser},
-                #{vipExpiry}, #{createdAt}, #{modifiedAt}, #{salt})
-    </insert>
-
-
-    <insert
-            id="insertProfile"
-            useGeneratedKeys="true" keyProperty="profileId">
-        INSERT INTO PROFILES
-        (`profile_id`, `user_id`, `full_name`, `birthday`, `profile_pic`,
-         `gender`, `sexual_orientation`, `preferred_gender`,
-         `dating_goal`, `self_intro`, `location`, `blocked_id`, `profile_avatar`)
-        VALUES (#{profileId}, #{id}, #{fullName}, #{birthday}, #{profilePic}, #{gender}, #{sexualOrientation}, #{preferredGender},
-                #{datingGoal}, #{selfIntro}, #{location}, #{blockId}, #{profileAvatar})
-    </insert>
-
-    <update id="updatePasswordByID">
-        UPDATE `USERS` SET
-                           password = #{password},
-                           modified_at = #{modifiedAt}
-        WHERE `id` = ${id}
-    </update>
+<!--    <select id="getByUserPhone" resultMap="UserEntityMap">-->
+<!--        SELECT *-->
+<!--        FROM `users`-->
+<!--        WHERE phone = #{phone}-->
+<!--    </select>-->
 
     <select id="getUserByID" resultMap="UserEntityMap">
         SELECT *
         FROM `USERS`
         WHERE `id` = #{id}
     </select>
+
+    <insert
+            id="register"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO USERS
+        (`id`, `username`, `email`, `password`,
+         `third_party_login`, `facebook_user`, `google_user`,
+         `vip_expiry`, `created_at`, `modified_at`, `salt`)
+        VALUES (#{id}, #{username}, #{email}, #{password}, #{thirdPartyLogin}, #{facebookUser}, #{googleUser},
+                #{vipExpiry}, #{createdAt}, #{modifiedAt}, #{salt})
+    </insert>
+
+    <insert
+            id="registerByOAuth"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO USERS
+        (`id`, `username`, `password`, `email`, `third_party_login`, `facebook_user`, `google_user`,
+         `vip_expiry`, `created_at`, `modified_at`)
+        VALUES (#{id}, #{username}, #{password}, #{email}, #{thirdPartyLogin}, #{facebookUser}, #{googleUser},
+                #{vipExpiry}, #{createdAt}, #{modifiedAt})
+    </insert>
+
+    <update id="updatePasswordByID">
+        UPDATE `USERS`
+        SET password    = #{password},
+            modified_at = #{modifiedAt}
+        WHERE `id` = ${id}
+    </update>
+
 </mapper>

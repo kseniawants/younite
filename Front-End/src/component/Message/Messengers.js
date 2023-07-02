@@ -1,12 +1,14 @@
 // 聊天好友
-import React from 'react';
-import '../../styles/all.scss';
+import React from 'react'
+import '../../styles/all.scss'
+import PropTypes from 'prop-types';
 import { ChatDatas } from './ChatDatas';
 
-const Messengers = () => {
-  const handleSelect = (user) => {
-    // 在這裡處理選擇使用者的邏輯
-    console.log('Selected User:', user);
+const Messengers = ({ setCurrentChat }) => {
+
+  const handleSelect = (chat) => {
+    // 在这里处理选择用户的逻辑
+    setCurrentChat(chat);  // 通过父组件传入的函数来更新currentChat
   };
 
   return (
@@ -17,14 +19,9 @@ const Messengers = () => {
           id='userChat'
           style={{ cursor: 'pointer' }}
           key={chat.userInfo.uid}
-          onClick={() => handleSelect(chat.userInfo)}
-        >
-          <img
-            className='rounded-circle bg-dark'
-            style={{ height: '50px', width: '50px', objectFit: 'cover' }}
-            src={chat.userInfo.photoURL}
-            alt=''
-          />
+          onClick={() => handleSelect(chat)}
+          >
+          <img className='rounded-circle bg-dark' style={{height: '50px', width:'50px' , objectFit: 'cover'}} src={chat.userInfo.photoURL} alt="" />
           <div>
             <span style={{ fontSize: '18px' }}>{chat.userInfo.displayName}</span>
             <p style={{ fontSize: '14px', color: '#949494' }}>{chat.lastMessage?.text}</p>
@@ -34,5 +31,8 @@ const Messengers = () => {
     </div>
   );
 };
-
+Messengers.propTypes = {
+  setCurrentChat: PropTypes.func.isRequired,
+};
 export default Messengers;
+
