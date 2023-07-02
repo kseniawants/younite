@@ -9,10 +9,11 @@ public class FriendEntity {
     private Integer firstUserID;
     private Integer secondUserID;
     private Boolean isMatched;
-    private Boolean isChatEnabled;
+    private Boolean isVideoChatEnabled;
     private Boolean isVoiceChatEnabled;
     private Boolean isImageEnabled;
     private Boolean isInvitationSent;
     private Boolean isInvitationAccepted;
+    private Integer invitationStatus;
     private Date createAt;
 }

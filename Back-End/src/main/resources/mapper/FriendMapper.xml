@@ -7,12 +7,13 @@
         <result column="user_id_1" property="firstUserID"></result>
         <result column="user_id_2" property="secondUserID"></result>
         <result column="is_matched" property="isMatched"></result>
-        <result column="is_chat_enabled" property="isChatEnabled"></result>
+        <result column="is_videochat_enabled" property="isVideoChatEnabled"></result>
         <result column="is_voice_chat_enabled" property="isVoiceChatEnabled"></result>
         <result column="is_image_enabled" property="isImageEnabled"></result>
         <result column="invitation_sent" property="isInvitationSent"></result>
         <result column="invitation_accepted" property="isInvitationAccepted"></result>
         <result column="created_at" property="createAt"></result>
+        <result column="invitation_status" property="invitationStatus"></result>
     </resultMap>
 
     <insert id="insertFriend"
@@ -24,7 +25,42 @@
 
     <update id="setInvitationSent">
         UPDATE `MESSAGES`
-        SET `invitation_sent` = #{isInvitationSent}
+        SET `invitation_sent` = #{isVideoChatEnabled}
+        WHERE `user_id_1` = #{firstUserID}
+        AND `user_id_2` = #{secondUserID}
+    </update>
+
+    <update id="setVideoChatStatus">
+        UPDATE `MESSAGES`
+        SET `is_videochat_enabled` = #{isVideoChatEnabled}
+        WHERE `user_id_1` = #{firstUserID}
+        AND `user_id_2` = #{secondUserID}
+    </update>
+
+    <update id="setVoiceChatStatus">
+        UPDATE `MESSAGES`
+        SET `is_voice_chat_enabled` = #{isVoiceChatEnabled}
+        WHERE `user_id_1` = #{firstUserID}
+        AND `user_id_2` = #{secondUserID}
+    </update>
+
+    <update id="setImageStatus">
+        UPDATE `MESSAGES`
+        SET `is_image_enabled` = #{isImageEnabled}
+        WHERE `user_id_1` = #{firstUserID}
+          AND `user_id_2` = #{secondUserID}
+    </update>
+
+    <update id="setInvitationAccept">
+        UPDATE `MESSAGES`
+        SET `invitation_accepted` = #{isInvitationAccepted}
+        WHERE `user_id_1` = #{firstUserID}
+        AND `user_id_2` = #{secondUserID}
+    </update>
+
+    <update id="setInvitationStatus">
+        UPDATE `MESSAGES`
+        SET `invitation_status` = `invitation_status` | #{invitationStatus}
         WHERE `user_id_1` = #{firstUserID}
         AND `user_id_2` = #{secondUserID}
     </update>
@@ -41,4 +77,15 @@
         WHERE (`user_id_1` =  #{firstUserID}
         AND `user_id_2` = #{secondUserID})
     </select>
+
+    <select id="getInvitationStatus" resultMap="FriendEntityMap" >
+        SELECT *
+        FROM `MESSAGES`
+        WHERE (`user_id_1` = #{firstUserID}
+            AND `user_id_2` = #{secondUserID})
+          AND (`invitation_status` &amp; #{invitationStatus})
+            = #{invitationStatus}
+    </select>
+
+
 </mapper>
