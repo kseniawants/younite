@@ -4,6 +4,7 @@ import Search from './Search'
 import PropTypes from 'prop-types';
 import Messengers from './Messengers'
 
+
 const MessageBar = ({ chats, setCurrentChat }) => {
   return (
     <div className=''>
@@ -16,8 +17,8 @@ const MessageBar = ({ chats, setCurrentChat }) => {
         <Messengers chats={chats} setCurrentChat={setCurrentChat}/>
       </div>
     </div>
-  )
-}
+  );
+};
 
 MessageBar.propTypes = {
   chats: PropTypes.array.isRequired,
