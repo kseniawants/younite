@@ -1,5 +1,7 @@
 package tw.com.younite.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.io.Serializable;

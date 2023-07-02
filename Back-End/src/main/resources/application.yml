@@ -1,9 +1,13 @@
+server:
+  tomcat:
+    uri-encoding: utf-8
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: root
-    url: jdbc:mysql://localhost:3306/younite
+#    url: jdbc:mysql://localhost:3306/younite?serverTimezone=UTC
+    url: jdbc:mysql://younite-database.c7ta6ybbk9nu.ap-northeast-1.rds.amazonaws.com:3306/younite
   servlet:
     multipart:
       max-file-size: 10MB
