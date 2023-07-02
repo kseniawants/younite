@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import '../styles/all.scss';
 import Select from 'react-select';
 import { useForm, Controller } from 'react-hook-form';
 import { Input, RadioButtonGroup } from './FormElements';
-import { DatePicker, Button, Divider } from 'antd';
+import {  Button, Divider } from 'antd';
 // import Avatar from './InfoElements/Avatar';
 import PhotoWall from './InfoElements/PhotoWall';
 import LocationModal from './InfoElements/Location';
@@ -12,6 +12,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 function Info() {
   const [submitting, setSubmitting] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const navigate = useNavigate();
     const {
       register,
@@ -26,8 +27,10 @@ function Info() {
     const onSubmit = async (data) => {
       try {
         setSubmitting(true);
-        console.log(data.goal);
+        setFormSubmitted(true);
+        await submitForm(data);
         navigate('/home');
+        console.log(data);
       } catch (error) {
         console.error(error);
       } finally {
@@ -35,23 +38,33 @@ function Info() {
       }
     };
 
-  const radioGender = [
-    { label: '男生', value: 'male' },
-    { label: '女生', value: 'female' },
-    { label: '其他', value: 'other' },
-  ];
+    const submitForm = () => {
+      return new Promise((resolve) => {
+        // 模拟异步操作，这里使用 setTimeout 延时 2 秒
+        setTimeout(() => {
+          // 假设提交成功
+          resolve();
+        }, 2000);
+      });
+    };
 
-  const radioSO = [
-    { label: '生理男', value: 'man' },
-    { label: '生理女', value: 'woman' },
-    { label: '雙性戀', value: 'bisexual' },
-  ];
+    const radioGender = [
+      { label: '男生', value: 'male' },
+      { label: '女生', value: 'female' },
+      { label: '其他', value: 'other' },
+    ];
 
-  const radioShow = [
-    { label: '男生', value: 'men' },
-    { label: '女生', value: 'women' },
-    { label: '所有人', value: 'all' },
-  ];
+    const radioSO = [
+      { label: '生理男', value: 'man' },
+      { label: '生理女', value: 'woman' },
+      { label: '雙性戀', value: 'bisexual' },
+    ];
+
+    const radioShow = [
+      { label: '男生', value: 'men' },
+      { label: '女生', value: 'women' },
+      { label: '所有人', value: 'all' },
+    ];
 
     const hobbies = [
       { value: 'swim', label: '游泳' },
@@ -102,6 +115,30 @@ function Info() {
       setValue('goal', selectedButtonLabel); // 使用setValue更新goal字段的值
     };
 
+    // const handleFileChange = (file) => {
+    //   console.log('File changed:', file);
+    // };
+
+    const fileInputRef = useRef(null);
+
+    const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    const fileName = file.name;
+    const fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
+
+      // 检查文件扩展名是否为音频格式
+      if (fileExtension === 'mp3' || fileExtension === 'wav') {
+        // 在这里执行您的音频文件上传逻辑
+        console.log('Uploaded audio file:', file);
+      } else {
+        console.log('Invalid file format. Please select an MP3 or WAV file.');
+      }
+    };
+
+    const handleButtonClick = () => {
+      fileInputRef.current.click();
+    };
+
   return (
     <div className='container'>
     <form className='row justify-content-center flex-md-row flex-column-reverse'>
@@ -141,29 +178,31 @@ function Info() {
             }}
           ></Input>
         </div>
-        <div className='pb-4'>
+        <div className='pb-4 w-50'>
           <i className="fa-solid fa-cake-candles text-black"></i>
           <span className="text-danger p-1">*</span>
-          <label htmlFor="">生日</label>
-          <br />
-          <Controller
-          control={control}
-          name="birthday"
-          rules={{ required: true }}
-          render={({ field }) => (
-            <DatePicker
-              {...field}
-              placeholder="選擇生日"
-              className={`mt-2 shadow-sm ${errors.birthday && 'is-invalid'}`}
-            />
-          )}
-        />
-        {errors.birthday && <div className="invalid-feedback">請選擇生日</div>}
+          {/* <label htmlFor="">生日</label>
+          <br /> */}
+          <Input
+            id='birthday'
+            labelText='生日'
+            type='text'
+            placeholder='輸入生日 (yyyy-mm-dd)'
+            errors={errors}
+            register={register}
+            rules={{
+              required: '生日為必填',
+              pattern: {
+                value: /^\d{4}-\d{2}-\d{2}$/,
+                message: '請輸入有效的生日格式 (yyyy-mm-dd)',
+              },
+            }}
+          />
         </div>
         <div className='pb-4'>
           <i className="fa-solid fa-briefcase text-black"></i>
           <span className="text-danger p-1">*</span>
-          <label className='mb-2'>興趣</label>
+          <label className='mb-2'>職業</label>
           <br />
           <Controller
             name="profession"
@@ -174,12 +213,12 @@ function Info() {
               <Select
                 {...field}
                 options={profession}
-                className="basic-multi-select w-50 rounded-3"
+                className="basic-multi-select w-50 rounded shadow-sm"
                 classNamePrefix="select"
                 styles={{
                   placeholder: (provided) => ({
                     ...provided,
-                    color: '#BBBBBB',
+                    color: 'rgba(0, 0, 0, 0.2)',
                   }),
                 }}
                 placeholder="選擇職業"
@@ -250,12 +289,12 @@ function Info() {
                 {...field}
                 isMulti
                 options={hobbies}
-                className="basic-multi-select w-75 rounded-3"
+                className="basic-multi-select w-75 rounded shadow-sm"
                 classNamePrefix="select"
                 styles={{
                   placeholder: (provided) => ({
                     ...provided,
-                    color: '#BBBBBB',
+                    color: 'rgba(0, 0, 0, 0.2)',
                   }),
                 }}
                 placeholder="新增興趣"
@@ -278,6 +317,7 @@ function Info() {
               rules={{ required: true }}
               render={({ field }) => (
                 <Button
+                  type="dashed"
                   {...field}
                   className={` ${errors.goal && 'is-invalid'}`}
                   onClick={handleInfoModalButtonClick}
@@ -335,7 +375,14 @@ function Info() {
           <i className="fa-solid fa-volume-low text-black pe-2"></i>
           <label className='mb-2'>語音自我介紹</label>
           <br />
-          <Button type="dashed d-flex col align-items-center" >
+          <input
+            type="file"
+            style={{ display: 'none' }}
+            ref={fileInputRef}
+            onChange={handleFileUpload}
+            accept=".mp3,.wav" // 限制可选的文件类型为 MP3 和 WAV
+          />
+          <Button  type="dashed d-flex col align-items-center" onClick={handleButtonClick}>
             <i className="fa-solid fa-volume-high text-black pe-1"></i>
             <div className='circle rounded-circle me-1' style={{backgroundColor:"#D3D3D3", width:"4px", height:"4px"}}></div>
             <div className='circle rounded-circle me-1' style={{backgroundColor:"#D3D3D3", width:"4px", height:"4px"}}></div>
@@ -345,26 +392,28 @@ function Info() {
         <div className='pb-4'>
           <i className="fa-solid fa-pen-to-square text-black pe-2"/>
           <label htmlFor="exampleFormControlTextarea1" className="form-label mb-2">文字自我介紹</label>
-          <textarea className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" {...register('textareaFieldName')}></textarea>
         </div>
       </div>
-      <div className='col-md-5'>
-        {/* <div className='p-4 mb-4'>
+      <div className='col-md-4'>
+        <div className='p-4 mb-4'>
           <span className="text-danger p-1">*</span>
           <label className='mb-4'>大頭貼照片</label>
-          <Controller
+          {/* <Controller
               control={control}
-              name="goal"
+              name="pic"
               rules={{ required: true }}
               render={({ field }) => (
             <Avatar
               {...field}
-              className={` ${errors.goal && 'is-invalid'}`}
+              className={errors.pic ? 'is-invalid' : ''}
+              value={field.value}
+              onFileChange={handleFileChange}
             />
             )}
             />
-            {errors.goal && <div className="invalid-feedback ">請上傳大頭照</div>}
-        </div> */}
+            {errors.pic && <div className="invalid-feedback ">請上傳大頭照</div>} */}
+        </div>
         <div className='p-4 mb-4'>
           <label className='mb-4'>個人檔案照片</label>
           <PhotoWall/>
@@ -372,13 +421,43 @@ function Info() {
       </div>
     </form>
     <div className='d-flex flex-column-reverse flex-md-row py-4 justify-content-center align-items-md-center align-items-center w-100'>
-    <Link to='/home'>
-      <button type='submit' className='btn btn-primary rounded text-white' disabled={submitting} onClick={handleSubmit(onSubmit)}>
-        {submitting ? '正在送出表單...' : '送出表單'}
-      </button>
+      <Link to='/home'>
+        {formSubmitted && (
+          <div className={`fullscreen-overlay ${submitting ? 'show' : ''}`}>
+            <svg
+              version="1.1"
+              id="L9"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              viewBox="0 0 100 100"
+              enableBackground="new 0 0 0 0"
+              xmlSpace="preserve"
+            >
+              <path
+                fill="#fff"
+                d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"
+              >
+                <animateTransform
+                  attributeName="transform"
+                  attributeType="XML"
+                  type="rotate"
+                  dur="5s"
+                  from="0 50 50"
+                  to="360 50 50"
+                  repeatCount="indefinite"
+                />
+              </path>
+            </svg>
+          </div>
+        )}
+        <button type='submit' className='btn btn-primary rounded text-white' disabled={submitting || formSubmitted} onClick={handleSubmit(onSubmit)}>
+          {submitting ? '正在送出表單...' : '送出表單'}
+        </button>
       </Link>
-      </div>
     </div>
+  </div>
   );
 }
 

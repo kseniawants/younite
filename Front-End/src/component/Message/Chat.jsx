@@ -8,10 +8,15 @@ const Chat = ({ currentChat }) => {
   // 使用從 props 中取得的 currentChat 代替從 ChatDatas 取得的 user
   const user = currentChat.userInfo; 
   const [isCallModalVisible, setCallModalVisible] = useState(false);
+  const [isCallModalVisible1, setCallModalVisible1] = useState(false);
 
   const handleCallButtonClick = () => {
     setCallModalVisible(true);
   };  
+  
+  const handleCallButtonClick1 = () => {
+    setCallModalVisible1(true);
+  }; 
 
   return (
     <div className='' style={{flex: '2'}}>
@@ -26,10 +31,11 @@ const Chat = ({ currentChat }) => {
         <div className='d-flex' style={{gap: '20px'}}>
           <div>
             <i className="fa-solid fa-phone text-dark fa-lg" style={{cursor: 'pointer'}} onClick={handleCallButtonClick}></i>
-            {isCallModalVisible && <Call closeModal={() => setCallModalVisible(false)} />}
+            {isCallModalVisible && <Call currentChat={currentChat} closeModal={() => setCallModalVisible(false)} />}
           </div>
           <div>
-            <i className="fa-solid fa-video text-dark fa-lg" style={{ cursor: 'pointer' }}></i>
+            <i className="fa-solid fa-video text-dark fa-lg" style={{ cursor: 'pointer' }} onClick={handleCallButtonClick1}></i>
+            {isCallModalVisible1 && <Call currentChat={currentChat} closeModal={() => setCallModalVisible1(false)} />}
           </div>
           <div>
             <i className="fa-solid fa-ellipsis text-dark fa-lg" style={{cursor: 'pointer'}}></i>

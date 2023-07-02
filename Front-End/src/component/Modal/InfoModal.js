@@ -29,12 +29,12 @@ function InfoModal({ closeModal, setSelectedButtonLabel, onOk }) {
     setTimeout(() => {
       closeModal(); // 关闭窗口
       onOk(buttonLabel); // 将选中的按钮标签传递给onOk回调函数
-    }, 1500); // 延迟关闭窗口
+    }, 1000); // 延迟关闭窗口
   };
 
   return (
     <>
-      <Draggable handle=".title" onDrag={handleDrag}>
+      <Draggable handle=".info" onDrag={handleDrag}>
         <section className='info container-fluid' style={{ top: position.y, left: position.x }}>
           <div className='row p-3'>
           <div className='col-12 d-flex p-0 justify-content-end'>
@@ -45,82 +45,78 @@ function InfoModal({ closeModal, setSelectedButtonLabel, onOk }) {
                 onClick={() => closeModal(false)}
               ></button>
             </div>
-            <div className='title col-12'>
-              <h2>現在我想找尋...</h2>
-            </div>
-            <div className='body'>
-              <span>分享答案，才能增加配對率!</span>
+            <h2 className='col-12'>現在我想找尋...</h2>
+            <span>分享答案，才能增加配對率!</span>
+            <br />
+            <ButtonToolbar aria-label="Toolbar with button groups" className='d-flex justify-content-center my-3'>
+              <div className='mb-2'>
+                <ButtonGroup className="me-3" aria-label="First group">
+                  <Button
+                    variant={selectedButton === 'btnradio1' ? 'outline-primary' : 'outline-radio'}
+                    onClick={() => handleButtonClick('btnradio1', '長期伴侶')}
+                    autoComplete="off"
+                    className="btnradio"
+                  >
+                    長期伴侶
+                  </Button>
+                </ButtonGroup>
+                <ButtonGroup className="me-3" aria-label="Second group">
+                  <Button
+                    variant={selectedButton === 'btnradio2' ? 'outline-primary' : 'outline-radio'}
+                    onClick={() => handleButtonClick('btnradio2', '短期關係')}
+                    autoComplete="off"
+                    className="btnradio"
+                  >
+                    <span>短期關係</span><br />
+                    <span>但不排斥長期</span>
+                  </Button>
+                </ButtonGroup>
+                <ButtonGroup className="" aria-label="Third group">
+                  <Button
+                    variant={selectedButton === 'btnradio3' ? 'outline-primary' : 'outline-radio'}
+                    onClick={() => handleButtonClick('btnradio3', '長期關係')}
+                    autoComplete="off"
+                    className="btnradio"
+                  >
+                    <span>長期關係</span><br />
+                    <span>但不排斥短期</span>
+                  </Button>
+                </ButtonGroup>
+              </div>
               <br />
-              <ButtonToolbar aria-label="Toolbar with button groups" className='d-flex justify-content-center my-3'>
-                <div className='mb-2'>
-                  <ButtonGroup className="me-3" aria-label="First group">
-                    <Button
-                      variant={selectedButton === 'btnradio1' ? 'outline-primary' : 'outline-radio'}
-                      onClick={() => handleButtonClick('btnradio1', '長期伴侶')}
-                      autoComplete="off"
-                      className="btnradio"
-                    >
-                      長期伴侶
-                    </Button>
-                  </ButtonGroup>
-                  <ButtonGroup className="me-3" aria-label="Second group">
-                    <Button
-                      variant={selectedButton === 'btnradio2' ? 'outline-primary' : 'outline-radio'}
-                      onClick={() => handleButtonClick('btnradio2', '短期關係')}
-                      autoComplete="off"
-                      className="btnradio"
-                    >
-                      <span>短期關係</span><br />
-                      <span>但不排斥長期</span>
-                    </Button>
-                  </ButtonGroup>
-                  <ButtonGroup className="" aria-label="Third group">
-                    <Button
-                      variant={selectedButton === 'btnradio3' ? 'outline-primary' : 'outline-radio'}
-                      onClick={() => handleButtonClick('btnradio3', '長期關係')}
-                      autoComplete="off"
-                      className="btnradio"
-                    >
-                      <span>長期關係</span><br />
-                      <span>但不排斥短期</span>
-                    </Button>
-                  </ButtonGroup>
-                </div>
-                <br />
-                <div className='mt-2'>
-                  <ButtonGroup className="me-3" aria-label="Fourth group">
-                    <Button
-                      variant={selectedButton === 'btnradio4' ? 'outline-primary' : 'outline-radio'}
-                      onClick={() => handleButtonClick('btnradio4', '短暫的享樂')}
-                      autoComplete="off"
-                      className="btnradio"
-                    >
-                      短暫的享樂
-                    </Button>
-                  </ButtonGroup>
-                  <ButtonGroup className="me-3" aria-label="Fixth group">
-                    <Button
-                      variant={selectedButton === 'btnradio5' ? 'outline-primary' : 'outline-radio'}
-                      onClick={() => handleButtonClick('btnradio5', '新朋友')}
-                      autoComplete="off"
-                      className="btnradio"
-                    >
-                      新朋友
-                    </Button>
-                  </ButtonGroup>
-                  <ButtonGroup className="" aria-label="Sixth group">
-                    <Button
-                      variant={selectedButton === 'btnradio6' ? 'outline-primary' : 'outline-radio'}
-                      onClick={() => handleButtonClick('btnradio6', '我還在思考')}
-                      autoComplete="off"
-                      className="btnradio"
-                    >
-                      我還在思考
-                    </Button>
-                  </ButtonGroup>
-                </div>
-              </ButtonToolbar>
-            </div>
+              <div className='mt-2'>
+                <ButtonGroup className="me-3" aria-label="Fourth group">
+                  <Button
+                    variant={selectedButton === 'btnradio4' ? 'outline-primary' : 'outline-radio'}
+                    onClick={() => handleButtonClick('btnradio4', '短暫的享樂')}
+                    autoComplete="off"
+                    className="btnradio"
+                  >
+                    短暫的享樂
+                  </Button>
+                </ButtonGroup>
+                <ButtonGroup className="me-3" aria-label="Fixth group">
+                  <Button
+                    variant={selectedButton === 'btnradio5' ? 'outline-primary' : 'outline-radio'}
+                    onClick={() => handleButtonClick('btnradio5', '新朋友')}
+                    autoComplete="off"
+                    className="btnradio"
+                  >
+                    新朋友
+                  </Button>
+                </ButtonGroup>
+                <ButtonGroup className="" aria-label="Sixth group">
+                  <Button
+                    variant={selectedButton === 'btnradio6' ? 'outline-primary' : 'outline-radio'}
+                    onClick={() => handleButtonClick('btnradio6', '我還在思考')}
+                    autoComplete="off"
+                    className="btnradio"
+                  >
+                    我還在思考
+                  </Button>
+                </ButtonGroup>
+              </div>
+            </ButtonToolbar>
           </div>
         </section>
       </Draggable>
