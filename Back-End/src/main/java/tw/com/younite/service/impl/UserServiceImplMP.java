@@ -27,7 +27,7 @@ public class UserServiceImplMP extends ServiceImpl<IUserDao, users> implements I
         user.setUsername(parseJSON(token).get("name").asText());
         user.setEmail(parseJSON(token).get("email").asText());
         user.setThirdPartyLogin(true);
-        System.out.println(user + "˙456");
+        System.out.println(user + "service測試");
         return user;
 //        LambdaQueryWrapper<users> lqw = new LambdaQueryWrapper<>();
 //        lqw.eq(users::getEmail, user.getEmail()).eq(users::getThirdPartyLogin,true);
