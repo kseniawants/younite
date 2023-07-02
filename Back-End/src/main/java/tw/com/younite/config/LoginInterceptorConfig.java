@@ -30,6 +30,8 @@ public class LoginInterceptorConfig implements WebMvcConfigurer {
         whiteLists.add("/users/login");
         whiteLists.add("/OAuth.html");
         whiteLists.add("/users/registerByOAuth");
+        whiteLists.add("/ecpayCheckout");
+        whiteLists.add("/user/googleLogin");
 
         //黑名單(用戶不可隨意訪問的url), param: String
         registry.addInterceptor(interceptor)

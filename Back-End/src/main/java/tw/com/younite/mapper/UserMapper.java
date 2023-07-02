@@ -1,7 +1,7 @@
 package tw.com.younite.mapper;
 
-import tw.com.younite.entity.User;
-import tw.com.younite.entity.UserProfile;
+import tw.com.younite.entity.UserEntity;
+import tw.com.younite.entity.UserProfileEntity;
 
 import java.util.Date;
 
@@ -10,13 +10,11 @@ public interface UserMapper {
     * @param user
     * @return 受影響的數據(增、刪、改都有，可以根據返回值判斷)
     */
-    Integer register(User user);
-    Integer registerByOAuth(User user);
-    Integer insertProfile(UserProfile userProfile);
-    UserProfile getByFullName(String fullName);
-    User getByUsername(String username);
-    User getByUserEmail(String email);
-    User getByUserPhone(String phone);
+    Integer register(UserEntity user);
+    Integer registerByOAuth(UserEntity user);
+    UserEntity getByUsername(String username);
+    UserEntity getByUserEmail(String email);
+    UserEntity getByUserPhone(String phone);
 
     /**
      * 根據users table / user id 來修改密碼
@@ -26,17 +24,17 @@ public interface UserMapper {
      * @return 受影響的行數
      * */
     Integer updatePasswordByID(Integer id, String password, Date modifiedAt);
-    Integer updateUserProfileByID(UserProfile userProfile);
+
     /**
      * 根據users table / user id 來查詢用戶
      * @param id 用戶的id
      * @return User物件
      * */
-    User getUserByID(Integer id);
+    UserEntity getUserByID(Integer id);
     /**
      * 根據users table / user id 來查詢用戶
      *  @param id 用戶的id
      *  @return Profile物件
      * */
-    UserProfile getProfileByID(Integer id);
+
 }

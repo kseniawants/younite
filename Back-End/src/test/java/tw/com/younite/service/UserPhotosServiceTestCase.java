@@ -5,7 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import tw.com.younite.entity.UserPhotos;
+import tw.com.younite.entity.UserPhotosEntity;
 import tw.com.younite.service.inter.IUserPhotosService;
 
 @SpringBootTest
@@ -16,7 +16,7 @@ public class UserPhotosServiceTestCase {
     IUserPhotosService iUserPhotosService;
     @Test
     public void testUserPhotosService() {
-        UserPhotos userPhotos = new UserPhotos();
+        UserPhotosEntity userPhotos = new UserPhotosEntity();
         userPhotos.setProfileID(39);
         userPhotos.setSixthPhotoPath("Hello");
         iUserPhotosService.insertPhotos(userPhotos);

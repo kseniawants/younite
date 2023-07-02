@@ -6,9 +6,9 @@ import UserImage from '../assets/images/sia.png';
 
 function NotificationCollapse() {
   return (
-    <section className='notification-collapse row'>
+    <section className='notification-collapse row fade-in-out'>
       <div className='collapse-bg'>
-        <h4>通知</h4>
+        <h5>通知</h5>
         <hr />
         <h6>這週</h6>
         <div className='d-flex collapse-content mt-3'>

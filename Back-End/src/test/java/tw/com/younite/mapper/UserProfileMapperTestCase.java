@@ -1,6 +1,10 @@
 package tw.com.younite.mapper;
 
-import tw.com.younite.entity.UserProfile;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import tw.com.younite.entity.UserProfileEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,30 +19,30 @@ import java.util.Date;
 @RunWith(SpringRunner.class)
 public class UserProfileMapperTestCase {
     @Autowired
-    private UserMapper userMapper;
+    private UserProfileMapper userProfileMapper;
 
     @Test
     public void testInsertProfile() {
-        UserProfile userProfile = new UserProfile();
+        UserProfileEntity userProfile = new UserProfileEntity();
         userProfile.setProfileId(1);
         userProfile.setId(2);
         userProfile.setBirthday(new Date());
         userProfile.setGender("Female");
         userProfile.setFullName("Rita");
-        Integer result = userMapper.insertProfile(userProfile);
+        Integer result = userProfileMapper.insertProfile(userProfile);
         System.out.println("result = " + result);
         System.out.println("userProfile = " + userProfile);
     }
 
     @Test
     public void testGetProfileByID() {
-        UserProfile userProfile = userMapper.getProfileByID(98);
+        UserProfileEntity userProfile = userProfileMapper.getProfileByID(98);
         System.out.println("userProfile = " + userProfile);
     }
 
     @Test
     public void testUpdateProfileByID() throws ParseException {
-        UserProfile userProfile = userMapper.getProfileByID(98);
+        UserProfileEntity userProfile = userProfileMapper.getProfileByID(98);
         Integer id = userProfile.getUserId();
         userProfile.setFullName("Hello你好嗎");
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -51,20 +55,50 @@ public class UserProfileMapperTestCase {
         userProfile.setSelfIntro("");
         userProfile.setProfileAvatar("/avatar/cat.jpg");
         userProfile.setUserId(id);
-        userMapper.updateUserProfileByID(userProfile);
+        userProfileMapper.updateUserProfileByID(userProfile);
         System.out.println("userProfile = " + userProfile);
     }
 
     @Test
     public void testInsertProfileWrong() {
-        UserProfile userProfile = new UserProfile();
+        UserProfileEntity userProfile = new UserProfileEntity();
         userProfile.setProfileId(2);
         userProfile.setId(3);
         userProfile.setBirthday(new Date());
         userProfile.setGender("Male");
         userProfile.setFullName("Rex");
-        Integer result = userMapper.insertProfile(userProfile);
+        Integer result = userProfileMapper.insertProfile(userProfile);
         System.out.println("result = " + result);
         System.out.println("userProfile = " + userProfile);
+    }
+
+    @Test
+    public void testBlockUsers() throws JsonProcessingException {
+        UserProfileEntity userProfile = userProfileMapper.getProfileByID(160);
+        ObjectMapper objectMapper= new ObjectMapper();
+        ObjectNode json = objectMapper.createObjectNode();
+        json.put("name1", 126);
+        json.put("name2", 127);
+        String jsonString = objectMapper.writeValueAsString(json);
+        userProfile.setBlockId(jsonString);
+        System.out.println(jsonString);
+        Integer result = userProfileMapper.blockUser(userProfile);
+        System.out.println("result = " + result);
+        System.out.println("userProfile = " + userProfile);
+    }
+
+    @Test
+    public void testGetBlockedID() {
+        UserProfileEntity result = userProfileMapper.getBlockedID(166);
+        String str = result.getBlockId();
+        System.out.println("result = " + result);
+    }
+
+    @Test
+    public void testUnblockID() {
+        UserProfileEntity userProfile = userProfileMapper.getProfileByID(165);
+        userProfile.setIndex(0);
+        Integer result = userProfileMapper.unblockUser(userProfile);
+        System.out.println("result = " + result);
     }
 }
