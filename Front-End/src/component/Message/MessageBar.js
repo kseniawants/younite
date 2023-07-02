@@ -1,7 +1,7 @@
 //包住中間的Bar
-import React from 'react'
-import Search from './Search'
-import Messengers from './Messengers'
+import React from 'react';
+import Search from './Search';
+import Messengers from './Messengers';
 
 const MessageBar = () => {
   return (
@@ -11,11 +11,11 @@ const MessageBar = () => {
         <p className='d-grid justify-content-center text-radio'>好友對話:10/25</p>
       </div>
       <div>
-        <Search/>
-        <Messengers/>
+        <Search />
+        <Messengers />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default MessageBar
+export default MessageBar;
