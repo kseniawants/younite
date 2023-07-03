@@ -131,5 +131,5 @@ LocationModal.propTypes = {
 };
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyDEQ4Rf5sExPchgOPBZVeyhIVs1IVwagUw'
+  apiKey: process.env.REACT_APP_GOOLGE_MAP,
 })(LocationModal); 
