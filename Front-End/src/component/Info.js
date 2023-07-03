@@ -4,7 +4,7 @@ import Select from 'react-select';
 import { useForm, Controller } from 'react-hook-form';
 import { Input, RadioButtonGroup } from './FormElements';
 import {  Button, Divider } from 'antd';
-// import Avatar from './InfoElements/Avatar';
+import Avatar from './InfoElements/Avatar';
 import PhotoWall from './InfoElements/PhotoWall';
 import LocationModal from './InfoElements/Location';
 import InfoModal from './Modal/InfoModal';
@@ -67,21 +67,67 @@ function Info() {
     ];
 
     const hobbies = [
-      { value: 'swim', label: '游泳' },
-      { value: 'cook', label: '烹飪' },
-      { value: 'drama', label: '韓劇' },
-      { value: 'game', label: '手遊' }
-    ]
+      { value: 'music', label: '音樂' },
+      { value: 'reading', label: '閱讀' },
+      { value: 'sports', label: '運動' },
+      { value: 'photography', label: '攝影' },
+      { value: 'travel', label: '旅遊' },
+      { value: 'cooking', label: '烹飪' },
+      { value: 'painting', label: '繪畫' },
+      { value: 'gardening', label: '園藝' },
+      { value: 'hiking', label: '遠足' },
+      { value: 'biking', label: '騎單車' },
+      { value: 'dancing', label: '舞蹈' },
+      { value: 'yoga', label: '瑜伽' },
+      { value: 'gaming', label: '遊戲' },
+      { value: 'watching movies', label: '看電影' },
+      { value: 'collecting stamps', label: '集郵' },
+      { value: 'collecting coins', label: '集幣' },
+      { value: 'playing musical instruments', label: '彈奏樂器' },
+      { value: 'writing', label: '寫作' },
+      { value: 'bird watching', label: '觀鳥' },
+      { value: 'volunteering', label: '志願服務' },
+      { value: 'fishing', label: '釣魚' },
+      { value: 'knitting', label: '編織' },
+      { value: 'shopping', label: '購物' },
+      { value: 'cooking', label: '料理' },
+      { value: 'singing', label: '唱歌' },
+      { value: 'playing board games', label: '玩桌遊' },
+      { value: 'watching sports', label: '看體育比賽' },
+      { value: 'crafting', label: '手工藝' },
+      { value: 'solving puzzles', label: '解謎' },
+      { value: 'learning languages', label: '學習語言' }
+    ];
+
+    const [selectedHobbies, setSelectedHobbies] = useState([]);
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const handleHobbyChange = (selectedOptions) => {
+      if (selectedOptions.length <= 5) {
+        setSelectedHobbies(selectedOptions);
+        setErrorMessage('');
+      } else {
+        setErrorMessage('您最多只能選擇 5 個興趣');
+      }
+    };
 
     const profession = [
       { value: 'doctor', label: '醫生' },
-      { value: 'police', label: '警察' },
-      { value: 'teacher', label: '老師' },
+      { value: 'teacher', label: '教師/教育工作者' },
+      { value: 'lawyer', label: '律師/法務人員' },
       { value: 'engineer', label: '工程師' },
-      { value: 'accountant', label: '會計師' },
-      { value: 'business', label: '商人' },
-      { value: 'nurse', label: '護士' }
-    ]
+      { value: 'finance', label: '金融/銀行從業人員' },
+      { value: 'sales', label: '銷售/市場行銷人員' },
+      { value: 'media', label: '媒體/新聞從業人員' },
+      { value: 'designer', label: '設計師' },
+      { value: 'management', label: '企業管理/行政人員' },
+      { value: 'it', label: '電腦/資訊科技專業人員' },
+      { value: 'hr', label: '人力資源專員' },
+      { value: 'architect', label: '建築師/室內設計師' },
+      { value: 'hospitality', label: '餐飲/酒店從業人員' },
+      { value: 'artist', label: '藝術家/藝術從業人員' },
+      { value: 'fitness', label: '健身教練/體育運動員' }
+    ];     
 
     const [isInfoModalVisible, setInfoModalVisible] = useState(false);
     const [isLocationModalVisible, setLocationModalVisible] = useState(false);
@@ -156,7 +202,6 @@ function Info() {
             rules={{
               required: '姓名為必填',
             }}
-            
           ></Input>
         </div>
         <div className='pb-4 w-50'>
@@ -298,11 +343,18 @@ function Info() {
                   }),
                 }}
                 placeholder="新增興趣"
+                value={selectedHobbies}
+                onChange={handleHobbyChange}
               />
             )}
           />
           {errors.hobbies && (
             <div className="error-message text-danger mt-2" style={{fontSize: '0.9rem'}}>{errors.hobbies.message}</div>
+          )}
+          {errorMessage && (
+            <div className="error-message text-danger mt-2" style={{ fontSize: '0.9rem' }}>
+              {errorMessage}
+            </div>
           )}
         </div>
         <div className='d-flex pb-4'>
@@ -399,20 +451,29 @@ function Info() {
         <div className='p-4 mb-4'>
           <span className="text-danger p-1">*</span>
           <label className='mb-4'>大頭貼照片</label>
-          {/* <Controller
+          <Controller
               control={control}
               name="pic"
               rules={{ required: true }}
               render={({ field }) => (
-            <Avatar
-              {...field}
-              className={errors.pic ? 'is-invalid' : ''}
-              value={field.value}
-              onFileChange={handleFileChange}
-            />
+                <>
+                <Avatar
+                  {...field}
+                  className={errors.pic ? 'is-invalid' : ''}
+                  value={field.value}
+                  onFileChange={(file) => {
+                    field.onChange(file);
+                  }}
+                />
+                <input
+                  type="hidden"
+                  {...field}
+                  value={field.value}
+                />
+              </>
             )}
             />
-            {errors.pic && <div className="invalid-feedback ">請上傳大頭照</div>} */}
+            {errors.pic && <div className="invalid-feedback ">請上傳大頭照</div>}
         </div>
         <div className='p-4 mb-4'>
           <label className='mb-4'>個人檔案照片</label>
@@ -443,7 +504,7 @@ function Info() {
                   attributeName="transform"
                   attributeType="XML"
                   type="rotate"
-                  dur="5s"
+                  dur="0.5s"
                   from="0 50 50"
                   to="360 50 50"
                   repeatCount="indefinite"
