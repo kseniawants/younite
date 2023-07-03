@@ -80,36 +80,23 @@ function Info() {
       { value: 'dancing', label: '舞蹈' },
       { value: 'yoga', label: '瑜伽' },
       { value: 'gaming', label: '遊戲' },
-      { value: 'watching movies', label: '看電影' },
-      { value: 'collecting stamps', label: '集郵' },
-      { value: 'collecting coins', label: '集幣' },
-      { value: 'playing musical instruments', label: '彈奏樂器' },
+      { value: 'movies', label: '電影' },
+      { value: 'stamps', label: '集郵' },
+      { value: 'coins', label: '集幣' },
+      { value: 'instruments', label: '樂器' },
       { value: 'writing', label: '寫作' },
-      { value: 'bird watching', label: '觀鳥' },
+      { value: 'birdwatching', label: '觀鳥' },
       { value: 'volunteering', label: '志願服務' },
       { value: 'fishing', label: '釣魚' },
       { value: 'knitting', label: '編織' },
       { value: 'shopping', label: '購物' },
-      { value: 'cooking', label: '料理' },
       { value: 'singing', label: '唱歌' },
-      { value: 'playing board games', label: '玩桌遊' },
-      { value: 'watching sports', label: '看體育比賽' },
+      { value: 'boardgames', label: '桌遊' },
+      { value: 'sports-watching', label: '看體育比賽' },
       { value: 'crafting', label: '手工藝' },
-      { value: 'solving puzzles', label: '解謎' },
-      { value: 'learning languages', label: '學習語言' }
+      { value: 'puzzles', label: '解謎' },
+      { value: 'languages', label: '學習語言' }
     ];
-
-    const [selectedHobbies, setSelectedHobbies] = useState([]);
-    const [errorMessage, setErrorMessage] = useState('');
-
-    const handleHobbyChange = (selectedOptions) => {
-      if (selectedOptions.length <= 5) {
-        setSelectedHobbies(selectedOptions);
-        setErrorMessage('');
-      } else {
-        setErrorMessage('您最多只能選擇 5 個興趣');
-      }
-    };
 
     const profession = [
       { value: 'doctor', label: '醫生' },
@@ -343,18 +330,11 @@ function Info() {
                   }),
                 }}
                 placeholder="新增興趣"
-                value={selectedHobbies}
-                onChange={handleHobbyChange}
               />
             )}
           />
           {errors.hobbies && (
             <div className="error-message text-danger mt-2" style={{fontSize: '0.9rem'}}>{errors.hobbies.message}</div>
-          )}
-          {errorMessage && (
-            <div className="error-message text-danger mt-2" style={{ fontSize: '0.9rem' }}>
-              {errorMessage}
-            </div>
           )}
         </div>
         <div className='d-flex pb-4'>

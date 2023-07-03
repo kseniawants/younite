@@ -168,7 +168,7 @@ function RegisterForm() {
               <div className='pt-3 pb-1 d-flex flex-column align-items-center justify-content-center'>
                 <LoginSocialGoogle
                   client_id={
-                    '234241802651-ngs8vhu4c0d2u72nmot9kbt799scpoh9.apps.googleusercontent.com'
+                    process.env.REACT_APP_GOOLGE_LOGIN
                   }
                   scope='openid profile email'
                   discoveryDocs='claims_supported'
