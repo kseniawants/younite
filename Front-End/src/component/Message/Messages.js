@@ -19,11 +19,11 @@ const Messages = ({ currentChat }) => {
         />
       ))}
     </div>
-  )
-}
-
+  );
+};
 Messages.propTypes = {
   currentChat: PropTypes.object,
 };
 
 export default Messages
+

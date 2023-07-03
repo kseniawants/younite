@@ -15,7 +15,7 @@ function SideNav() {
   const handleModalClick = () => {
     setOpenModal(true);
     setIsActive(true);
-    setFadeInModal(true); // 設置淡入為 true，觸發淡入效果
+    setFadeInModal(true); //設置淡入為 true，觸發淡入效果
   };
 
   const handleCollapseClick = () => {
