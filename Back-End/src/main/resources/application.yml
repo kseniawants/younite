@@ -16,6 +16,14 @@ spring:
 mybatis:
   mapper-locations: classpath:mapper/*.xml
 
+springfox:
+  documentation:
+    swagger-ui:
+      enabled: true
+mvc:
+  pathmatch:
+    matching-strategy: ant_path_matcher
+
 encryption:
   secretKeyF: YOUNITEDATINGAPPLICATIONFRONTEND
   secretKeyB: 64YOUNITEDATINGAPPLCATIONFORBACKEND
