@@ -2,6 +2,7 @@ package tw.com.younite.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import tw.com.younite.service.exception.InvitationNotFoundException;
 import tw.com.younite.service.inter.IFriendService;
 import tw.com.younite.util.JSONResult;
 
@@ -11,8 +12,11 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*")
 public class FriendController extends BaseController {
+    private static final int VIDEO_CHAT_INVITATION = 1;
     private static final int VIDEO_CHAT_INVITATION_ACCEPT = 2;
+    private static final int VOICE_CHAT_INVITATION = 4;
     private static final int VOICE_CHAT_INVITATION_ACCEPT = 8;
+    private static final int IMAGE_INVITATION = 16;
     private static final int IMAGE_INVITATION_ACCEPT = 32;
 
     @Autowired
@@ -23,13 +27,13 @@ public class FriendController extends BaseController {
                                                 @PathVariable Integer status,
                                                 @PathVariable Integer friendID) {
         Integer userID = getIDFromSession(session);
-        iFriendService.setInvitationStatus(userID, friendID, status);
         switch (status) {
+            case VIDEO_CHAT_INVITATION, VOICE_CHAT_INVITATION, IMAGE_INVITATION -> iFriendService.setInvitationStatus(userID, friendID, status);
             case VIDEO_CHAT_INVITATION_ACCEPT -> iFriendService.setVideoChatFunction(userID, friendID);
             case VOICE_CHAT_INVITATION_ACCEPT -> iFriendService.setVoiceChatFunction(userID, friendID);
             case IMAGE_INVITATION_ACCEPT -> iFriendService.setImageSendFunction(userID, friendID);
+            default -> throw new InvitationNotFoundException("");
         }
-
         return new JSONResult<>(OK);
     }
 

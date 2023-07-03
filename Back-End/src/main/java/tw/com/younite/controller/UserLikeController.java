@@ -4,14 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tw.com.younite.entity.FriendEntity;
 import tw.com.younite.entity.UserLikeEntity;
+import tw.com.younite.entity.UserProfileEntity;
 import tw.com.younite.service.exception.DuplicatedLikedUserException;
 import tw.com.younite.service.exception.FriendExceedLimitException;
 import tw.com.younite.service.exception.UserNotFoundException;
 import tw.com.younite.service.inter.IFriendService;
 import tw.com.younite.service.inter.IUserLikeService;
+import tw.com.younite.service.inter.IUserProfileService;
 import tw.com.younite.service.inter.IUserService;
 import tw.com.younite.util.JSONResult;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 import javax.servlet.http.HttpSession;
@@ -25,6 +28,9 @@ public class UserLikeController extends BaseController {
 
     @Autowired
     IUserService iUserService;
+
+    @Autowired
+    IUserProfileService iUserProfileService;
 
     @Autowired
     IFriendService iFriendService;
@@ -82,6 +88,17 @@ public class UserLikeController extends BaseController {
         Integer userID = getIDFromSession(session);
         List<Integer> data = iUserLikeService.getLikedUserList(userID);
         return new JSONResult<>(OK, data);
+    }
+
+    @GetMapping("/users/getLikedUsersProfile")
+    public JSONResult<List<UserProfileEntity>> getLikedUserProfiles(HttpSession session) {
+        Integer userID = getIDFromSession(session);
+        List<Integer> data = iUserLikeService.getLikedUserList(userID);
+        List<UserProfileEntity> likedUserProfileList = new ArrayList<>();
+        for (Integer likedUserID: data) {
+            likedUserProfileList.add(iUserProfileService.getUserProfile(likedUserID));
+        }
+        return new JSONResult<>(OK, likedUserProfileList);
     }
 
     @GetMapping("/users/likesTracker/{likedUserID}")
