@@ -71,4 +71,4 @@ Chat.propTypes = {
   }).isRequired,
 };
 
-export default Chat  ;
+export default Chat  

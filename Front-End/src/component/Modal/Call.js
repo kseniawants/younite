@@ -23,7 +23,7 @@ function Call({ closeModal, currentChat }) {
   return (
     <>
       <Draggable handle='.userImg' onDrag={handleDrag}>
-        <section className='userImg modal-bg container-fluid' style={{'--bg-image': `url(${currentChat.userInfo.photoURL})`, top: position.y, left: position.x }}>
+        <section className='userImg container-fluid' style={{'--bg-image': `url(${currentChat.userInfo.photoURL})`, top: position.y, left: position.x }}>
           <div className='modalContainer row p-3'>
             {/* <div className='col-12 d-flex p-0'>
               <button onClick={() => closeModal(false)} className='position-absolute top-0 end-0 me-4 mt-4 bg-transparent'>
