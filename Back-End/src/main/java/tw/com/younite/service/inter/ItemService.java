@@ -1,7 +1,6 @@
-package tw.com.younite.service;
+package tw.com.younite.service.inter;
 
 import tw.com.younite.entity.ItemEntity;
-
 
 import java.util.List;
 

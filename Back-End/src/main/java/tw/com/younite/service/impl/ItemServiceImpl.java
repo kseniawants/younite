@@ -1,9 +1,8 @@
-package com.example.basicfunctions01.service.impl;
+package tw.com.younite.service.impl;
 
-import com.example.basicfunctions01.entity.Item;
-import com.example.basicfunctions01.mapper.ItemMapper;
-import com.example.basicfunctions01.mapper.UserMapper;
-import com.example.basicfunctions01.service.ItemService;
+import tw.com.younite.entity.ItemEntity;
+import tw.com.younite.mapper.ItemMapper;
+import tw.com.younite.service.inter.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +15,7 @@ public class ItemServiceImpl implements ItemService {
 
 
     @Override
-    public List<Item> getItems() {
+    public List<ItemEntity> getItems() {
 
         return itemMapper.selectAll();
 

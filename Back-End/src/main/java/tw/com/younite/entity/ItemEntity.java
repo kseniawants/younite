@@ -1,12 +1,10 @@
-package com.example.basicfunctions01.entity;
+package tw.com.younite.entity;
 
 import lombok.Data;
 
-import java.util.List;
-
 @Data
 //Data 涵蓋 getter setter toString
-public class Item {
+public class ItemEntity {
 
     private Integer id;
     private String itemName;

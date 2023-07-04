@@ -1,12 +1,12 @@
-package com.example.basicfunctions01.service;
+package tw.com.younite.service;
 
-import com.example.basicfunctions01.entity.Item;
-import com.example.basicfunctions01.mapper.ItemMapper;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import tw.com.younite.entity.ItemEntity;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public class ItemServiceTestCase {
     @Test
     public void test() {
 
-        List<Item> a = itemService.getItems();
+        List<ItemEntity> a = itemService.getItems();
 
         System.out.println("item = " + a);
 

@@ -1,14 +1,15 @@
 package com.example.basicfunctions01.service;
 
-import com.example.basicfunctions01.entity.User;
-import com.example.basicfunctions01.entity.UserProfile;
+
+import tw.com.younite.entity.UserEntity;
+import tw.com.younite.entity.UserProfileEntity;
 
 
 public interface IUserService {
     /** register interface*/
-    void reg(User user);
-    void insertProfile(UserProfile userProfile);
-    User login(User user);
+    void reg(UserEntity user);
+    void insertProfile(UserProfileEntity userProfile);
+    UserEntity login(UserEntity user);
     void changePassword(Integer id, String username, String oldPassword, String newPassword);
 
 

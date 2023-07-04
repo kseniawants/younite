@@ -1,6 +1,6 @@
-package com.example.basicfunctions01.mapper;
+package tw.com.younite.mapper;
 
-import com.example.basicfunctions01.entity.Item;
+import tw.com.younite.entity.ItemEntity;
 
 import java.util.List;
 
@@ -10,5 +10,10 @@ public interface ItemMapper {
 
     //從itemmapper返回方法名
     //查詢所有
-    List<Item> selectAll();
+    List<ItemEntity> selectAll();
+    ItemEntity getItemPriceByItemId(Integer itemId);
+    String getItemNameByItemId(Integer itemId);
+
+
+
 }
