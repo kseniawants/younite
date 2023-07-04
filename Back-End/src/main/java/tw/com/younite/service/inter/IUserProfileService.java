@@ -1,9 +1,14 @@
 package tw.com.younite.service.inter;
 
-import tw.com.younite.entity.UserProfile;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import tw.com.younite.entity.UserProfileEntity;
+import java.util.List;
 
 public interface IUserProfileService {
-    void insertProfile(UserProfile userProfile);
-    void resetUserProfile(UserProfile userprofile);
-    UserProfile getUserProfile(Integer id);
+    void insertProfile(UserProfileEntity userProfile);
+    void resetUserProfile(UserProfileEntity userprofile);
+    UserProfileEntity getUserProfile(Integer id);
+    List<Integer> getBlockedID(Integer userID);
+    void blockUser(Integer userID, Integer blockedUserID);
+    void unblockUser(Integer userID, Integer blockedUserID);
 }

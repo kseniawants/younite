@@ -4,6 +4,7 @@ import Draggable from 'react-draggable';
 import '../../styles/Modal/draggableModal.scss';
 
 function FilterDraggableModal({ closeModal }) {
+  // 移動視窗 程式碼 START
   const [position, setPosition] = useState({ x: undefined, y: undefined });
   const [fadeIn, setFadeIn] = useState(false); // 追蹤是否需要淡入
   useEffect(() => {
@@ -29,7 +30,6 @@ function FilterDraggableModal({ closeModal }) {
       x: x + deltaX * speedFactor,
       y: y + deltaY * speedFactor,
     };
-
     setPosition(newPosition);
   };
 

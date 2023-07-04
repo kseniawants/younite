@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 function RegisterForm() {
   const [submitting, setSubmitting] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const navigate = useNavigate();
   const {
     register,
@@ -20,12 +21,24 @@ function RegisterForm() {
   const onSubmit = async () => {
     try {
       setSubmitting(true);
+      setFormSubmitted(true);
+      await submitForm();
       navigate('/personal');
     } catch (error) {
       console.error(error);
     } finally {
       setSubmitting(false);
     }
+  };
+
+  const submitForm = () => {
+    return new Promise((resolve) => {
+      // 模拟异步操作，这里使用 setTimeout 延时 2 秒
+      setTimeout(() => {
+        // 假设提交成功
+        resolve();
+      }, 2000);
+    });
   };
   
   const password = watch('password');
@@ -111,6 +124,36 @@ function RegisterForm() {
               </div>
               <div className='d-flex justify-content-center mt-4'>
                 <Link to='/personal'>
+                  {formSubmitted && (
+                    <div className={`fullscreen-overlay ${submitting ? 'show' : ''}`}>
+                      <svg
+                        version="1.1"
+                        id="L9"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlnsXlink="http://www.w3.org/1999/xlink"
+                        x="0px"
+                        y="0px"
+                        viewBox="0 0 100 100"
+                        enableBackground="new 0 0 0 0"
+                        xmlSpace="preserve"
+                      >
+                        <path
+                          fill="#fff"
+                          d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"
+                        >
+                          <animateTransform
+                            attributeName="transform"
+                            attributeType="XML"
+                            type="rotate"
+                            dur="0.5s"
+                            from="0 50 50"
+                            to="360 50 50"
+                            repeatCount="indefinite"
+                          />
+                        </path>
+                      </svg>
+                    </div>
+                  )}
                   <button
                     type='submit'
                     className='btn btn-primary py-3 px-7 rounded-2 d-flex align-items-center justify-content-center'
@@ -125,7 +168,7 @@ function RegisterForm() {
               <div className='pt-3 pb-1 d-flex flex-column align-items-center justify-content-center'>
                 <LoginSocialGoogle
                   client_id={
-                    '234241802651-ngs8vhu4c0d2u72nmot9kbt799scpoh9.apps.googleusercontent.com'
+                    process.env.REACT_APP_GOOLGE_LOGIN
                   }
                   scope='openid profile email'
                   discoveryDocs='claims_supported'

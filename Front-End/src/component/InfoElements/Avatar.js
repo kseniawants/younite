@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Upload, message } from 'antd';
 import ImgCrop from 'antd-img-crop';
+import PropTypes from 'prop-types';
 
-const Avatar = () => {
+const Avatar = ({ onFileChange }) => {
   const [fileList, setFileList] = useState([
     // {
     //   uid: '-1',
@@ -22,6 +23,7 @@ const Avatar = () => {
     }
 
     setFileList(newFileList);
+    onFileChange(newFileList);
   };
 
   const onPreview = async (file) => {
@@ -52,6 +54,10 @@ const Avatar = () => {
       </Upload>
     </ImgCrop>
   );
+};
+
+Avatar.propTypes = {
+  onFileChange: PropTypes.func.isRequired,
 };
 
 export default Avatar;

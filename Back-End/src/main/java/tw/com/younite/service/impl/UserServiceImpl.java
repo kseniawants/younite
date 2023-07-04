@@ -1,9 +1,9 @@
 package tw.com.younite.service.impl;
 
-import tw.com.younite.entity.User;
+import tw.com.younite.entity.UserEntity;
 import tw.com.younite.mapper.UserMapper;
 import tw.com.younite.service.inter.IUserService;
-import tw.com.younite.service.exception.UsernameDuplicatedException;
+import tw.com.younite.service.exception.DuplicatedUsernameException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -20,27 +20,20 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private UserMapper userMapper;
 
-
     @Override
-    public void reg(User user) {
+    public void reg(UserEntity user) {
         String username = user.getUsername();
         String email = user.getEmail();
-        String phone = user.getPhone();
-        User result = userMapper.getByUsername(username);
+        UserEntity result = userMapper.getByUsername(username);
 
         //驗證帳號是否重複
         if (result != null) {
-            throw new UsernameDuplicatedException("帳號重複!");
+            throw new DuplicatedUsernameException("帳號重複!");
         }
 
         //驗證信箱是否重複
         if (userMapper.getByUserEmail(email) != null) {
-            throw new EmailDuplicatedException("電子信箱重複!");
-        }
-
-        //驗證手機是否重複
-        if (userMapper.getByUserPhone(phone) != null) {
-            throw new PhoneDuplicatedException("電話重複!");
+            throw new DuplicatedEmailException("電子信箱重複!");
         }
 
 
@@ -68,7 +61,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public void regByOAuth(User user) {
+    public void regByOAuth(UserEntity user) {
         Integer rows = userMapper.registerByOAuth(user);
         if (rows != 1) {
             throw new RegisterException("第三方註冊失敗");
@@ -76,10 +69,10 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public User login(User user) {
+    public UserEntity login(UserEntity user) {
         String username = user.getUsername();
         String password = user.getPassword();
-        User result = userMapper.getByUsername(username);
+        UserEntity result = userMapper.getByUsername(username);
         if (result == null) {
             throw new UserNotFoundException("帳號不存在");
         }
@@ -89,7 +82,7 @@ public class UserServiceImpl implements IUserService {
         if (!MD5Password.equals(databasePassword)) {
             throw new PasswordNotMatchException("密碼錯誤!");
         }
-        User newUser = new User();
+        UserEntity newUser = new UserEntity();
         newUser.setId(result.getId());
         newUser.setUsername(result.getUsername());
         return newUser;
@@ -103,9 +96,10 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public void resetPassword(Integer id, String username,
-                               String oldPassword, String newPassword) {
-        User result = userMapper.getUserByID(id);
+    public void resetPassword (Integer id,
+                              String oldPassword,
+                              String newPassword) {
+        UserEntity result = userMapper.getUserByID(id);
         if (result == null) {
             throw new UserNotFoundException();
         }
@@ -119,7 +113,7 @@ public class UserServiceImpl implements IUserService {
         }
     }
 
-    private void checkPassword(String uncheckPassword, User user) throws PasswordNotMatchException {
+    private void checkPassword(String uncheckPassword, UserEntity user) throws PasswordNotMatchException {
         //資料庫中的密碼
         String databasePassword = user.getPassword();
         //待確認密碼加密
@@ -133,5 +127,12 @@ public class UserServiceImpl implements IUserService {
         }
     }
 
-
+    @Override
+    public UserEntity getUserByID(Integer id) {
+        UserEntity result = userMapper.getUserByID(id);
+        if (result == null) {
+            throw new UserNotFoundException("使用者不存在");
+        }
+        return result;
+    }
 }

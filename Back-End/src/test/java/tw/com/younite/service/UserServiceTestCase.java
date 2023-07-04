@@ -1,6 +1,6 @@
 package tw.com.younite.service;
 
-import tw.com.younite.entity.User;
+import tw.com.younite.entity.UserEntity;
 import tw.com.younite.service.exception.ServiceException;
 import tw.com.younite.service.inter.IUserService;
 import org.junit.Test;
@@ -19,7 +19,7 @@ public class UserServiceTestCase {
     @Test
     public void testReg() {
         try {
-            User user = new User();
+            UserEntity user = new UserEntity();
             user.setUsername("Rita");
             user.setPassword("123456");
             user.setEmail("Rita123@gmail.com");
@@ -35,7 +35,7 @@ public class UserServiceTestCase {
     @Test
     public void testReg01() {
         try {
-            User user = new User();
+            UserEntity user = new UserEntity();
             user.setUsername("Rex");
             user.setPassword("12345689");
             user.setEmail("Rex123@gmail.com");
@@ -50,7 +50,7 @@ public class UserServiceTestCase {
     @Test
     public void testReg02() {
         try {
-            User user = new User();
+            UserEntity user = new UserEntity();
             user.setUsername("Rex1");
             user.setPassword("123456898");
             user.setEmail("Rex123444@gmail.com");
@@ -65,7 +65,7 @@ public class UserServiceTestCase {
     @Test
     public void testReg03() {
         try {
-            User user = new User();
+            UserEntity user = new UserEntity();
             user.setUsername("Leo");
             user.setPassword("1234567");
             user.setEmail("Leo123@gmail.com");
@@ -80,7 +80,7 @@ public class UserServiceTestCase {
     @Test
     public void testReg04() {
         try {
-            User user = new User();
+            UserEntity user = new UserEntity();
             user.setUsername("Lucas");
             user.setPassword("1234567");
             user.setEmail("Lucas123@gmail.com");
@@ -94,15 +94,15 @@ public class UserServiceTestCase {
 
     @Test
     public void test05Login() {
-        User user = new User();
+        UserEntity user = new UserEntity();
         user.setUsername("David76666");
         user.setPassword("david888777");
-        User newUser = iUserService.login(user);
+        UserEntity newUser = iUserService.login(user);
         System.out.println("user = " + newUser);
     }
 
     @Test
     public void testChangePassword() {
-        iUserService.resetPassword(6, "Lucas", "1234567", "7654321");
+        iUserService.resetPassword(6, "1234567", "7654321");
     }
 }
