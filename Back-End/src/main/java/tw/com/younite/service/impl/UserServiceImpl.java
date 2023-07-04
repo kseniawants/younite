@@ -20,6 +20,7 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private UserMapper userMapper;
 
+
     @Override
     public void reg(User user) {
         String username = user.getUsername();
@@ -131,4 +132,6 @@ public class UserServiceImpl implements IUserService {
             throw new PasswordNotMatchException("密碼錯誤");
         }
     }
+
+
 }

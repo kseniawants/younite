@@ -1,6 +1,6 @@
-package tw.com.younite.config;
+package com.example.basicfunctions01.config;
 
-import tw.com.younite.interceptor.LoginInterceptor;
+import com.example.basicfunctions01.interceptor.LoginInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -26,10 +26,12 @@ public class LoginInterceptorConfig implements WebMvcConfigurer {
         whiteLists.add("/style/**");
         whiteLists.add("/register.html");
         whiteLists.add("/login.html");
-        whiteLists.add("/users/register");
-        whiteLists.add("/users/login");
-        whiteLists.add("/OAuth.html");
-        whiteLists.add("/users/registerByOAuth");
+        whiteLists.add("/index.html");
+        whiteLists.add("/register");
+        whiteLists.add("/login");
+        whiteLists.add("/items");
+        whiteLists.add("/store.html");
+
 
         //黑名單(用戶不可隨意訪問的url), param: String
         registry.addInterceptor(interceptor)
