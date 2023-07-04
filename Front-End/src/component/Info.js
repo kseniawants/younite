@@ -26,10 +26,12 @@ function Info() {
 
     const onSubmit = async (data) => {
       try {
+        data.photoWall = photoWallValue.map((item) => item.thumbUrl);
         setSubmitting(true);
         setFormSubmitted(true);
         await submitForm(data);
         navigate('/home');
+        console.log(data.pic[0]?.thumbUrl);
         console.log(data);
       } catch (error) {
         console.error(error);
@@ -170,6 +172,12 @@ function Info() {
 
     const handleButtonClick = () => {
       fileInputRef.current.click();
+    };
+
+    const [photoWallValue, setPhotoWallValue] = useState([]);
+
+    const handlePhotoWallChange = (value) => {
+      setPhotoWallValue(value);
     };
 
   return (
@@ -457,7 +465,7 @@ function Info() {
         </div>
         <div className='p-4 mb-4'>
           <label className='mb-4'>個人檔案照片</label>
-          <PhotoWall/>
+          <PhotoWall onChange={handlePhotoWallChange} />
         </div>
       </div>
     </form>
