@@ -15,7 +15,7 @@
 
 
     <insert id="addPhotos" useGeneratedKeys="true" keyProperty="photoID">
-        INSERT INTO `PHOTOS`
+        INSERT INTO `photos`
         (`profile_id`, `photo1_path`, `photo2_path`,`photo3_path`,
          `photo4_path`, `photo5_path`, `photo6_path`)
         VALUES (#{profileID}, #{firstPhotoPath}, #{secondPhotoPath},

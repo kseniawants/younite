@@ -19,9 +19,9 @@ public class UserMapperTestCase {
     @Test
     public void testRegister() {
         UserEntity user = new UserEntity();
-        user.setId(1);
-        user.setEmail("david.liu0206@gmail.com");
-        user.setUsername("David");
+        user.setId(200);
+        user.setEmail("gfdhgdhgfudihidugohigh@gmail.com");
+        user.setUsername("fuigdfhigflhidiglhd");
         user.setPassword("aaa520520");
         Integer result = userMapper.register(user);
         System.out.println("result = " + result);
@@ -30,7 +30,7 @@ public class UserMapperTestCase {
     @Test
     public void testRegisterByPAuth() {
         UserEntity user = new UserEntity();
-        user.setId(102);
+        user.setId(200);
         user.setEmail("qoqo850206123@gmail.com");
         user.setUsername("David123");
         user.setGoogleUser("1");

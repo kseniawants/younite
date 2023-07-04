@@ -10,6 +10,8 @@ import tw.com.younite.util.JSONResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -18,7 +20,7 @@ import javax.servlet.http.HttpSession;
 
 //@Api(tags = "Users")
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class UserController extends BaseController {
     @Autowired
     private IUserService iUserService;
@@ -39,13 +41,11 @@ public class UserController extends BaseController {
         return new JSONResult<UserEntity>(OK, user);
     }
 
-
-
-
     @PostMapping("/users/register")
     public JSONResult<Void> reg(@RequestBody UserEntity user, HttpSession session) {
         iUserService.reg(user);
         session.setAttribute("id", user.getId());
+        System.out.println("userID: " + getIDFromSession(session));
         return new JSONResult<>(CREATE_OK);
     }
 

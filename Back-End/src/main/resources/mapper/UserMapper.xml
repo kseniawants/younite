@@ -33,25 +33,25 @@
 
     <select id="getUserByID" resultMap="UserEntityMap">
         SELECT *
-        FROM `USERS`
+        FROM `users`
         WHERE `id` = #{id}
     </select>
 
     <insert
             id="register"
             useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO USERS
-        (`id`, `username`, `email`, `password`,
+        INSERT INTO users
+        (`username`, `email`, `password`,
          `third_party_login`, `facebook_user`, `google_user`,
          `vip_expiry`, `created_at`, `modified_at`, `salt`)
-        VALUES (#{id}, #{username}, #{email}, #{password}, #{thirdPartyLogin}, #{facebookUser}, #{googleUser},
+        VALUES (#{username}, #{email}, #{password}, #{thirdPartyLogin}, #{facebookUser}, #{googleUser},
                 #{vipExpiry}, #{createdAt}, #{modifiedAt}, #{salt})
     </insert>
 
     <insert
             id="registerByOAuth"
             useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO USERS
+        INSERT INTO users
         (`id`, `username`, `password`, `email`, `third_party_login`, `facebook_user`, `google_user`,
          `vip_expiry`, `created_at`, `modified_at`)
         VALUES (#{id}, #{username}, #{password}, #{email}, #{thirdPartyLogin}, #{facebookUser}, #{googleUser},
@@ -59,7 +59,7 @@
     </insert>
 
     <update id="updatePasswordByID">
-        UPDATE `USERS`
+        UPDATE `users`
         SET password    = #{password},
             modified_at = #{modifiedAt}
         WHERE `id` = ${id}
