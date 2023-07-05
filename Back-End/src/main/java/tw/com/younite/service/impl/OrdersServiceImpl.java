@@ -50,8 +50,7 @@ public class OrdersServiceImpl implements OrdersService {
 
 
 
-//    @Override
-//    public Date setVipDate(OrdersMapper ordersMapper, Date vipDate)
+
     @Override
     public Date setVipDate(String mTradeNo, Integer itemId, Date vipDate) {
         OrdersEntity order = ordersMapper.getByTradeNo(mTradeNo);

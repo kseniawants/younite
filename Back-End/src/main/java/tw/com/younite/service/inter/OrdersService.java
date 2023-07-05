@@ -14,11 +14,9 @@ public interface OrdersService {
 
     void updateUnlocked(String mTradeNo, Boolean unlocked, Date purchased);
 
-//    Date setVipDate(OrdersMapper ordersMapper, Date vipDate) ;
 
-    //    @Override
-    //    public Date setVipDate(OrdersMapper ordersMapper, Date vipDate)
     Date setVipDate(String mTradeNo, Integer itemId, Date vipDate);
 
+    //尚未確定要放哪
     void lockedVip(Integer id, Boolean unlocked);
 }
