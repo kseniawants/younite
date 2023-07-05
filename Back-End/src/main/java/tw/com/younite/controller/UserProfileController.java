@@ -1,5 +1,8 @@
 package tw.com.younite.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import tw.com.younite.entity.UserPhotosEntity;
 import tw.com.younite.entity.UserProfileEntity;
 import tw.com.younite.service.exception.BlockedIDAlreadyExistsException;
@@ -23,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Api(tags ="個人資料建立")
 @RestController
 @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class UserProfileController extends BaseController {
@@ -72,9 +76,9 @@ public class UserProfileController extends BaseController {
         VOICE_TYPE.add("audio/wav");
         VOICE_TYPE.add("audio/aac");
     }
-
+    @ApiOperation("接受使用者的個人檔案相關資訊")
     @PostMapping(value = "/users/profile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public JSONResult<String> insertProfile(@ModelAttribute UserProfileEntity userProfile,
+    public JSONResult<String> insertProfile(@ApiParam(value = "使用者個人資料新增", required = true)@ModelAttribute UserProfileEntity userProfile,
                                             HttpSession session,
                                             String birthday,
                                             @RequestParam(required = false) MultipartFile voice,
@@ -106,9 +110,9 @@ public class UserProfileController extends BaseController {
         //返回使用者的大頭貼路徑給前端，未來可以展示用
         return new JSONResult<>(CREATE_OK, avatarPath);
     }
-
+    @ApiOperation("封鎖使用者黑名單")
     @PostMapping("/users/blockUser")
-    public JSONResult<Void> blockUser(HttpSession session, Integer blockedUserID) {
+    public JSONResult<Void> blockUser(@ApiParam(value = "要被封鎖的使用者ID匯入", required = true)HttpSession session, Integer blockedUserID) {
         Integer userID = getIDFromSession(session);
         if (iUserProfileService.getBlockedID(userID).contains(blockedUserID)) {
             throw new BlockedIDAlreadyExistsException("此用戶已在黑名單內");
@@ -116,9 +120,9 @@ public class UserProfileController extends BaseController {
         iUserProfileService.blockUser(userID, blockedUserID);
         return new JSONResult<>(CREATE_OK, "已成功添加黑名單");
     }
-
+    @ApiOperation("取消封鎖使用者黑名單")
     @PostMapping("/users/unblockUser")
-    public JSONResult<Void> unblockUser(HttpSession session, Integer unblockedUserID) {
+    public JSONResult<Void> unblockUser(@ApiParam(value = "要取消封鎖在黑名單內的使用者ID匯入", required = true)HttpSession session, Integer unblockedUserID) {
         Integer userID = getIDFromSession(session);
         if (!iUserProfileService.getBlockedID(userID).contains(unblockedUserID)) {
             throw new BlockedUserNotFoundException();
@@ -127,29 +131,31 @@ public class UserProfileController extends BaseController {
         return new JSONResult<>(CREATE_OK, "已將用戶自黑名單中移除!");
     }
 
-
+    @ApiOperation("查詢黑名單")
     @GetMapping("/users/getBlokedID")
-    public JSONResult<List<Integer>> getBlockedList(HttpSession session) {
+    public JSONResult<List<Integer>> getBlockedList(@ApiParam(value = "查詢黑名單的資料回傳", required = true)HttpSession session) {
         Integer userID = getIDFromSession(session);
         List<Integer> data = iUserProfileService.getBlockedID(userID);
         return new JSONResult<>(OK, data);
     }
-
+    @ApiOperation("查詢個人資料")
     @GetMapping("/users/profile")
-    public JSONResult<UserProfileEntity> getUserProfile(HttpSession session) {
+    public JSONResult<UserProfileEntity> getUserProfile(@ApiParam(value = "查詢個人資料回傳", required = true)HttpSession session) {
         Integer userID = getIDFromSession(session);
         UserProfileEntity data = iUserProfileService.getUserProfile(userID);
         return new JSONResult<>(OK, data);
     }
-
+    @ApiOperation("查詢指定的個人資料")
     @GetMapping("/users/profile/{userID}")
-    public JSONResult<UserProfileEntity> getUserProfile(@PathVariable Integer userID) {
+    public JSONResult<UserProfileEntity> getUserProfile(@ApiParam(value = "查詢指定個人資料回傳", required = true)
+                                                            @PathVariable Integer userID) {
         UserProfileEntity data = iUserProfileService.getUserProfile(userID);
         return new JSONResult<>(OK, data);
     }
-
+    @ApiOperation("修改個人資料與更新")
     @PutMapping("/users/profile")
-    public JSONResult<Void> resetProfiles(@ModelAttribute UserProfileEntity userProfile,
+    public JSONResult<Void> resetProfiles(@ApiParam(value = "接收個人資料修改與更新資料", required = true)
+                                              @ModelAttribute UserProfileEntity userProfile,
                                           HttpSession session,
                                           String birthday,
                                           MultipartFile avatar,

@@ -17,10 +17,12 @@
 //            HttpServletResponse response,
 //            Object handler) throws Exception {
 //        Object obj = request.getSession().getAttribute("id");
+
 //        if (obj == null) {
 //            response.sendRedirect("/login.html");
 //            return false;
 //        }
+
 //        return true;
 //    }
 //

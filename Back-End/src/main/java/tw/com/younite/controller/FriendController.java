@@ -1,5 +1,8 @@
 package tw.com.younite.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tw.com.younite.service.inter.IFriendService;
@@ -7,7 +10,7 @@ import tw.com.younite.util.JSONResult;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
-
+@Api(tags ="處理好友功能")
 @RestController
 @CrossOrigin(origins = "*")
 public class FriendController extends BaseController {
@@ -17,9 +20,9 @@ public class FriendController extends BaseController {
 
     @Autowired
     IFriendService iFriendService;
-
+    @ApiOperation("設置好友邀請狀態")
     @PutMapping("/users/invitation/{friendID}/{status}")
-    public JSONResult<Void> setInvitationStatus(HttpSession session,
+    public JSONResult<Void> setInvitationStatus(@ApiParam(value = "傳入好友邀請狀態;視訊、語音、圖片", required = true)HttpSession session,
                                                 @PathVariable Integer status,
                                                 @PathVariable Integer friendID) {
         Integer userID = getIDFromSession(session);
@@ -32,16 +35,17 @@ public class FriendController extends BaseController {
 
         return new JSONResult<>(OK);
     }
-
+    @ApiOperation("好友清單")
     @GetMapping("/users/friends")
-    public JSONResult<List<Integer>> getFriendList(HttpSession session) {
+    public JSONResult<List<Integer>> getFriendList(@ApiParam(value = "傳出好友清單", required = true)HttpSession session) {
         Integer userID = getIDFromSession(session);
         List<Integer> data = iFriendService.getFriendsList(userID);
         return new JSONResult<>(OK, data);
     }
-
+    @ApiOperation("指定好友清單")
     @GetMapping("/users/friends/{userID}")
-    public JSONResult<List<Integer>> getUsersFriendList(@PathVariable Integer userID) {
+    public JSONResult<List<Integer>> getUsersFriendList(@ApiParam(value = "傳出指定好友清單", required = true)
+                                                            @PathVariable Integer userID) {
         List<Integer> data = iFriendService.getFriendsList(userID);
         return new JSONResult<>(OK, data);
     }
