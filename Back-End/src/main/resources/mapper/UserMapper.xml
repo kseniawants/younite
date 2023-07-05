@@ -23,6 +23,8 @@
         WHERE username = #{username}
     </select>
 
+
+
     <select id="getByUserEmail" resultMap="UserEntityMap">
         SELECT *
         FROM `users`
@@ -78,8 +80,7 @@
 
     <update id="lockedVipById">
         UPDATE `users`
-        SET vip_expiry = #{vipExpiry},
-            unlocked = False
+        SET unlocked = False
         WHERE `id` = ${id}
     </update>
 
