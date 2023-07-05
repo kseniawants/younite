@@ -10,6 +10,8 @@
         <result column="third_party_login" property="thirdPartyLogin"></result>
         <result column="facebook_user" property="facebookUser"></result>
         <result column="google_user" property="googleUser"></result>
+        <result column="vip_expiry" property="vipExpiry"></result>
+
     </resultMap>
 
 
@@ -62,6 +64,12 @@
         UPDATE `users`
         SET password    = #{password},
             modified_at = #{modifiedAt}
+        WHERE `id` = ${id}
+    </update>
+
+    <update id="updateVipById">
+        UPDATE `users`
+        SET vip_expiry = #{vipExpiry}
         WHERE `id` = ${id}
     </update>
 

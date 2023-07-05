@@ -2,6 +2,7 @@ package tw.com.younite.service.inter;
 
 
 import tw.com.younite.entity.OrdersEntity;
+import tw.com.younite.mapper.OrdersMapper;
 
 import java.util.Date;
 
@@ -13,5 +14,9 @@ public interface OrdersService {
 
     void updateUnlocked(String mTradeNo, Boolean unlocked, Date purchased);
 
-    Date updateVIP(OrdersEntity orders, Integer userId , Date expiry);
+//    Date setVipDate(OrdersMapper ordersMapper, Date vipDate) ;
+
+    //    @Override
+    //    public Date setVipDate(OrdersMapper ordersMapper, Date vipDate)
+    Date setVipDate(String mTradeNo, Integer itemId, Date vipDate);
 }

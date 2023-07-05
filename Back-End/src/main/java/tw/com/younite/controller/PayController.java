@@ -1,5 +1,8 @@
 package tw.com.younite.controller;
 
+import tw.com.younite.entity.OrdersEntity;
+import tw.com.younite.mapper.OrdersMapper;
+import tw.com.younite.mapper.UserMapper;
 import tw.com.younite.service.inter.OrdersService;
 import tw.com.younite.service.inter.PayService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Calendar;
 import java.util.Date;
 
 @RestController
@@ -16,6 +20,10 @@ public class PayController extends BaseController{
     private OrdersService ordersService;
     @Autowired
     private PayService payService;
+    @Autowired
+    private OrdersMapper ordersMapper;
+    @Autowired
+    private UserMapper userMapper;
     @PostMapping("/orders")
     public String orders(HttpSession session, Integer itemId) {
         Integer userId = getIDFromSession(session);
@@ -48,7 +56,10 @@ public class PayController extends BaseController{
         if (rtnCode.equals("1")) {
             System.out.println("success!");
             ordersService.updateUnlocked(merchantTradeNo, Boolean.TRUE, new Date());
-
+            OrdersEntity newOrder = ordersMapper.getByTradeNo(merchantTradeNo);
+            Date vipdate = ordersService.setVipDate(newOrder.getMTradeNo(),newOrder.getItemId(),newOrder.getPurchased());
+            userMapper.updateVipById(newOrder.getUserId(), vipdate);
+//            System.out.println("vipdate = " + vipdate);
         } else {
             System.out.println("fail!");
         }

@@ -42,6 +42,12 @@
         WHERE `id` = #{id}
     </select>
 
+    <select id="getByTradeNo" resultMap="OrdersEntityMap">
+        SELECT *
+        FROM `orders`
+        WHERE `merchant_trade_no` = #{mTradeNo}
+    </select>
+
     <update id="addTradeNo">
         UPDATE  `orders` SET
                              `merchant_trade_no` = #{mTradeNo}

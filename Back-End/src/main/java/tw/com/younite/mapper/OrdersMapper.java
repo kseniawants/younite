@@ -16,11 +16,12 @@ public interface OrdersMapper {
 
     OrdersEntity getById(Integer id);
 
+    OrdersEntity getByTradeNo (String mTradeNo);
+
     void addTradeNo(Integer id, String mTradeNo);
 
     Integer getItemByUser(Integer userId, Integer itemId);
 
-    Date getPurchasedByUser (Integer userId, Date purchased);
 
 
 }
