@@ -9,6 +9,8 @@ import lombok.Data;
 public class users {
     @ApiModelProperty(value = "GOOLE登入傳入Email")
     private String email;
+    @ApiModelProperty(value = "GOOLE登入傳入username")
     private String username;
+    @ApiModelProperty(value = "GOOLE登入傳入ThirdPartyLogin")
     private boolean ThirdPartyLogin;
 }

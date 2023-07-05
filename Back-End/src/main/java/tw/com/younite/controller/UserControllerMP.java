@@ -12,7 +12,7 @@ import tw.com.younite.entity.users;
 import tw.com.younite.service.inter.IUserServiceMP;
 
 import java.util.List;
-@Api(tags ="Google登入")
+@Api(tags ="Google第三方登入")
 @RestController
 public class UserControllerMP {
     @Autowired

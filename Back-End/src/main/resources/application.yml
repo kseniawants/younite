@@ -21,7 +21,7 @@ springfox:
   documentation:
     swagger-ui:
       enabled: true
-#      springBoots版本2.X版後就要加上，不然SWAGER會壞掉
+#springBoots版本2.X版後就要加上，不然SWAGER會壞掉
 mvc:
   pathmatch:
     matching-strategy: ant_path_matcher
