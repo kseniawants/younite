@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 public class PaymentVerifyBase{
 //	protected String confPath = "/ecpay/payment/integration/config/EcpayPayment.xml";
-	protected String confPath = "/ecpay/payment/integration/config/EcpayPayment.xml";
+	protected String confPath = "/EcpayPayment.xml";
 
 	protected Document doc;
 	public PaymentVerifyBase(){

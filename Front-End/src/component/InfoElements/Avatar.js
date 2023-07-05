@@ -41,10 +41,53 @@ const Avatar = ({ onFileChange }) => {
     imgWindow?.document.write(image.outerHTML);
   };
 
+  const handleBeforeUpload = (file) => {
+    const isImage = file.type.startsWith('image/');
+    const isLt2M = file.size / 1024 / 1024 < 2;
+
+    if (!isImage) {
+      message.error('只能上传图片文件！');
+    }
+
+    if (!isLt2M) {
+      message.error('图片文件大小不能超过2MB！');
+    }
+
+    return isImage && isLt2M;
+  };
+
+  const handleCustomRequest = (options) => {
+    const {  onSuccess, onProgress } = options;
+
+    // 自定义上传逻辑
+    // 将文件上传到指定位置，并在上传过程中更新进度和状态
+
+    // 示例：模拟上传进度
+    const total = 100;
+    let uploaded = 0;
+
+    const uploadInterval = setInterval(() => {
+      uploaded += 10;
+      onProgress({ percent: uploaded });
+
+      if (uploaded >= total) {
+        clearInterval(uploadInterval);
+        onSuccess(); // 上传成功
+      }
+    }, 500);
+
+    // 示例：模拟上传失败
+    // setTimeout(() => {
+    //   clearInterval(uploadInterval);
+    //   onError(new Error('上传失败'));
+    // }, 2000);
+  };
+
   return (
     <ImgCrop rotationSlider>
       <Upload
-        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+        beforeUpload={handleBeforeUpload}
+        customRequest={handleCustomRequest}
         listType="picture-circle"
         fileList={fileList}
         onChange={onChange}

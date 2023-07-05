@@ -1,0 +1,39 @@
+package tw.com.younite.controller;
+
+import tw.com.younite.entity.ItemEntity;
+import tw.com.younite.service.inter.ItemService;
+import tw.com.younite.util.JSONResult;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+import static tw.com.younite.controller.BaseController.OK;
+
+@RestController
+public class ItemController {
+
+        @Autowired
+        private ItemService itemService;
+
+        //取得所有商品列表
+
+    @GetMapping("/items")
+    public JSONResult<List<ItemEntity>> getAllItems(){
+        List<ItemEntity> itemList = itemService.getItems(); //list 會回傳商品列表回來
+
+        return new JSONResult<List<ItemEntity>>(OK, itemList);
+    }
+
+
+
+}
+
+
+//        @GetMapping("/items")
+//        public ResponseEntity<List<Item>> getItems(){
+//            List<Item> itemList = itemService.getItems(); //list 會回傳商品列表回來
+//
+//            return ResponseEntity.status(HttpStatus.OK).body(itemList);
+//        }

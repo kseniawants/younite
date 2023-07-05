@@ -1,5 +1,6 @@
 package tw.com.younite.mapper;
 
+import tw.com.younite.entity.OrdersEntity;
 import tw.com.younite.entity.UserEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @SpringBootTest
@@ -15,13 +18,15 @@ public class UserMapperTestCase {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private OrdersMapper ordersMapper;
 
     @Test
     public void testRegister() {
         UserEntity user = new UserEntity();
-        user.setId(1);
-        user.setEmail("david.liu0206@gmail.com");
-        user.setUsername("David");
+        user.setId(200);
+        user.setEmail("gfdhgdhgfudihidugohigh@gmail.com");
+        user.setUsername("fuigdfhigflhidiglhd");
         user.setPassword("aaa520520");
         Integer result = userMapper.register(user);
         System.out.println("result = " + result);
@@ -30,7 +35,7 @@ public class UserMapperTestCase {
     @Test
     public void testRegisterByPAuth() {
         UserEntity user = new UserEntity();
-        user.setId(102);
+        user.setId(200);
         user.setEmail("qoqo850206123@gmail.com");
         user.setUsername("David123");
         user.setGoogleUser("1");
@@ -55,5 +60,20 @@ public class UserMapperTestCase {
     public void testGetByID() {
         UserEntity user = userMapper.getUserByID(44);
         System.out.println("user = " + user);
+    }
+
+    @Test
+    public void testUpdateVipById() throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date expiry = dateFormat.parse("2023-09-05 14:49:54");
+        userMapper.updateVipById(210, expiry);
+    }
+
+    @Test
+    public void testGetByTradeNo () {
+        OrdersEntity order = ordersMapper.getByTradeNo("Y1688538055138");
+        System.out.println("order = " + order);
+
+
     }
 }

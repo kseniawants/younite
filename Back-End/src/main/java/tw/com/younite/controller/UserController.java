@@ -13,6 +13,8 @@ import tw.com.younite.util.JSONResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -22,7 +24,7 @@ import javax.servlet.http.HttpSession;
 //@Api(tags = "Users")
 @Api(tags ="登入與註冊頁面")
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class UserController extends BaseController {
     @Autowired
     private IUserService iUserService;
@@ -46,12 +48,14 @@ public class UserController extends BaseController {
 
 
 
+
     @ApiOperation("註冊新用戶")
     @PostMapping("/users/register")
     public JSONResult<Void> reg(@ApiParam(value = "傳入以註冊用戶資訊", required = true)
                                     @RequestBody UserEntity user, HttpSession session) {
         iUserService.reg(user);
         session.setAttribute("id", user.getId());
+        System.out.println("userID: " + getIDFromSession(session));
         return new JSONResult<>(CREATE_OK);
     }
 

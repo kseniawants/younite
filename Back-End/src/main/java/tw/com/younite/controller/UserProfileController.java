@@ -28,7 +28,7 @@ import java.util.List;
 
 @Api(tags ="個人資料建立")
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class UserProfileController extends BaseController {
     @Autowired
     private IUserProfileService iUserProfileService;
@@ -83,7 +83,8 @@ public class UserProfileController extends BaseController {
                                             String birthday,
                                             @RequestParam(required = false) MultipartFile voice,
                                             MultipartFile avatar,
-                                            MultipartFile[] photos) {
+                                            @RequestParam(required = false) MultipartFile[] photos) {
+        System.out.println("ProfileuserID: " + getIDFromSession(session));
         Integer userID = getIDFromSession(session);
         if (iUserProfileService.getUserProfile(userID) == null) {
             userProfile.setId(userID);
@@ -207,12 +208,14 @@ public class UserProfileController extends BaseController {
         Integer profileID = iUserProfileService.getUserProfile(userID).getProfileId();
         UserPhotosEntity userPhotos = new UserPhotosEntity();
         userPhotos.setProfileID(profileID);
-
-        for (int i = 0; i < photos.length; i++) {
-            MultipartFile photo = photos[i];
-            String photoPath = fileUploadUtil.uploadFile(photo);
-            setUserPhotoPath(userPhotos, i, photoPath);
+        if (photos != null) {
+            for (int i = 0; i < photos.length; i++) {
+                MultipartFile photo = photos[i];
+                String photoPath = fileUploadUtil.uploadFile(photo);
+                setUserPhotoPath(userPhotos, i, photoPath);
+            }
         }
+
         iUserPhotosService.insertPhotos(userPhotos);
     }
 
