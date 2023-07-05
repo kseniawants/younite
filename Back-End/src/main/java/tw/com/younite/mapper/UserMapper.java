@@ -40,7 +40,7 @@ public interface UserMapper {
 
     void updateVipById(Integer id, Date vipExpiry , Boolean unlocked);
 
-    void lockedVipById(Integer id, Date vipExpiry , Boolean unlocked);
+    void lockedVipById(Integer id, Boolean unlocked);
 
 
 }

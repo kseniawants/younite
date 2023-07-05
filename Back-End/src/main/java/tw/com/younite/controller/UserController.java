@@ -85,6 +85,8 @@ public class UserController extends BaseController {
         session.setAttribute("id", data.getId());
         session.setAttribute("username", data.getUsername());
         return new JSONResult<UserEntity>(OK, data);
+
+
     }
 
     @ApiOperation("修改用戶密碼")

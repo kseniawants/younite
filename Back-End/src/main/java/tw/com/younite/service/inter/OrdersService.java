@@ -16,7 +16,4 @@ public interface OrdersService {
 
 
     Date setVipDate(String mTradeNo, Integer itemId, Date vipDate);
-
-    //尚未確定要放哪
-    void lockedVip(Integer id, Boolean unlocked);
 }

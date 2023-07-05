@@ -36,7 +36,7 @@ public class OrderServiceTestCase {
         // 模拟 VIP 过期的情况
         if (vipDate.before(currentDate)) {
             // 在这里可以添加相关的测试逻辑，比如验证是否调用了 ordersMapper.updateLocked() 方法等
-            userMapper.lockedVipById(user.getId(), vipDate, unlocked);
+            userMapper.lockedVipById(user.getId(),  unlocked);
 
             System.out.println("ok");
         } else {

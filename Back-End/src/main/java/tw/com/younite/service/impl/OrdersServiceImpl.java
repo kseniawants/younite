@@ -71,22 +71,5 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
 
-    //檢查vip是否到期 看要放哪(是否登入時 同時驗證)
-    @Override
-    public void lockedVip(Integer id, Boolean unlocked){
-        UserEntity user = userMapper.getUserByID(id);
-        Date vipDate = user.getVipExpiry();
-        Date currentDate = new Date();  // 获取当前日期
-
-        if (vipDate.before(currentDate)) {
-         userMapper.lockedVipById(id, vipDate, unlocked);
-
-        }
-        else{
-
-        }
-    }
-
-
 
 }
