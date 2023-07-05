@@ -23,19 +23,5 @@ public class ItemServiceImpl implements ItemService {
 
     }
 
-//    @Override
-//    public Date setItemDate(Integer itemId, Integer Id,  Date vipDate) {
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.setTime(vipDate);
-//
-//        if (itemId == 1) {
-//            calendar.add(Calendar.MONTH, 1);
-//        } else if (itemId == 2) {
-//            calendar.add(Calendar.MONTH, 3);
-//        } else if (itemId == 3) {
-//            calendar.add(Calendar.YEAR, 1);
-//        }
-//
-//        return calendar.getTime();
-//    }
+
 }

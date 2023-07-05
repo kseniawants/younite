@@ -38,7 +38,9 @@ public interface UserMapper {
      *  @return Profile物件
      * */
 
-    void updateVipById(Integer id, Date vipExpiry);
+    void updateVipById(Integer id, Date vipExpiry , Boolean unlocked);
+
+    void lockedVipById(Integer id, Date vipExpiry , Boolean unlocked);
 
 
 }

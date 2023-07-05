@@ -18,4 +18,5 @@ public class UserEntity extends BaseEntity implements Serializable {
     private String googleUser;
     private String facebookUser;
     private Date vipExpiry;
+    private Boolean unlocked;
 }

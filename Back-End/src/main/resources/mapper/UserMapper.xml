@@ -11,6 +11,8 @@
         <result column="facebook_user" property="facebookUser"></result>
         <result column="google_user" property="googleUser"></result>
         <result column="vip_expiry" property="vipExpiry"></result>
+        <result column="unlocked" property="unlocked"></result>
+
 
     </resultMap>
 
@@ -69,8 +71,18 @@
 
     <update id="updateVipById">
         UPDATE `users`
-        SET vip_expiry = #{vipExpiry}
+        SET vip_expiry = #{vipExpiry},
+            unlocked = True
         WHERE `id` = ${id}
     </update>
+
+    <update id="lockedVipById">
+        UPDATE `users`
+        SET vip_expiry = #{vipExpiry},
+            unlocked = False
+        WHERE `id` = ${id}
+    </update>
+
+
 
 </mapper>

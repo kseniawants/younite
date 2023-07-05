@@ -15,6 +15,8 @@ public interface OrdersMapper {
     Integer getAmountById (Integer id);
 
     OrdersEntity getById(Integer id);
+    OrdersEntity getByUserId(Integer userId);
+
 
     OrdersEntity getByTradeNo (String mTradeNo);
 
@@ -22,6 +24,6 @@ public interface OrdersMapper {
 
     Integer getItemByUser(Integer userId, Integer itemId);
 
-
+    void updateLocked (Integer userId, Boolean unlocked);
 
 }

@@ -19,4 +19,6 @@ public interface OrdersService {
     //    @Override
     //    public Date setVipDate(OrdersMapper ordersMapper, Date vipDate)
     Date setVipDate(String mTradeNo, Integer itemId, Date vipDate);
+
+    void lockedVip(Integer id, Boolean unlocked);
 }

@@ -8,6 +8,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import tw.com.younite.entity.ItemEntity;
 
+import tw.com.younite.mapper.OrdersMapper;
+import tw.com.younite.mapper.UserMapper;
+import tw.com.younite.service.inter.OrdersService;
+
 import java.util.List;
 
 @SpringBootTest
@@ -16,7 +20,9 @@ public class ItemServiceTestCase {
 
     @Autowired
     private ItemService itemService;
-//    private ItemMapper itemMapper;
+
+
+
 
     @Test
     public void test() {
@@ -25,7 +31,8 @@ public class ItemServiceTestCase {
 
         System.out.println("item = " + a);
 
-
     }
+
+
 
 }

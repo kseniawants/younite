@@ -2,8 +2,10 @@ package tw.com.younite.service.impl;
 
 import tw.com.younite.entity.ItemEntity;
 import tw.com.younite.entity.OrdersEntity;
+import tw.com.younite.entity.UserEntity;
 import tw.com.younite.mapper.ItemMapper;
 import tw.com.younite.mapper.OrdersMapper;
+import tw.com.younite.mapper.UserMapper;
 import tw.com.younite.service.inter.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +21,8 @@ public class OrdersServiceImpl implements OrdersService {
     private OrdersMapper ordersMapper;
     @Autowired
     private ItemMapper itemMapper;
-
+    @Autowired
+    private UserMapper userMapper;
 
     @Override
     public Integer createOrder(Integer userId, Integer itemId) {
@@ -69,13 +72,22 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
 
+    //檢查vip是否到期 看要放哪(是否登入時 同時驗證)
+    @Override
+    public void lockedVip(Integer id, Boolean unlocked){
+        UserEntity user = userMapper.getUserByID(id);
+        Date vipDate = user.getVipExpiry();
+        Date currentDate = new Date();  // 获取当前日期
+
+        if (vipDate.before(currentDate)) {
+         userMapper.lockedVipById(id, vipDate, unlocked);
+
+        }
+        else{
+
+        }
+    }
+
+
+
 }
-
-
-
-
-
-
-
-
-

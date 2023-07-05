@@ -66,7 +66,7 @@ public class UserMapperTestCase {
     public void testUpdateVipById() throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date expiry = dateFormat.parse("2023-09-05 14:49:54");
-        userMapper.updateVipById(210, expiry);
+        userMapper.updateVipById(210, expiry , true);
     }
 
     @Test

@@ -58,7 +58,8 @@ public class PayController extends BaseController{
             ordersService.updateUnlocked(merchantTradeNo, Boolean.TRUE, new Date());
             OrdersEntity newOrder = ordersMapper.getByTradeNo(merchantTradeNo);
             Date vipdate = ordersService.setVipDate(newOrder.getMTradeNo(),newOrder.getItemId(),newOrder.getPurchased());
-            userMapper.updateVipById(newOrder.getUserId(), vipdate);
+            Integer userId = newOrder.getUserId();
+            userMapper.updateVipById(userId, vipdate , true);
 //            System.out.println("vipdate = " + vipdate);
         } else {
             System.out.println("fail!");
