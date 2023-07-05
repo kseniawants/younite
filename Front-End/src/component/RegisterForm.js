@@ -33,12 +33,11 @@ function RegisterForm() {
       const response = await axios.post('http://localhost:8080/users/register', requestBody);
         console.log(response.data)  
       if (response.data.state === 201) {
-        
-          navigate('/personal');
-        } else {
-          alert(response.data.message);
-          throw new Error('API 請求失敗');
-        }
+        navigate('/personal');
+      } else {
+        alert(response.data.message);
+        throw new Error('API 請求失敗');
+      }
       
     } catch (error) {
       console.error(error);
