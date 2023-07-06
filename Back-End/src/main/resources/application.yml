@@ -1,9 +1,15 @@
+server:
+  tomcat:
+    uri-encoding: utf-8
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: root
-    url: jdbc:mysql://localhost:3306/younite
+    username: admin
+    password: younite666
+#    username: root
+#    password: root
+#    url: jdbc:mysql://localhost:3306/younite?serverTimezone=UTC
+    url: jdbc:mysql://younite-database.c7ta6ybbk9nu.ap-northeast-1.rds.amazonaws.com:3306/younite
   servlet:
     multipart:
       max-file-size: 10MB
@@ -12,9 +18,50 @@ spring:
 mybatis:
   mapper-locations: classpath:mapper/*.xml
 
+#SWAGER的UI介面功能啟動
+springfox:
+  documentation:
+    swagger-ui:
+      enabled: true
+#springBoots版本2.X版後就要加上，不然SWAGER會壞掉
+mvc:
+  pathmatch:
+    matching-strategy: ant_path_matcher
+
 encryption:
   secretKeyF: YOUNITEDATINGAPPLICATIONFRONTEND
   secretKeyB: 64YOUNITEDATINGAPPLCATIONFORBACKEND
+
+s3:
+  region: ap-northeast-1
+  accessKeyId: AKIAS73US3WN7QWQUBBR
+  accessKeySecret: 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
+  bucketName: younite-avatar-bucket
+  endpoint: https://younite-avatar-bucket.s3.amazonaws.com
+#  endpoint: https://younite-avatar-bucket.s3.amazonaws.com
+
+amazon:
+  aws:
+    access-key-id: AKIAS73US3WNVPRMQSEO
+    access-key-secret: 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
+  s3:
+    default-bucket: younite-avatar-bucket
+    region: ap-northeast-1
+    dirname: younite-avatar-bucket
+
+cloud:
+  aws:
+    credentials:
+      access-key: AKIAS73US3WNVPRMQSEO
+      secret-key: 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
+    region:
+      static: ap-northeast-1
+    stack:
+      auto: false
+
+application:
+  bucket:
+    name: younite-avatar-bucket
 
 
 

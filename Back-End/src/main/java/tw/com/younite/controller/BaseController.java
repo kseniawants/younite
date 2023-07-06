@@ -32,76 +32,76 @@ public class BaseController {
     public JSONResult<Void> handleException(Throwable e) {
         JSONResult<Void> result = new JSONResult<>();
         if (e instanceof DuplicatedUsernameException) {
-            result.setStatus(CONFLICT_ERROR);
+            result.setState(CONFLICT_ERROR);
             result.setMessage("帳號已被註冊");
         } else if (e instanceof DuplicatedEmailException) {
-            result.setStatus(CONFLICT_ERROR);
+            result.setState(CONFLICT_ERROR);
             result.setMessage("信箱已被註冊");
         } else if (e instanceof DuplicatedPhoneException) {
-            result.setStatus(CONFLICT_ERROR);
+            result.setState(CONFLICT_ERROR);
             result.setMessage("手機已被註冊");
         } else if (e instanceof DuplicatedFullNameException) {
-            result.setStatus(CONFLICT_ERROR);
+            result.setState(CONFLICT_ERROR);
             result.setMessage("暱稱已被註冊!");
         } else if(e instanceof DuplicatedUserProfileException) {
-            result.setStatus(CONFLICT_ERROR);
+            result.setState(CONFLICT_ERROR);
             result.setMessage("個人資料已經存在!");
         } else if (e instanceof DuplicatedLikedUserException) {
-            result.setStatus(CONFLICT_ERROR);
+            result.setState(CONFLICT_ERROR);
             result.setMessage("喜歡的用戶已存在!");
         } else if (e instanceof BlockedIDAlreadyExistsException) {
-            result.setStatus(CONFLICT_ERROR);
+            result.setState(CONFLICT_ERROR);
             result.setMessage("此用戶已在黑名單內!");
         } else if (e instanceof UserNotFoundException) {
-            result.setStatus(NOT_FOUND_ERROR);
+            result.setState(NOT_FOUND_ERROR);
             result.setMessage("帳號不存在!");
         } else if (e instanceof  LikedUserNotFoundException) {
-            result.setStatus(NOT_FOUND_ERROR);
+            result.setState(NOT_FOUND_ERROR);
             result.setMessage("喜歡的用戶不存在或已被刪除!");
         } else if (e instanceof BlockedUserNotFoundException) {
-            result.setStatus(NOT_FOUND_ERROR);
+            result.setState(NOT_FOUND_ERROR);
             result.setMessage("封鎖的用戶不存在或已被解除封鎖!");
         } else if (e instanceof NoMatchedException) {
-            result.setStatus(NOT_FOUND_ERROR);
+            result.setState(NOT_FOUND_ERROR);
             result.setMessage("目前尚未有成功配對的用戶!");
         } else if (e instanceof  InvitationNotFoundException) {
             result.setStatus(NOT_FOUND_ERROR);
             result.setMessage("找不到邀請狀態碼，請重新傳入");
         } else if (e instanceof PasswordNotMatchException) {
-            result.setStatus(UNAUTHORIZED_ERROR);
+            result.setState(UNAUTHORIZED_ERROR);
             result.setMessage("密碼錯誤!");
         } else if (e instanceof  LikedUserException) {
-            result.setStatus(INTERNAL_SERVER_ERROR);
+            result.setState(INTERNAL_SERVER_ERROR);
             result.setMessage("伺服器異常，無法添加喜歡用戶，請稍後再試!");
         } else if (e instanceof RegisterException) {
-            result.setStatus(INTERNAL_SERVER_ERROR);
+            result.setState(INTERNAL_SERVER_ERROR);
             result.setMessage("伺服器異常，無法註冊，請稍後再嘗試! ");
         } else if (e instanceof UpdateException) {
-            result.setStatus(INTERNAL_SERVER_ERROR);
+            result.setState(INTERNAL_SERVER_ERROR);
             result.setMessage("更新數據時產生未知的錯誤!");
         } else if (e instanceof InsertProfileException) {
-            result.setStatus(INTERNAL_SERVER_ERROR);
+            result.setState(INTERNAL_SERVER_ERROR);
             result.setMessage("伺服器異常，無法新增個人資料，請稍後再嘗試!");
         } else if (e instanceof FileTypeException) {
-            result.setStatus(UNSUPPORTED_FILE_TYPE_ERROR);
+            result.setState(UNSUPPORTED_FILE_TYPE_ERROR);
             result.setMessage("文件格式錯誤，無法上傳");
         } else if (e instanceof InterestException) {
             result.setStatus(INTERNAL_SERVER_ERROR);
             result.setMessage("伺服器異常，無法新增個人興趣，請稍後再嘗試!");
         } else if (e instanceof FileEmptyException) {
-            result.setStatus(BAD_REQUEST);
+            result.setState(BAD_REQUEST);
             result.setMessage("文件為空，無法上傳");
         } else if (e instanceof FileSizeException) {
-            result.setStatus(PAYLOAD_MAXIMUM_SIZE_ERROR);
+            result.setState(PAYLOAD_MAXIMUM_SIZE_ERROR);
             result.setMessage("文件檔案過大，無法上傳");
         } else if (e instanceof FileStateException) {
-            result.setStatus(CONFLICT_ERROR);
+            result.setState(CONFLICT_ERROR);
             result.setMessage("文件狀態異常");
         } else if (e instanceof FileUploadIOException) {
-            result.setStatus(INTERNAL_SERVER_ERROR);
+            result.setState(INTERNAL_SERVER_ERROR);
             result.setMessage("文件IO異常");
         } else if (e instanceof FileUploadException) {
-            result.setStatus(INTERNAL_SERVER_ERROR);
+            result.setState(INTERNAL_SERVER_ERROR);
             result.setMessage("文件上傳時發生異常!");
         }
         return result;

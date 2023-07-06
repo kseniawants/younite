@@ -20,11 +20,23 @@
 <div id="logreg-forms">
     <form class="form-signin">
         <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
-        <div class="social-login">
+        <div class="social-login" style="display: flex">
             <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign in with Facebook</span>
             </button>
-            <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign in with Google+</span>
-            </button>
+<!--            <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign in with Google+</span>-->
+<!--            </button>-->
+            <div id="g_id_onload"
+                 data-client_id="234241802651-ngs8vhu4c0d2u72nmot9kbt799scpoh9.apps.googleusercontent.com"
+                 data-callback="handleCallback"
+                 data-auto_prompt="false"></div>
+            <div class="g_id_signin"
+                 data-type="standard"
+                 data-size="large"
+                 data-theme="outline"
+                 data-text="sign_in_with"
+                 data-shape="pill"
+                 data-logo_alignment="left"></div>
+
         </div>
         <p style="text-align:center"> OR </p>
         <input type="text" id="inputUsername" class="form-control" placeholder="Username" required="" autofocus="">
@@ -107,6 +119,31 @@ $(()=>{
     $('#logreg-forms #cancel_signup').click(toggleSignUp);
 })g" target="_blank" style="color:black">By Artin</a>
 </p>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </body>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+
+<script>
+    function handleCallback(response) {
+        var apple = response.credential;
+        var data = {
+            credential: apple
+        };
+        console.log(apple);
+        $.ajax({
+            url: "/user/googleLogin",
+            type: "POST",
+            data: data,
+            success: function (response) {
+                console.log(response); // Handle the response from the backend
+            },
+            error: function (xhr, status, error) {
+                console.log("AJAX request error:", error); // Handle any errors
+            }
+        });
+    }
+
+</script>
+
 </html>

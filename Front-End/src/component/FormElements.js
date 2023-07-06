@@ -66,43 +66,48 @@ Input.propTypes = {
   placeholder: PropTypes.string,
 };
 
-// export const ButtonGroup = ({
-//   id,
-//   labelText,
-//   register,
-//   type,
-//   errors,
-//   rules,
-//   ariaLabel,
-//   value,
-// }) => {
-//   return (
-//     <>
-//       <div className="btn-group" role="group" aria-label={ariaLabel}>
-//         <button
-//           id={id}
-//           type={type}
-//           value={value}
-//           {...register(id, rules)}
-//           className={`btn btn-primary ${errors[id] && 'is-invalid'}`}
-//         >
-//           {labelText}
-//         </button>
-//         {errors[id] && (
-//           <div className='invalid-feedback'>{errors[id]?.message}</div>
-//         )}
-//       </div>
-//     </>
-//   );
-// };
+export const RadioButtonGroup = ({ name, options, register, errors, rules }) => {
+  return (
+    <div>
+      <div className='btn-group' role='group' aria-label='Basic radio toggle button group'>
+        {options.map((option, index) => (
+          <React.Fragment key={index}>
+            <input
+              type='radio'
+              id={`${name}${index}`}
+              className={`btn-check ${errors[name] && 'is-invalid'}`}
+              {...register(name, rules)}
+              value={option.value}
+            />
+            <label
+              htmlFor={`${name}${index}`}
+              className={`btn btn-outline-radio mt-2 me-4 px-4 rounded shadow-sm bg-white ${
+                errors[name] && 'is-invalid'
+              }`}
+            >
+              {option.label}
+            </label>
+          </React.Fragment>
+        ))}
+      </div>
+      {errors[name] && (
+        <div className='d-block invalid-feedback' style={{ marginTop: '10px' }}>
+          {errors[name]?.message}
+        </div>
+      )}
+    </div>
+  );
+};
 
-// ButtonGroup.propTypes = {
-//   id: PropTypes.string.isRequired,
-//   labelText: PropTypes.string.isRequired,
-//   register: PropTypes.func.isRequired,
-//   type: PropTypes.string.isRequired,
-//   errors: PropTypes.object.isRequired,
-//   rules: PropTypes.object.isRequired,
-//   ariaLabel: PropTypes.string.isRequired,
-//   value: PropTypes.string,
-// };
+RadioButtonGroup.propTypes = {
+  name: PropTypes.string.isRequired,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  register: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
+  rules: PropTypes.object.isRequired,
+};
