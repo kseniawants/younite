@@ -18,6 +18,16 @@ spring:
 mybatis:
   mapper-locations: classpath:mapper/*.xml
 
+#SWAGER的UI介面功能啟動
+springfox:
+  documentation:
+    swagger-ui:
+      enabled: true
+#springBoots版本2.X版後就要加上，不然SWAGER會壞掉
+mvc:
+  pathmatch:
+    matching-strategy: ant_path_matcher
+
 encryption:
   secretKeyF: YOUNITEDATINGAPPLICATIONFRONTEND
   secretKeyB: 64YOUNITEDATINGAPPLCATIONFORBACKEND

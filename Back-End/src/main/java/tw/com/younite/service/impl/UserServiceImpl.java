@@ -73,6 +73,7 @@ public class UserServiceImpl implements IUserService {
         String username = user.getUsername();
         String password = user.getPassword();
         UserEntity result = userMapper.getByUsername(username);
+
         if (result == null) {
             throw new UserNotFoundException("帳號不存在");
         }
@@ -85,8 +86,18 @@ public class UserServiceImpl implements IUserService {
         UserEntity newUser = new UserEntity();
         newUser.setId(result.getId());
         newUser.setUsername(result.getUsername());
+        //檢查vip是否到期
+        Date vipDate = result.getVipExpiry();
+        Date currentDate = new Date();
+        if (vipDate.before(currentDate)) {
+            userMapper.lockedVipById(result.getId(), false);
+        }
         return newUser;
+
+
     }
+
+
 
     private String getMD5Password(String password, String salt) {
         for (int i = 0; i < 5; i++) {
@@ -135,4 +146,7 @@ public class UserServiceImpl implements IUserService {
         }
         return result;
     }
+
+
+
 }

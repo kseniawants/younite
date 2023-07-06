@@ -5,8 +5,4 @@ public interface PayService {
     String ecpayCheckout( Integer id);
 
 
-
-
-
-
 }

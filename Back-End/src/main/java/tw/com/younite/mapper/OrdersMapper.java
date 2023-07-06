@@ -15,12 +15,15 @@ public interface OrdersMapper {
     Integer getAmountById (Integer id);
 
     OrdersEntity getById(Integer id);
+    OrdersEntity getByUserId(Integer userId);
+
+
+    OrdersEntity getByTradeNo (String mTradeNo);
 
     void addTradeNo(Integer id, String mTradeNo);
 
     Integer getItemByUser(Integer userId, Integer itemId);
 
-    Date getPurchasedByUser (Integer userId, Date purchased);
-
+    void updateLocked (Integer userId, Boolean unlocked);
 
 }

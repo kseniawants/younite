@@ -1,5 +1,6 @@
 package tw.com.younite.mapper;
 
+import tw.com.younite.entity.OrdersEntity;
 import tw.com.younite.entity.UserEntity;
 import tw.com.younite.entity.UserProfileEntity;
 
@@ -36,5 +37,10 @@ public interface UserMapper {
      *  @param id 用戶的id
      *  @return Profile物件
      * */
+
+    void updateVipById(Integer id, Date vipExpiry , Boolean unlocked);
+
+    void lockedVipById(Integer id, Boolean unlocked);
+
 
 }
