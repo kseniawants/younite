@@ -24,39 +24,6 @@ function RegisterForm() {
     mode: 'onTouched',
   });
 
-  const onSubmit = async (data) => {
-    try {
-      setSubmitting(true);
-      const requestBody = {
-        username: data.name,
-        email: data.email,
-        password: data.password,
-      };
-      setFormSubmitted(true);
-      await submitForm();
-      axios.defaults.withCredentials = true;
-
-      const response = await axios.post('/users/register', requestBody);
-      console.log(response.data);
-      if (response.data.state === 201) {
-        navigate('/personal');
-      } else if (response.data.state === 409) {
-        setAlertMessage(response.data.message); // 設置錯誤訊息
-        setStateIcon(response.data.state);
-        setShowAlertModal(true); // 顯示彈出視窗
-      } else {
-        setAlertMessage(response.data.message); // 設置錯誤訊息
-        setStateIcon(response.data.state);
-        setShowAlertModal(true); // 顯示彈出視窗
-        throw new Error('API 請求失敗');
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
   const submitForm = () => {
     return new Promise((resolve) => {
       // 模拟异步操作，这里使用 setTimeout 延时 2 秒
@@ -69,6 +36,47 @@ function RegisterForm() {
 
   const handleAlertModalClose = () => {
     setShowAlertModal(false); // 關閉彈出視窗
+  };
+
+  const handleRegistrationResponse = (response) => {
+    setAlertMessage(response.data.message);
+    setStateIcon(response.data.state);
+    setFormSubmitted(false);
+    setShowAlertModal(true);
+    navigate('/register');
+    setTimeout(() => {
+      setShowAlertModal(false);
+    }, 2000);
+  };
+
+  const onSubmit = async (data) => {
+    try {
+      setSubmitting(true);
+      const requestBody = {
+        username: data.name,
+        email: data.email,
+        password: data.password,
+      };
+
+      setFormSubmitted(true);
+      await submitForm();
+      axios.defaults.withCredentials = true;
+
+      const response = await axios.post('/users/register', requestBody);
+      console.log(response.data);
+
+      if (response.data.state === 201) {
+        navigate('/personal');
+        setFormSubmitted(false);
+      } else {
+        handleRegistrationResponse(response);
+        console.log('API 請求失敗');
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const password = watch('password');
@@ -104,7 +112,7 @@ function RegisterForm() {
                 <Input
                   id='email'
                   labelText='信箱'
-                  type='email'
+                  type='emailpassword'
                   placeholder='輸入信箱'
                   errors={errors}
                   register={register}
