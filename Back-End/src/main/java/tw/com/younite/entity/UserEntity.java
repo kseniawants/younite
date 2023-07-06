@@ -27,7 +27,7 @@ public class UserEntity extends BaseEntity implements Serializable {
     private String googleUser;
     @ApiModelProperty(value = "使用者登入註冊facebookUser")
     private String facebookUser;
-    @ApiModelProperty(value = "使用者登入註冊vipExpiry")
+    @ApiModelProperty(value = "使用者vip時間")
     private Date vipExpiry;
     private Boolean unlocked;
 }
