@@ -32,7 +32,7 @@ function SideNav() {
   useEffect(() => {
     axios.get('http://localhost:8080/users/profile').then((response) => {
       setPost(response.data);
-      console.log(post)
+      console.log(post);
     });
   }, []);
 
@@ -44,7 +44,7 @@ function SideNav() {
         <figure className='text-decoration-none mt-5 d-flex flex-column align-items-center'>
           <img src={Logo} alt='YouNite-Logo' className='mb-5' style={{ height: '20px' }} />
           <img src={UserImage} alt='Picture' className='mb-1 nav-user-image' />
-          <h6 className='text-black nav-text mt-2'>{post.data.fullName}</h6>
+          <h6 className='text-black nav-text mt-2'></h6>
         </figure>
 
         <ul className='nav flex-column fs-5 align-items-center'>
