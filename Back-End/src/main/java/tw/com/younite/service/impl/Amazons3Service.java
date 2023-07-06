@@ -28,6 +28,8 @@ public class Amazons3Service {
 
     public String uploadFile(MultipartFile file) {
         File fileObj = convertMultiPartFileToFile(file);
+        String originalFileName = file.getOriginalFilename();
+        int index = originalFileName.lastIndexOf(".");
         String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
         s3Client.putObject(new PutObjectRequest(bucketName, fileName, fileObj));
         fileObj.delete();

@@ -21,6 +21,7 @@ import java.io.IOException;
 import javax.annotation.PostConstruct;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 @Service
 public class AmazonUploadServiceImpl implements AmazonUploadService {
@@ -46,18 +47,21 @@ public class AmazonUploadServiceImpl implements AmazonUploadService {
     public AmazonFileVO upload(MultipartFile file) {
         String tempFileName = file.getOriginalFilename();
         String originalFileName = file.getOriginalFilename();
+        int index = originalFileName.lastIndexOf(".");
+        String suffix = originalFileName.substring(index);
+        String fileName = UUID.randomUUID().toString().toUpperCase() + suffix;
         String contentType = file.getContentType();
         long fileSize = file.getSize();
         String dateDir = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         String tempBucketName = FolderName;
-        String filePath = tempBucketName +"/"+ tempFileName;
+        String filePath = tempBucketName +"/"+ fileName;
         ObjectMetadata objectMetadata = new ObjectMetadata();
         objectMetadata.setContentType(contentType);
         objectMetadata.setContentLength(fileSize);
         try {
-            PutObjectResult putObjectResult = s3.putObject(tempBucketName, tempFileName, file.getInputStream(), objectMetadata);
+            PutObjectResult putObjectResult = s3.putObject(tempBucketName, fileName, file.getInputStream(), objectMetadata);
             //文件权限,设置为公共读
-            s3.setObjectAcl(bucketName, tempFileName, CannedAccessControlList.PublicRead);
+            s3.setObjectAcl(bucketName, fileName, CannedAccessControlList.PublicRead);
         } catch (AmazonServiceException e) {
             System.out.println(e.getErrorMessage());
         } catch (IOException e) {

@@ -32,7 +32,7 @@ public class AmazonS3Controller extends BaseController{
         AmazonFileVO amazonFileModel = null;
         try {
             amazonFileModel = amazonUploadService.upload(file);
-            System.out.println("amazonFileModel = " + amazonFileModel);
+            System.out.println("amazonFileModel = " + amazonFileModel.getFilePath());
         } catch (Exception e) {
             e.printStackTrace();
         }
