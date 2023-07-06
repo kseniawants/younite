@@ -30,6 +30,12 @@
         WHERE `merchant_trade_no` = #{mTradeNo}
     </update>
 
+    <update id="updateLocked">
+        UPDATE `orders` SET
+                            unlocked = false
+        WHERE `user_id` = #{userId}
+    </update>
+
     <select id="getAmountById" resultType="Integer">
             SELECT amount
             FROM `orders`
@@ -40,6 +46,18 @@
         SELECT *
         FROM `orders`
         WHERE `id` = #{id}
+    </select>
+
+    <select id="getByUserId" resultMap="OrdersEntityMap">
+        SELECT *
+        FROM `orders`
+        WHERE `user_id` = #{userId}
+    </select>
+
+    <select id="getByTradeNo" resultMap="OrdersEntityMap">
+        SELECT *
+        FROM `orders`
+        WHERE `merchant_trade_no` = #{mTradeNo}
     </select>
 
     <update id="addTradeNo">

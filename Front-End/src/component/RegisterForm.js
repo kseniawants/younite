@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { Input } from './FormElements';
 import { LoginSocialFacebook, LoginSocialGoogle } from 'reactjs-social-login';
 import { FacebookLoginButton, GoogleLoginButton } from 'react-social-login-buttons';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import AlertModal from './Modal/AlertModal';
 
 function RegisterForm() {
   const [submitting, setSubmitting] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [showAlertModal, setShowAlertModal] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [stateIcon, setStateIcon] = useState('');
+
   const navigate = useNavigate();
   const {
     register,
@@ -27,14 +32,22 @@ function RegisterForm() {
         email: data.email,
         password: data.password,
       };
+      setFormSubmitted(true);
+      await submitForm();
       axios.defaults.withCredentials = true;
-      const response = await axios.post('http://localhost:8080/users/register', requestBody);
 
-      if (response.status === 200) {
-        setFormSubmitted(true);
-        await submitForm();
+      const response = await axios.post('/users/register', requestBody);
+      console.log(response.data);
+      if (response.data.state === 201) {
         navigate('/personal');
+      } else if (response.data.state === 409) {
+        setAlertMessage(response.data.message); // 設置錯誤訊息
+        setStateIcon(response.data.state);
+        setShowAlertModal(true); // 顯示彈出視窗
       } else {
+        setAlertMessage(response.data.message); // 設置錯誤訊息
+        setStateIcon(response.data.state);
+        setShowAlertModal(true); // 顯示彈出視窗
         throw new Error('API 請求失敗');
       }
     } catch (error) {
@@ -52,6 +65,10 @@ function RegisterForm() {
         resolve();
       }, 2000);
     });
+  };
+
+  const handleAlertModalClose = () => {
+    setShowAlertModal(false); // 關閉彈出視窗
   };
 
   const password = watch('password');
@@ -225,6 +242,12 @@ function RegisterForm() {
           </form>
         </div>
       </div>
+      <AlertModal
+        message={alertMessage}
+        showModal={showAlertModal}
+        handleModalClose={handleAlertModalClose}
+        state={stateIcon}
+      />
     </div>
   );
 }

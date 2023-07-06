@@ -9,6 +9,8 @@ import axios from 'axios';
 function LoginForm() {
   const [submitting, setSubmitting] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+
+  // 轉址判斷
   const navigate = useNavigate();
   const {
     register,
@@ -18,22 +20,24 @@ function LoginForm() {
     mode: 'onTouched',
   });
 
+  // 表單發送的按鈕
   const onSubmit = async (data) => {
     try {
-      setFormSubmitted(true);
       setSubmitting(true);
+      setFormSubmitted(true);
       await submitForm();
       const requestBody = {
         username: data.name,
         password: data.password,
       };
-      const apiURL = 'http://localhost:8080/users/login';
       axios.defaults.withCredentials = true;
-      const response = await axios.post(apiURL, requestBody);
-      if (response.data.state == 200) {
+      const response = await axios.post('/users/login', requestBody);
+      if (response.data.state === 200) {
         navigate('/home');
+        console.log(response.data);
       } else {
         alert(response.data.message);
+        throw new Error('API 請求失敗');
       }
     } catch (error) {
       console.error(error);
@@ -56,6 +60,7 @@ function LoginForm() {
     <div className='container p-0'>
       <div className='bg-light vh-100 d-flex justify-content-center align-items-center'>
         <div className='row'>
+          {/* 以下是表單 */}
           <form
             onSubmit={handleSubmit(onSubmit)}
             className='shadow rounded-3 bg-light bg-opacity-25 p-3'

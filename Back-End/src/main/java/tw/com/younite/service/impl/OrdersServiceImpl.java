@@ -2,12 +2,16 @@ package tw.com.younite.service.impl;
 
 import tw.com.younite.entity.ItemEntity;
 import tw.com.younite.entity.OrdersEntity;
+import tw.com.younite.entity.UserEntity;
 import tw.com.younite.mapper.ItemMapper;
 import tw.com.younite.mapper.OrdersMapper;
+import tw.com.younite.mapper.UserMapper;
 import tw.com.younite.service.inter.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 @Service
@@ -17,7 +21,8 @@ public class OrdersServiceImpl implements OrdersService {
     private OrdersMapper ordersMapper;
     @Autowired
     private ItemMapper itemMapper;
-
+    @Autowired
+    private UserMapper userMapper;
 
     @Override
     public Integer createOrder(Integer userId, Integer itemId) {
@@ -43,33 +48,28 @@ public class OrdersServiceImpl implements OrdersService {
         ordersMapper.updateUnlocked( mTradeNo, unlocked, purchased);
     }
 
+
+
+
     @Override
-    public Date updateVIP(OrdersEntity orders, Integer userId, Date expiry) {
-        return null;
+    public Date setVipDate(String mTradeNo, Integer itemId, Date vipDate) {
+        OrdersEntity order = ordersMapper.getByTradeNo(mTradeNo);
+        Integer item = order.getItemId();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(vipDate);
+
+        if (item == 1) {
+            calendar.add(Calendar.MONTH, 1);
+        } else if (item == 2) {
+            calendar.add(Calendar.MONTH, 3);
+        } else if (item == 3) {
+            calendar.add(Calendar.YEAR, 1);
+        }
+
+        return calendar.getTime();
     }
 
 
+
 }
-
-
-
-
-
-//    @Override
-//    public Integer getItemPriceByItemId(Integer itemId) {
-//            return itemMapper.getItemPriceByItemId(itemId);
-//        }
-//    @Override
-//    public void insertOrder(Orders order) {
-//
-//            order.setUnlocked(false);
-//            Date date = new Date();
-//            order.setPurchased(date);
-//            ordersMapper.insertOrder(order);
-//    }
-
-
-
-
-
-
