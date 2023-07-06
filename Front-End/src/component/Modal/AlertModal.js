@@ -105,7 +105,7 @@ const AlertModal = ({ state, message, showModal, handleModalClose }) => {
               </div>
               <div className='modal-body'>
                 {icon}
-                <h5 className='ms-3 mt-1'>{message}</h5>
+                <h5 className='ms-3 '>{message}</h5>
               </div>
             </div>
           </div>

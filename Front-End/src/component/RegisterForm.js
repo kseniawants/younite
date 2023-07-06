@@ -43,10 +43,10 @@ function RegisterForm() {
     setStateIcon(response.data.state);
     setFormSubmitted(false);
     setShowAlertModal(true);
-    navigate('/register');
+
     setTimeout(() => {
       setShowAlertModal(false);
-    }, 2000);
+    }, 3000);
   };
 
   const onSubmit = async (data) => {
@@ -66,11 +66,17 @@ function RegisterForm() {
       console.log(response.data);
 
       if (response.data.state === 201) {
-        navigate('/personal');
-        setFormSubmitted(false);
+        handleRegistrationResponse(response);
+        console.log('成功了吧');
+        setTimeout(() => {
+          navigate('/personal');
+        }, 3000);
       } else {
         handleRegistrationResponse(response);
         console.log('API 請求失敗');
+        setTimeout(() => {
+          navigate('/register');
+        }, 3000);
       }
     } catch (error) {
       console.error(error);
