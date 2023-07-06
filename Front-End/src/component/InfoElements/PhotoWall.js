@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Modal, Upload, message } from 'antd';
+import PropTypes from 'prop-types';
 
 const getBase64 = (file) =>
   new Promise((resolve, reject) => {
@@ -10,7 +11,7 @@ const getBase64 = (file) =>
     reader.onerror = (error) => reject(error);
   });
 
-const PhotoWall = () => {
+const PhotoWall = ({ onChange }) => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
   const [previewTitle, setPreviewTitle] = useState('');
@@ -37,6 +38,9 @@ const PhotoWall = () => {
     setPreviewOpen(true);
     setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf('/') + 1));
   };
+  useEffect(() => {
+    onChange(fileList); // 監聽 fileList 變化，觸發 onChange 回調函式
+  }, [fileList, onChange]);
   const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
   const uploadButton = (
     <div>
@@ -67,7 +71,7 @@ const PhotoWall = () => {
   };
 
   const handleCustomRequest = (options) => {
-    const {  onSuccess, onProgress } = options;
+    const { onSuccess, onProgress } = options;
 
     // 自定义上传逻辑
     // 将文件上传到指定位置，并在上传过程中更新进度和状态
@@ -116,6 +120,10 @@ const PhotoWall = () => {
       </Modal>
     </>
   );
+};
+
+PhotoWall.propTypes = {
+  onChange: PropTypes.func.isRequired,
 };
 
 export default PhotoWall;

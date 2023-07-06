@@ -27,35 +27,38 @@ function Info() {
 
   const onSubmit = async (data) => {
     try {
-      data.photoWall = photoWallValue.map((item) => item.thumbUrl);
+      data.photoWall = photoWallValue.map((file) => file.originFileObj);
       setSubmitting(true);
       setFormSubmitted(true);
       await submitForm(data);
       const formData = new FormData();
+      console.log(data.photoWall);
+      console.log(data.pic[0].originFileObj);
+      console.log(data);
       formData.append('fullName', data.name);
-      formData.append('gender', data.radioGender.value);
-      formData.append('sexualOrientation', data.radioSO.value);
-      formData.append('location', data.address);
+      formData.append('gender', data.radioGender);
+      formData.append('sexualOrientation', data.radioSO);
+      formData.append('location', JSON.stringify(data.address));
       formData.append('selfIntro', data.textareaFieldName);
-      formData.append('preferred_gender', data.radioShow.value);
+      formData.append('preferred_gender', data.radioShow);
       formData.append('datingGoal', data.goal);
-      formData.append('avatar', data.pic[0]?.thumbUrl);
+      formData.append('avatar', data.pic[0].originFileObj);
       formData.append('birthday', data.birthday);
-      formData.append('professions', data.profession.value);
+      formData.append('professions', data.profession.label);
       formData.append('phone', data.tel);
+      formData.append('photos', data.photoWall);
+      axios.defaults.withCredentials = true;
       const response = await axios.post('http://localhost:8080/users/profile', formData, {
         headers: {
           'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>',
         },
       });
       console.log(response.data);
-      if (response.data.status == 201) {
+      if (response.data.state == 201) {
         navigate('/home');
       } else {
-        console.log('API請求吃敗');
+        console.log('API請求失敗');
       }
-      console.log(data.pic[0]?.thumbUrl);
-      console.log(data);
     } catch (error) {
       console.error(error);
     } finally {
@@ -74,21 +77,21 @@ function Info() {
   };
 
   const radioGender = [
-    { label: '男生', value: 'male' },
-    { label: '女生', value: 'female' },
-    { label: '其他', value: 'other' },
+    { label: '男生', value: 'Male' },
+    { label: '女生', value: 'Female' },
+    { label: '其他', value: 'Other' },
   ];
 
   const radioSO = [
-    { label: '生理男', value: 'man' },
-    { label: '生理女', value: 'woman' },
-    { label: '雙性戀', value: 'bisexual' },
+    { label: '生理男', value: 'Man' },
+    { label: '生理女', value: 'Woman' },
+    { label: '雙性戀', value: 'Bisexual' },
   ];
 
   const radioShow = [
-    { label: '男生', value: 'men' },
-    { label: '女生', value: 'women' },
-    { label: '所有人', value: 'all' },
+    { label: '男生', value: 'Male' },
+    { label: '女生', value: 'Female' },
+    { label: '所有人', value: 'Other' },
   ];
 
   const hobbies = [
