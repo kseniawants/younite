@@ -3,11 +3,13 @@ package tw.com.younite.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import tw.com.younite.entity.AmazonFileVO;
 import tw.com.younite.entity.UserPhotosEntity;
 import tw.com.younite.entity.UserProfileEntity;
 import tw.com.younite.service.exception.BlockedIDAlreadyExistsException;
 import tw.com.younite.service.exception.BlockedUserNotFoundException;
 import tw.com.younite.service.exception.DuplicatedUserProfileException;
+import tw.com.younite.service.inter.AmazonUploadService;
 import tw.com.younite.service.inter.IUserPhotosService;
 import tw.com.younite.service.inter.IUserProfileService;
 import tw.com.younite.util.DateUtil;
@@ -41,6 +43,9 @@ public class UserProfileController extends BaseController {
 
     @Autowired
     private IUserPhotosService iUserPhotosService;
+
+    @Autowired
+    private AmazonUploadService amazonUploadService;
 
     /**
      *
@@ -98,8 +103,18 @@ public class UserProfileController extends BaseController {
         }
 
         validateAvatar(avatar);
-        String avatarPath = fileUploadUtil.uploadFile(avatar);
-        userProfile.setProfileAvatar(avatarPath);
+        AmazonFileVO amazonFileModel = null;
+        String prefix = "https://younite-avatar-bucket.s3.ap-northeast-1.amazonaws.com/";
+        String avatarPath = "";
+        try {
+            amazonFileModel = amazonUploadService.upload(avatar);
+            avatarPath = prefix + amazonFileModel.getFilePath();
+            userProfile.setProfileAvatar(avatarPath);
+            System.out.println(avatarPath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
         Date date = dateUtil.parseDate(birthday);
         userProfile.setBirthday(date);

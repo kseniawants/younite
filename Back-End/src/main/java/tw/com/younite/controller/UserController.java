@@ -34,11 +34,12 @@ public class UserController extends BaseController {
 
     @ApiOperation("用ID獲取相應使用者資訊")
     @GetMapping("/users/getUser/{userID}")
-    public JSONResult<UserEntity> getUser(@ApiParam(value = "傳出以ID尋找的使用者資訊", required = true)@PathVariable Integer userID, HttpSession session) throws Exception {
+    public JSONResult<UserEntity> getUser(@ApiParam(value = "傳出以ID尋找的使用者資訊", required = true)
+                                              @PathVariable Integer userID, HttpSession session) throws Exception {
         UserEntity user = iUserService.getUserByID(userID);
         return new JSONResult<UserEntity>(OK, user);
     }
-    @ApiOperation("獲取當前用戶資訊")
+    @ApiOperation("獲取當前用戶資訊(需先登入)")
     @GetMapping("/users/getUser")
     public JSONResult<UserEntity> getCurrentUser(@ApiParam(value = "傳出使用者資訊", required = true)HttpSession session) {
         Integer userID = getIDFromSession(session);

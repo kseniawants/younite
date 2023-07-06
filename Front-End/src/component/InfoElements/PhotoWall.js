@@ -71,7 +71,7 @@ const PhotoWall = ({ onChange }) => {
   };
 
   const handleCustomRequest = (options) => {
-    const {  onSuccess, onProgress } = options;
+    const { onSuccess, onProgress } = options;
 
     // 自定义上传逻辑
     // 将文件上传到指定位置，并在上传过程中更新进度和状态
