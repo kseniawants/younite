@@ -34,10 +34,10 @@ function InfoModal({ closeModal, setSelectedButtonLabel, onOk }) {
 
   return (
     <>
-      <Draggable handle=".info" onDrag={handleDrag}>
+      <Draggable handle='.info' onDrag={handleDrag}>
         <section className='info container-fluid' style={{ top: position.y, left: position.x }}>
           <div className='row p-3'>
-          <div className='col-12 d-flex p-0 justify-content-end'>
+            <div className='col-12 d-flex justify-content-end'>
               <button
                 type='button'
                 className='btn-close'
@@ -48,69 +48,74 @@ function InfoModal({ closeModal, setSelectedButtonLabel, onOk }) {
             <h2 className='col-12'>現在我想找尋...</h2>
             <span>分享答案，才能增加配對率!</span>
             <br />
-            <ButtonToolbar aria-label="Toolbar with button groups" className='d-flex justify-content-center my-3'>
-              <div className='mb-2'>
-                <ButtonGroup className="me-3" aria-label="First group">
+            <ButtonToolbar
+              aria-label='Toolbar with button groups'
+              className='d-flex justify-content-center my-3 container-fluid'
+            >
+              <div className='mb-2 row'>
+                <ButtonGroup className='col-4' aria-label='First group'>
                   <Button
                     variant={selectedButton === 'btnradio1' ? 'outline-primary' : 'outline-radio'}
                     onClick={() => handleButtonClick('btnradio1', '長期伴侶')}
-                    autoComplete="off"
-                    className="btnradio"
+                    autoComplete='off'
+                    className='btnradio'
                   >
                     長期伴侶
                   </Button>
                 </ButtonGroup>
-                <ButtonGroup className="me-3" aria-label="Second group">
+                <ButtonGroup className='col-4' aria-label='Second group'>
                   <Button
                     variant={selectedButton === 'btnradio2' ? 'outline-primary' : 'outline-radio'}
                     onClick={() => handleButtonClick('btnradio2', '短期關係')}
-                    autoComplete="off"
-                    className="btnradio"
+                    autoComplete='off'
+                    className='btnradio'
                   >
-                    <span>短期關係</span><br />
+                    <span>短期關係</span>
+                    <br />
                     <span>但不排斥長期</span>
                   </Button>
                 </ButtonGroup>
-                <ButtonGroup className="" aria-label="Third group">
+                <ButtonGroup className='col-4' aria-label='Third group'>
                   <Button
                     variant={selectedButton === 'btnradio3' ? 'outline-primary' : 'outline-radio'}
                     onClick={() => handleButtonClick('btnradio3', '長期關係')}
-                    autoComplete="off"
-                    className="btnradio"
+                    autoComplete='off'
+                    className='btnradio'
                   >
-                    <span>長期關係</span><br />
+                    <span>長期關係</span>
+                    <br />
                     <span>但不排斥短期</span>
                   </Button>
                 </ButtonGroup>
               </div>
               <br />
-              <div className='mt-2'>
-                <ButtonGroup className="me-3" aria-label="Fourth group">
+              <div className='mt-2 row'>
+                <ButtonGroup className='col-4' aria-label='Fourth group'>
                   <Button
                     variant={selectedButton === 'btnradio4' ? 'outline-primary' : 'outline-radio'}
                     onClick={() => handleButtonClick('btnradio4', '短暫的享樂')}
-                    autoComplete="off"
-                    className="btnradio"
+                    autoComplete='off'
+                    className='btnradio'
                   >
                     短暫的享樂
                   </Button>
                 </ButtonGroup>
-                <ButtonGroup className="me-3" aria-label="Fixth group">
+                <ButtonGroup className='col-4' aria-label='Fixth group'>
                   <Button
                     variant={selectedButton === 'btnradio5' ? 'outline-primary' : 'outline-radio'}
                     onClick={() => handleButtonClick('btnradio5', '新朋友')}
-                    autoComplete="off"
-                    className="btnradio"
+                    autoComplete='off'
+                    className='btnradio'
                   >
                     新朋友
                   </Button>
                 </ButtonGroup>
-                <ButtonGroup className="" aria-label="Sixth group">
+                <ButtonGroup className='col-4' aria-label='Sixth group'>
                   <Button
                     variant={selectedButton === 'btnradio6' ? 'outline-primary' : 'outline-radio'}
                     onClick={() => handleButtonClick('btnradio6', '我還在思考')}
-                    autoComplete="off"
-                    className="btnradio"
+                    autoComplete='off'
+                    className='btnradio'
                   >
                     我還在思考
                   </Button>

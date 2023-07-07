@@ -3,6 +3,7 @@ import '../styles/component/bdGradient.scss';
 import '../styles/home.scss';
 import PeoplePhoto from '../component/User/PeoplePhoto';
 import UserCard from '../component/User/UserCard';
+import { Link } from 'react-router-dom';
 
 function Home() {
   return (
@@ -25,7 +26,7 @@ function Home() {
             <PeoplePhoto />
           </div>
           <div className='bg-pageMore d-flex'>
-            <a href=''>顯示更多...</a>
+            <Link to='/show'>顯示更多...</Link>
           </div>
         </section>
         <section className='row justify-content-between mt-3'>
@@ -38,7 +39,9 @@ function Home() {
             </div>
           </div>
           <div className='bg-pageMain col'>
-            <i className='fa-solid fa-user-lock'></i>
+            <Link to="/store">
+              <i className='fa-solid fa-user-lock' style={{color:'#82898D'}}></i>
+            </Link>
             <h6>誰喜歡你</h6>
             <div className='user-lock'>
               <UserCard />
