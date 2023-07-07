@@ -57,6 +57,7 @@ function RegisterForm() {
       setFormSubmitted(true);
       await submitForm();
 
+
       axios.defaults.withCredentials = true;
       const response = await axios.post('/users/register', requestBody);
       console.log(response.data);
