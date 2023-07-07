@@ -10,9 +10,9 @@ import AlertModal from './Modal/AlertModal';
 function LoginForm() {
   const [submitting, setSubmitting] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [showAlertModal, setShowAlertModal] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
-  const [AlertStateIcon, setAlertStateIcon] = useState('');
+  const [showAlertModal, setShowAlertModal] = useState(false); //Alert 視窗
+  const [alertMessage, setAlertMessage] = useState(''); //Alert 訊息
+  const [AlertStateIcon, setAlertStateIcon] = useState(''); //Alert icon
 
   // 轉址判斷
   const navigate = useNavigate();
@@ -24,17 +24,12 @@ function LoginForm() {
     mode: 'onTouched',
   });
 
-  const handleAlertModalClose = () => {
-    setShowAlertModal(false); // 關閉彈出視窗
-  };
-
-  const handleRegistrationResponse = (response) => {
+  const handleAlertRes = (response) => {
     //Alert用
     setAlertMessage(response.data.message);
     setAlertStateIcon(response.data.state);
     setFormSubmitted(false);
     setShowAlertModal(true);
-
     setTimeout(() => {
       setShowAlertModal(false);
     }, 2500);
@@ -51,6 +46,7 @@ function LoginForm() {
   };
 
   // 表單發送的按鈕
+  axios.defaults.withCredentials = true; //Axios 支援跨域請求和 Cookie 傳遞
   const onSubmit = async (data) => {
     console.log(data);
     try {
@@ -62,17 +58,16 @@ function LoginForm() {
         password: data.password,
       };
       axios.defaults.withCredentials = true;
-
       const response = await axios.post('/users/login', requestBody);
       console.log(requestBody);
       if (response.data.state === 200) {
-        handleRegistrationResponse(response);
+        handleAlertRes(response);
         console.log(response);
         setTimeout(() => {
           navigate('/home');
         }, 2500);
       } else {
-        handleRegistrationResponse(response);
+        handleAlertRes(response);
         console.log(response);
         setTimeout(() => {
           navigate('/login');
@@ -220,12 +215,7 @@ function LoginForm() {
           </form>
         </div>
       </div>
-      <AlertModal
-        message={alertMessage}
-        showModal={showAlertModal}
-        handleModalClose={handleAlertModalClose}
-        state={AlertStateIcon}
-      />
+      <AlertModal message={alertMessage} showModal={showAlertModal} state={AlertStateIcon} />
     </div>
   );
 }
