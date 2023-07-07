@@ -5,10 +5,14 @@ import { LoginSocialFacebook, LoginSocialGoogle } from 'reactjs-social-login';
 import { FacebookLoginButton, GoogleLoginButton } from 'react-social-login-buttons';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import AlertModal from './Modal/AlertModal';
 
 function LoginForm() {
   const [submitting, setSubmitting] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [showAlertModal, setShowAlertModal] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [AlertStateIcon, setAlertStateIcon] = useState('');
 
   // 轉址判斷
   const navigate = useNavigate();
@@ -20,30 +24,20 @@ function LoginForm() {
     mode: 'onTouched',
   });
 
-  // 表單發送的按鈕
-  const onSubmit = async (data) => {
-    try {
-      setSubmitting(true);
-      setFormSubmitted(true);
-      await submitForm();
-      const requestBody = {
-        username: data.name,
-        password: data.password,
-      };
-      axios.defaults.withCredentials = true;
-      const response = await axios.post('http://localhost:8080/users/login', requestBody);
-      if (response.data.state === 200) {
-        navigate('/home');
-        console.log(response.data);
-      } else {
-        alert(response.data.message);
-        throw new Error('API 請求失敗');
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setSubmitting(false);
-    }
+  const handleAlertModalClose = () => {
+    setShowAlertModal(false); // 關閉彈出視窗
+  };
+
+  const handleRegistrationResponse = (response) => {
+    //Alert用
+    setAlertMessage(response.data.message);
+    setAlertStateIcon(response.data.state);
+    setFormSubmitted(false);
+    setShowAlertModal(true);
+
+    setTimeout(() => {
+      setShowAlertModal(false);
+    }, 2500);
   };
 
   const submitForm = () => {
@@ -54,6 +48,41 @@ function LoginForm() {
         resolve();
       }, 2000);
     });
+  };
+
+  // 表單發送的按鈕
+  const onSubmit = async (data) => {
+    console.log(data);
+    try {
+      setSubmitting(true);
+      setFormSubmitted(true);
+      await submitForm();
+      const requestBody = {
+        username: data.username,
+        password: data.password,
+      };
+      axios.defaults.withCredentials = true;
+
+      const response = await axios.post('/users/login', requestBody);
+      console.log(requestBody);
+      if (response.data.state === 200) {
+        handleRegistrationResponse(response);
+        console.log(response);
+        setTimeout(() => {
+          navigate('/home');
+        }, 2500);
+      } else {
+        handleRegistrationResponse(response);
+        console.log(response);
+        setTimeout(() => {
+          navigate('/login');
+        }, 2500);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -73,7 +102,7 @@ function LoginForm() {
             >
               <div className='mb-1'>
                 <Input
-                  id='name'
+                  id='username'
                   type='text'
                   errors={errors}
                   labelText='使用者帳號/信箱/手機號碼'
@@ -191,6 +220,12 @@ function LoginForm() {
           </form>
         </div>
       </div>
+      <AlertModal
+        message={alertMessage}
+        showModal={showAlertModal}
+        handleModalClose={handleAlertModalClose}
+        state={AlertStateIcon}
+      />
     </div>
   );
 }
