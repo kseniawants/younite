@@ -4,6 +4,7 @@ import { Input } from './FormElements';
 import { LoginSocialFacebook, LoginSocialGoogle } from 'reactjs-social-login';
 import { FacebookLoginButton, GoogleLoginButton } from 'react-social-login-buttons';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function RegisterForm() {
   const [submitting, setSubmitting] = useState(false);
@@ -18,12 +19,26 @@ function RegisterForm() {
     mode: 'onTouched',
   });
   
-  const onSubmit = async () => {
+  const onSubmit = async (data) => {
     try {
       setSubmitting(true);
+      const requestBody = {
+        username: data.username,
+        email: data.email,
+        password: data.password,
+      };
       setFormSubmitted(true);
       await submitForm();
-      navigate('/personal');
+      axios.defaults.withCredentials = true;
+      const response = await axios.post('http://localhost:8080/users/register', requestBody);
+        console.log(response.data)  
+      if (response.data.state === 201) {
+        navigate('/personal');
+      } else {
+        alert(response.data.message);
+        throw new Error('API 請求失敗');
+      }
+      
     } catch (error) {
       console.error(error);
     } finally {
@@ -59,7 +74,7 @@ function RegisterForm() {
             >
               <div className='mb-1'>
                 <Input
-                  id='name'
+                  id='username'
                   type='text'
                   errors={errors}
                   labelText='帳號名稱'

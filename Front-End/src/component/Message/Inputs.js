@@ -1,8 +1,14 @@
 // 聊天室輸入框
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Input, Space } from 'antd';
 
 const Inputs = () => {
+
+  const [isClicked , setIsClicked] = useState(false)
+  const handleClick = () => {
+    setIsClicked(!isClicked)
+  } 
+
   return (
     <div
       className='p-2 d-flex align-items-center justify-content-between'
@@ -17,10 +23,19 @@ const Inputs = () => {
           className='fa-solid fa-photo-film text-radio fa-lg pe-4'
           style={{ cursor: 'pointer' }}
         ></i>
-        <i
-          className='fa-solid fa-microphone text-radio fa-lg pe-0'
-          style={{ cursor: 'pointer' }}
-        ></i>
+        {isClicked ? (
+            <i 
+              className="fa-solid fa-microphone fa-fade fa-lg" 
+              style={{color: '#ff0000', }}
+              onClick={handleClick}
+            />
+          ) : (
+            <i
+              className='fa-solid fa-microphone text-radio fa-lg pe-0'
+              style={{ cursor: 'pointer' }}
+              onClick={handleClick}
+            ></i> 
+        )}
       </div>
       <Space.Compact
         style={{

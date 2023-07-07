@@ -9,6 +9,7 @@ import PhotoWall from './InfoElements/PhotoWall';
 import LocationModal from './InfoElements/Location';
 import InfoModal from './Modal/InfoModal';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Info() {
   const [submitting, setSubmitting] = useState(false);
@@ -24,13 +25,48 @@ function Info() {
       mode: 'onTouched',
     });
 
+    
     const onSubmit = async (data) => {
       try {
+        let str = [];
+          for (let i = 0; i < data.hobbies.length; i++) {
+            str.push(data.hobbies[i].label);
+          }
+        data.photoWall = photoWallValue.map((file) => file.originFileObj);
         setSubmitting(true);
         setFormSubmitted(true);
         await submitForm(data);
-        navigate('/home');
+        const formData = new FormData();
+        console.log(data.photoWall);
+        console.log(data.pic[0].originFileObj);
         console.log(data);
+        formData.append('fullName', data.name);
+        formData.append('gender', data.radioGender);
+        formData.append('sexualOrientation', data.radioSO);
+        formData.append('location', JSON.stringify(data.address));
+        formData.append('selfIntro', data.textareaFieldName);
+        formData.append('preferredGender', data.radioShow);
+        formData.append('datingGoal', data.goal);
+        formData.append('avatar', data.pic[0].originFileObj);
+        formData.append('birthday', data.birthday);
+        formData.append('professions', data.profession.label);
+        formData.append('phone', data.tel);
+        formData.append('photos', data.photoWall);
+        formData.append('hobbies', str);
+        axios.defaults.withCredentials = true;
+        const response = await axios.post('http://localhost:8080/users/profile', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>',
+          },
+        });
+        console.log(response.data);
+        if (response.data.state == 201) {
+          navigate('/home');
+        } else {
+          console.log('API請求失敗');
+        }
+
+
       } catch (error) {
         console.error(error);
       } finally {
@@ -49,21 +85,21 @@ function Info() {
     };
 
     const radioGender = [
-      { label: '男生', value: 'male' },
-      { label: '女生', value: 'female' },
-      { label: '其他', value: 'other' },
+      { label: '男生', value: 'Male' },
+      { label: '女生', value: 'Female' },
+      { label: '其他', value: 'Other' },
     ];
 
     const radioSO = [
-      { label: '生理男', value: 'man' },
-      { label: '生理女', value: 'woman' },
-      { label: '雙性戀', value: 'bisexual' },
+      { label: '生理男', value: 'Man' },
+      { label: '生理女', value: 'Woman' },
+      { label: '雙性戀', value: 'Bisexual' },
     ];
 
     const radioShow = [
-      { label: '男生', value: 'men' },
-      { label: '女生', value: 'women' },
-      { label: '所有人', value: 'all' },
+      { label: '男生', value: 'Male' },
+      { label: '女生', value: 'Female' },
+      { label: '所有人', value: 'Other' },
     ];
 
     const hobbies = [
@@ -170,6 +206,12 @@ function Info() {
 
     const handleButtonClick = () => {
       fileInputRef.current.click();
+    };
+
+    const [photoWallValue, setPhotoWallValue] = useState([]);
+
+    const handleChange = (value) => {
+      setPhotoWallValue(value);
     };
 
   return (
@@ -440,7 +482,7 @@ function Info() {
                 <Avatar
                   {...field}
                   className={errors.pic ? 'is-invalid' : ''}
-                  value={field.value}
+                  // value={field.value}
                   onFileChange={(file) => {
                     field.onChange(file);
                   }}
@@ -457,7 +499,7 @@ function Info() {
         </div>
         <div className='p-4 mb-4'>
           <label className='mb-4'>個人檔案照片</label>
-          <PhotoWall/>
+          <PhotoWall onChange={handleChange} />
         </div>
       </div>
     </form>

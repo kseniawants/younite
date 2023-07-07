@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import Logo from '../assets/logo/logo-type.png';
 import '../styles/component/nav.scss';
-import UserImage from '../assets/images/sia.png';
+// import UserImage from '../assets/images/sia.png';
 import ChatBotModal from './Modal/ChatBotModal';
 import NotificationCollapse from '../pages/NotificationCollapse';
+import axios from 'axios';
 
 function SideNav() {
   const [openModal, setOpenModal] = useState(false); // Model 開關
@@ -27,13 +28,23 @@ function SideNav() {
     setIsActive(false);
   };
 
+  const [post, setPost] = useState(null);
+  useEffect(() => {
+    axios.get('http://localhost:8080/users/profile').then((response) => {
+      setPost(response.data);
+      // console.log(response.data)
+    });
+  }, []);
+
+  if (post === null) return null;
+
   return (
     <>
       <nav className='bg-secondary d-flex p-0 justify-content-between flex-column align-items-center'>
         <figure className='text-decoration-none mt-5 d-flex flex-column align-items-center'>
           <img src={Logo} alt='YouNite-Logo' className='mb-5' style={{ height: '20px' }} />
-          <img src={UserImage} alt='Picture' className='mb-1 nav-user-image' />
-          <h6 className='text-black nav-text mt-2'>Cindy 24</h6>
+          <img src={post.data.profileAvatar} alt='Picture' className='mb-1 nav-user-image'/>
+          <h6 className='text-black nav-text mt-2'>{post.data.fullName}</h6>
         </figure>
 
         <ul className='nav flex-column fs-5 align-items-center'>
