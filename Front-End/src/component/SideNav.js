@@ -30,6 +30,7 @@ function SideNav() {
 
   const [post, setPost] = useState(null);
   useEffect(() => {
+    axios.defaults.withCredentials = true;
     axios.get('http://localhost:8080/users/profile').then((response) => {
       setPost(response.data);
       // console.log(response.data)
@@ -43,13 +44,13 @@ function SideNav() {
       <nav className='bg-secondary d-flex p-0 justify-content-between flex-column align-items-center'>
         <figure className='text-decoration-none mt-5 d-flex flex-column align-items-center'>
           <img src={Logo} alt='YouNite-Logo' className='mb-5' style={{ height: '20px' }} />
-          <img src={post.data.profileAvatar} alt='Picture' className='mb-1 nav-user-image'/>
+          <img src={post.data.profileAvatar} alt='Picture' className='mb-1 nav-user-image' />
           <h6 className='text-black nav-text mt-2'>{post.data.fullName}</h6>
         </figure>
 
         <ul className='nav flex-column fs-5 align-items-center'>
           <li className='nav-item'>
-            <NavLink to='/' className='nav-link' aria-current='page'>
+            <NavLink to='/home' className='nav-link' aria-current='page'>
               <i className='fa-solid fa-house'></i>
             </NavLink>
           </li>
@@ -88,7 +89,7 @@ function SideNav() {
             </NavLink>
           </li>
           <li className='nav-item'>
-            <NavLink to='/landing' className='nav-link'>
+            <NavLink to='/' className='nav-link'>
               <i className='fa-solid fa-right-from-bracket'></i>
             </NavLink>
           </li>

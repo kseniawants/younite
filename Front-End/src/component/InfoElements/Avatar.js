@@ -9,22 +9,23 @@ const Avatar = ({ onFileChange }) => {
   const [fileList, setFileList] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8080/users/profile')
+    axios.defaults.withCredentials = true;
+    axios
+      .get('http://localhost:8080/users/profile')
       .then((response) => {
         const userData = response.data;
-        setFormData(userData.data.profileAvatar); 
+        setFormData(userData.data.profileAvatar);
       })
       .catch((error) => {
         console.error(error);
       });
   }, []);
 
-    useEffect(() => {
-      if (formData) {
-        setFileList([{ url: formData }]);
-      }
-    }, [formData]);
-
+  useEffect(() => {
+    if (formData) {
+      setFileList([{ url: formData }]);
+    }
+  }, [formData]);
 
   const onChange = ({ fileList: newFileList }) => {
     // 檢查新的檔案列表長度
@@ -70,7 +71,7 @@ const Avatar = ({ onFileChange }) => {
   };
 
   const handleCustomRequest = (options) => {
-    const {  onSuccess, onProgress } = options;
+    const { onSuccess, onProgress } = options;
 
     // 自定义上传逻辑
     // 将文件上传到指定位置，并在上传过程中更新进度和状态
@@ -101,7 +102,7 @@ const Avatar = ({ onFileChange }) => {
       <Upload
         beforeUpload={handleBeforeUpload}
         customRequest={handleCustomRequest}
-        listType="picture-circle"
+        listType='picture-circle'
         fileList={fileList}
         onChange={onChange}
         onPreview={onPreview}
