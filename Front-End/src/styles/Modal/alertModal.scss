@@ -1,9 +1,26 @@
 /* 整個 Modal 的樣式 */
-.modal {
+.alertModal {
   button {
+    display: none;
+    margin: 0.25rem 0.25rem 0 0;
     border: none;
     background: none;
   }
+
+  .modal-body {
+    align-items: center;
+    .ui {
+      margin-top: 0.75rem;
+    }
+  }
+  .modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60%;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 10px 0.5px;
+  }
+
   .modal-header {
     border: none;
   }
@@ -11,15 +28,13 @@
     display: flex;
     justify-content: center;
   }
+  svg {
+    height: 2rem;
+    margin-bottom: 1rem;
+  }
 }
 
 /* icon 的樣式 */
-.ui-success,
-.ui-error {
-  width: 100px;
-  height: 100px;
-  margin: 40px;
-}
 
 .ui-success {
   &-circle {
