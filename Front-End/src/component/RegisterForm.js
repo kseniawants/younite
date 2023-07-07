@@ -54,7 +54,7 @@ function RegisterForm() {
     try {
       setSubmitting(true);
       const requestBody = {
-        username: data.name,
+        username: data.username,
         email: data.email,
         password: data.password,
       };

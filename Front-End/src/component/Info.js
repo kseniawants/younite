@@ -24,62 +24,38 @@ function Info() {
     mode: 'onTouched',
   });
 
-    
-    const onSubmit = async (data) => {
-      try {
-        let str = [];
-          for (let i = 0; i < data.hobbies.length; i++) {
-            str.push(data.hobbies[i].label);
-          }
-        data.photoWall = photoWallValue.map((file) => file.originFileObj);
-        setSubmitting(true);
-        setFormSubmitted(true);
-        await submitForm(data);
-        const formData = new FormData();
-        console.log(data.photoWall);
-        console.log(data.pic[0].originFileObj);
-        console.log(data);
-        formData.append('fullName', data.name);
-        formData.append('gender', data.radioGender);
-        formData.append('sexualOrientation', data.radioSO);
-        formData.append('location', JSON.stringify(data.address));
-        formData.append('selfIntro', data.textareaFieldName);
-        formData.append('preferredGender', data.radioShow);
-        formData.append('datingGoal', data.goal);
-        formData.append('avatar', data.pic[0].originFileObj);
-        formData.append('birthday', data.birthday);
-        formData.append('professions', data.profession.label);
-        formData.append('phone', data.tel);
-        formData.append('photos', data.photoWall);
-        formData.append('hobbies', str);
-        axios.defaults.withCredentials = true;
-        const response = await axios.post('http://localhost:8080/users/profile', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>',
-          },
-        });
-        console.log(response.data);
-        if (response.data.state == 201) {
-          navigate('/home');
-        } else {
-          console.log('API請求失敗');
-        }
-
-
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setSubmitting(false);
+  const onSubmit = async (data) => {
+    try {
+      let str = [];
+      for (let i = 0; i < data.hobbies.length; i++) {
+        str.push(data.hobbies[i].label);
       }
-    };
-
-    const submitForm = () => {
-      return new Promise((resolve) => {
-        // 模拟异步操作，这里使用 setTimeout 延时 2 秒
-        setTimeout(() => {
-          // 假设提交成功
-          resolve();
-        }, 2000);
+      data.photoWall = photoWallValue.map((file) => file.originFileObj);
+      setSubmitting(true);
+      setFormSubmitted(true);
+      await submitForm(data);
+      const formData = new FormData();
+      console.log(data.photoWall);
+      console.log(data.pic[0].originFileObj);
+      console.log(data);
+      formData.append('fullName', data.name);
+      formData.append('gender', data.radioGender);
+      formData.append('sexualOrientation', data.radioSO);
+      formData.append('location', JSON.stringify(data.address));
+      formData.append('selfIntro', data.textareaFieldName);
+      formData.append('preferredGender', data.radioShow);
+      formData.append('datingGoal', data.goal);
+      formData.append('avatar', data.pic[0].originFileObj);
+      formData.append('birthday', data.birthday);
+      formData.append('professions', data.profession.label);
+      formData.append('phone', data.tel);
+      formData.append('photos', data.photoWall);
+      formData.append('hobbies', str);
+      axios.defaults.withCredentials = true;
+      const response = await axios.post('http://localhost:8080/users/profile', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>',
+        },
       });
       console.log(response.data);
       if (response.data.state == 201) {
@@ -232,15 +208,9 @@ function Info() {
 
   const [photoWallValue, setPhotoWallValue] = useState([]);
 
-<<<<<<< HEAD
-  const handlePhotoWallChange = (value) => {
+  const handleChange = (value) => {
     setPhotoWallValue(value);
   };
-=======
-    const handleChange = (value) => {
-      setPhotoWallValue(value);
-    };
->>>>>>> origin/dev
 
   return (
     <div className='container'>
@@ -536,11 +506,10 @@ function Info() {
               rules={{ required: true }}
               render={({ field }) => (
                 <>
-<<<<<<< HEAD
                   <Avatar
                     {...field}
                     className={errors.pic ? 'is-invalid' : ''}
-                    value={field.value}
+                    // value={field.value}
                     onFileChange={(file) => {
                       field.onChange(file);
                     }}
@@ -550,66 +519,10 @@ function Info() {
               )}
             />
             {errors.pic && <div className='invalid-feedback '>請上傳大頭照</div>}
-=======
-                <Avatar
-                  {...field}
-                  className={errors.pic ? 'is-invalid' : ''}
-                  // value={field.value}
-                  onFileChange={(file) => {
-                    field.onChange(file);
-                  }}
-                />
-                <input
-                  type="hidden"
-                  {...field}
-                  value={field.value}
-                />
-              </>
-            )}
-            />
-            {errors.pic && <div className="invalid-feedback ">請上傳大頭照</div>}
-        </div>
-        <div className='p-4 mb-4'>
-          <label className='mb-4'>個人檔案照片</label>
-          <PhotoWall onChange={handleChange} />
-        </div>
-      </div>
-    </form>
-    <div className='d-flex flex-column-reverse flex-md-row py-4 justify-content-center align-items-md-center align-items-center w-100'>
-      <Link to='/home'>
-        {formSubmitted && (
-          <div className={`fullscreen-overlay ${submitting ? 'show' : ''}`}>
-            <svg
-              version="1.1"
-              id="L9"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlnsXlink="http://www.w3.org/1999/xlink"
-              x="0px"
-              y="0px"
-              viewBox="0 0 100 100"
-              enableBackground="new 0 0 0 0"
-              xmlSpace="preserve"
-            >
-              <path
-                fill="#fff"
-                d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"
-              >
-                <animateTransform
-                  attributeName="transform"
-                  attributeType="XML"
-                  type="rotate"
-                  dur="0.5s"
-                  from="0 50 50"
-                  to="360 50 50"
-                  repeatCount="indefinite"
-                />
-              </path>
-            </svg>
->>>>>>> origin/dev
           </div>
           <div className='p-4 mb-4'>
             <label className='mb-4'>個人檔案照片</label>
-            <PhotoWall onChange={handlePhotoWallChange} />
+            <PhotoWall onChange={handleChange} />
           </div>
         </div>
       </form>
