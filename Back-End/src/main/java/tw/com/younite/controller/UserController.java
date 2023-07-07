@@ -58,6 +58,7 @@ public class UserController extends BaseController {
         session.setAttribute("id", user.getId());
         System.out.println("userID: " + getIDFromSession(session));
         return new JSONResult<>(CREATE_OK);
+
     }
 
     @ApiOperation("透過OAuth註冊新用戶")
@@ -80,14 +81,13 @@ public class UserController extends BaseController {
 
     @ApiOperation("用戶登入")
     @PostMapping("/users/login")
-    public JSONResult<UserEntity> login(@ApiParam(value = "傳入用戶登入資料", required = true)HttpSession session, @RequestBody UserEntity user) {
+    public JSONResult<UserEntity> login(@ApiParam(value = "傳入用戶登入資料",
+            required = true)HttpSession session, @RequestBody UserEntity user) {
         UserEntity data = iUserService.login(user);
         //TODO: 把username改成profiles中的full name.
         session.setAttribute("id", data.getId());
         session.setAttribute("username", data.getUsername());
         return new JSONResult<UserEntity>(OK, data);
-
-
     }
 
     @ApiOperation("修改用戶密碼")

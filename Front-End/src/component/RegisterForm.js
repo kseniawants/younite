@@ -12,7 +12,7 @@ function RegisterForm() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [showAlertModal, setShowAlertModal] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
-  const [stateIcon, setStateIcon] = useState('');
+  const [AlertStateIcon, setAlertStateIcon] = useState('');
 
   const navigate = useNavigate();
   const {
@@ -23,39 +23,6 @@ function RegisterForm() {
   } = useForm({
     mode: 'onTouched',
   });
-
-  const onSubmit = async (data) => {
-    try {
-      setSubmitting(true);
-      const requestBody = {
-        username: data.name,
-        email: data.email,
-        password: data.password,
-      };
-      setFormSubmitted(true);
-      await submitForm();
-      axios.defaults.withCredentials = true;
-
-      const response = await axios.post('http://localhost:8080/users/register', requestBody);
-      console.log(response.data);
-      if (response.data.state === 201) {
-        navigate('/personal');
-      } else if (response.data.state === 409) {
-        setAlertMessage(response.data.message); // 設置錯誤訊息
-        setStateIcon(response.data.state);
-        setShowAlertModal(true); // 顯示彈出視窗
-      } else {
-        setAlertMessage(response.data.message); // 設置錯誤訊息
-        setStateIcon(response.data.state);
-        setShowAlertModal(true); // 顯示彈出視窗
-        throw new Error('API 請求失敗');
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setSubmitting(false);
-    }
-  };
 
   const submitForm = () => {
     return new Promise((resolve) => {
@@ -69,6 +36,54 @@ function RegisterForm() {
 
   const handleAlertModalClose = () => {
     setShowAlertModal(false); // 關閉彈出視窗
+  };
+
+  const handleRegistrationResponse = (response) => {
+    //Alert用
+    setAlertMessage(response.data.message);
+    setAlertStateIcon(response.data.state);
+    setFormSubmitted(false);
+    setShowAlertModal(true);
+
+    setTimeout(() => {
+      setShowAlertModal(false);
+    }, 2500);
+  };
+
+  const onSubmit = async (data) => {
+    try {
+      setSubmitting(true);
+      const requestBody = {
+        username: data.username,
+        email: data.email,
+        password: data.password,
+      };
+
+      setFormSubmitted(true);
+      await submitForm();
+      axios.defaults.withCredentials = true;
+
+      const response = await axios.post('http://localhost:8080/users/register', requestBody);
+      console.log(response.data);
+
+      if (response.data.state === 201) {
+        handleRegistrationResponse(response);
+        console.log('成功了吧');
+        setTimeout(() => {
+          navigate('/personal');
+        }, 2500);
+      } else {
+        handleRegistrationResponse(response);
+        console.log('API 請求失敗');
+        setTimeout(() => {
+          navigate('/register');
+        }, 2500);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const password = watch('password');
@@ -89,7 +104,7 @@ function RegisterForm() {
             >
               <div className='mb-1'>
                 <Input
-                  id='name'
+                  id='username'
                   type='text'
                   errors={errors}
                   labelText='帳號名稱'
@@ -104,7 +119,7 @@ function RegisterForm() {
                 <Input
                   id='email'
                   labelText='信箱'
-                  type='email'
+                  type='emailpassword'
                   placeholder='輸入信箱'
                   errors={errors}
                   register={register}
@@ -246,7 +261,7 @@ function RegisterForm() {
         message={alertMessage}
         showModal={showAlertModal}
         handleModalClose={handleAlertModalClose}
-        state={stateIcon}
+        state={AlertStateIcon}
       />
     </div>
   );

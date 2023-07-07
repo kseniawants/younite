@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import '../styles/all.scss';
 import Select from 'react-select';
 import { useForm, Controller } from 'react-hook-form';
 import { Input, RadioButtonGroup } from './FormElements';
@@ -27,6 +26,10 @@ function Info() {
 
   const onSubmit = async (data) => {
     try {
+      let str = [];
+      for (let i = 0; i < data.hobbies.length; i++) {
+        str.push(data.hobbies[i].label);
+      }
       data.photoWall = photoWallValue.map((file) => file.originFileObj);
       setSubmitting(true);
       setFormSubmitted(true);
@@ -35,16 +38,12 @@ function Info() {
       console.log(data.photoWall);
       console.log(data.pic[0].originFileObj);
       console.log(data);
-      let str = [];
-      for (let i = 0; i < data.hobbies.length; i++) {
-        str.push(data.hobbies[i].label);
-      }
       formData.append('fullName', data.name);
       formData.append('gender', data.radioGender);
       formData.append('sexualOrientation', data.radioSO);
       formData.append('location', JSON.stringify(data.address));
       formData.append('selfIntro', data.textareaFieldName);
-      formData.append('preferred_gender', data.radioShow);
+      formData.append('preferredGender', data.radioShow);
       formData.append('datingGoal', data.goal);
       formData.append('avatar', data.pic[0].originFileObj);
       formData.append('birthday', data.birthday);
@@ -58,13 +57,10 @@ function Info() {
           'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>',
         },
       });
-
-      console.log(data);
-      console.log(str);
+      console.log(response.data);
       if (response.data.state == 201) {
         navigate('/home');
       } else {
-        console.log(response.data.state);
         console.log('API請求失敗');
       }
     } catch (error) {
@@ -212,7 +208,7 @@ function Info() {
 
   const [photoWallValue, setPhotoWallValue] = useState([]);
 
-  const handlePhotoWallChange = (value) => {
+  const handleChange = (value) => {
     setPhotoWallValue(value);
   };
 
@@ -513,7 +509,7 @@ function Info() {
                   <Avatar
                     {...field}
                     className={errors.pic ? 'is-invalid' : ''}
-                    value={field.value}
+                    // value={field.value}
                     onFileChange={(file) => {
                       field.onChange(file);
                     }}
@@ -526,7 +522,7 @@ function Info() {
           </div>
           <div className='p-4 mb-4'>
             <label className='mb-4'>個人檔案照片</label>
-            <PhotoWall onChange={handlePhotoWallChange} />
+            <PhotoWall onChange={handleChange} />
           </div>
         </div>
       </form>
