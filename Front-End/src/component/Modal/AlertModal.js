@@ -5,7 +5,7 @@ import '../../styles/Modal/alertModal.scss';
 const AlertModal = ({ state, message, showModal, handleModalClose }) => {
   let icon = '';
   console.log(state);
-  if (state === 201) {
+  if (state === 201 || state === 200) {
     icon = (
       <div className='ui ui-success'>
         <svg viewBox='0 0 87 87' version='1.1'>
@@ -40,7 +40,7 @@ const AlertModal = ({ state, message, showModal, handleModalClose }) => {
         </svg>
       </div>
     );
-  } else if (state === 409) {
+  } else if (state === 409 || state === 404 || state === 401) {
     icon = (
       <div className='ui ui-error'>
         <svg viewBox='0 0 87 87' version='1.1'>
@@ -88,7 +88,12 @@ const AlertModal = ({ state, message, showModal, handleModalClose }) => {
   return (
     <>
       {showModal && (
-        <div className='modal fade show' tabIndex='-1' role='dialog' style={{ display: 'block' }}>
+        <div
+          className='alertModal modal fade show'
+          tabIndex='-1'
+          role='dialog'
+          style={{ display: 'block' }}
+        >
           <div className='modal-dialog'>
             <div className='modal-content'>
               <div className='modal-header p-0'>

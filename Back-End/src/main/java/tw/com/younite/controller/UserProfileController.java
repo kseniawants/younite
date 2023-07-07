@@ -220,7 +220,8 @@ public class UserProfileController extends BaseController {
     }
 
     private void handleUserPhotos(Integer userID, MultipartFile[] photos) {
-        Integer profileID = iUserProfileService.getUserProfile(userID).getProfileId();
+        Integer profileID = iUserProfileService.getUserProfile(userID)
+                .getProfileId();
         UserPhotosEntity userPhotos = new UserPhotosEntity();
         userPhotos.setProfileID(profileID);
         if (photos != null) {
@@ -234,7 +235,8 @@ public class UserProfileController extends BaseController {
         iUserPhotosService.insertPhotos(userPhotos);
     }
 
-    private void setUserPhotoPath(UserPhotosEntity userPhotos, int index, String photoPath) {
+    private void setUserPhotoPath(UserPhotosEntity userPhotos, int index,
+                                  String photoPath) {
         switch (index) {
             case 0 -> userPhotos.setFirstPhotoPath(photoPath);
             case 1 -> userPhotos.setSecondPhotoPath(photoPath);

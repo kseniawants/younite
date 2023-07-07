@@ -12,7 +12,7 @@ function RegisterForm() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [showAlertModal, setShowAlertModal] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
-  const [stateIcon, setStateIcon] = useState('');
+  const [AlertStateIcon, setAlertStateIcon] = useState('');
 
   const navigate = useNavigate();
   const {
@@ -39,14 +39,15 @@ function RegisterForm() {
   };
 
   const handleRegistrationResponse = (response) => {
+    //Alert用
     setAlertMessage(response.data.message);
-    setStateIcon(response.data.state);
+    setAlertStateIcon(response.data.state);
     setFormSubmitted(false);
     setShowAlertModal(true);
 
     setTimeout(() => {
       setShowAlertModal(false);
-    }, 3000);
+    }, 2500);
   };
 
   const onSubmit = async (data) => {
@@ -70,13 +71,13 @@ function RegisterForm() {
         console.log('成功了吧');
         setTimeout(() => {
           navigate('/personal');
-        }, 3000);
+        }, 2500);
       } else {
         handleRegistrationResponse(response);
         console.log('API 請求失敗');
         setTimeout(() => {
           navigate('/register');
-        }, 3000);
+        }, 2500);
       }
     } catch (error) {
       console.error(error);
@@ -260,7 +261,7 @@ function RegisterForm() {
         message={alertMessage}
         showModal={showAlertModal}
         handleModalClose={handleAlertModalClose}
-        state={stateIcon}
+        state={AlertStateIcon}
       />
     </div>
   );
