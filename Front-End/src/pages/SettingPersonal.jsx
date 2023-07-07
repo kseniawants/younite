@@ -31,6 +31,10 @@ function SettingPersonal() {
       console.log(data.photoWall);
       console.log(data);
       console.log(data.profileAvatar[0].originFileObj);
+      let str = [];
+      for (let i = 0; i < data.hobbies.length; i++) {
+        str.push(data.hobbies[i].label);
+      }
       const formData = new FormData();
       formData.append('fullName', data.fullName);
       formData.append('gender', data.gender);
@@ -44,6 +48,7 @@ function SettingPersonal() {
       formData.append('professions', data.professions.label);
       formData.append('phone', data.phone);
       formData.append('photos', data.photoWall);
+      formData.append('hobbies', str);
       axios.defaults.withCredentials = true;
 
       const response = await axios.put('http://localhost:8080/users/profile', formData, {
@@ -215,6 +220,7 @@ function SettingPersonal() {
       professions: '',
       datingGoal: '',
       location:'',
+      selfIntro:'',
     });
 
     const fetchData = () => {
@@ -233,6 +239,7 @@ function SettingPersonal() {
           setValue('datingGoal', userData.data.datingGoal);
           setValue('location', userData.data.location);
           setValue('profileAvatar', userData.data.profileAvatar);
+          setValue('selfIntro', userData.data.selfIntro);
           setSelectedButtonLabel( userData.data.datingGoal);
           setSelectedLocation(userData.data.location);
         })
@@ -538,11 +545,17 @@ function SettingPersonal() {
                       <div className='circle rounded-circle me-1' style={{backgroundColor:"#D3D3D3", width:"4px", height:"4px"}}></div>
                       <div className='circle rounded-circle me-1' style={{backgroundColor:"#D3D3D3", width:"4px", height:"4px"}}></div>
                     </Button>
-                    </div>
+                  </div>
                     <div className='pb-4'>
                       <i className="fa-solid fa-pen-to-square text-black pe-2"/>
-                      <label htmlFor="exampleFormControlTextarea1" className="form-label mb-2">文字自我介紹</label>
-                      <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" {...register('textareaFieldName')}></textarea>
+                      <label htmlFor="selfIntro" className="form-label mb-2">文字自我介紹</label>
+                      <textarea 
+                        className="form-control" 
+                        id="selfIntro" rows="3" 
+                        {...register('selfIntro')}
+                        value={formDatas.selfIntro}
+                        onChange={handleChanges}
+                        ></textarea>
                     </div>
                   </div>
                 <div className='col-md-4'>
