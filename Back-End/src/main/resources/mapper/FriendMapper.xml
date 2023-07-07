@@ -18,48 +18,48 @@
 
     <insert id="insertFriend"
             useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO MESSAGES
+        INSERT INTO messages
             (user_id_1, user_id_2, is_matched)
         VALUES (#{firstUserID}, #{secondUserID}, #{isMatched})
     </insert>
 
     <update id="setInvitationSent">
-        UPDATE `MESSAGES`
+        UPDATE `messages`
         SET `invitation_sent` = #{isVideoChatEnabled}
         WHERE `user_id_1` = #{firstUserID}
         AND `user_id_2` = #{secondUserID}
     </update>
 
     <update id="setVideoChatStatus">
-        UPDATE `MESSAGES`
+        UPDATE `messages`
         SET `is_videochat_enabled` = #{isVideoChatEnabled}
         WHERE `user_id_1` = #{firstUserID}
         AND `user_id_2` = #{secondUserID}
     </update>
 
     <update id="setVoiceChatStatus">
-        UPDATE `MESSAGES`
+        UPDATE `messages`
         SET `is_voice_chat_enabled` = #{isVoiceChatEnabled}
         WHERE `user_id_1` = #{firstUserID}
         AND `user_id_2` = #{secondUserID}
     </update>
 
     <update id="setImageStatus">
-        UPDATE `MESSAGES`
+        UPDATE `messages`
         SET `is_image_enabled` = #{isImageEnabled}
         WHERE `user_id_1` = #{firstUserID}
           AND `user_id_2` = #{secondUserID}
     </update>
 
     <update id="setInvitationAccept">
-        UPDATE `MESSAGES`
+        UPDATE `messages`
         SET `invitation_accepted` = #{isInvitationAccepted}
         WHERE `user_id_1` = #{firstUserID}
         AND `user_id_2` = #{secondUserID}
     </update>
 
     <update id="setInvitationStatus">
-        UPDATE `MESSAGES`
+        UPDATE `messages`
         SET `invitation_status` = `invitation_status` | #{invitationStatus}
         WHERE `user_id_1` = #{firstUserID}
         AND `user_id_2` = #{secondUserID}
@@ -67,25 +67,24 @@
 
     <select id="getFriend" resultMap="FriendEntityMap" >
         SELECT *
-        FROM  `MESSAGES`
+        FROM  `messages`
         WHERE `user_id_1` =  #{firstUserID}
     </select>
 
     <select id="getSpecificFriend" resultMap="FriendEntityMap" >
         SELECT *
-        FROM  `MESSAGES`
+        FROM  `messages`
         WHERE (`user_id_1` =  #{firstUserID}
         AND `user_id_2` = #{secondUserID})
     </select>
 
     <select id="getInvitationStatus" resultMap="FriendEntityMap" >
         SELECT *
-        FROM `MESSAGES`
+        FROM `messages`
         WHERE (`user_id_1` = #{firstUserID}
             AND `user_id_2` = #{secondUserID})
           AND (`invitation_status` &amp; #{invitationStatus})
             = #{invitationStatus}
     </select>
-
 
 </mapper>

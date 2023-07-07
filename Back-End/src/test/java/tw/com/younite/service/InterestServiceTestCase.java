@@ -23,6 +23,6 @@ public class InterestServiceTestCase {
         list.add("跑步");
         list.add("登山");
         list.add("睡覺");
-        iInterestService.setInterests(163, list);
+        iInterestService.setInterests(286, list);
     }
 }

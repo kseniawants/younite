@@ -11,6 +11,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import tw.com.younite.entity.InterestEntity;
 import tw.com.younite.entity.UserProfileEntity;
 
+import java.util.Arrays;
+import java.util.List;
+
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class InterestMapperTestCase {
@@ -31,5 +34,13 @@ public class InterestMapperTestCase {
         System.out.println("interests = " + interests);
         System.out.println("result = " + interests.getInterest());
 
+    }
+
+    @Test
+    public void testGetUsersByInterests() {
+        String interests = interestMapper.getInterests(292).getInterest();
+        String[] interestArray = interests.replaceAll("\\[|\\]", "").split(", ");
+        List<UserProfileEntity> result = interestMapper.findUsersByInterests(interestArray);
+        System.out.println("result = " + result);
     }
 }

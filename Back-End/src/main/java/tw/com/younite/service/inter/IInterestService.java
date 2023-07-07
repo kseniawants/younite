@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface IInterestService {
     void setInterests(Integer userID, List<String> interest);
-    List<Integer> getInterests(Integer userID);
+    List<String> getInterests(Integer userID);
 }

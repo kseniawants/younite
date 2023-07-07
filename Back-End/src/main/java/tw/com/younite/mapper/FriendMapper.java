@@ -16,5 +16,4 @@ public interface FriendMapper {
     FriendEntity getInvitationStatus(Integer firstUserID,
                                      Integer secondUserID,
                                      Integer invitationStatus);
-
 }

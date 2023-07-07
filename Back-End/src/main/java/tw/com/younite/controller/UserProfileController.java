@@ -4,12 +4,14 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import tw.com.younite.entity.AmazonFileVO;
+import tw.com.younite.entity.InterestEntity;
 import tw.com.younite.entity.UserPhotosEntity;
 import tw.com.younite.entity.UserProfileEntity;
 import tw.com.younite.service.exception.BlockedIDAlreadyExistsException;
 import tw.com.younite.service.exception.BlockedUserNotFoundException;
 import tw.com.younite.service.exception.DuplicatedUserProfileException;
 import tw.com.younite.service.inter.AmazonUploadService;
+import tw.com.younite.service.inter.IInterestService;
 import tw.com.younite.service.inter.IUserPhotosService;
 import tw.com.younite.service.inter.IUserProfileService;
 import tw.com.younite.util.DateUtil;
@@ -46,6 +48,9 @@ public class UserProfileController extends BaseController {
 
     @Autowired
     private AmazonUploadService amazonUploadService;
+
+    @Autowired
+    private IInterestService interestService;
 
     /**
      *
@@ -86,10 +91,10 @@ public class UserProfileController extends BaseController {
     public JSONResult<String> insertProfile(@ApiParam(value = "使用者個人資料新增", required = true)@ModelAttribute UserProfileEntity userProfile,
                                             HttpSession session,
                                             String birthday,
+                                            @RequestParam("hobbies") List<String> hobbies,
                                             @RequestParam(required = false) MultipartFile voice,
                                             MultipartFile avatar,
                                             @RequestParam(required = false) MultipartFile[] photos) {
-        System.out.println("ProfileuserID: " + getIDFromSession(session));
         Integer userID = getIDFromSession(session);
         if (iUserProfileService.getUserProfile(userID) == null) {
             userProfile.setId(userID);
@@ -115,9 +120,12 @@ public class UserProfileController extends BaseController {
             e.printStackTrace();
         }
 
-
+        //格式化生日
         Date date = dateUtil.parseDate(birthday);
         userProfile.setBirthday(date);
+
+        //設置興趣
+        interestService.setInterests(userID, hobbies);
 
         iUserProfileService.insertProfile(userProfile);
         handleUserPhotos(userID, photos);
@@ -167,6 +175,15 @@ public class UserProfileController extends BaseController {
         UserProfileEntity data = iUserProfileService.getUserProfile(userID);
         return new JSONResult<>(OK, data);
     }
+
+    @ApiOperation("查詢指定用戶興趣")
+    @GetMapping("/users/interest/{userID}")
+    public JSONResult<List<String>> getUserInterest(@ApiParam(value = "查詢指定個興趣，並回傳", required = true)
+                                                        @PathVariable Integer userID) {
+        List<String> data = interestService.getInterests(userID);
+        return new JSONResult<>(OK, data);
+    }
+
     @ApiOperation("修改個人資料與更新")
     @PutMapping("/users/profile")
     public JSONResult<Void> resetProfiles(@ApiParam(value = "接收個人資料修改與更新資料", required = true)
