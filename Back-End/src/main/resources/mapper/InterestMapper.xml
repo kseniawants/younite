@@ -21,13 +21,13 @@
         WHERE `user_id` = #{userID}
     </select>
 
-    <select id="findUsersByInterests" resultType="User">
-        SELECT u.*
-        FROM users u
-        JOIN interests i ON u.user_id = i.user_id
+    <select id="findUsersByInterests" resultMap="InterestEntityMap">
+        SELECT p.* FROM `profiles` p
+        JOIN `interests` i ON p.user_id = i.user_id
         WHERE i.interest IN
-            <foreach collection="array" item="interest" open="(" close=")" separator=",">
-                #{interest}
-            </foreach>
+        <foreach collection="array" item="interest" open="(" close=")" separator=",">
+            #{interest}
+        </foreach>
     </select>
+
 </mapper>
