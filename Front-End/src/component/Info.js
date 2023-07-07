@@ -25,8 +25,13 @@ function Info() {
       mode: 'onTouched',
     });
 
+    
     const onSubmit = async (data) => {
       try {
+        let str = [];
+          for (let i = 0; i < data.hobbies.length; i++) {
+            str.push(data.hobbies[i].label);
+          }
         data.photoWall = photoWallValue.map((file) => file.originFileObj);
         setSubmitting(true);
         setFormSubmitted(true);
@@ -40,13 +45,14 @@ function Info() {
         formData.append('sexualOrientation', data.radioSO);
         formData.append('location', JSON.stringify(data.address));
         formData.append('selfIntro', data.textareaFieldName);
-        formData.append('preferred_gender', data.radioShow);
+        formData.append('preferredGender', data.radioShow);
         formData.append('datingGoal', data.goal);
         formData.append('avatar', data.pic[0].originFileObj);
         formData.append('birthday', data.birthday);
         formData.append('professions', data.profession.label);
         formData.append('phone', data.tel);
         formData.append('photos', data.photoWall);
+        formData.append('hobbies', str);
         axios.defaults.withCredentials = true;
         const response = await axios.post('http://localhost:8080/users/profile', formData, {
           headers: {
@@ -204,7 +210,7 @@ function Info() {
 
     const [photoWallValue, setPhotoWallValue] = useState([]);
 
-    const handlePhotoWallChange = (value) => {
+    const handleChange = (value) => {
       setPhotoWallValue(value);
     };
 
@@ -476,7 +482,7 @@ function Info() {
                 <Avatar
                   {...field}
                   className={errors.pic ? 'is-invalid' : ''}
-                  value={field.value}
+                  // value={field.value}
                   onFileChange={(file) => {
                     field.onChange(file);
                   }}
@@ -493,7 +499,7 @@ function Info() {
         </div>
         <div className='p-4 mb-4'>
           <label className='mb-4'>個人檔案照片</label>
-          <PhotoWall onChange={handlePhotoWallChange} />
+          <PhotoWall onChange={handleChange} />
         </div>
       </div>
     </form>

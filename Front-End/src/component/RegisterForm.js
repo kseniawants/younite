@@ -5,6 +5,7 @@ import { Input } from './FormElements';
 import { LoginSocialFacebook, LoginSocialGoogle } from 'reactjs-social-login';
 import { FacebookLoginButton, GoogleLoginButton } from 'react-social-login-buttons';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import AlertModal from './Modal/AlertModal';
 
 function RegisterForm() {
@@ -23,12 +24,12 @@ function RegisterForm() {
   } = useForm({
     mode: 'onTouched',
   });
-
+  
   const onSubmit = async (data) => {
     try {
       setSubmitting(true);
       const requestBody = {
-        username: data.name,
+        username: data.username,
         email: data.email,
         password: data.password,
       };
@@ -36,7 +37,7 @@ function RegisterForm() {
       await submitForm();
       axios.defaults.withCredentials = true;
 
-      const response = await axios.post('/users/register', requestBody);
+      const response = await axios.post('http://localhost:8080/users/register', requestBody);
       console.log(response.data);
       if (response.data.state === 201) {
         navigate('/personal');
@@ -89,7 +90,7 @@ function RegisterForm() {
             >
               <div className='mb-1'>
                 <Input
-                  id='name'
+                  id='username'
                   type='text'
                   errors={errors}
                   labelText='帳號名稱'

@@ -31,7 +31,7 @@ function LoginForm() {
         password: data.password,
       };
       axios.defaults.withCredentials = true;
-      const response = await axios.post('/users/login', requestBody);
+      const response = await axios.post('http://localhost:8080/users/login', requestBody);
       if (response.data.state === 200) {
         navigate('/home');
         console.log(response.data);
@@ -79,9 +79,9 @@ function LoginForm() {
                   labelText='使用者帳號/信箱/手機號碼'
                   placeholder='輸入使用者帳號/信箱/手機號碼'
                   register={register}
-                  rules={{
-                    required: '使用者帳號/信箱/手機號碼為必填',
-                  }}
+                  // rules={{
+                  //   required: '使用者帳號/信箱/手機號碼為必填',
+                  // }}
                 ></Input>
               </div>
               <div className='mb-1'>
