@@ -5,7 +5,6 @@ import { Input } from './FormElements';
 import { LoginSocialFacebook, LoginSocialGoogle } from 'reactjs-social-login';
 import { FacebookLoginButton, GoogleLoginButton } from 'react-social-login-buttons';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import AlertModal from './Modal/AlertModal';
 
 function RegisterForm() {
