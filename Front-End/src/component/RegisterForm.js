@@ -104,7 +104,7 @@ function RegisterForm() {
             >
               <div className='mb-1'>
                 <Input
-                  id='name'
+                  id='username'
                   type='text'
                   errors={errors}
                   labelText='帳號名稱'

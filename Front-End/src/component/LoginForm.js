@@ -108,9 +108,9 @@ function LoginForm() {
                   labelText='使用者帳號/信箱/手機號碼'
                   placeholder='輸入使用者帳號/信箱/手機號碼'
                   register={register}
-                  rules={{
-                    required: '使用者帳號/信箱/手機號碼為必填',
-                  }}
+                  // rules={{
+                  //   required: '使用者帳號/信箱/手機號碼為必填',
+                  // }}
                 ></Input>
               </div>
               <div className='mb-1'>
