@@ -64,6 +64,9 @@ public class BaseController {
         } else if (e instanceof NoMatchedException) {
             result.setState(NOT_FOUND_ERROR);
             result.setMessage("目前尚未有成功配對的用戶!");
+        } else if (e instanceof  InvitationNotFoundException) {
+            result.setState(NOT_FOUND_ERROR);
+            result.setMessage("找不到邀請狀態碼，請重新傳入");
         } else if (e instanceof PasswordNotMatchException) {
             result.setState(UNAUTHORIZED_ERROR);
             result.setMessage("密碼錯誤!");
@@ -82,6 +85,9 @@ public class BaseController {
         } else if (e instanceof FileTypeException) {
             result.setState(UNSUPPORTED_FILE_TYPE_ERROR);
             result.setMessage("文件格式錯誤，無法上傳");
+        } else if (e instanceof InterestException) {
+            result.setState(INTERNAL_SERVER_ERROR);
+            result.setMessage("伺服器異常，無法新增個人興趣，請稍後再嘗試!");
         } else if (e instanceof FileEmptyException) {
             result.setState(BAD_REQUEST);
             result.setMessage("文件為空，無法上傳");

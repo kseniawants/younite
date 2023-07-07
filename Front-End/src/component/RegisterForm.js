@@ -63,7 +63,7 @@ function RegisterForm() {
       await submitForm();
       axios.defaults.withCredentials = true;
 
-      const response = await axios.post('/users/register', requestBody);
+      const response = await axios.post('http://localhost:8080/users/register', requestBody);
       console.log(response.data);
 
       if (response.data.state === 201) {
