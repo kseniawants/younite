@@ -180,14 +180,14 @@ public class UserProfileController extends BaseController {
                                           HttpSession session,
                                           String birthday,
                                           @RequestParam(value = "hobbies", required = false) List<String> hobbies,
-                                          @RequestParam(required = false) MultipartFile voice,
-                                          @RequestParam(required = false) MultipartFile avatar,
-                                          @RequestParam(required = false) MultipartFile[] photos) {
+                                          @RequestParam(value = "voice", required = false) MultipartFile voice,
+                                          @RequestParam(value = "avatar") MultipartFile avatar,
+                                          @RequestParam(value = "photos", required = false) MultipartFile[] photos) {
         Integer userID = getIDFromSession(session);
-
         userProfile.setUserId(userID);
         Date date = dateUtil.parseDate(birthday);
         userProfile.setBirthday(date);
+        System.out.println("avatar = " + avatar);
         if (avatar != null) {
             uploadFile(avatar, userProfile, "avatar");
         } else {
@@ -199,7 +199,7 @@ public class UserProfileController extends BaseController {
             uploadFile(voice, userProfile, "voice");
         } else {
             String originalFilePath = userProfile.getVoiceIntro();
-            userProfile.setProfileAvatar(originalFilePath);
+            userProfile.setVoiceIntro(originalFilePath);
         }
 
 
@@ -208,8 +208,11 @@ public class UserProfileController extends BaseController {
         }
 
         iUserProfileService.resetUserProfile(userProfile);
-        interestService.removeInterests(userID);
-        interestService.setInterests(userID, hobbies);
+        if (hobbies != null) {
+            interestService.removeInterests(userID);
+            interestService.setInterests(userID, hobbies);
+        }
+
 
         return new JSONResult<Void>(NO_CONTENT_OK,"個人資料更新成功");
     }
@@ -268,17 +271,17 @@ public class UserProfileController extends BaseController {
         }
     }
 
-    private void uploadFile(MultipartFile file, UserProfileEntity profile, String folderName) {
+    private void uploadFile(MultipartFile file, UserProfileEntity userProfile, String folderName) {
         AmazonFileVO amazonFileModel = null;
+        String filePath = "";
 
         try {
             amazonFileModel = amazonUploadService.upload(file, folderName);
-            String filePath = PREFIX + amazonFileModel.getFilePath();
+            filePath = PREFIX + amazonFileModel.getFilePath();
             if (AVATAR_TYPE.contains(file.getContentType())) {
-                profile.setProfileAvatar(filePath);
-            } else if (VOICE_TYPE.contains(file.getContentType())){
-                profile.setVoiceIntro(filePath);
-            } else {
+                userProfile.setProfileAvatar(filePath);
+            } else if (VOICE_TYPE.contains(file.getContentType())) {
+                userProfile.setVoiceIntro(filePath);
             }
         } catch (Exception e) {
             e.printStackTrace();
