@@ -9,11 +9,11 @@ function Store() {
   const [selected, setSelected] = useState(null); // 新增 selected 狀態
 
   useEffect(() => {
+    //初次開啟執行
     axios.defaults.withCredentials = true;
     axios
       .get('/items')
       .then((response) => {
-        console.log(response);
         setPrices(response.data.data);
       })
       .catch((error) => {
@@ -23,10 +23,7 @@ function Store() {
 
   const handleRadioChange = (event) => {
     setSelected(event.target.value); // 更新選擇的值
-    console.log(event.target.value);
   };
-
-  console.log(handleRadioChange);
 
   const handleButtonClick = () => {
     if (selected) {
@@ -34,28 +31,36 @@ function Store() {
       const itemId = selectedItem.id;
       console.log(itemId);
 
+      const formData = new FormData();
+      formData.append('itemId', itemId);
+
       axios.defaults.withCredentials = true;
-      axios.defaults.headers.common['Cookie'] = cookie.parse(document.cookie); // 设置请求头的Cookie
       axios
-        .post('/orders', { itemId: itemId }) // 發送POST請求
+        .post('/orders', formData)
         .then((response) => {
+          console.log(formData);
+          // 將回傳的數據保存在 response.data 中
           const data = response.data;
-          console.error({ itemId: itemId });
-          const blob = new Blob([data], { type: 'text/html' });
-          const url = URL.createObjectURL(blob);
-          window.open(url); // 在新窗口中打開URL
+          const newWindow = window.open('', '_blank'); //
+          const htmlContent = `
+            <!DOCTYPE html>
+            <html>
+              <body>
+                ${data} 
+              </body>
+            </html>
+          `;
+
+          newWindow.document.write(htmlContent); // 將HTML寫到新的window
+          newWindow.document.close(); // 關閉文檔輸入流
+          console.log(response.data);
         })
         .catch((error) => {
           console.error(error);
-          console.error({ itemId: itemId });
+          console.log(`{ itemId: ${itemId} }`);
         });
     }
   };
-
-  // // 將所選的訂閱項目和價格發送到後端
-  // const handleSubscription = (itemName, price) => {
-  //   console.log(`Selected: ${itemName} - $${price}`);
-  // };
 
   return (
     <section className='container mt-4'>
