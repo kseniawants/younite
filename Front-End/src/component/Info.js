@@ -9,10 +9,14 @@ import LocationModal from './InfoElements/Location';
 import InfoModal from './Modal/InfoModal';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import AlertModal from './Modal/AlertModal';
 
 function Info() {
   const [submitting, setSubmitting] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [showAlertModal, setShowAlertModal] = useState(false); //Alert 視窗
+  const [alertMessage, setAlertMessage] = useState(''); //Alert 訊息
+  const [AlertStateIcon, setAlertStateIcon] = useState(''); //Alert icon
   const navigate = useNavigate();
   const {
     register,
@@ -23,6 +27,17 @@ function Info() {
   } = useForm({
     mode: 'onTouched',
   });
+
+  const handleAlertRes = (response) => {
+    //Alert用
+    setAlertMessage(response.data.message);
+    setAlertStateIcon(response.data.state);
+    setFormSubmitted(false);
+    setShowAlertModal(true);
+    setTimeout(() => {
+      setShowAlertModal(false);
+    }, 2500);
+  };
 
   const onSubmit = async (data) => {
     try {
@@ -52,16 +67,22 @@ function Info() {
       formData.append('photos', data.photoWall);
       formData.append('hobbies', str);
       axios.defaults.withCredentials = true;
-      const response = await axios.post('http://localhost:8080/users/profile', formData, {
+      const response = await axios.post('/users/profile', formData, {
         headers: {
           'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>',
         },
       });
       console.log(response.data);
       if (response.data.state == 201) {
-        navigate('/home');
+        handleAlertRes(response);
+        setTimeout(() => {
+          navigate('/home');
+        }, 2500);
       } else {
-        console.log('API請求失敗');
+        handleAlertRes(response);
+        setTimeout(() => {
+          navigate('/personal');
+        }, 2500);
       }
     } catch (error) {
       console.error(error);
@@ -76,7 +97,7 @@ function Info() {
       setTimeout(() => {
         // 假设提交成功
         resolve();
-      }, 2000);
+      }, 2500);
     });
   };
 
@@ -568,6 +589,7 @@ function Info() {
           </button>
         </Link>
       </div>
+      <AlertModal message={alertMessage} showModal={showAlertModal} state={AlertStateIcon} />
     </div>
   );
 }

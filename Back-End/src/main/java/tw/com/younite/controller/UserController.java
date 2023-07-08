@@ -57,7 +57,7 @@ public class UserController extends BaseController {
         iUserService.reg(user);
         session.setAttribute("id", user.getId());
         System.out.println("userID: " + getIDFromSession(session));
-        return new JSONResult<>(CREATE_OK);
+        return new JSONResult<>(CREATE_OK, "註冊成功");
 
     }
 
@@ -69,14 +69,14 @@ public class UserController extends BaseController {
         user.setThirdPartyLogin(true);
         iUserService.regByOAuth(user);
         session.setAttribute("id", user.getId());
-        return new JSONResult<>(CREATE_OK);
+        return new JSONResult<>(CREATE_OK, "註冊成功");
     }
     @ApiOperation("用戶登出")
     @PostMapping("/users/logout")
     public JSONResult<Void> Logout (@ApiParam(value = "傳入用戶登出", required = true)HttpSession session) {
         session.removeAttribute("id");
         session.removeAttribute("username");
-        return new JSONResult<>(OK);
+        return new JSONResult<>(OK, "成功登出");
     }
 
     @ApiOperation("用戶登入")
@@ -87,7 +87,7 @@ public class UserController extends BaseController {
         //TODO: 把username改成profiles中的full name.
         session.setAttribute("id", data.getId());
         session.setAttribute("username", data.getUsername());
-        return new JSONResult<UserEntity>(OK, data);
+        return new JSONResult<UserEntity>(OK,"登入成功", data);
     }
 
     @ApiOperation("修改用戶密碼")
@@ -95,7 +95,7 @@ public class UserController extends BaseController {
     public JSONResult<Void> changePassword(@ApiParam(value = "傳入修改後的密碼資料", required = true)String oldPassword, String newPassword, HttpSession session) {
         Integer id = getIDFromSession(session);
         iUserService.resetPassword(id, oldPassword, newPassword);
-        return new JSONResult<>(NO_CONTENT_OK);
+        return new JSONResult<>(NO_CONTENT_OK,"密碼修改成功");
     }
 
     @ApiOperation("修改用戶密碼（透過用戶ID）")
@@ -103,6 +103,6 @@ public class UserController extends BaseController {
     public JSONResult<Void> changePasswordTwo(@ApiParam(value = "傳入修改用戶密碼（透過用戶ID）", required = true)
                                                   @PathVariable Integer userID, String oldPassword, String newPassword, HttpSession session) {
         iUserService.resetPassword(userID, oldPassword, newPassword);
-        return new JSONResult<>(NO_CONTENT_OK);
+        return new JSONResult<>(NO_CONTENT_OK,"密碼修改成功");
     }
 }

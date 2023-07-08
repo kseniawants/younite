@@ -10,10 +10,15 @@ import PhotoWall from '../component/InfoElements/PhotoWall';
 import LocationModal from '../component/InfoElements/Location';
 import InfoModal from '../component/Modal/InfoModal';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+
+import AlertModal from '../component/Modal/AlertModal';
+
 
 function SettingPersonal() {
   const [submitting, setSubmitting] = useState(false);
+  const [showAlertModal, setShowAlertModal] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [AlertStateIcon, setAlertStateIcon] = useState('');
   const {
     register,
     handleSubmit,
@@ -23,6 +28,16 @@ function SettingPersonal() {
   } = useForm({
     mode: 'onTouched',
   });
+
+  const handleAlertRes = (response) => {
+    setAlertMessage(response.data.message);
+    setAlertStateIcon(response.data.state);
+    setShowAlertModal(true);
+
+    setTimeout(() => {
+      setShowAlertModal(false);
+    }, 2500);
+  };
 
   const onSubmit = async (data) => {
     try {
@@ -50,19 +65,20 @@ function SettingPersonal() {
       formData.append('phone', data.phone);
       formData.append('photos', data.photoWall);
       formData.append('hobbies', str);
+
       axios.defaults.withCredentials = true;
-      const response = await axios.put('http://localhost:8080/users/profile', formData, {
+      const response = await axios.put('/users/profile', formData, {
         headers: {
           'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>',
         },
       });
       console.log(response.data);
-      if (response.data.state == 204) {
-        console.log('上傳成功');
-        const navigate = useNavigate;
-        navigate('/home');
+
+      if (response.data.state == 200) {
+        handleAlertRes(response);
+        
       } else {
-        console.log('API請求失敗');
+        handleAlertRes(response);
       }
     } catch (error) {
       console.error(error);
@@ -155,6 +171,7 @@ function SettingPersonal() {
   const [selectedButtonLabel, setSelectedButtonLabel] = useState(null); // 新增选中的按钮标签状态
   const [selectedLocation, setSelectedLocation] = useState(null);
 
+
   const handleInfoModalButtonClick = () => {
     setInfoModalVisible(true);
   };
@@ -227,8 +244,8 @@ function SettingPersonal() {
   });
 
   const fetchData = () => {
-    axios
-      .get('http://localhost:8080/users/profile')
+    axios.get('/users/profile')
+
       .then((response) => {
         const userData = response.data;
         setformDatas(userData.data);
@@ -638,6 +655,7 @@ function SettingPersonal() {
           </div>
         </section>
       </section>
+      <AlertModal message={alertMessage} showModal={showAlertModal} state={AlertStateIcon} />
     </>
   );
 }

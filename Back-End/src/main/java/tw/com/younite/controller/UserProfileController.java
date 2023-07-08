@@ -124,6 +124,7 @@ public class UserProfileController extends BaseController {
 
         //返回使用者的大頭貼路徑給前端，未來可以展示用
         return new JSONResult<>(CREATE_OK);
+
     }
 
     @ApiOperation("封鎖使用者黑名單")
@@ -161,7 +162,7 @@ public class UserProfileController extends BaseController {
     public JSONResult<UserProfileEntity> getUserProfile(@ApiParam(value = "查詢個人資料回傳", required = true) HttpSession session) {
         Integer userID = getIDFromSession(session);
         UserProfileEntity data = iUserProfileService.getUserProfile(userID);
-        return new JSONResult<>(OK, data);
+        return new JSONResult<>(OK,  data);
     }
 
     @ApiOperation("查詢指定的個人資料")
@@ -210,7 +211,7 @@ public class UserProfileController extends BaseController {
         interestService.removeInterests(userID);
         interestService.setInterests(userID, hobbies);
 
-        return new JSONResult<Void>(NO_CONTENT_OK);
+        return new JSONResult<Void>(NO_CONTENT_OK,"個人資料更新成功");
     }
 
     private void validateAvatar(MultipartFile avatar) {
