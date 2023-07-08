@@ -56,35 +56,33 @@
 }
 
 /* VIP卡片 */
+.btn-group-vertical {
+  align-content: space-around;
+}
 .store-card {
-  text-align: center;
+  justify-content: center;
   background-color: white;
-  border: 3px solid #fa6b6b;
+  border: 5px solid #fa6b6b;
   border-radius: 10px;
   max-width: 15vw;
-  .store-gray {
-    color: #bbbbbb;
+  height: 60%;
+  .store-price {
+    color: #fa6b6b;
   }
-  &:hover {
-    cursor: pointer;
-    transform: translateX(2px) translateY(-1px);
-    transition: transform 0.25s;
+  .btn-check:checked + .btn,
+  .btn.active,
+  .btn.show,
+  .btn:first-child:active,
+  :not(.btn-check) + .btn:active {
+    justify-content: center;
+    width: 100%;
+    border: #fa6b6b;
+    transition: 0.2s;
     box-shadow: -15px 0px 10px -15px rgba(0, 0, 0, 0.2);
     color: black;
     background-color: #fa6b6b;
-    .store-white {
-      content: '';
-      background-color: white;
-      border-radius: 10px;
-      margin-top: 2rem;
-    }
     .store-price {
-      color: #fa6b6b;
-    }
-    .store-gray {
-      color: black;
+      color: white;
     }
   }
 }
-
-/* import storeImage from '../../assets/images/storeCarousels.png'; */

@@ -4,11 +4,7 @@
   position: fixed;
   background-color: white;
   height: 70vh;
-  width: 40vw;
-  /* padding: 2rem; */
-  /* margin: 2rem 5rem; */
-  /* align-items: center;
-  justify-items: center; */
+  width: auto;
   justify-content: center;
   text-align: center;
   border-radius: 10px;
@@ -21,5 +17,8 @@
     border-width: thin;
     width: 15vw;
     height: 20vh;
+    .form-check-input {
+      color: #fa6b6b;
+    }
   }
 }

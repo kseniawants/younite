@@ -3,6 +3,7 @@ package tw.com.younite.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import tw.com.younite.entity.ItemEntity;
 import tw.com.younite.service.inter.ItemService;
 import tw.com.younite.util.JSONResult;
@@ -15,6 +16,7 @@ import java.util.List;
 import static tw.com.younite.controller.BaseController.OK;
 @Api(tags ="顯示商品")
 @RestController
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class ItemController {
 
         @Autowired

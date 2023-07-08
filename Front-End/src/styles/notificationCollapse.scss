@@ -40,7 +40,7 @@ i {
 
 @keyframes slideIn {
   from {
-    transform: translateX(-5%); /* 起始位置在左邊界外 */
+    transform: translateX(-80%); /* 起始位置在左邊界外 */
   }
   to {
     transform: translateX(0); /* 結束位置在原位 */
