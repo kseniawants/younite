@@ -12,6 +12,7 @@
     "antd-img-crop": "^4.12.2",
     "axios": "^1.4.0",
     "bootstrap": "^5.3.0",
+    "cookie": "^0.5.0",
     "dotenv": "^16.3.1",
     "google-maps-react": "^2.0.6",
     "openai": "^3.3.0",

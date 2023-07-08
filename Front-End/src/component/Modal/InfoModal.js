@@ -35,7 +35,7 @@ function InfoModal({ closeModal, setSelectedButtonLabel, onOk }) {
   return (
     <>
       <Draggable handle='.info' onDrag={handleDrag}>
-        <section className='info container-fluid' style={{ top: position.y, left: position.x }}>
+        <section className='info row' style={{ top: position.y, left: position.x }}>
           <div className='row p-3'>
             <div className='col-12 d-flex p-0 justify-content-end'>
               <button

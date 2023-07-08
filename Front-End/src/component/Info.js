@@ -238,7 +238,7 @@ function Info() {
       <form className='row justify-content-center flex-md-row flex-column-reverse'>
         <div className='col-md-5'>
           <div className='pb-4 w-50'>
-            <i className='fa-solid fa-user text-black' />
+            <i className='fa-solid fa-user text-black personal' />
             <span className='text-danger p-1'>*</span>
             <Input
               id='name'

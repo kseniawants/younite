@@ -31,7 +31,7 @@ function SideNav() {
   const [post, setPost] = useState(null);
   useEffect(() => {
     axios.defaults.withCredentials = true;
-    axios.get('http://localhost:8080/users/profile').then((response) => {
+    axios.get('/users/profile').then((response) => {
       setPost(response.data);
       // console.log(response.data)
     });
