@@ -4,7 +4,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import tw.com.younite.entity.AmazonFileVO;
-import tw.com.younite.entity.InterestEntity;
 import tw.com.younite.entity.UserPhotosEntity;
 import tw.com.younite.entity.UserProfileEntity;
 import tw.com.younite.service.exception.BlockedIDAlreadyExistsException;
@@ -30,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Api(tags ="個人資料建立")
+@Api(tags = "個人資料建立")
 @RestController
 @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class UserProfileController extends BaseController {
@@ -86,15 +85,18 @@ public class UserProfileController extends BaseController {
         VOICE_TYPE.add("audio/wav");
         VOICE_TYPE.add("audio/aac");
     }
+
+    private static final String PREFIX = "https://younite-avatar-bucket.s3.ap-northeast-1.amazonaws.com/";
+
     @ApiOperation("接受使用者的個人檔案相關資訊")
     @PostMapping(value = "/users/profile", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public JSONResult<String> insertProfile(@ApiParam(value = "使用者個人資料新增", required = true)@ModelAttribute UserProfileEntity userProfile,
-                                            HttpSession session,
-                                            String birthday,
-                                            @RequestParam("hobbies") List<String> hobbies,
-                                            @RequestParam(required = false) MultipartFile voice,
-                                            MultipartFile avatar,
-                                            @RequestParam(required = false) MultipartFile[] photos) {
+    public JSONResult<Void> insertProfile(@ApiParam(value = "使用者個人資料新增", required = true) @ModelAttribute UserProfileEntity userProfile,
+                                          HttpSession session,
+                                          String birthday,
+                                          @RequestParam("hobbies") List<String> hobbies,
+                                          @RequestParam(required = false) MultipartFile voice,
+                                          MultipartFile avatar,
+                                          @RequestParam(required = false) MultipartFile[] photos) {
         Integer userID = getIDFromSession(session);
         if (iUserProfileService.getUserProfile(userID) == null) {
             userProfile.setId(userID);
@@ -108,17 +110,7 @@ public class UserProfileController extends BaseController {
         }
 
         validateAvatar(avatar);
-        AmazonFileVO amazonFileModel = null;
-        String prefix = "https://younite-avatar-bucket.s3.ap-northeast-1.amazonaws.com/";
-        String avatarPath = "";
-        try {
-            amazonFileModel = amazonUploadService.upload(avatar);
-            avatarPath = prefix + amazonFileModel.getFilePath();
-            userProfile.setProfileAvatar(avatarPath);
-            System.out.println(avatarPath);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        uploadFile(avatar, userProfile, "avatar");
 
         //格式化生日
         Date date = dateUtil.parseDate(birthday);
@@ -131,11 +123,13 @@ public class UserProfileController extends BaseController {
         handleUserPhotos(userID, photos);
 
         //返回使用者的大頭貼路徑給前端，未來可以展示用
-        return new JSONResult<>(CREATE_OK, "個人資料填寫成功", avatarPath);
+        return new JSONResult<>(CREATE_OK);
+
     }
+
     @ApiOperation("封鎖使用者黑名單")
     @PostMapping("/users/blockUser")
-    public JSONResult<Void> blockUser(@ApiParam(value = "要被封鎖的使用者ID匯入", required = true)HttpSession session, Integer blockedUserID) {
+    public JSONResult<Void> blockUser(@ApiParam(value = "要被封鎖的使用者ID匯入", required = true) HttpSession session, Integer blockedUserID) {
         Integer userID = getIDFromSession(session);
         if (iUserProfileService.getBlockedID(userID).contains(blockedUserID)) {
             throw new BlockedIDAlreadyExistsException("此用戶已在黑名單內");
@@ -143,9 +137,10 @@ public class UserProfileController extends BaseController {
         iUserProfileService.blockUser(userID, blockedUserID);
         return new JSONResult<>(CREATE_OK, "已成功添加黑名單");
     }
+
     @ApiOperation("取消封鎖使用者黑名單")
     @PostMapping("/users/unblockUser")
-    public JSONResult<Void> unblockUser(@ApiParam(value = "要取消封鎖在黑名單內的使用者ID匯入", required = true)HttpSession session, Integer unblockedUserID) {
+    public JSONResult<Void> unblockUser(@ApiParam(value = "要取消封鎖在黑名單內的使用者ID匯入", required = true) HttpSession session, Integer unblockedUserID) {
         Integer userID = getIDFromSession(session);
         if (!iUserProfileService.getBlockedID(userID).contains(unblockedUserID)) {
             throw new BlockedUserNotFoundException();
@@ -156,58 +151,65 @@ public class UserProfileController extends BaseController {
 
     @ApiOperation("查詢黑名單")
     @GetMapping("/users/getBlokedID")
-    public JSONResult<List<Integer>> getBlockedList(@ApiParam(value = "查詢黑名單的資料回傳", required = true)HttpSession session) {
+    public JSONResult<List<Integer>> getBlockedList(@ApiParam(value = "查詢黑名單的資料回傳", required = true) HttpSession session) {
         Integer userID = getIDFromSession(session);
         List<Integer> data = iUserProfileService.getBlockedID(userID);
         return new JSONResult<>(OK, data);
     }
+
     @ApiOperation("查詢個人資料")
     @GetMapping("/users/profile")
-    public JSONResult<UserProfileEntity> getUserProfile(@ApiParam(value = "查詢個人資料回傳", required = true)HttpSession session) {
+    public JSONResult<UserProfileEntity> getUserProfile(@ApiParam(value = "查詢個人資料回傳", required = true) HttpSession session) {
         Integer userID = getIDFromSession(session);
         UserProfileEntity data = iUserProfileService.getUserProfile(userID);
         return new JSONResult<>(OK,  data);
     }
+
     @ApiOperation("查詢指定的個人資料")
     @GetMapping("/users/profile/{userID}")
     public JSONResult<UserProfileEntity> getUserProfile(@ApiParam(value = "查詢指定個人資料回傳", required = true)
-                                                            @PathVariable Integer userID) {
-        UserProfileEntity data = iUserProfileService.getUserProfile(userID);
-        return new JSONResult<>(OK, data);
-    }
-
-    @ApiOperation("查詢指定用戶興趣")
-    @GetMapping("/users/interest/{userID}")
-    public JSONResult<List<String>> getUserInterest(@ApiParam(value = "查詢指定個興趣，並回傳", required = true)
                                                         @PathVariable Integer userID) {
-        List<String> data = interestService.getInterests(userID);
+        UserProfileEntity data = iUserProfileService.getUserProfile(userID);
         return new JSONResult<>(OK, data);
     }
 
     @ApiOperation("修改個人資料與更新")
     @PutMapping("/users/profile")
     public JSONResult<Void> resetProfiles(@ApiParam(value = "接收個人資料修改與更新資料", required = true)
-                                              @ModelAttribute UserProfileEntity userProfile,
+                                          @ModelAttribute UserProfileEntity userProfile,
                                           HttpSession session,
                                           String birthday,
-                                          MultipartFile avatar,
-                                          MultipartFile voice,
-                                          MultipartFile[] photos) {
+                                          @RequestParam(value = "hobbies", required = false) List<String> hobbies,
+                                          @RequestParam(required = false) MultipartFile voice,
+                                          @RequestParam(required = false) MultipartFile avatar,
+                                          @RequestParam(required = false) MultipartFile[] photos) {
         Integer userID = getIDFromSession(session);
+
         userProfile.setUserId(userID);
+        Date date = dateUtil.parseDate(birthday);
+        userProfile.setBirthday(date);
+        if (avatar != null) {
+            uploadFile(avatar, userProfile, "avatar");
+        } else {
+            String originalFilePath = userProfile.getProfileAvatar();
+            userProfile.setProfileAvatar(originalFilePath);
+        }
+
+        if (voice != null) {
+            uploadFile(voice, userProfile, "voice");
+        } else {
+            String originalFilePath = userProfile.getVoiceIntro();
+            userProfile.setProfileAvatar(originalFilePath);
+        }
 
 
-        userProfile.setBirthday(dateUtil.parseDate(birthday));
+        if (photos != null) {
+            handleUserPhotos(userID, photos);
+        }
 
-
-        String newAvatarPath = fileUploadUtil.uploadFile(avatar);
-        String newVoicePath = fileUploadUtil.uploadFile(voice);
-
-
-        userProfile.setProfileAvatar(newAvatarPath);
-        userProfile.setVoiceIntro(newVoicePath);
         iUserProfileService.resetUserProfile(userProfile);
-        handleUserPhotos(userID, photos);
+        interestService.removeInterests(userID);
+        interestService.setInterests(userID, hobbies);
 
         return new JSONResult<Void>(NO_CONTENT_OK,"個人資料更新成功");
     }
@@ -263,6 +265,23 @@ public class UserProfileController extends BaseController {
             case 5 -> userPhotos.setSixthPhotoPath(photoPath);
             default -> {
             }
+        }
+    }
+
+    private void uploadFile(MultipartFile file, UserProfileEntity profile, String folderName) {
+        AmazonFileVO amazonFileModel = null;
+
+        try {
+            amazonFileModel = amazonUploadService.upload(file, folderName);
+            String filePath = PREFIX + amazonFileModel.getFilePath();
+            if (AVATAR_TYPE.contains(file.getContentType())) {
+                profile.setProfileAvatar(filePath);
+            } else if (VOICE_TYPE.contains(file.getContentType())){
+                profile.setVoiceIntro(filePath);
+            } else {
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

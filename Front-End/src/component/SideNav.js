@@ -27,7 +27,7 @@ function SideNav() {
     setOpenModal(false);
     setIsActive(false);
   };
-
+  axios.defaults.withCredentials = true;
   const [post, setPost] = useState(null);
   useEffect(() => {
     axios.defaults.withCredentials = true;

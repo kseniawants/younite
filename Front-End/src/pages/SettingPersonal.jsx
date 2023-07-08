@@ -10,7 +10,9 @@ import PhotoWall from '../component/InfoElements/PhotoWall';
 import LocationModal from '../component/InfoElements/Location';
 import InfoModal from '../component/Modal/InfoModal';
 import axios from 'axios';
+
 import AlertModal from '../component/Modal/AlertModal';
+
 
 function SettingPersonal() {
   const [submitting, setSubmitting] = useState(false);
@@ -71,8 +73,10 @@ function SettingPersonal() {
         },
       });
       console.log(response.data);
+
       if (response.data.state == 200) {
         handleAlertRes(response);
+        
       } else {
         handleAlertRes(response);
       }
@@ -167,6 +171,7 @@ function SettingPersonal() {
   const [selectedButtonLabel, setSelectedButtonLabel] = useState(null); // 新增选中的按钮标签状态
   const [selectedLocation, setSelectedLocation] = useState(null);
 
+
   const handleInfoModalButtonClick = () => {
     setInfoModalVisible(true);
   };
@@ -239,8 +244,8 @@ function SettingPersonal() {
   });
 
   const fetchData = () => {
-    axios
-      .get('/users/profile')
+    axios.get('/users/profile')
+
       .then((response) => {
         const userData = response.data;
         setformDatas(userData.data);

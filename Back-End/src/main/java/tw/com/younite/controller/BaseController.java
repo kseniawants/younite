@@ -26,7 +26,6 @@ public class BaseController {
     public static final int INTERNAL_SERVER_ERROR = 500;
 
 
-
     //網頁註冊頁面產生的異常，會被此控制器所攔截，方法的返回值直接傳遞給前端。
     @ExceptionHandler(ServiceException.class)
     public JSONResult<Void> handleException(Throwable e) {
@@ -43,7 +42,7 @@ public class BaseController {
         } else if (e instanceof DuplicatedFullNameException) {
             result.setState(CONFLICT_ERROR);
             result.setMessage("暱稱已被註冊!");
-        } else if(e instanceof DuplicatedUserProfileException) {
+        } else if (e instanceof DuplicatedUserProfileException) {
             result.setState(CONFLICT_ERROR);
             result.setMessage("個人資料已經存在!");
         } else if (e instanceof DuplicatedLikedUserException) {
@@ -55,7 +54,10 @@ public class BaseController {
         } else if (e instanceof UserNotFoundException) {
             result.setState(NOT_FOUND_ERROR);
             result.setMessage("帳號不存在!");
-        } else if (e instanceof  LikedUserNotFoundException) {
+        } else if (e instanceof InterestsNotFoundException) {
+            result.setState(NOT_FOUND_ERROR);
+            result.setMessage("興趣不存在!");
+        } else if (e instanceof LikedUserNotFoundException) {
             result.setState(NOT_FOUND_ERROR);
             result.setMessage("喜歡的用戶不存在或已被刪除!");
         } else if (e instanceof BlockedUserNotFoundException) {
@@ -64,13 +66,13 @@ public class BaseController {
         } else if (e instanceof NoMatchedException) {
             result.setState(NOT_FOUND_ERROR);
             result.setMessage("目前尚未有成功配對的用戶!");
-        } else if (e instanceof  InvitationNotFoundException) {
+        } else if (e instanceof InvitationNotFoundException) {
             result.setState(NOT_FOUND_ERROR);
             result.setMessage("找不到邀請狀態碼，請重新傳入");
         } else if (e instanceof PasswordNotMatchException) {
             result.setState(UNAUTHORIZED_ERROR);
             result.setMessage("密碼錯誤!");
-        } else if (e instanceof  LikedUserException) {
+        } else if (e instanceof LikedUserException) {
             result.setState(INTERNAL_SERVER_ERROR);
             result.setMessage("伺服器異常，無法添加喜歡用戶，請稍後再試!");
         } else if (e instanceof RegisterException) {
@@ -109,15 +111,16 @@ public class BaseController {
 
     /**
      * 獲取session物件中的full name
+     *
      * @param session session物件
      * @return 當前登陸用戶的full name的值
-     * */
-    protected final String getUsernameFromSession (HttpSession session) {
+     */
+    protected final String getUsernameFromSession(HttpSession session) {
         //TODO: getAttribute改成full name.
         return session.getAttribute("username").toString();
     }
 
-    protected final Integer getIDFromSession (HttpSession session) {
+    protected final Integer getIDFromSession(HttpSession session) {
         return Integer.valueOf(session.getAttribute("id").toString());
     }
 }

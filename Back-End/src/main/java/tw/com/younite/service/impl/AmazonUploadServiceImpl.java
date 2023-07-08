@@ -44,22 +44,20 @@ public class AmazonUploadServiceImpl implements AmazonUploadService {
 
     private String FolderName = "avatar";
 
-    public AmazonFileVO upload(MultipartFile file) {
-        String tempFileName = file.getOriginalFilename();
+    public AmazonFileVO upload(MultipartFile file, String folderName) {
         String originalFileName = file.getOriginalFilename();
+        assert originalFileName != null;
         int index = originalFileName.lastIndexOf(".");
         String suffix = originalFileName.substring(index);
         String fileName = UUID.randomUUID().toString().toUpperCase() + suffix;
         String contentType = file.getContentType();
         long fileSize = file.getSize();
-        String dateDir = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        String tempBucketName = FolderName;
-        String filePath = tempBucketName +"/"+ fileName;
+        String filePath = folderName +"/"+ fileName;
         ObjectMetadata objectMetadata = new ObjectMetadata();
         objectMetadata.setContentType(contentType);
         objectMetadata.setContentLength(fileSize);
         try {
-            PutObjectResult putObjectResult = s3.putObject(tempBucketName, fileName, file.getInputStream(), objectMetadata);
+            PutObjectResult putObjectResult = s3.putObject(folderName, fileName, file.getInputStream(), objectMetadata);
             //文件权限,设置为公共读
             s3.setObjectAcl(bucketName, fileName, CannedAccessControlList.PublicRead);
         } catch (AmazonServiceException e) {

@@ -17,12 +17,24 @@ public class InterestServiceTestCase {
     @Autowired
     IInterestService iInterestService;
     @Test
-    public void testInterestService() throws Exception {
+    public void testSetInterestService() {
         List<String> list = new ArrayList<>();
         list.add("游泳");
         list.add("跑步");
         list.add("登山");
         list.add("睡覺");
-        iInterestService.setInterests(286, list);
+        list.add("玩耍");
+        list.add("打球");
+        list.add("打牌");
+        iInterestService.setInterests(300, list);
+    }
+    @Test
+    public void testGetInterestService() {
+        System.out.println("Result = " + iInterestService.getInterests(300));
+    }
+
+    @Test
+    public void testRemovedInterests() {
+        iInterestService.removeInterests(312);
     }
 }
