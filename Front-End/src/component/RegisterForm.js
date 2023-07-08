@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { Input } from './FormElements';
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-import { LoginSocialFacebook } from 'reactjs-social-login';
-import { FacebookLoginButton } from 'react-social-login-buttons';
+import { LoginSocialFacebook, LoginSocialGoogle } from 'reactjs-social-login';
+import { FacebookLoginButton, GoogleLoginButton } from 'react-social-login-buttons';
 import { Link, useNavigate } from 'react-router-dom';
+import AlertModal from './Modal/AlertModal';
 
 function RegisterForm() {
   const [submitting, setSubmitting] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [showAlertModal, setShowAlertModal] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [AlertStateIcon, setAlertStateIcon] = useState('');
+
   const navigate = useNavigate();
   const {
     register,
@@ -17,26 +23,66 @@ function RegisterForm() {
   } = useForm({
     mode: 'onTouched',
   });
-  
-  const onSubmit = async () => {
+
+  const submitForm = () => {
+    return new Promise((resolve) => {
+      // 模拟异步操作，这里使用 setTimeout 延时 2 秒
+      setTimeout(() => {
+        // 假设提交成功
+        resolve();
+      }, 2000);
+    });
+  };
+
+  const handleAlertRes = (response) => {
+    setAlertMessage(response.data.message);
+    setAlertStateIcon(response.data.state);
+    setFormSubmitted(false);
+    setShowAlertModal(true);
+
+    setTimeout(() => {
+      setShowAlertModal(false);
+    }, 2500);
+  };
+
+  const onSubmit = async (data) => {
     try {
       setSubmitting(true);
-      navigate('/personal');
+      const requestBody = {
+        username: data.username,
+        email: data.email,
+        password: data.password,
+      };
+
+      setFormSubmitted(true);
+      await submitForm();
+
+
+      axios.defaults.withCredentials = true;
+      const response = await axios.post('/users/register', requestBody);
+      console.log(response.data);
+
+      if (response.data.state === 201) {
+        handleAlertRes(response);
+        console.log('成功了吧');
+        setTimeout(() => {
+          navigate('/personal');
+        }, 2500);
+      } else {
+        handleAlertRes(response);
+        console.log('API 請求失敗');
+        setTimeout(() => {
+          navigate('/register');
+        }, 2500);
+      }
     } catch (error) {
       console.error(error);
     } finally {
       setSubmitting(false);
     }
   };
-  
-  const password = watch('password');
 
-  const responseMessage = (response) => {
-    console.log(response);
-  };
-  const errorMessage = (error) => {
-    console.log(error);
-  };
+  const password = watch('password');
 
   return (
     <div className='container p-0'>
@@ -54,7 +100,7 @@ function RegisterForm() {
             >
               <div className='mb-1'>
                 <Input
-                  id='name'
+                  id='username'
                   type='text'
                   errors={errors}
                   labelText='帳號名稱'
@@ -69,7 +115,7 @@ function RegisterForm() {
                 <Input
                   id='email'
                   labelText='信箱'
-                  type='email'
+                  type='emailpassword'
                   placeholder='輸入信箱'
                   errors={errors}
                   register={register}
@@ -113,12 +159,42 @@ function RegisterForm() {
                       value: 6,
                       message: '確認密碼長度不少於 6',
                     },
-                  validate: (value) => value === password || '密碼不符合',
+                    validate: (value) => value === password || '密碼不符合',
                   }}
                 ></Input>
               </div>
               <div className='d-flex justify-content-center mt-4'>
                 <Link to='/personal'>
+                  {formSubmitted && (
+                    <div className={`fullscreen-overlay ${submitting ? 'show' : ''}`}>
+                      <svg
+                        version='1.1'
+                        id='L9'
+                        xmlns='http://www.w3.org/2000/svg'
+                        xmlnsXlink='http://www.w3.org/1999/xlink'
+                        x='0px'
+                        y='0px'
+                        viewBox='0 0 100 100'
+                        enableBackground='new 0 0 0 0'
+                        xmlSpace='preserve'
+                      >
+                        <path
+                          fill='#fff'
+                          d='M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50'
+                        >
+                          <animateTransform
+                            attributeName='transform'
+                            attributeType='XML'
+                            type='rotate'
+                            dur='0.5s'
+                            from='0 50 50'
+                            to='360 50 50'
+                            repeatCount='indefinite'
+                          />
+                        </path>
+                      </svg>
+                    </div>
+                  )}
                   <button
                     type='submit'
                     className='btn btn-primary py-3 px-7 rounded-2 d-flex align-items-center justify-content-center'
@@ -131,20 +207,25 @@ function RegisterForm() {
                 </Link>
               </div>
               <div className='pt-3 pb-1 d-flex flex-column align-items-center justify-content-center'>
-                <GoogleOAuthProvider clientId='234241802651-ngs8vhu4c0d2u72nmot9kbt799scpoh9.apps.googleusercontent.com'>
-                  <GoogleLogin
-                    // className='w-100%'
-                    theme='outline'
-                    logo_alignment='center'
-                    width='396px'
-                    size='large'
-                    shape='rectangular'
-                    text='signup_with'
-                    context='signup'
-                    onSuccess={responseMessage}
-                    onError={errorMessage}
-                  />
-                </GoogleOAuthProvider>
+                <LoginSocialGoogle
+                  client_id={process.env.REACT_APP_GOOLGE_LOGIN}
+                  scope='openid profile email'
+                  discoveryDocs='claims_supported'
+                  access_type='offline'
+                  onResolve={({ provider, data }) => {
+                    console.log(provider, data);
+                  }}
+                  onReject={(err) => {
+                    console.log(err);
+                  }}
+                >
+                  <GoogleLoginButton
+                    className='mt-2 d-flex justify-content-center'
+                    style={{ width: '396px', height: '40px' }}
+                  >
+                    <span className='fs-6 fw-light'>使用 Google 帳戶註冊</span>
+                  </GoogleLoginButton>
+                </LoginSocialGoogle>
                 <LoginSocialFacebook
                   appId='672335331385748'
                   onResolve={(response) => {
@@ -172,6 +253,7 @@ function RegisterForm() {
           </form>
         </div>
       </div>
+      <AlertModal message={alertMessage} showModal={showAlertModal} state={AlertStateIcon} />
     </div>
   );
 }

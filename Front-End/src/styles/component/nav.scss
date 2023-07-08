@@ -3,6 +3,7 @@ nav {
   min-height: 100vh;
   min-width: 10%;
   position: fixed;
+  z-index: 999;
 }
 
 .nav-user-image {
@@ -30,7 +31,7 @@ li i {
   &:hover {
     color: #fa6b6b;
     transform: translateX(1px) translateY(-1px);
-    transition: transform 0.2s;
+
     cursor: pointer;
   }
 }
