@@ -4,12 +4,13 @@ import '../styles/all.scss';
 import Select from 'react-select';
 import { useForm, Controller } from 'react-hook-form';
 import { RadioButtonGroups, InfoInput } from '../component/InfoElements/FromElement';
-import {  Button, Divider } from 'antd';
+import { Button, Divider } from 'antd';
 import Avatar from '../component/InfoElements/Avatar';
 import PhotoWall from '../component/InfoElements/PhotoWall';
 import LocationModal from '../component/InfoElements/Location';
 import InfoModal from '../component/Modal/InfoModal';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function SettingPersonal() {
   const [submitting, setSubmitting] = useState(false);
@@ -50,19 +51,19 @@ function SettingPersonal() {
       formData.append('photos', data.photoWall);
       formData.append('hobbies', str);
       axios.defaults.withCredentials = true;
-
       const response = await axios.put('http://localhost:8080/users/profile', formData, {
         headers: {
           'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>',
         },
       });
       console.log(response.data);
-      if (response.data.state == 200) {
+      if (response.data.state == 204) {
         console.log('上傳成功');
+        const navigate = useNavigate;
+        navigate('/home');
       } else {
         console.log('API請求失敗');
       }
-      
     } catch (error) {
       console.error(error);
     } finally {
@@ -127,7 +128,7 @@ function SettingPersonal() {
     { value: 'sports-watching', label: '看體育比賽' },
     { value: 'crafting', label: '手工藝' },
     { value: 'puzzles', label: '解謎' },
-    { value: 'languages', label: '學習語言' }
+    { value: 'languages', label: '學習語言' },
   ];
 
   const profession = [
@@ -145,124 +146,128 @@ function SettingPersonal() {
     { value: 'architect', label: '建築師/室內設計師' },
     { value: 'hospitality', label: '餐飲/酒店從業人員' },
     { value: 'artist', label: '藝術家/藝術從業人員' },
-    { value: 'fitness', label: '健身教練/體育運動員' }
+    { value: 'fitness', label: '健身教練/體育運動員' },
   ];
 
   const [isInfoModalVisible, setInfoModalVisible] = useState(false);
-    const [isLocationModalVisible, setLocationModalVisible] = useState(false);
-    const [isLocationSelected, setLocationSelected] = useState(false);
-    const [selectedButtonLabel, setSelectedButtonLabel] = useState(null); // 新增选中的按钮标签状态
-    const [selectedLocation, setSelectedLocation] = useState(null);
+  const [isLocationModalVisible, setLocationModalVisible] = useState(false);
+  const [isLocationSelected, setLocationSelected] = useState(false);
+  const [selectedButtonLabel, setSelectedButtonLabel] = useState(null); // 新增选中的按钮标签状态
+  const [selectedLocation, setSelectedLocation] = useState(null);
 
-    const handleInfoModalButtonClick = () => {
-      setInfoModalVisible(true);
-    };
-    
-    const handleLocationModalButtonClick = () => {
-      setLocationModalVisible(true);
-    };
-    
-    const handleDialogCancel = () => {
-      setInfoModalVisible(false);
-      setLocationModalVisible(false);
-    };
-    
-    const handleDialogOk = (selectedLocation) => { // 传入选中按钮的标签
-      setLocationModalVisible(false);
-      setLocationSelected(true);
-      setSelectedLocation(selectedLocation); // 更新选中的按钮标签
-      setValue('location', selectedLocation); // 使用setValue更新Controller的值
-    };
+  const handleInfoModalButtonClick = () => {
+    setInfoModalVisible(true);
+  };
 
-    const handleDialogOk1 = (selectedButtonLabel) => { // 传入选中按钮的标签
-      setInfoModalVisible(false);
-      setSelectedButtonLabel(selectedButtonLabel); // 更新选中按钮的标签
-      setValue('datingGoal', selectedButtonLabel); // 使用setValue更新datingGoal字段的值
-    };
+  const handleLocationModalButtonClick = () => {
+    setLocationModalVisible(true);
+  };
 
-    // const handleFileChange = (file) => {
-    //   console.log('File changed:', file);
-    // };
+  const handleDialogCancel = () => {
+    setInfoModalVisible(false);
+    setLocationModalVisible(false);
+  };
 
-    const fileInputRef = useRef(null);
+  const handleDialogOk = (selectedLocation) => {
+    // 传入选中按钮的标签
+    setLocationModalVisible(false);
+    setLocationSelected(true);
+    setSelectedLocation(selectedLocation); // 更新选中的按钮标签
+    setValue('location', selectedLocation); // 使用setValue更新Controller的值
+  };
 
-    const handleFileUpload = (event) => {
+  const handleDialogOk1 = (selectedButtonLabel) => {
+    // 传入选中按钮的标签
+    setInfoModalVisible(false);
+    setSelectedButtonLabel(selectedButtonLabel); // 更新选中按钮的标签
+    setValue('datingGoal', selectedButtonLabel); // 使用setValue更新datingGoal字段的值
+  };
+
+  // const handleFileChange = (file) => {
+  //   console.log('File changed:', file);
+  // };
+
+  const fileInputRef = useRef(null);
+
+  const handleFileUpload = (event) => {
     const file = event.target.files[0];
     const fileName = file.name;
     const fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
 
-      // 检查文件扩展名是否为音频格式
-      if (fileExtension === 'mp3' || fileExtension === 'wav') {
-        // 在这里执行您的音频文件上传逻辑
-        console.log('Uploaded audio file:', file);
-      } else {
-        console.log('Invalid file format. Please select an MP3 or WAV file.');
-      }
-    };
-
-    const handleButtonClick = () => {
-      fileInputRef.current.click();
-    };
-
-    const [photoWallValue, setPhotoWallValue] = useState([]);
-
-    const handleChange = (value) => {
-      setPhotoWallValue(value);
-    };
-
-    const [formDatas, setformDatas] = useState({
-      fullName:'',
-      phone:'',
-      birthday:'',
-      gender:'',
-      sexualOrientation:'',
-      preferredGender:'',
-      professions: '',
-      datingGoal: '',
-      location:'',
-      selfIntro:'',
-    });
-
-    const fetchData = () => {
-      axios.get('http://localhost:8080/users/profile')
-        .then((response) => {
-          const userData = response.data;
-          setformDatas(userData.data); 
-          console.log(userData.data)
-          setValue('fullName', userData.data.fullName);
-          setValue('phone', userData.data.phone);
-          setValue('birthday', birthdayDate);
-          setValue('gender', userData.data.gender);
-          setValue('sexualOrientation', userData.data.sexualOrientation);
-          setValue('preferredGender', userData.data.preferredGender);
-          setValue('professions', userData.data.professions);
-          setValue('datingGoal', userData.data.datingGoal);
-          setValue('location', userData.data.location);
-          setValue('profileAvatar', userData.data.profileAvatar);
-          setValue('selfIntro', userData.data.selfIntro);
-          setSelectedButtonLabel( userData.data.datingGoal);
-          setSelectedLocation(userData.data.location);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+    // 检查文件扩展名是否为音频格式
+    if (fileExtension === 'mp3' || fileExtension === 'wav') {
+      // 在这里执行您的音频文件上传逻辑
+      console.log('Uploaded audio file:', file);
+    } else {
+      console.log('Invalid file format. Please select an MP3 or WAV file.');
     }
+  };
 
-    useEffect(() => {
-      fetchData();
-    }, []);
+  const handleButtonClick = () => {
+    fileInputRef.current.click();
+  };
 
-    const defaultValue = formDatas.professions ? profession.find(option => option.label === formDatas.professions) : profession[0];
-    const birthdayDate = formDatas.birthday.split("T")[0];
+  const [photoWallValue, setPhotoWallValue] = useState([]);
 
-    const handleChanges = (e) => {
-      const { name, value } = e.target;
-      setformDatas((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    };
+  const handleChange = (value) => {
+    setPhotoWallValue(value);
+  };
 
+  const [formDatas, setformDatas] = useState({
+    fullName: '',
+    phone: '',
+    birthday: '',
+    gender: '',
+    sexualOrientation: '',
+    preferredGender: '',
+    professions: '',
+    datingGoal: '',
+    location: '',
+    selfIntro: '',
+  });
+
+  const fetchData = () => {
+    axios
+      .get('http://localhost:8080/users/profile')
+      .then((response) => {
+        const userData = response.data;
+        setformDatas(userData.data);
+        console.log(userData.data);
+        setValue('fullName', userData.data.fullName);
+        setValue('phone', userData.data.phone);
+        setValue('birthday', birthdayDate);
+        setValue('gender', userData.data.gender);
+        setValue('sexualOrientation', userData.data.sexualOrientation);
+        setValue('preferredGender', userData.data.preferredGender);
+        setValue('professions', userData.data.professions);
+        setValue('datingGoal', userData.data.datingGoal);
+        setValue('location', userData.data.location);
+        setValue('profileAvatar', userData.data.profileAvatar);
+        setValue('selfIntro', userData.data.selfIntro);
+        setSelectedButtonLabel(userData.data.datingGoal);
+        setSelectedLocation(userData.data.location);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const defaultValue = formDatas.professions
+    ? profession.find((option) => option.label === formDatas.professions)
+    : profession[0];
+  const birthdayDate = formDatas.birthday.split('T')[0];
+
+  const handleChanges = (e) => {
+    const { name, value } = e.target;
+    setformDatas((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   return (
     <>
@@ -273,8 +278,8 @@ function SettingPersonal() {
               <form className='row justify-content-center flex-md-row flex-column-reverse'>
                 <div className='col-md-5'>
                   <div className='pb-4 w-50'>
-                    <i className="fa-solid fa-user text-black"/>
-                    <span className="text-danger p-1">*</span>
+                    <i className='fa-solid fa-user text-black' />
+                    <span className='text-danger p-1'>*</span>
                     <InfoInput
                       id='fullName'
                       labelText='姓名'
@@ -290,8 +295,8 @@ function SettingPersonal() {
                     ></InfoInput>
                   </div>
                   <div className='pb-4 w-50'>
-                    <i className="fa-solid fa-phone text-black"/>
-                    <span className="text-danger p-1">*</span>
+                    <i className='fa-solid fa-phone text-black' />
+                    <span className='text-danger p-1'>*</span>
                     <InfoInput
                       id='phone'
                       labelText='電話'
@@ -311,8 +316,8 @@ function SettingPersonal() {
                     />
                   </div>
                   <div className='pb-4 w-50'>
-                    <i className="fa-solid fa-cake-candles text-black"></i>
-                    <span className="text-danger p-1">*</span>
+                    <i className='fa-solid fa-cake-candles text-black'></i>
+                    <span className='text-danger p-1'>*</span>
                     {/* <label htmlFor="">生日</label>
                     <br /> */}
                     <InfoInput
@@ -340,12 +345,12 @@ function SettingPersonal() {
                     />
                   </div>
                   <div className='pb-4'>
-                    <i className="fa-solid fa-briefcase text-black"></i>
-                    <span className="text-danger p-1">*</span>
+                    <i className='fa-solid fa-briefcase text-black'></i>
+                    <span className='text-danger p-1'>*</span>
                     <label className='mb-2'>職業</label>
                     <br />
                     <Controller
-                      name="professions"
+                      name='professions'
                       control={control}
                       rules={{ required: '請選擇職業' }}
                       defaultValue={[]}
@@ -353,15 +358,15 @@ function SettingPersonal() {
                         <Select
                           {...field}
                           options={profession}
-                          className="basic-multi-select w-50 rounded shadow-sm"
-                          classNamePrefix="select"
+                          className='basic-multi-select w-50 rounded shadow-sm'
+                          classNamePrefix='select'
                           styles={{
                             placeholder: (provided) => ({
                               ...provided,
                               color: 'rgba(0, 0, 0, 0.2)',
                             }),
                           }}
-                          placeholder="選擇職業"
+                          placeholder='選擇職業'
                           value={defaultValue}
                           onChange={(selectedOption) => {
                             setformDatas((prevData) => ({
@@ -373,16 +378,21 @@ function SettingPersonal() {
                       )}
                     />
                     {errors.profession && (
-                      <div className="error-message text-danger mt-2" style={{fontSize: '0.9rem'}}>{errors.profession.message}</div>
+                      <div
+                        className='error-message text-danger mt-2'
+                        style={{ fontSize: '0.9rem' }}
+                      >
+                        {errors.profession.message}
+                      </div>
                     )}
                   </div>
                   <div className='pb-4'>
-                    <i className="fa-solid fa-venus-mars text-black"></i>
-                    <span className="text-danger p-1">*</span>
+                    <i className='fa-solid fa-venus-mars text-black'></i>
+                    <span className='text-danger p-1'>*</span>
                     <label>性別</label>
                     <br />
                     <RadioButtonGroups
-                      name="gender"
+                      name='gender'
                       options={radioGender}
                       register={register}
                       errors={errors}
@@ -391,15 +401,15 @@ function SettingPersonal() {
                       }}
                       checked={formDatas.gender}
                       onChange={handleChanges}
-                      />
+                    />
                   </div>
                   <div className='pb-4'>
-                    <i className="fa-solid fa-transgender text-black"></i>
-                    <span className="text-danger p-1">*</span>
+                    <i className='fa-solid fa-transgender text-black'></i>
+                    <span className='text-danger p-1'>*</span>
                     <label>性向</label>
                     <br />
                     <RadioButtonGroups
-                      name="sexualOrientation"
+                      name='sexualOrientation'
                       options={radioSO}
                       register={register}
                       errors={errors}
@@ -411,12 +421,12 @@ function SettingPersonal() {
                     />
                   </div>
                   <div className='pb-4'>
-                    <i className="fa-solid fa-users text-black"></i>
-                    <span className="text-danger p-1">*</span>
+                    <i className='fa-solid fa-users text-black'></i>
+                    <span className='text-danger p-1'>*</span>
                     <label>顯示給我看</label>
                     <br />
                     <RadioButtonGroups
-                      name="preferredGender"
+                      name='preferredGender'
                       options={radioShow}
                       register={register}
                       errors={errors}
@@ -428,12 +438,12 @@ function SettingPersonal() {
                     />
                   </div>
                   <div className='pb-4'>
-                    <i className="fa-solid fa-heart-circle-plus text-black"></i>
-                    <span className="text-danger p-1">*</span>
+                    <i className='fa-solid fa-heart-circle-plus text-black'></i>
+                    <span className='text-danger p-1'>*</span>
                     <label className='mb-2'>興趣</label>
                     <br />
                     <Controller
-                      name="hobbies"
+                      name='hobbies'
                       control={control}
                       rules={{ required: '請選擇興趣' }}
                       defaultValue={[]}
@@ -442,26 +452,31 @@ function SettingPersonal() {
                           {...field}
                           isMulti
                           options={hobbies}
-                          className="basic-multi-select w-75 rounded shadow-sm"
-                          classNamePrefix="select"
+                          className='basic-multi-select w-75 rounded shadow-sm'
+                          classNamePrefix='select'
                           styles={{
                             placeholder: (provided) => ({
                               ...provided,
                               color: 'rgba(0, 0, 0, 0.2)',
                             }),
                           }}
-                          placeholder="新增興趣"
+                          placeholder='新增興趣'
                         />
                       )}
                     />
                     {errors.hobbies && (
-                      <div className="error-message text-danger mt-2" style={{fontSize: '0.9rem'}}>{errors.hobbies.message}</div>
+                      <div
+                        className='error-message text-danger mt-2'
+                        style={{ fontSize: '0.9rem' }}
+                      >
+                        {errors.hobbies.message}
+                      </div>
                     )}
                   </div>
                   <div className='d-flex pb-4'>
                     <div className='mb-2 pe-5'>
-                      <i className="fa-solid fa-magnifying-glass text-black"></i>
-                      <span className="text-danger p-1">*</span>
+                      <i className='fa-solid fa-magnifying-glass text-black'></i>
+                      <span className='text-danger p-1'>*</span>
                       <label className='mb-2'>我想找尋</label>
                       <br />
                       <Controller
@@ -470,7 +485,7 @@ function SettingPersonal() {
                         rules={{ required: true }}
                         render={({ field }) => (
                           <Button
-                            type="dashed"
+                            type='dashed'
                             {...field}
                             className={` ${errors.datingGoal && 'is-invalid'}`}
                             onClick={handleInfoModalButtonClick}
@@ -481,7 +496,7 @@ function SettingPersonal() {
                         )}
                       />
                       {errors.datingGoal && !selectedButtonLabel && (
-                        <div className="invalid-feedback">請選擇交友目標</div>
+                        <div className='invalid-feedback'>請選擇交友目標</div>
                       )}
                       {isInfoModalVisible && (
                         <InfoModal
@@ -492,7 +507,9 @@ function SettingPersonal() {
                           selectedButtonLabel={selectedButtonLabel}
                         />
                       )}
-                      {selectedButtonLabel && <div className="completed-tag">{selectedButtonLabel}</div>}
+                      {selectedButtonLabel && (
+                        <div className='completed-tag'>{selectedButtonLabel}</div>
+                      )}
                     </div>
                     <div className='mb-2 ps-5'>
                       <i className='fa-solid fa-location-dot text-black'></i>
@@ -501,11 +518,11 @@ function SettingPersonal() {
                       <br />
                       <Controller
                         control={control}
-                        name="location"
+                        name='location'
                         rules={{ required: true }}
                         render={({ field }) => (
                           <Button
-                            type="dashed"
+                            type='dashed'
                             {...field}
                             className={` ${errors.location && 'is-invalid'}`}
                             onClick={handleLocationModalButtonClick}
@@ -515,8 +532,15 @@ function SettingPersonal() {
                           </Button>
                         )}
                       />
-                      {isLocationSelected && selectedLocation && <div className="completed-tag"><i className="fa-solid fa-check text-danger"/>已選擇地點</div>}
-                      {errors.location && !isLocationSelected && <div className="invalid-feedback">請選擇地點</div>}
+                      {isLocationSelected && selectedLocation && (
+                        <div className='completed-tag'>
+                          <i className='fa-solid fa-check text-danger' />
+                          已選擇地點
+                        </div>
+                      )}
+                      {errors.location && !isLocationSelected && (
+                        <div className='invalid-feedback'>請選擇地點</div>
+                      )}
                       <LocationModal
                         visible={isLocationModalVisible}
                         onCancel={handleDialogCancel}
@@ -529,45 +553,57 @@ function SettingPersonal() {
                   </Divider>
 
                   <div className='pb-4'>
-                    <i className="fa-solid fa-volume-low text-black pe-2"></i>
+                    <i className='fa-solid fa-volume-low text-black pe-2'></i>
                     <label className='mb-2'>語音自我介紹</label>
                     <br />
                     <input
-                      type="file"
+                      type='file'
                       style={{ display: 'none' }}
                       ref={fileInputRef}
                       onChange={handleFileUpload}
-                      accept=".mp3,.wav" // 限制可选的文件类型为 MP3 和 WAV
+                      accept='.mp3,.wav' // 限制可选的文件类型为 MP3 和 WAV
                     />
-                    <Button  type="dashed d-flex col align-items-center" onClick={handleButtonClick}>
-                      <i className="fa-solid fa-volume-high text-black pe-1"></i>
-                      <div className='circle rounded-circle me-1' style={{backgroundColor:"#D3D3D3", width:"4px", height:"4px"}}></div>
-                      <div className='circle rounded-circle me-1' style={{backgroundColor:"#D3D3D3", width:"4px", height:"4px"}}></div>
-                      <div className='circle rounded-circle me-1' style={{backgroundColor:"#D3D3D3", width:"4px", height:"4px"}}></div>
+                    <Button type='dashed d-flex col align-items-center' onClick={handleButtonClick}>
+                      <i className='fa-solid fa-volume-high text-black pe-1'></i>
+                      <div
+                        className='circle rounded-circle me-1'
+                        style={{ backgroundColor: '#D3D3D3', width: '4px', height: '4px' }}
+                      ></div>
+                      <div
+                        className='circle rounded-circle me-1'
+                        style={{ backgroundColor: '#D3D3D3', width: '4px', height: '4px' }}
+                      ></div>
+                      <div
+                        className='circle rounded-circle me-1'
+                        style={{ backgroundColor: '#D3D3D3', width: '4px', height: '4px' }}
+                      ></div>
                     </Button>
                   </div>
-                    <div className='pb-4'>
-                      <i className="fa-solid fa-pen-to-square text-black pe-2"/>
-                      <label htmlFor="selfIntro" className="form-label mb-2">文字自我介紹</label>
-                      <textarea 
-                        className="form-control" 
-                        id="selfIntro" rows="3" 
-                        {...register('selfIntro')}
-                        value={formDatas.selfIntro}
-                        onChange={handleChanges}
-                        ></textarea>
-                    </div>
+                  <div className='pb-4'>
+                    <i className='fa-solid fa-pen-to-square text-black pe-2' />
+                    <label htmlFor='selfIntro' className='form-label mb-2'>
+                      文字自我介紹
+                    </label>
+                    <textarea
+                      className='form-control'
+                      id='selfIntro'
+                      rows='3'
+                      {...register('selfIntro')}
+                      value={formDatas.selfIntro}
+                      onChange={handleChanges}
+                    ></textarea>
                   </div>
+                </div>
                 <div className='col-md-4'>
                   <div className='p-4 mb-4'>
-                    <span className="text-danger p-1">*</span>
+                    <span className='text-danger p-1'>*</span>
                     <label className='mb-4'>大頭貼照片</label>
                     <Controller
-                        control={control}
-                        name="profileAvatar"
-                        rules={{ required: true }}
-                        render={({ field }) => (
-                          <>
+                      control={control}
+                      name='profileAvatar'
+                      rules={{ required: true }}
+                      render={({ field }) => (
+                        <>
                           <Avatar
                             {...field}
                             className={errors.profileAvatar ? 'is-invalid' : ''}
@@ -576,15 +612,11 @@ function SettingPersonal() {
                               field.onChange(file);
                             }}
                           />
-                          <input
-                            type="hidden"
-                            {...field}
-                            value={field.value}
-                          />
+                          <input type='hidden' {...field} value={field.value} />
                         </>
                       )}
-                      />
-                      {errors.profileAvatar && <div className="invalid-feedback ">請上傳大頭照</div>}
+                    />
+                    {errors.profileAvatar && <div className='invalid-feedback '>請上傳大頭照</div>}
                   </div>
                   <div className='p-4 mb-4'>
                     <label className='mb-4'>個人檔案照片</label>

@@ -31,7 +31,7 @@ public class AmazonS3Controller extends BaseController{
     public JSONResult<Void> upload(@RequestParam("file") MultipartFile file) {
         AmazonFileVO amazonFileModel = null;
         try {
-            amazonFileModel = amazonUploadService.upload(file);
+            amazonFileModel = amazonUploadService.upload(file, "avatar");
             System.out.println("amazonFileModel = " + amazonFileModel.getFilePath());
         } catch (Exception e) {
             e.printStackTrace();

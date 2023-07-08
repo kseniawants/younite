@@ -27,7 +27,7 @@ function SideNav() {
     setOpenModal(false);
     setIsActive(false);
   };
-
+  axios.defaults.withCredentials = true;
   const [post, setPost] = useState(null);
   useEffect(() => {
     axios.get('http://localhost:8080/users/profile').then((response) => {
@@ -43,7 +43,7 @@ function SideNav() {
       <nav className='bg-secondary d-flex p-0 justify-content-between flex-column align-items-center'>
         <figure className='text-decoration-none mt-5 d-flex flex-column align-items-center'>
           <img src={Logo} alt='YouNite-Logo' className='mb-5' style={{ height: '20px' }} />
-          <img src={post.data.profileAvatar} alt='Picture' className='mb-1 nav-user-image'/>
+          <img src={post.data.profileAvatar} alt='Picture' className='mb-1 nav-user-image' />
           <h6 className='text-black nav-text mt-2'>{post.data.fullName}</h6>
         </figure>
 
