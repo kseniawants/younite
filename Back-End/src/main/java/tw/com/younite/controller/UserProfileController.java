@@ -181,25 +181,26 @@ public class UserProfileController extends BaseController {
                                           String birthday,
                                           @RequestParam(value = "hobbies", required = false) List<String> hobbies,
                                           @RequestParam(value = "voice", required = false) MultipartFile voice,
-                                          @RequestParam(value = "avatar") MultipartFile avatar,
+                                          @RequestParam(value = "avatar", required = false) MultipartFile avatar,
                                           @RequestParam(value = "photos", required = false) MultipartFile[] photos) {
         Integer userID = getIDFromSession(session);
+        UserProfileEntity originalProfile = iUserProfileService.getUserProfile(userID);
+        String originalAvatar = originalProfile.getProfileAvatar();
+        String originalVoice = originalProfile.getVoiceIntro();
+        //新用戶
         userProfile.setUserId(userID);
         Date date = dateUtil.parseDate(birthday);
         userProfile.setBirthday(date);
-        System.out.println("avatar = " + avatar);
         if (avatar != null) {
             uploadFile(avatar, userProfile, "avatar");
         } else {
-            String originalFilePath = userProfile.getProfileAvatar();
-            userProfile.setProfileAvatar(originalFilePath);
+            userProfile.setProfileAvatar(originalAvatar);
         }
 
         if (voice != null) {
             uploadFile(voice, userProfile, "voice");
         } else {
-            String originalFilePath = userProfile.getVoiceIntro();
-            userProfile.setVoiceIntro(originalFilePath);
+            userProfile.setVoiceIntro(originalVoice);
         }
 
 
@@ -253,7 +254,6 @@ public class UserProfileController extends BaseController {
                 setUserPhotoPath(userPhotos, i, photoPath);
             }
         }
-
         iUserPhotosService.insertPhotos(userPhotos);
     }
 

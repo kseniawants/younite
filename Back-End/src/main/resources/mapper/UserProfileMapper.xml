@@ -38,12 +38,12 @@
          `gender`, `sexual_orientation`, `preferred_gender`,
          `dating_goal`, `self_intro`, `location`,
          `blocked_id`, `profile_avatar`, `birthday`,
-         `voice_intro`, `phone`, `professions`)
+         `voice_intro`, `phone`, `professions`, `city`)
         VALUES (#{profileId}, #{id}, #{fullName},
                 #{gender}, #{sexualOrientation}, #{preferredGender},
                 #{datingGoal}, #{selfIntro}, #{location},
                 #{blockId}, #{profileAvatar}, #{birthday},
-                #{voiceIntro}, #{phone}, #{professions})
+                #{voiceIntro}, #{phone}, #{professions}, #{city})
     </insert>
 
     <update id="blockUser">
@@ -71,7 +71,8 @@
             `profile_avatar`     = #{profileAvatar},
             `voice_intro`        = #{voiceIntro},
             `phone`              = #{phone},
-            `professions`        = #{professions}
+            `professions`        = #{professions},
+            `city`               = #{city}
         WHERE `user_id` = #{userId}
     </update>
 
