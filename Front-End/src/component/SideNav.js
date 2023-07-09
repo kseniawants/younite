@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import Logo from '../assets/logo/logo-type.png';
 import '../styles/component/nav.scss';
+// import UserImage from '../assets/images/sia.png';
 import ChatBotModal from './Modal/ChatBotModal';
 import NotificationCollapse from '../pages/NotificationCollapse';
 import axios from 'axios';

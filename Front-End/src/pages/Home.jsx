@@ -39,8 +39,8 @@ function Home() {
             </div>
           </div>
           <div className='bg-pageMain col'>
-            <Link to='/store'>
-              <i className='fa-solid fa-user-lock' style={{ color: '#82898D' }}></i>
+            <Link to="/store">
+              <i className='fa-solid fa-user-lock' style={{color:'#82898D'}}></i>
             </Link>
             <h6>誰喜歡你</h6>
             <div className='user-lock'>
