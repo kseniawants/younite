@@ -41,38 +41,58 @@ function FilterModal({ closeModal }) {
   return (
     <>
       {/* 宣告 Draggable handle 選擇抓取的物件範圍 */}
-      <Draggable handle='.modal-bg' onDrag={handleDrag}>
+      <Draggable handle='.filter-modal-bg' cancel='input' onDrag={handleDrag}>
         <section
-          className={`modal-bg container-fluid p-0 ${fadeIn ? 'fade-in' : ''}`}
+          className={`filter-modal-bg container-fluid p-0 ${fadeIn ? 'fade-in' : ''}`}
           style={{ top: position.y, left: position.x }}
         >
           <div className='row p-3 justify-content-center '>
-            <i className='col-6 fa-solid fa-robot mt-1'></i>
-            <div className='col-6 d-flex justify-content-end'>
-              <button
-                type='button'
-                className='btn-close'
-                onClick={() => closeModal(false)}
-              ></button>
+            <div className='filter-container'>
+              <div className='col-12 d-flex justify-content-end'>
+                <button
+                  type='button'
+                  className='btn-close'
+                  onClick={() => closeModal(false)}
+                ></button>
+              </div>
+              {/* ↓↓↓ 下面可以隨意更改，區塊直接用 col 來寫  ↓↓↓*/}
+              <label htmlFor='customRange1' className='form-label'>
+                距離
+                <span id='output' className='bg-lightblue text-black rounded px-2 mx-3'>
+                  {rangeVal}
+                </span>
+                公里
+              </label>
+              <input
+                type='range'
+                className='form-range'
+                id='customRange1'
+                value={rangeVal}
+                min='0'
+                max='999'
+                step='10'
+                onChange={updateRange}
+              />
+              <hr className='mx-1' />
+              <label htmlFor='customRange1' className='form-label'>
+                年齡
+                <span id='output' className='bg-lightblue text-black rounded px-2 mx-3'>
+                  {rangeVal}
+                </span>
+                歲
+              </label>
+              <input
+                type='range'
+                className='form-range'
+                id='customRange1'
+                value={rangeVal}
+                min='0'
+                max='100'
+                step='1'
+                onChange={updateRange}
+              />
+              {/* ↑↑↑ 上面可以隨意更改，區塊直接用 col 來寫 ↑↑↑ */}
             </div>
-            {/* ↓↓↓ 下面可以隨意更改，區塊直接用 col 來寫  ↓↓↓*/}
-            <label htmlFor='customRange1' className='form-label'>
-              Example range
-            </label>
-            <input
-              type='range'
-              className='form-range'
-              id='customRange1'
-              value={rangeVal}
-              min='0'
-              max='5'
-              step='0.5'
-              onChange={updateRange}
-            />
-            <span id='output' className='bg-lightblue text-white rounded px-2 mx-3'>
-              {rangeVal}
-            </span>
-            {/* ↑↑↑ 上面可以隨意更改，區塊直接用 col 來寫 ↑↑↑ */}
           </div>
         </section>
       </Draggable>
