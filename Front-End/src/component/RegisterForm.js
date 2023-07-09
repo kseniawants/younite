@@ -26,20 +26,13 @@ function RegisterForm() {
 
   const submitForm = () => {
     return new Promise((resolve) => {
-      // 模拟异步操作，这里使用 setTimeout 延时 2 秒
       setTimeout(() => {
-        // 假设提交成功
         resolve();
-      }, 2000);
+      }, 1000);
     });
   };
 
-  const handleAlertModalClose = () => {
-    setShowAlertModal(false); // 關閉彈出視窗
-  };
-
-  const handleRegistrationResponse = (response) => {
-    //Alert用
+  const handleAlertRes = (response) => {
     setAlertMessage(response.data.message);
     setAlertStateIcon(response.data.state);
     setFormSubmitted(false);
@@ -61,19 +54,20 @@ function RegisterForm() {
 
       setFormSubmitted(true);
       await submitForm();
-      axios.defaults.withCredentials = true;
 
+
+      axios.defaults.withCredentials = true;
       const response = await axios.post('/users/register', requestBody);
       console.log(response.data);
 
       if (response.data.state === 201) {
-        handleRegistrationResponse(response);
+        handleAlertRes(response);
         console.log('成功了吧');
         setTimeout(() => {
           navigate('/personal');
         }, 2500);
       } else {
-        handleRegistrationResponse(response);
+        handleAlertRes(response);
         console.log('API 請求失敗');
         setTimeout(() => {
           navigate('/register');
@@ -257,12 +251,7 @@ function RegisterForm() {
           </form>
         </div>
       </div>
-      <AlertModal
-        message={alertMessage}
-        showModal={showAlertModal}
-        handleModalClose={handleAlertModalClose}
-        state={AlertStateIcon}
-      />
+      <AlertModal message={alertMessage} showModal={showAlertModal} state={AlertStateIcon} />
     </div>
   );
 }

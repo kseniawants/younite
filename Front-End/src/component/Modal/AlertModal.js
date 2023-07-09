@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../../styles/Modal/alertModal.scss';
 
-const AlertModal = ({ state, message, showModal, handleModalClose }) => {
+const AlertModal = ({ state, message, showModal }) => {
   let icon = '';
   console.log(state);
   if (state === 201 || state === 200) {
@@ -96,21 +96,9 @@ const AlertModal = ({ state, message, showModal, handleModalClose }) => {
         >
           <div className='modal-dialog'>
             <div className='modal-content'>
-              <div className='modal-header p-0'>
-                <h5 className='modal-title'></h5>
-                <button
-                  type='button'
-                  className='close btn-md'
-                  data-dismiss='modal'
-                  aria-label='Close'
-                  onClick={handleModalClose}
-                >
-                  <span aria-hidden='true'>&times;</span>
-                </button>
-              </div>
               <div className='modal-body'>
                 {icon}
-                <h5 className='ms-3 '>{message}</h5>
+                <h5 className='ms-3 mt-2 '>{message}</h5>
               </div>
             </div>
           </div>
@@ -124,7 +112,6 @@ AlertModal.propTypes = {
   state: PropTypes.number.isRequired,
   message: PropTypes.string.isRequired,
   showModal: PropTypes.bool.isRequired,
-  handleModalClose: PropTypes.func.isRequired,
 };
 
 export default AlertModal;

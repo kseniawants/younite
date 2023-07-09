@@ -10,9 +10,9 @@ import AlertModal from './Modal/AlertModal';
 function LoginForm() {
   const [submitting, setSubmitting] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [showAlertModal, setShowAlertModal] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
-  const [AlertStateIcon, setAlertStateIcon] = useState('');
+  const [showAlertModal, setShowAlertModal] = useState(false); //Alert 視窗
+  const [alertMessage, setAlertMessage] = useState(''); //Alert 訊息
+  const [AlertStateIcon, setAlertStateIcon] = useState(''); //Alert icon
 
   // 轉址判斷
   const navigate = useNavigate();
@@ -24,17 +24,12 @@ function LoginForm() {
     mode: 'onTouched',
   });
 
-  const handleAlertModalClose = () => {
-    setShowAlertModal(false); // 關閉彈出視窗
-  };
-
-  const handleRegistrationResponse = (response) => {
+  const handleAlertRes = (response) => {
     //Alert用
     setAlertMessage(response.data.message);
     setAlertStateIcon(response.data.state);
     setFormSubmitted(false);
     setShowAlertModal(true);
-
     setTimeout(() => {
       setShowAlertModal(false);
     }, 2500);
@@ -42,15 +37,14 @@ function LoginForm() {
 
   const submitForm = () => {
     return new Promise((resolve) => {
-      // 模拟异步操作，这里使用 setTimeout 延时 2 秒
       setTimeout(() => {
-        // 假设提交成功
         resolve();
-      }, 2000);
+      }, 1000);
     });
   };
 
   // 表單發送的按鈕
+  axios.defaults.withCredentials = true; //Axios 支援跨域請求和 Cookie 傳遞
   const onSubmit = async (data) => {
     console.log(data);
     try {
@@ -62,17 +56,16 @@ function LoginForm() {
         password: data.password,
       };
       axios.defaults.withCredentials = true;
-
       const response = await axios.post('/users/login', requestBody);
       console.log(requestBody);
       if (response.data.state === 200) {
-        handleRegistrationResponse(response);
+        handleAlertRes(response);
         console.log(response);
         setTimeout(() => {
           navigate('/home');
         }, 2500);
       } else {
-        handleRegistrationResponse(response);
+        handleAlertRes(response);
         console.log(response);
         setTimeout(() => {
           navigate('/login');
@@ -108,9 +101,9 @@ function LoginForm() {
                   labelText='使用者帳號/信箱/手機號碼'
                   placeholder='輸入使用者帳號/信箱/手機號碼'
                   register={register}
-                  // rules={{
-                  //   required: '使用者帳號/信箱/手機號碼為必填',
-                  // }}
+                  rules={{
+                    required: '使用者帳號/信箱/手機號碼為必填',
+                  }}
                 ></Input>
               </div>
               <div className='mb-1'>
@@ -131,7 +124,7 @@ function LoginForm() {
                 ></Input>
               </div>
               <div className='d-flex justify-content-center mt-4'>
-                <Link to='/home'>
+                {/* <Link to='/home'> */}
                   {formSubmitted && (
                     <div className={`fullscreen-overlay ${submitting ? 'show' : ''}`}>
                       <svg
@@ -171,7 +164,7 @@ function LoginForm() {
                   >
                     {submitting ? '正在登入...' : '登入'}
                   </button>
-                </Link>
+                {/* </Link> */}
               </div>
               <div className='pt-3 pb-1 d-flex flex-column align-items-center justify-content-center'>
                 <LoginSocialGoogle
@@ -220,12 +213,7 @@ function LoginForm() {
           </form>
         </div>
       </div>
-      <AlertModal
-        message={alertMessage}
-        showModal={showAlertModal}
-        handleModalClose={handleAlertModalClose}
-        state={AlertStateIcon}
-      />
+      <AlertModal message={alertMessage} showModal={showAlertModal} state={AlertStateIcon} />
     </div>
   );
 }

@@ -9,7 +9,8 @@ import Home from './pages/Home';
 import SettingPersonal from './pages/SettingPersonal';
 import ChatRoom from './pages/ChatRoom';
 import Store from './pages/Store';
-import ShowMore from './pages/ShowMore';
+import ShowMore from './component/ShowMore';
+import LikeShowMore from './pages/LikeShowMore';
 
 function App() {
   return (
@@ -22,7 +23,9 @@ function App() {
         <Route path='/chatroom' element={<ChatRoom />}></Route>
         <Route path='/' element={<HomeLayout />}>
           <Route path='/home' element={<Home />}></Route>
-          <Route path='/show' element={<ShowMore />}></Route>
+          <Route path='/show' element={<ShowMore />}>
+            <Route path='/show/like' element={<LikeShowMore />}></Route>
+          </Route>
           <Route path='/setting' element={<SettingPersonal />}></Route>
           <Route path='/store' element={<Store />}></Route>
         </Route>

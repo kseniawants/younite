@@ -84,6 +84,7 @@ export const RadioButtonGroup = ({ name, options, register, errors, rules }) => 
               className={`btn btn-outline-radio mt-2 me-4 px-4 rounded shadow-sm bg-white ${
                 errors[name] && 'is-invalid'
               }`}
+              style={{zIndex: '0'}}
             >
               {option.label}
             </label>

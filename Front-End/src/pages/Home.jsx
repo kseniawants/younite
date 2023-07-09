@@ -12,9 +12,9 @@ function Home() {
         <section className='bg-pageMain row d-flex'>
           <div className='bg-pageTitle d-flex'>
             <h6>你可能喜歡</h6>
-            <button type='button' className='btn btn-primary btn-sm text-white'>
+            {/* <button type='button' className='btn btn-primary btn-sm text-white'>
               <i className='fa-solid fa-filter me-1' size='sm'></i>篩選
-            </button>
+            </button> */}
           </div>
           <div className='bg-pagePhoto d-flex mt-3 mb-3'>
             <PeoplePhoto />
@@ -26,7 +26,7 @@ function Home() {
             <PeoplePhoto />
           </div>
           <div className='bg-pageMore d-flex'>
-            <Link to='/show'>顯示更多...</Link>
+            <Link to='/show/like'>顯示更多...</Link>
           </div>
         </section>
         <section className='row justify-content-between mt-3'>
