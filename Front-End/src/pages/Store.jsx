@@ -57,7 +57,6 @@ function Store() {
         })
         .catch((error) => {
           console.error(error);
-          console.log(`{ itemId: ${itemId} }`);
         });
     }
   };

@@ -12,9 +12,6 @@ function Home() {
         <section className='bg-pageMain row d-flex'>
           <div className='bg-pageTitle d-flex'>
             <h6>你可能喜歡</h6>
-            <button type='button' className='btn btn-primary btn-sm text-white'>
-              <i className='fa-solid fa-filter me-1' size='sm'></i>篩選
-            </button>
           </div>
           <div className='bg-pagePhoto d-flex mt-3 mb-3'>
             <PeoplePhoto />
@@ -39,8 +36,8 @@ function Home() {
             </div>
           </div>
           <div className='bg-pageMain col'>
-            <Link to="/store">
-              <i className='fa-solid fa-user-lock' style={{color:'#82898D'}}></i>
+            <Link to='/store'>
+              <i className='fa-solid fa-user-lock' style={{ color: '#82898D' }}></i>
             </Link>
             <h6>誰喜歡你</h6>
             <div className='user-lock'>
