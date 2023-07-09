@@ -48,12 +48,4 @@ public class InterestController extends BaseController {
         return new JSONResult<>(OK, data);
     }
 
-    @ApiOperation("查詢相似興趣用戶資料跟興趣")
-    @GetMapping("/users/mutualInterestsMap")
-    public JSONResult<Map<UserProfileEntity, List<String>>> getMutualInterestss(@ApiParam(value = "查詢類似興趣用戶資料，並回傳", required = true)
-                                                                                HttpSession session) {
-        Integer userID = getIDFromSession(session);
-        Map<UserProfileEntity, List<String>>  data = interestService.findUserProfilesByInterestss(userID);
-        return new JSONResult<>(OK, data);
-    }
 }
