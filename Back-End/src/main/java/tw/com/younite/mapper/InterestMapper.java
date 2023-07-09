@@ -13,4 +13,5 @@ public interface InterestMapper {
     Integer removeInterests(Integer userID);
     Integer updateInterests(Integer userID);
 
+
 }

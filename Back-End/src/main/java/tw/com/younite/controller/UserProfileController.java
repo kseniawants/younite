@@ -28,6 +28,7 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Api(tags = "個人資料建立")
 @RestController
@@ -173,6 +174,15 @@ public class UserProfileController extends BaseController {
         return new JSONResult<>(OK, data);
     }
 
+    @ApiOperation("獲得相同職業的使用者名單")
+    @GetMapping("/users/profiles/profession")
+    public JSONResult<List<Map<String, Object>>> getProfilesByProfession(@ApiParam(value = "接收ID才取得相同興趣的使用者", required = true)
+                                                                         HttpSession session) {
+        Integer userID = getIDFromSession(session);
+        List<Map<String, Object>> data = iUserProfileService.getProfilesByProfession(userID);
+        return new JSONResult<>(OK,"透過職業取得其他用戶資料成功", data);
+    }
+
     @ApiOperation("修改個人資料與更新")
     @PutMapping("/users/profile")
     public JSONResult<Void> resetProfiles(@ApiParam(value = "接收個人資料修改與更新資料", required = true)
@@ -188,7 +198,7 @@ public class UserProfileController extends BaseController {
         String originalAvatar = originalProfile.getProfileAvatar();
         String originalVoice = originalProfile.getVoiceIntro();
         //新用戶
-        userProfile.setUserId(userID);
+        userProfile.setUserID(userID);
         Date date = dateUtil.parseDate(birthday);
         userProfile.setBirthday(date);
         if (avatar != null) {
@@ -218,6 +228,8 @@ public class UserProfileController extends BaseController {
         return new JSONResult<Void>(NO_CONTENT_OK,"個人資料更新成功");
     }
 
+
+
     private void validateAvatar(MultipartFile avatar) {
         if (avatar.isEmpty()) {
             throw new FileEmptyException("大頭照不能為空");
@@ -244,7 +256,7 @@ public class UserProfileController extends BaseController {
 
     private void handleUserPhotos(Integer userID, MultipartFile[] photos) {
         Integer profileID = iUserProfileService.getUserProfile(userID)
-                .getProfileId();
+                .getProfileID();
         UserPhotosEntity userPhotos = new UserPhotosEntity();
         userPhotos.setProfileID(profileID);
         if (photos != null) {
