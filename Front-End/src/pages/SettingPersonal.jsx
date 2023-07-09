@@ -54,6 +54,7 @@ function SettingPersonal() {
       formData.append('gender', data.gender);
       formData.append('sexualOrientation', data.sexualOrientation);
       formData.append('location', JSON.stringify(data.location));
+      formData.append('city', data.city);
       formData.append('selfIntro', data.textareaFieldName);
       formData.append('preferredGender', data.preferredGender);
       formData.append('datingGoal', data.datingGoal);
@@ -166,6 +167,7 @@ function SettingPersonal() {
   const [isLocationSelected, setLocationSelected] = useState(false);
   const [selectedButtonLabel, setSelectedButtonLabel] = useState(null); // 新增选中的按钮标签状态
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [city, setCity] = useState(null);
 
   const handleInfoModalButtonClick = () => {
     setInfoModalVisible(true);
@@ -180,12 +182,14 @@ function SettingPersonal() {
     setLocationModalVisible(false);
   };
 
-  const handleDialogOk = (selectedLocation) => {
+  const handleDialogOk = (selectedLocation, city) => {
     // 传入选中按钮的标签
     setLocationModalVisible(false);
     setLocationSelected(true);
     setSelectedLocation(selectedLocation); // 更新选中的按钮标签
+    setCity(city);
     setValue('location', selectedLocation); // 使用setValue更新Controller的值
+    setValue('city', city); // 设置city的值
   };
 
   const handleDialogOk1 = (selectedButtonLabel) => {
@@ -235,6 +239,7 @@ function SettingPersonal() {
     professions: '',
     datingGoal: '',
     location: '',
+    city: '',
     selfIntro: '',
   });
 
@@ -254,6 +259,7 @@ function SettingPersonal() {
         setValue('professions', userData.data.professions);
         setValue('datingGoal', userData.data.datingGoal);
         setValue('location', userData.data.location);
+        setValue('city', userData.data.city);
         setValue('profileAvatar', userData.data.profileAvatar);
         setValue('selfIntro', userData.data.selfIntro);
         setSelectedButtonLabel(userData.data.datingGoal);
