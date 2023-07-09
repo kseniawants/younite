@@ -10,9 +10,7 @@ import PhotoWall from '../component/InfoElements/PhotoWall';
 import LocationModal from '../component/InfoElements/Location';
 import InfoModal from '../component/Modal/InfoModal';
 import axios from 'axios';
-
 import AlertModal from '../component/Modal/AlertModal';
-
 
 function SettingPersonal() {
   const [submitting, setSubmitting] = useState(false);
@@ -42,11 +40,12 @@ function SettingPersonal() {
   const onSubmit = async (data) => {
     try {
       data.photoWall = photoWallValue.map((file) => file.originFileObj);
+      const avatarData = data.profileAvatar ? (data.profileAvatar[0]?.originFileObj || data.profileAvatar) : null;
       setSubmitting(true);
       await submitForm(data);
       console.log(data.photoWall);
       console.log(data);
-      console.log(data.profileAvatar[0].originFileObj);
+      console.log(avatarData);
       let str = [];
       for (let i = 0; i < data.hobbies.length; i++) {
         str.push(data.hobbies[i].label);
@@ -59,7 +58,7 @@ function SettingPersonal() {
       formData.append('selfIntro', data.textareaFieldName);
       formData.append('preferredGender', data.preferredGender);
       formData.append('datingGoal', data.datingGoal);
-      formData.append('avatar', data.profileAvatar[0].originFileObj);
+      formData.append('avatar', avatarData);
       formData.append('birthday', data.birthday);
       formData.append('professions', data.professions.label);
       formData.append('phone', data.phone);
@@ -89,9 +88,7 @@ function SettingPersonal() {
 
   const submitForm = () => {
     return new Promise((resolve) => {
-      // 模拟异步操作，这里使用 setTimeout 延时 2 秒
       setTimeout(() => {
-        // 假设提交成功
         resolve();
       }, 2000);
     });
@@ -171,7 +168,6 @@ function SettingPersonal() {
   const [selectedButtonLabel, setSelectedButtonLabel] = useState(null); // 新增选中的按钮标签状态
   const [selectedLocation, setSelectedLocation] = useState(null);
 
-
   const handleInfoModalButtonClick = () => {
     setInfoModalVisible(true);
   };
@@ -244,8 +240,8 @@ function SettingPersonal() {
   });
 
   const fetchData = () => {
-    axios.get('/users/profile')
-
+    axios
+      .get('/users/profile')
       .then((response) => {
         const userData = response.data;
         setformDatas(userData.data);
@@ -263,6 +259,23 @@ function SettingPersonal() {
         setValue('selfIntro', userData.data.selfIntro);
         setSelectedButtonLabel(userData.data.datingGoal);
         setSelectedLocation(userData.data.location);
+        axios.defaults.withCredentials = true;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const [hobby, setHobby] = useState({
+
+  })
+
+  const fetchData2 = () => {
+    axios
+      .get('/users/interest')
+      .then((response) => {
+        setHobby(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.error(error);
@@ -271,6 +284,7 @@ function SettingPersonal() {
 
   useEffect(() => {
     fetchData();
+    fetchData2();
   }, []);
 
   const defaultValue = formDatas.professions
@@ -478,6 +492,7 @@ function SettingPersonal() {
                             }),
                           }}
                           placeholder='新增興趣'
+                          value={hobby}
                         />
                       )}
                     />

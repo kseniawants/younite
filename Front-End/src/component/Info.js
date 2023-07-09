@@ -7,7 +7,7 @@ import Avatar from './InfoElements/Avatar';
 import PhotoWall from './InfoElements/PhotoWall';
 import LocationModal from './InfoElements/Location';
 import InfoModal from './Modal/InfoModal';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AlertModal from './Modal/AlertModal';
 
@@ -51,7 +51,7 @@ function Info() {
       await submitForm(data);
       const formData = new FormData();
       console.log(data.photoWall);
-      console.log(data.pic[0].originFileObj);
+      console.log(data.profileAvatar[0].originFileObj);
       console.log(data);
       formData.append('fullName', data.name);
       formData.append('gender', data.radioGender);
@@ -60,7 +60,7 @@ function Info() {
       formData.append('selfIntro', data.textareaFieldName);
       formData.append('preferredGender', data.radioShow);
       formData.append('datingGoal', data.goal);
-      formData.append('avatar', data.pic[0].originFileObj);
+      formData.append('avatar', data.profileAvatar[0].originFileObj);
       formData.append('birthday', data.birthday);
       formData.append('professions', data.profession.label);
       formData.append('phone', data.tel);
@@ -93,11 +93,9 @@ function Info() {
 
   const submitForm = () => {
     return new Promise((resolve) => {
-      // 模拟异步操作，这里使用 setTimeout 延时 2 秒
       setTimeout(() => {
-        // 假设提交成功
         resolve();
-      }, 2500);
+      }, 1500);
     });
   };
 
@@ -238,7 +236,7 @@ function Info() {
       <form className='row justify-content-center flex-md-row flex-column-reverse'>
         <div className='col-md-5'>
           <div className='pb-4 w-50'>
-            <i className='fa-solid fa-user text-black personal' />
+            <i className='fa-solid fa-user text-black' />
             <span className='text-danger p-1'>*</span>
             <Input
               id='name'
@@ -523,13 +521,13 @@ function Info() {
             <label className='mb-4'>大頭貼照片</label>
             <Controller
               control={control}
-              name='pic'
+              name='profileAvatar'
               rules={{ required: true }}
               render={({ field }) => (
                 <>
                   <Avatar
                     {...field}
-                    className={errors.pic ? 'is-invalid' : ''}
+                    className={errors.profileAvatar ? 'is-invalid' : ''}
                     // value={field.value}
                     onFileChange={(file) => {
                       field.onChange(file);
@@ -539,7 +537,7 @@ function Info() {
                 </>
               )}
             />
-            {errors.pic && <div className='invalid-feedback '>請上傳大頭照</div>}
+            {errors.profileAvatar && <div className='invalid-feedback '>請上傳大頭照</div>}
           </div>
           <div className='p-4 mb-4'>
             <label className='mb-4'>個人檔案照片</label>
@@ -548,7 +546,7 @@ function Info() {
         </div>
       </form>
       <div className='d-flex flex-column-reverse flex-md-row py-4 justify-content-center align-items-md-center align-items-center w-100'>
-        <Link to='/home'>
+        {/* <Link to='/home'> */}
           {formSubmitted && (
             <div className={`fullscreen-overlay ${submitting ? 'show' : ''}`}>
               <svg
@@ -587,7 +585,7 @@ function Info() {
           >
             {submitting ? '正在送出表單...' : '送出表單'}
           </button>
-        </Link>
+        {/* </Link> */}
       </div>
       <AlertModal message={alertMessage} showModal={showAlertModal} state={AlertStateIcon} />
     </div>

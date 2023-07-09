@@ -5,7 +5,7 @@ import '../../styles/Modal/Info.scss';
 import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 
 function InfoModal({ closeModal, setSelectedButtonLabel, onOk }) {
-  const [position, setPosition] = useState({ x: 300, y: 100 });
+  const [position, setPosition] = useState({ x: 500, y: 100 });
   const [selectedButton, setSelectedButton] = useState(null);
 
   const handleDrag = (e, ui) => {
