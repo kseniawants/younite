@@ -1,5 +1,6 @@
 package tw.com.younite.controller;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import tw.com.younite.util.JSONResult;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
-
+@Api(tags ="用戶興趣")
 @RestController
 @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class InterestController extends BaseController {

@@ -1,9 +1,10 @@
 package tw.com.younite.entity;
 
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+@ApiModel(description = "亞馬遜雲端儲存服務的Entity")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
