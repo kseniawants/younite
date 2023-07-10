@@ -69,6 +69,9 @@ public class BaseController {
         } else if (e instanceof InvitationNotFoundException) {
             result.setState(NOT_FOUND_ERROR);
             result.setMessage("找不到邀請狀態碼，請重新傳入");
+        } else if (e instanceof ProfileNotFoundException) {
+            result.setState(NOT_FOUND_ERROR);
+            result.setMessage("找不到當前用戶資料，請先建立!");
         } else if (e instanceof PasswordNotMatchException) {
             result.setState(UNAUTHORIZED_ERROR);
             result.setMessage("密碼錯誤!");

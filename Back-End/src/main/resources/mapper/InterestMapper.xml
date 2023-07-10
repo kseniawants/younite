@@ -17,29 +17,31 @@
 
     <select id="getInterests" resultMap="InterestEntityMap">
         SELECT `interest`, `user_id`
-            FROM `interests`
+        FROM `interests`
         WHERE `user_id` = #{userID}
     </select>
 
-<!--    <select id="findUsersByInterests" resultMap="InterestEntityMap">-->
-<!--        SELECT *-->
-<!--        FROM `interests`-->
-<!--        WHERE interest-->
-<!--        LIKE CONCAT("%", #{interest}, "%")-->
-<!--        AND `user_id` != #{userID}-->
-<!--    </select>    -->
+    <!--    <select id="findUsersByInterests" resultMap="InterestEntityMap">-->
+    <!--        SELECT *-->
+    <!--        FROM `interests`-->
+    <!--        WHERE interest-->
+    <!--        LIKE CONCAT("%", #{interest}, "%")-->
+    <!--        AND `user_id` != #{userID}-->
+    <!--    </select>    -->
 
     <select id="findUsersByInterests" resultMap="InterestEntityMap">
-        SELECT p.*,  i.interest
+        SELECT p.*, i.interest
         FROM profiles p
                  JOIN interests i ON p.user_id = i.user_id
         WHERE i.interest
             LIKE CONCAT("%", #{interest}, "%")
           AND p.user_id != #{userID}
+          AND p.gender = #{gender}
     </select>
 
     <delete id="removeInterests">
-        DELETE FROM `interests`
+        DELETE
+        FROM `interests`
         WHERE `user_id` = #{userID}
     </delete>
 

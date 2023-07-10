@@ -6,9 +6,7 @@ import io.swagger.annotations.ApiParam;
 import tw.com.younite.entity.AmazonFileVO;
 import tw.com.younite.entity.UserPhotosEntity;
 import tw.com.younite.entity.UserProfileEntity;
-import tw.com.younite.service.exception.BlockedIDAlreadyExistsException;
-import tw.com.younite.service.exception.BlockedUserNotFoundException;
-import tw.com.younite.service.exception.DuplicatedUserProfileException;
+import tw.com.younite.service.exception.*;
 import tw.com.younite.service.inter.AmazonUploadService;
 import tw.com.younite.service.inter.IInterestService;
 import tw.com.younite.service.inter.IUserPhotosService;
@@ -195,6 +193,9 @@ public class UserProfileController extends BaseController {
                                           @RequestParam(value = "photos", required = false) MultipartFile[] photos) {
         Integer userID = getIDFromSession(session);
         UserProfileEntity originalProfile = iUserProfileService.getUserProfile(userID);
+        if (originalProfile == null) {
+            throw new ProfileNotFoundException("用戶資料不存在，請先創建!");
+        }
         String originalAvatar = originalProfile.getProfileAvatar();
         String originalVoice = originalProfile.getVoiceIntro();
         //新用戶

@@ -66,42 +66,45 @@ public class InterestService implements IInterestService {
     public List<Map<String, Object>> findUserProfilesByInterests(Integer userID) {
         List<Map<String, Object>> userProfiles = new ArrayList<>();
         // 取得現在使用者想看的性别
-        String preferredGender = userProfileMapper.getProfileByID(userID).getPreferredGender();
+        String gender = userProfileMapper.getProfileByID(userID).getPreferredGender();
         // 取得現在使用者的興趣
         List<InterestEntity> interestEntityList = interestMapper.getInterests(userID);
 
         Set<Integer> addedUserIDs = new HashSet<>(); // 紀錄已添加過的用戶
 
         for (InterestEntity interestEntity : interestEntityList) {
-            List<InterestEntity> resultList = interestMapper.findUsersByInterests(interestEntity.getInterest(), userID);
+            List<InterestEntity> resultList = interestMapper.findUsersByInterests(interestEntity.getInterest(), userID, gender);
 
             if (!resultList.isEmpty()) {
                 // 把查詢結果加入List
                 for (InterestEntity result : resultList) {
                     UserProfileEntity userProfile = userProfileMapper.getProfileByID(result.getUserID());
-                    // 檢查性別是否符合偏好
-                    if (Objects.equals(userProfile.getGender(), preferredGender)) {
-                        Integer userProfileID = userProfile.getUserId();
-                        if (!addedUserIDs.contains(userProfile.getUserId())) {
-                            Map<String, Object> userProfileMap = new HashMap<>();
-                            userProfileMap.put("name", userProfile.getFullName());
-                            userProfileMap.put("userID", userProfile.getUserId());
-                            userProfileMap.put("profileAvatar", userProfile.getProfileAvatar());
-                            userProfileMap.put("age", tools.calculateAge(userProfile.getBirthday()));
-                            userProfileMap.put("interests", tools.parseInterests(result.getInterest()));
-                            userProfiles.add(userProfileMap);
-                            addedUserIDs.add(userProfile.getUserId());
-                        } else {
-                            for (Map<String, Object> userProfileMap : userProfiles) {
-                                Integer existingUserID = (Integer) userProfileMap.get("userID");
-                                if (existingUserID.equals(userProfileID)) {
-                                    List<String> existingInterests = new ArrayList<>((List<String>) userProfileMap.get("interests"));
-                                    List<String> parsedInterests = new ArrayList<>(tools.parseInterests(result.getInterest()));
-                                    existingInterests.addAll(parsedInterests);
-                                    userProfileMap.put("interests", existingInterests);
-                                }
+                    Integer userProfileID = userProfile.getUserId();
+                    if (!addedUserIDs.contains(userProfile.getUserId())) {
+                        Map<String, Object> userProfileMap = new HashMap<>();
+                        userProfileMap.put("name", userProfile.getFullName());
+                        userProfileMap.put("userID", userProfile.getUserId());
+                        userProfileMap.put("profileAvatar", userProfile.getProfileAvatar());
+                        userProfileMap.put("age", tools.calculateAge(userProfile.getBirthday()));
+                        userProfileMap.put("interests", tools.parseInterests(result.getInterest()));
+                        userProfileMap.put("city", userProfile.getCity());
+                        userProfileMap.put("dating", userProfile.getDatingGoal());
+                        userProfileMap.put("voice", userProfile.getVoiceIntro());
+                        userProfileMap.put("selfIntro", userProfile.getSelfIntro());
+                        userProfileMap.put("distance", userProfile.getSelfIntro());
+                        userProfiles.add(userProfileMap);
+                        addedUserIDs.add(userProfile.getUserId());
+                    } else {
+                        for (Map<String, Object> userProfileMap : userProfiles) {
+                            Integer existingUserID = (Integer) userProfileMap.get("userID");
+                            if (existingUserID.equals(userProfileID)) {
+                                List<String> existingInterests = new ArrayList<>((List<String>) userProfileMap.get("interests"));
+                                List<String> parsedInterests = new ArrayList<>(tools.parseInterests(result.getInterest()));
+                                existingInterests.addAll(parsedInterests);
+                                userProfileMap.put("interests", existingInterests);
                             }
                         }
+
                     }
                 }
             }
