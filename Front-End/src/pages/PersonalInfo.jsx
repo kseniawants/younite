@@ -8,7 +8,6 @@ const PersonalInfo = () => {
         <h3>建立帳號</h3>
       </div>
       <Info />
-      
     </div>
   );
 };

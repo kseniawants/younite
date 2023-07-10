@@ -5,7 +5,7 @@ import '../../styles/Modal/alertModal.scss';
 const AlertModal = ({ state, message, showModal }) => {
   let icon = '';
   console.log(state);
-  if (state === 201 || state === 200) {
+  if (state === 201 || state === 200 || state === 204) {
     icon = (
       <div className='ui ui-success'>
         <svg viewBox='0 0 87 87' version='1.1'>
