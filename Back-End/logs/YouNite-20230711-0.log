@@ -1,0 +1,44 @@
+2023-07-11 00:02:03 INFO  [main] org.springframework.boot.StartupInfoLogger: Starting YouNiteApplication using Java 20.0.1 on zichenglius-MacBook-Air.local with PID 17398 (/Users/zichengliu/finalTermProject/eeit64-younite/Back-End/target/classes started by zichengliu in /Users/zichengliu/finalTermProject/eeit64-younite/Back-End)
+2023-07-11 00:02:03 INFO  [main] org.springframework.boot.SpringApplication: No active profile set, falling back to 1 default profile: "default"
+2023-07-11 00:02:04 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer: Tomcat initialized with port(s): 8080 (http)
+2023-07-11 00:02:04 INFO  [main] org.apache.juli.logging.DirectJDKLog: Starting service [Tomcat]
+2023-07-11 00:02:04 INFO  [main] org.apache.juli.logging.DirectJDKLog: Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-11 00:02:04 INFO  [main] org.apache.juli.logging.DirectJDKLog: Initializing Spring embedded WebApplicationContext
+2023-07-11 00:02:04 INFO  [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext: Root WebApplicationContext: initialization completed in 925 ms
+2023-07-11 00:02:05 INFO  [main] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping: Adding welcome page: class path resource [static/index.html]
+2023-07-11 00:02:05 WARN  [main] org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration: Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-07-11 00:02:05 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer: Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-11 00:02:06 INFO  [main] org.springframework.boot.StartupInfoLogger: Started YouNiteApplication in 2.558 seconds (JVM running for 3.412)
+2023-07-11 00:02:21 INFO  [http-nio-8080-exec-1] org.apache.juli.logging.DirectJDKLog: Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-11 00:02:21 INFO  [http-nio-8080-exec-1] org.springframework.web.servlet.FrameworkServlet: Initializing Servlet 'dispatcherServlet'
+2023-07-11 00:02:21 INFO  [http-nio-8080-exec-1] org.springframework.web.servlet.FrameworkServlet: Completed initialization in 3 ms
+2023-07-11 00:02:31 WARN  [http-nio-8080-exec-9] org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver: Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2023-07-11 00:02:33 WARN  [http-nio-8080-exec-10] org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver: Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2023-07-11 00:04:16 INFO  [main] org.springframework.boot.StartupInfoLogger: Starting YouNiteApplication using Java 20.0.1 on zichenglius-MacBook-Air.local with PID 17624 (/Users/zichengliu/finalTermProject/eeit64-younite/Back-End/target/classes started by zichengliu in /Users/zichengliu/finalTermProject/eeit64-younite/Back-End)
+2023-07-11 00:04:16 INFO  [main] org.springframework.boot.SpringApplication: No active profile set, falling back to 1 default profile: "default"
+2023-07-11 00:04:17 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer: Tomcat initialized with port(s): 8080 (http)
+2023-07-11 00:04:17 INFO  [main] org.apache.juli.logging.DirectJDKLog: Starting service [Tomcat]
+2023-07-11 00:04:17 INFO  [main] org.apache.juli.logging.DirectJDKLog: Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-11 00:04:17 INFO  [main] org.apache.juli.logging.DirectJDKLog: Initializing Spring embedded WebApplicationContext
+2023-07-11 00:04:17 INFO  [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext: Root WebApplicationContext: initialization completed in 1153 ms
+2023-07-11 00:04:18 INFO  [main] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping: Adding welcome page: class path resource [static/index.html]
+2023-07-11 00:04:18 WARN  [main] org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration: Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-07-11 00:04:18 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer: Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-11 00:04:18 INFO  [main] org.springframework.boot.StartupInfoLogger: Started YouNiteApplication in 3.032 seconds (JVM running for 4.124)
+2023-07-11 00:04:24 INFO  [http-nio-8080-exec-1] org.apache.juli.logging.DirectJDKLog: Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-11 00:04:24 INFO  [http-nio-8080-exec-1] org.springframework.web.servlet.FrameworkServlet: Initializing Servlet 'dispatcherServlet'
+2023-07-11 00:04:24 INFO  [http-nio-8080-exec-1] org.springframework.web.servlet.FrameworkServlet: Completed initialization in 3 ms
+2023-07-11 00:07:52 INFO  [main] org.springframework.boot.StartupInfoLogger: Starting YouNiteApplication using Java 20.0.1 on zichenglius-MacBook-Air.local with PID 18004 (/Users/zichengliu/finalTermProject/eeit64-younite/Back-End/target/classes started by zichengliu in /Users/zichengliu/finalTermProject/eeit64-younite/Back-End)
+2023-07-11 00:07:52 INFO  [main] org.springframework.boot.SpringApplication: No active profile set, falling back to 1 default profile: "default"
+2023-07-11 00:07:54 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer: Tomcat initialized with port(s): 8080 (http)
+2023-07-11 00:07:54 INFO  [main] org.apache.juli.logging.DirectJDKLog: Starting service [Tomcat]
+2023-07-11 00:07:54 INFO  [main] org.apache.juli.logging.DirectJDKLog: Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-11 00:07:54 INFO  [main] org.apache.juli.logging.DirectJDKLog: Initializing Spring embedded WebApplicationContext
+2023-07-11 00:07:54 INFO  [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext: Root WebApplicationContext: initialization completed in 1436 ms
+2023-07-11 00:07:55 INFO  [main] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping: Adding welcome page: class path resource [static/index.html]
+2023-07-11 00:07:55 WARN  [main] org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration: Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-07-11 00:07:55 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer: Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-11 00:07:55 INFO  [main] org.springframework.boot.StartupInfoLogger: Started YouNiteApplication in 3.405 seconds (JVM running for 5.3)
+2023-07-11 00:07:55 INFO  [http-nio-8080-exec-1] org.apache.juli.logging.DirectJDKLog: Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-11 00:07:55 INFO  [http-nio-8080-exec-1] org.springframework.web.servlet.FrameworkServlet: Initializing Servlet 'dispatcherServlet'
+2023-07-11 00:07:55 INFO  [http-nio-8080-exec-1] org.springframework.web.servlet.FrameworkServlet: Completed initialization in 1 ms
