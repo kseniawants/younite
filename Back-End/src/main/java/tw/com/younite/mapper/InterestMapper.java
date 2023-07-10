@@ -9,7 +9,7 @@ import java.util.Map;
 public interface InterestMapper {
     Integer addInterest(InterestEntity interest);
     List<InterestEntity> getInterests(Integer userID);
-    List<InterestEntity> findUsersByInterests(String interest, Integer userID);
+    List<InterestEntity> findUsersByInterests(String interest, Integer userID, String gender);
     Integer removeInterests(Integer userID);
     Integer updateInterests(Integer userID);
 
