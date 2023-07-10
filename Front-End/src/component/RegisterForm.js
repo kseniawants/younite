@@ -26,11 +26,9 @@ function RegisterForm() {
 
   const submitForm = () => {
     return new Promise((resolve) => {
-      // 模拟异步操作，这里使用 setTimeout 延时 2 秒
       setTimeout(() => {
-        // 假设提交成功
         resolve();
-      }, 2000);
+      }, 1000);
     });
   };
 

@@ -1,5 +1,6 @@
 package tw.com.younite.service.impl;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import tw.com.younite.entity.OrdersEntity;
 import tw.com.younite.mapper.ItemMapper;
 import tw.com.younite.mapper.OrdersMapper;
@@ -23,6 +24,7 @@ public class PayServiceImpl implements PayService {
 
 
     @Override
+    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     public String ecpayCheckout(Integer id) {
 
 
@@ -37,14 +39,14 @@ public class PayServiceImpl implements PayService {
         obj.setMerchantTradeDate(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date()));
         obj.setTotalAmount(String.valueOf(order.getAmount()));
         obj.setTradeDesc("Thank you");
-        obj.setItemName(itemName);
-        obj.setReturnURL("https://d2d9-118-163-218-100.ngrok-free.app/callback");
+        obj.setItemName("itemName");
+        obj.setReturnURL("https://42e0-2401-e180-8920-7f0-e01f-295e-c461-42d.ngrok-free.app/callback");
         // OrderResultURL   : 選填 消費者完成付費後。重新導向的位置
-//        obj.setOrderResultURL("http://localhost:8080/complete.html");
+
+//        obj.setOrderResultURL("https://42e0-2401-e180-8920-7f0-e01f-295e-c461-42d.ngrok-free.app/");
         obj.setNeedExtraPaidInfo("N");
         String form = all.aioCheckOut(obj, null);
         System.out.println(form);
-
         // 注入mTradeNo到订单表
         ordersMapper.addTradeNo(id, mTradeNo);
         // 回傳form訂單 並自動將使用者導到 綠界

@@ -6,7 +6,7 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
-@ApiModel(description = "訂單系統的Entity")
+@ApiModel(description = "訂單的Entity")
 @Data
 //Data 涵蓋 getter setter toString
 public class OrdersEntity {

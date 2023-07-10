@@ -6,7 +6,7 @@ import UserImage from '../assets/images/sia.png';
 
 function NotificationCollapse() {
   return (
-    <section className='notification-collapse row fade-in-out'>
+    <section className='notification-collapse col fade-in-out'>
       <div className='collapse-bg'>
         <h5>通知</h5>
         <hr />

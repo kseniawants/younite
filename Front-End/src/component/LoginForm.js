@@ -37,11 +37,9 @@ function LoginForm() {
 
   const submitForm = () => {
     return new Promise((resolve) => {
-      // 模拟异步操作，这里使用 setTimeout 延时 2 秒
       setTimeout(() => {
-        // 假设提交成功
         resolve();
-      }, 2000);
+      }, 1000);
     });
   };
 
@@ -103,9 +101,9 @@ function LoginForm() {
                   labelText='使用者帳號/信箱/手機號碼'
                   placeholder='輸入使用者帳號/信箱/手機號碼'
                   register={register}
-                  // rules={{
-                  //   required: '使用者帳號/信箱/手機號碼為必填',
-                  // }}
+                  rules={{
+                    required: '使用者帳號/信箱/手機號碼為必填',
+                  }}
                 ></Input>
               </div>
               <div className='mb-1'>
@@ -126,7 +124,7 @@ function LoginForm() {
                 ></Input>
               </div>
               <div className='d-flex justify-content-center mt-4'>
-                <Link to='/home'>
+                {/* <Link to='/home'> */}
                   {formSubmitted && (
                     <div className={`fullscreen-overlay ${submitting ? 'show' : ''}`}>
                       <svg
@@ -166,7 +164,7 @@ function LoginForm() {
                   >
                     {submitting ? '正在登入...' : '登入'}
                   </button>
-                </Link>
+                {/* </Link> */}
               </div>
               <div className='pt-3 pb-1 d-flex flex-column align-items-center justify-content-center'>
                 <LoginSocialGoogle
