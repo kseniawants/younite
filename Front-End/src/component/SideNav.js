@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo/logo-type.png';
 import '../styles/component/nav.scss';
 // import UserImage from '../assets/images/sia.png';
@@ -27,25 +27,42 @@ function SideNav() {
     setOpenModal(false);
     setIsActive(false);
   };
+
   axios.defaults.withCredentials = true;
+
+  // 初始化 post 狀態為一個空物件
   const [post, setPost] = useState(null);
+
   useEffect(() => {
     axios.defaults.withCredentials = true;
     axios.get('/users/profile').then((response) => {
       setPost(response.data);
-      // console.log(response.data)
+      console.log(response.data)
     });
   }, []);
 
-  if (post === null) return null;
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    axios.defaults.withCredentials = true;
+
+    axios.post('/users/logout').then((response) => {
+      console.log(response);
+      // 登出成功後的處理
+      navigate('/'); // 導航到登入頁面
+    }).catch((error) => {
+      console.error(error);
+      // 處理登出失敗的情況
+    });
+  };
 
   return (
     <>
       <nav className='bg-secondary d-flex p-0 justify-content-between flex-column align-items-center'>
         <figure className='text-decoration-none mt-5 d-flex flex-column align-items-center'>
           <img src={Logo} alt='YouNite-Logo' className='mb-5' style={{ height: '20px' }} />
-          <img src={post.data.profileAvatar} alt='Picture' className='mb-1 nav-user-image' />
-          <h6 className='text-black nav-text mt-2'>{post.data.fullName}</h6>
+          <img src={post && post.data.profileAvatar} alt='Picture' className='mb-1 nav-user-image' />
+          <h6 className='text-black nav-text mt-2'>{post && post.data.fullName}</h6>
         </figure>
 
         <ul className='nav flex-column fs-5 align-items-center'>
@@ -88,11 +105,13 @@ function SideNav() {
               <i className='fa-solid fa-gear '></i>
             </NavLink>
           </li>
-          <li className='nav-item'>
-            <NavLink to='/' className='nav-link'>
-              <i className='fa-solid fa-right-from-bracket'></i>
-            </NavLink>
-          </li>
+          {post && (
+            <li className='nav-item'>
+              <button onClick={handleLogout} className='nav-link'>
+                <i className='fa-solid fa-right-from-bracket'></i>
+              </button>
+            </li>
+          )}
         </ul>
       </nav>
       {isCollapseOpen && <NotificationCollapse />}
