@@ -1,5 +1,7 @@
 package tw.com.younite.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +15,7 @@ import tw.com.younite.service.impl.Amazons3Service;
 import tw.com.younite.service.inter.AmazonUploadService;
 import tw.com.younite.util.JSONResult;
 
-
+@Api(tags ="亞馬遜雲端儲存服務")
 @RestController
 @RequestMapping("/storage")
 public class AmazonS3Controller extends BaseController{
@@ -27,6 +29,7 @@ public class AmazonS3Controller extends BaseController{
     @Autowired
     private Amazons3Service service;
 
+    @ApiOperation("上傳")
     @PostMapping(value = "/upload")
     public JSONResult<Void> upload(@RequestParam("file") MultipartFile file) {
         AmazonFileVO amazonFileModel = null;
@@ -40,6 +43,8 @@ public class AmazonS3Controller extends BaseController{
     }
 
     //這會動喔
+
+    @ApiOperation("上傳")
     @PostMapping("/uploadOK")
     public JSONResult<Void> uploadOK(@RequestParam("file") MultipartFile file) {
         service.uploadFile(file);
@@ -47,24 +52,25 @@ public class AmazonS3Controller extends BaseController{
     }
 
     //這會動喔
+    @ApiOperation("下載檔案")
     @GetMapping("/download/{fileName}")
     public JSONResult<ByteArrayResource> download(@PathVariable String fileName) {
         byte[] data = service.downloadFile(fileName);
         ByteArrayResource resource = new ByteArrayResource(data);
         return new JSONResult<>(OK, resource);
     }
-
+    @ApiOperation("上傳檔案")
     @PostMapping("/uploadFile")
     public String uploadFile(@RequestParam(value = "file") MultipartFile file) {
         System.out.println("file = " + file);
         return this.amazonService.uploadFile(file);
     }
-
+    @ApiOperation("刪除檔案")
     @DeleteMapping("/deleteFile")
     public String deleteFile(@RequestPart(value = "url") String fileUrl) {
         return this.amazonService.deleteFileFromS3Bucket(fileUrl);
     }
-
+    @ApiOperation("取得檔案內容")
     @GetMapping("/getFileList")
     public JSONResult<List<String>> getFileList() {
         System.out.println("this.amazonService.listFiles() = " + this.amazonService.listFiles());
