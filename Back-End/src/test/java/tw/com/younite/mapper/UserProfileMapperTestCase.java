@@ -24,7 +24,7 @@ public class UserProfileMapperTestCase {
     @Test
     public void testInsertProfile() {
         UserProfileEntity userProfile = new UserProfileEntity();
-        userProfile.setProfileId(1);
+        userProfile.setProfileID(1);
         userProfile.setId(2);
         userProfile.setBirthday(new Date());
         userProfile.setGender("Female");
@@ -43,7 +43,7 @@ public class UserProfileMapperTestCase {
     @Test
     public void testUpdateProfileByID() throws ParseException {
         UserProfileEntity userProfile = userProfileMapper.getProfileByID(98);
-        Integer id = userProfile.getUserId();
+        Integer id = userProfile.getUserID();
         userProfile.setFullName("Hello你好嗎");
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date parsedDate = dateFormat.parse("1996-02-06");
@@ -54,7 +54,7 @@ public class UserProfileMapperTestCase {
         userProfile.setLocation("Taichung");
         userProfile.setSelfIntro("");
         userProfile.setProfileAvatar("/avatar/cat.jpg");
-        userProfile.setUserId(id);
+        userProfile.setUserID(id);
         userProfileMapper.updateUserProfileByID(userProfile);
         System.out.println("userProfile = " + userProfile);
     }
@@ -62,7 +62,7 @@ public class UserProfileMapperTestCase {
     @Test
     public void testInsertProfileWrong() {
         UserProfileEntity userProfile = new UserProfileEntity();
-        userProfile.setProfileId(2);
+        userProfile.setProfileID(2);
         userProfile.setId(3);
         userProfile.setBirthday(new Date());
         userProfile.setGender("Male");
@@ -100,5 +100,10 @@ public class UserProfileMapperTestCase {
         userProfile.setIndex(0);
         Integer result = userProfileMapper.unblockUser(userProfile);
         System.out.println("result = " + result);
+    }
+
+    @Test
+    public void testGetProfilesByProfessions() {
+        System.out.println("Results = " + userProfileMapper.getProfilesByProfession(287, "工程師"));
     }
 }

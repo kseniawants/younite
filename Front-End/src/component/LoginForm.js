@@ -6,7 +6,6 @@ import { FacebookLoginButton, GoogleLoginButton } from 'react-social-login-butto
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AlertModal from './Modal/AlertModal';
-axios.defaults.withCredentials = true;
 
 function LoginForm() {
   const [submitting, setSubmitting] = useState(false);

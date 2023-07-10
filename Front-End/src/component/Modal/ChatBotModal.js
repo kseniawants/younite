@@ -84,13 +84,7 @@ function ChatBotModal({ closeModal }) {
   return (
     <>
       {/* 宣告 Draggable handle 選擇抓取的物件範圍 */}
-      <Draggable
-        handle='.modal-bg'
-        cancel='.msg-container , form'
-        nodeRef={draggableRef}
-        onDrag={handleDrag}
-      >
-
+      <Draggable handle='.modal-bg' nodeRef={draggableRef} onDrag={handleDrag}>
         <section
           ref={draggableRef}
           className={`modal-bg container-fluid p-0 ${fadeIn ? 'fade-in' : ''}`}
@@ -106,9 +100,8 @@ function ChatBotModal({ closeModal }) {
               ></button>
             </div>
             {/* ↓↓↓ 下面可以隨意更改，區塊直接用 col 來寫  ↓↓↓*/}
-            
             <main className='chatBotContent d-flex row align-content-center '>
-              <section className='d-flex msg-container'>
+              <section className='d-flex'>
                 {chats && chats.length
                   ? chats.map((chat, index) => (
                       <p

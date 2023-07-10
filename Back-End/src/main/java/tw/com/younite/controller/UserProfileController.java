@@ -6,9 +6,7 @@ import io.swagger.annotations.ApiParam;
 import tw.com.younite.entity.AmazonFileVO;
 import tw.com.younite.entity.UserPhotosEntity;
 import tw.com.younite.entity.UserProfileEntity;
-import tw.com.younite.service.exception.BlockedIDAlreadyExistsException;
-import tw.com.younite.service.exception.BlockedUserNotFoundException;
-import tw.com.younite.service.exception.DuplicatedUserProfileException;
+import tw.com.younite.service.exception.*;
 import tw.com.younite.service.inter.AmazonUploadService;
 import tw.com.younite.service.inter.IInterestService;
 import tw.com.younite.service.inter.IUserPhotosService;
@@ -28,6 +26,7 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Api(tags = "個人資料建立")
 @RestController
@@ -99,7 +98,7 @@ public class UserProfileController extends BaseController {
                                           @RequestParam(required = false) MultipartFile[] photos) {
         Integer userID = getIDFromSession(session);
         if (iUserProfileService.getUserProfile(userID) == null) {
-            userProfile.setId(userID);
+            userProfile.setUserId(userID);
         } else {
             throw new DuplicatedUserProfileException("個人檔案重複");
         }
@@ -173,6 +172,15 @@ public class UserProfileController extends BaseController {
         return new JSONResult<>(OK, data);
     }
 
+    @ApiOperation("獲得相同職業的使用者名單")
+    @GetMapping("/users/profiles/profession")
+    public JSONResult<List<Map<String, Object>>> getProfilesByProfession(@ApiParam(value = "接收ID才取得相同興趣的使用者", required = true)
+                                                                         HttpSession session) {
+        Integer userID = getIDFromSession(session);
+        List<Map<String, Object>> data = iUserProfileService.getProfilesByProfession(userID);
+        return new JSONResult<>(OK,"透過職業取得其他用戶資料成功", data);
+    }
+
     @ApiOperation("修改個人資料與更新")
     @PutMapping("/users/profile")
     public JSONResult<Void> resetProfiles(@ApiParam(value = "接收個人資料修改與更新資料", required = true)
@@ -181,25 +189,29 @@ public class UserProfileController extends BaseController {
                                           String birthday,
                                           @RequestParam(value = "hobbies", required = false) List<String> hobbies,
                                           @RequestParam(value = "voice", required = false) MultipartFile voice,
-                                          @RequestParam(value = "avatar") MultipartFile avatar,
+                                          @RequestParam(value = "avatar", required = false) MultipartFile avatar,
                                           @RequestParam(value = "photos", required = false) MultipartFile[] photos) {
         Integer userID = getIDFromSession(session);
+        UserProfileEntity originalProfile = iUserProfileService.getUserProfile(userID);
+        if (originalProfile == null) {
+            throw new ProfileNotFoundException("用戶資料不存在，請先創建!");
+        }
+        String originalAvatar = originalProfile.getProfileAvatar();
+        String originalVoice = originalProfile.getVoiceIntro();
+        //新用戶
         userProfile.setUserId(userID);
         Date date = dateUtil.parseDate(birthday);
         userProfile.setBirthday(date);
-        System.out.println("avatar = " + avatar);
         if (avatar != null) {
             uploadFile(avatar, userProfile, "avatar");
         } else {
-            String originalFilePath = userProfile.getProfileAvatar();
-            userProfile.setProfileAvatar(originalFilePath);
+            userProfile.setProfileAvatar(originalAvatar);
         }
 
         if (voice != null) {
             uploadFile(voice, userProfile, "voice");
         } else {
-            String originalFilePath = userProfile.getVoiceIntro();
-            userProfile.setVoiceIntro(originalFilePath);
+            userProfile.setVoiceIntro(originalVoice);
         }
 
 
@@ -216,6 +228,8 @@ public class UserProfileController extends BaseController {
 
         return new JSONResult<Void>(NO_CONTENT_OK,"個人資料更新成功");
     }
+
+
 
     private void validateAvatar(MultipartFile avatar) {
         if (avatar.isEmpty()) {
@@ -253,7 +267,6 @@ public class UserProfileController extends BaseController {
                 setUserPhotoPath(userPhotos, i, photoPath);
             }
         }
-
         iUserPhotosService.insertPhotos(userPhotos);
     }
 

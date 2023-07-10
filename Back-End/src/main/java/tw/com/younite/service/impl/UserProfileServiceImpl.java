@@ -5,15 +5,16 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import tw.com.younite.entity.UserProfileEntity;
+import tw.com.younite.mapper.InterestMapper;
 import tw.com.younite.mapper.UserMapper;
 import tw.com.younite.mapper.UserProfileMapper;
 import tw.com.younite.service.exception.*;
 import tw.com.younite.service.inter.IUserProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tw.com.younite.util.DataTransferUtil;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class UserProfileServiceImpl implements IUserProfileService {
@@ -22,6 +23,12 @@ public class UserProfileServiceImpl implements IUserProfileService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private InterestMapper interestMapper;
+
+    @Autowired
+    private DataTransferUtil tools;
 
     @Override
     public void insertProfile(UserProfileEntity userProfile) {
@@ -109,5 +116,29 @@ public class UserProfileServiceImpl implements IUserProfileService {
         }
         userProfileEntity.setIndex(index);
         userProfileMapper.unblockUser(userProfileEntity);
+    }
+
+    @Override
+    public List<Map<String, Object>> getProfilesByProfession(Integer userID) {
+        UserProfileEntity currentUserProfile = userProfileMapper.getProfileByID(userID);
+        String profession = currentUserProfile.getProfessions();
+        String preferredGender = currentUserProfile.getPreferredGender();
+        List<UserProfileEntity> profileLists = userProfileMapper.getProfilesByProfession(userID, profession);
+        List<Map<String, Object>> results = new ArrayList<>();
+        if (profileLists != null) {
+            for (UserProfileEntity profile: profileLists) {
+                if (Objects.equals(profile.getGender(), preferredGender)) {
+                    Map<String, Object> userProfile = new HashMap<>();
+                    Integer ID = profile.getUserId();
+                    userProfile.put("userID", ID);
+                    userProfile.put("name", profile.getFullName());
+                    userProfile.put("avatar", profile.getProfileAvatar());
+                    userProfile.put("age", tools.calculateAge(profile.getBirthday()));
+                    userProfile.put("interests", tools.parseInterestEntities(interestMapper.getInterests(ID)));
+                    results.add(userProfile);
+                }
+            }
+        }
+        return results;
     }
 }

@@ -37,4 +37,9 @@ public class InterestServiceTestCase {
     public void testRemovedInterests() {
         iInterestService.removeInterests(312);
     }
+
+    @Test
+    public void testGetMutualInterests() {
+        System.out.println("iInterestService.findUserProfilesByInterests(286) = " + iInterestService.findUserProfilesByInterests(4));
+    }
 }

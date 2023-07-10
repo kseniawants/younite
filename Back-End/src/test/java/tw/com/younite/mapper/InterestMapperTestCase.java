@@ -19,8 +19,11 @@ public class InterestMapperTestCase {
     @Autowired
     InterestMapper interestMapper;
 
+    @Autowired
+    UserProfileMapper userProfileMapper;
+
     @Test
-    public void testaddInterest() throws JsonProcessingException {
+    public void testAddInterest() throws JsonProcessingException {
         InterestEntity interest = new InterestEntity();
         interest.setUserID(165);
         String interestsString = "游泳,跑步,爬山";
@@ -34,22 +37,25 @@ public class InterestMapperTestCase {
         System.out.println("interests = " + interests);
     }
 
-//    @Test
-//    public void testGetUsersByInterests() {
-//        String interests = interestMapper.getInterests(292).getInterest();
-//        String[] interestArray = interests.replaceAll("\\[|\\]", "").split(", ");
-//        List<String> list = Arrays.asList(interestArray);
-//        List<InterestEntity> result = new ArrayList<>();
-//        Set<InterestEntity> addedInterestEntity = new HashSet<>();
-//        System.out.println("Arrays.asList(interestArray) = " + Arrays.asList(interestArray));
-//        for (String interest : list) {
-//            List<InterestEntity> interestResult = interestMapper.findUsersByInterests(interest);
-//            for (InterestEntity entity: interestResult) {
-//                if (!addedInterestEntity.contains(entity)) {
-//                    addedInterestEntity.add(entity);
-//                }
-//            }
-//        }
-//        System.out.println("addedInterestEntity = " + addedInterestEntity);
-//    }
+    @Test
+    public void testFindUsersProfileByInterests() {
+        Map<UserProfileEntity, List<String>> mutualInterestMap = new HashMap<>();
+        List<InterestEntity> interestEntityList = interestMapper.getInterests(286);
+
+        for (InterestEntity interestEntity : interestEntityList) {
+            List<InterestEntity> resultList = interestMapper.findUsersByInterests(interestEntity.getInterest(), 286);
+
+            if (!resultList.isEmpty()) {
+                // 将结果添加到已有的结果中
+                for (InterestEntity result : resultList) {
+                    UserProfileEntity userProfile = userProfileMapper.getProfileByID(result.getUserID());
+                    String interest = result.getInterest();
+                    mutualInterestMap.computeIfAbsent(userProfile, k -> new ArrayList<>()).add(interest);
+                }
+            }
+        }
+        System.out.println("mutualInterestMap = " + mutualInterestMap);
+        System.out.println("mutualInterestMap.size() = " + mutualInterestMap.size());
+        System.out.println("mutualInterestMap.get(userProfileMapper.getProfileByID(300)) = " + mutualInterestMap.get(userProfileMapper.getProfileByID(300)));
+    }
 }
