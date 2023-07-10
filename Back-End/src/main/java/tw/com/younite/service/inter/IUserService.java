@@ -10,6 +10,7 @@ public interface IUserService {
     UserEntity login(UserEntity user);
 
     UserEntity getUserByID(Integer id);
+    UserEntity getUserByUsername(String username);
 
 
 }
