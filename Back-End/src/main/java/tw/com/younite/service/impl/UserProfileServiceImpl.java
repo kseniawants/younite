@@ -129,7 +129,7 @@ public class UserProfileServiceImpl implements IUserProfileService {
             for (UserProfileEntity profile: profileLists) {
                 if (Objects.equals(profile.getGender(), preferredGender)) {
                     Map<String, Object> userProfile = new HashMap<>();
-                    Integer ID = profile.getUserID();
+                    Integer ID = profile.getUserId();
                     userProfile.put("userID", ID);
                     userProfile.put("name", profile.getFullName());
                     userProfile.put("avatar", profile.getProfileAvatar());

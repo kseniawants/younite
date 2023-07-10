@@ -81,16 +81,16 @@ public class InterestService implements IInterestService {
                     UserProfileEntity userProfile = userProfileMapper.getProfileByID(result.getUserID());
                     // 檢查性別是否符合偏好
                     if (Objects.equals(userProfile.getGender(), preferredGender)) {
-                        Integer userProfileID = userProfile.getUserID();
-                        if (!addedUserIDs.contains(userProfile.getUserID())) {
+                        Integer userProfileID = userProfile.getUserId();
+                        if (!addedUserIDs.contains(userProfile.getUserId())) {
                             Map<String, Object> userProfileMap = new HashMap<>();
                             userProfileMap.put("name", userProfile.getFullName());
-                            userProfileMap.put("userID", userProfile.getUserID());
+                            userProfileMap.put("userID", userProfile.getUserId());
                             userProfileMap.put("profileAvatar", userProfile.getProfileAvatar());
                             userProfileMap.put("age", tools.calculateAge(userProfile.getBirthday()));
                             userProfileMap.put("interests", tools.parseInterests(result.getInterest()));
                             userProfiles.add(userProfileMap);
-                            addedUserIDs.add(userProfile.getUserID());
+                            addedUserIDs.add(userProfile.getUserId());
                         } else {
                             for (Map<String, Object> userProfileMap : userProfiles) {
                                 Integer existingUserID = (Integer) userProfileMap.get("userID");

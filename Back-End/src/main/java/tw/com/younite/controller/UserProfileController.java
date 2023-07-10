@@ -100,7 +100,7 @@ public class UserProfileController extends BaseController {
                                           @RequestParam(required = false) MultipartFile[] photos) {
         Integer userID = getIDFromSession(session);
         if (iUserProfileService.getUserProfile(userID) == null) {
-            userProfile.setId(userID);
+            userProfile.setUserId(userID);
         } else {
             throw new DuplicatedUserProfileException("個人檔案重複");
         }
@@ -198,7 +198,7 @@ public class UserProfileController extends BaseController {
         String originalAvatar = originalProfile.getProfileAvatar();
         String originalVoice = originalProfile.getVoiceIntro();
         //新用戶
-        userProfile.setUserID(userID);
+        userProfile.setUserId(userID);
         Date date = dateUtil.parseDate(birthday);
         userProfile.setBirthday(date);
         if (avatar != null) {
@@ -256,7 +256,7 @@ public class UserProfileController extends BaseController {
 
     private void handleUserPhotos(Integer userID, MultipartFile[] photos) {
         Integer profileID = iUserProfileService.getUserProfile(userID)
-                .getProfileID();
+                .getProfileId();
         UserPhotosEntity userPhotos = new UserPhotosEntity();
         userPhotos.setProfileID(profileID);
         if (photos != null) {
