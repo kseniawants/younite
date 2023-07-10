@@ -1,13 +1,12 @@
 package tw.com.younite.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 import tw.com.younite.entity.UserEntity;
 import tw.com.younite.mapper.UserMapper;
-import tw.com.younite.service.inter.IUserService;
-import tw.com.younite.service.exception.DuplicatedUsernameException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.util.DigestUtils;
 import tw.com.younite.service.exception.*;
+import tw.com.younite.service.inter.IUserService;
 
 import java.util.Date;
 import java.util.UUID;
@@ -19,6 +18,9 @@ import java.util.UUID;
 public class UserServiceImpl implements IUserService {
     @Autowired
     private UserMapper userMapper;
+    //加密方式
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public void reg(UserEntity user) {
@@ -43,11 +45,10 @@ public class UserServiceImpl implements IUserService {
         /** 密碼加密處理, 加密方法: md5
          form: salt value + password + salt value */
 
-        String oldPassword = user.getPassword();
         String saltValue = UUID.randomUUID().toString().toUpperCase();
         user.setSalt(saltValue);
-        String md5Password = getMD5Password(oldPassword, saltValue);
-        user.setPassword(md5Password);
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
         /** 加入資料庫前，補全部分資料: */
         Date date = new Date();
         user.setVipExpiry(date);
@@ -74,15 +75,15 @@ public class UserServiceImpl implements IUserService {
         String password = user.getPassword();
         UserEntity result = userMapper.getByUsername(username);
 
+
         if (result == null) {
             throw new UserNotFoundException("帳號不存在");
         }
-        String databasePassword = result.getPassword();
-        String salt = result.getSalt();
-        String MD5Password = getMD5Password(password, salt);
-        if (!MD5Password.equals(databasePassword)) {
+
+        if (!passwordEncoder.matches(password, result.getPassword())) {
             throw new PasswordNotMatchException("密碼錯誤!");
         }
+
         UserEntity newUser = new UserEntity();
         newUser.setId(result.getId());
         newUser.setUsername(result.getUsername());
@@ -93,51 +94,26 @@ public class UserServiceImpl implements IUserService {
             userMapper.lockedVipById(result.getId(), false);
         }
         return newUser;
-
-
     }
 
-
-
-    private String getMD5Password(String password, String salt) {
-        for (int i = 0; i < 5; i++) {
-            password = DigestUtils.md5DigestAsHex((salt + password + salt).getBytes()).toUpperCase();
-        }
-        return password;
-    }
 
     @Override
-    public void resetPassword (Integer id,
-                              String oldPassword,
-                              String newPassword) {
+    public void resetPassword(Integer id, String oldPassword, String newPassword) {
         UserEntity result = userMapper.getUserByID(id);
         if (result == null) {
             throw new UserNotFoundException();
         }
-        //確認輸入的舊密碼和資料庫中的密碼是否相同
-        checkPassword(oldPassword, result);
-        //輸入的新密碼進行加密
-        String newMD5Password = getMD5Password(newPassword, result.getSalt());
-        Integer row = userMapper.updatePasswordByID(id, newMD5Password, new Date());
+
+        if (!passwordEncoder.matches(oldPassword, result.getPassword())) {
+            throw new PasswordNotMatchException("密碼錯誤");
+        }
+
+        String encodedPassword = passwordEncoder.encode(newPassword);
+        Integer row = userMapper.updatePasswordByID(id, encodedPassword, new Date());
         if (row != 1) {
             throw new UpdateException();
         }
     }
-
-    private void checkPassword(String uncheckPassword, UserEntity user) throws PasswordNotMatchException {
-        //資料庫中的密碼
-        String databasePassword = user.getPassword();
-        //待確認密碼加密
-        String salt = user.getSalt();
-        String password = getMD5Password(uncheckPassword, salt);
-        System.out.println("uncheckPassword = " + uncheckPassword);
-        System.out.println("password = " + password);
-        System.out.println("databasePassword = " + databasePassword);
-        if (!databasePassword.equals(password)) {
-            throw new PasswordNotMatchException("密碼錯誤");
-        }
-    }
-
     @Override
     public UserEntity getUserByID(Integer id) {
         UserEntity result = userMapper.getUserByID(id);
@@ -147,6 +123,14 @@ public class UserServiceImpl implements IUserService {
         return result;
     }
 
-
-
+    @Override
+    public UserEntity getUserByUsername(String username) {
+        UserEntity result = userMapper.getByUsername(username);
+        if (result == null) {
+            throw new UserNotFoundException("使用者不存在");
+        }
+        return result;
+    }
 }
+
+
