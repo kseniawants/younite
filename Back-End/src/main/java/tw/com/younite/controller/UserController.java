@@ -75,22 +75,7 @@ public class UserController extends BaseController {
         return new JSONResult<>(OK, "成功登出");
     }
 
-    @ApiOperation("用戶登入")
-    @PostMapping("/users/login")
-    public JSONResult<LoginResponse> login(HttpServletRequest request, @RequestBody UserEntity user) {
-        UserEntity data = iUserService.login(user);
-        HttpSession session = request.getSession();
-        session.setAttribute("id", data.getId());
-        session.setAttribute("username", data.getUsername());
-
-        // Generate JWT token
-        String token = JwtUtil.generateToken(data);
-
-        // Create the LoginResponse object with user and token
-        LoginResponse loginResponse = new LoginResponse(data, token);
-
-        return new JSONResult<>(OK, "登入成功", loginResponse);
-    }
+   giit
 
 
     @ApiOperation("修改用戶密碼")
