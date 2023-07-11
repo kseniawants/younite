@@ -12,9 +12,9 @@ import java.util.Date;
 @Data
 public class UserProfileEntity extends UserEntity implements Serializable {
     @ApiModelProperty(value = "使用者資料ID")
-    private Integer profileID;
+    private Integer profileId;
     @ApiModelProperty(value = "使用者ID")
-    private Integer userID;
+    private Integer userId;
     @ApiModelProperty(value = "使用者全名")
     private String fullName;
     @ApiModelProperty(value = "使用者性別")
@@ -46,6 +46,6 @@ public class UserProfileEntity extends UserEntity implements Serializable {
     @ApiModelProperty(value = "生日")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
-//    @ApiModelProperty(value = "程式")
-//    private String city;
+    @ApiModelProperty(value = "程式")
+    private String code;
 }

@@ -4,8 +4,8 @@
 
 <mapper namespace="tw.com.younite.mapper.UserProfileMapper">
     <resultMap id="UserProfileEntityMap" type="tw.com.younite.entity.UserProfileEntity">
-        <id column="profile_id" property="profileID"></id>
-        <result column="user_id" property="userID"></result>
+        <id column="profile_id" property="profileId"></id>
+        <result column="user_id" property="userId"></result>
         <result column="full_name" property="fullName"></result>
         <result column="profile_avatar" property="profileAvatar"></result>
         <result column="sexual_orientation" property="sexualOrientation"></result>
@@ -27,7 +27,7 @@
     <select id="getProfileByID" resultMap="UserProfileEntityMap">
         SELECT *
         FROM `profiles`
-        WHERE `user_id` = #{userID}
+        WHERE `user_id` = #{userId}
     </select>
 
     <insert
@@ -39,7 +39,7 @@
          `dating_goal`, `self_intro`, `location`,
          `blocked_id`, `profile_avatar`, `birthday`,
          `voice_intro`, `phone`, `professions`, `city`)
-        VALUES (#{profileId}, #{userID}, #{fullName},
+        VALUES (#{profileId}, #{userId}, #{fullName},
                 #{gender}, #{sexualOrientation}, #{preferredGender},
                 #{datingGoal}, #{selfIntro}, #{location},
                 #{blockId}, #{profileAvatar}, #{birthday},
@@ -49,13 +49,13 @@
     <update id="blockUser">
         UPDATE `profiles`
         SET `blocked_id` = JSON_ARRAY_APPEND(COALESCE(`blocked_id`, JSON_ARRAY()), '$', CAST(#{blockId} AS JSON))
-            WHERE `user_id` = ${userID}
+            WHERE `user_id` = ${userId}
     </update>
 
     <update id="unblockUser">
         UPDATE `profiles`
         SET `blocked_id` = JSON_REMOVE(`blocked_id`, CONCAT('$[', #{index}, ']'))
-            WHERE `user_id` = ${userID}
+            WHERE `user_id` = ${userId}
     </update>
 
     <update id="updateUserProfileByID">
@@ -79,13 +79,13 @@
     <select id="getBlockedID" resultMap="UserProfileEntityMap">
         SELECT `blocked_id`
         from `profiles`
-        WHERE `user_id` = #{userID}
+        WHERE `user_id` = #{userId}
     </select>
 
     <select id="getProfilesByProfession" resultMap="UserProfileEntityMap">
         SELECT *
         from profiles
-        WHERE `user_id` != #{userID}
+        WHERE `user_id` != #{userId}
           AND professions = #{professions}
     </select>
 
