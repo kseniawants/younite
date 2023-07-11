@@ -1000,3 +1000,21 @@ org.apache.ibatis.executor.ExecutorException: No setter found for the keyPropert
 2023-07-11 11:56:29.664  INFO 80094 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
 2023-07-11 11:56:29.722  INFO 80094 --- [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
 2023-07-11 11:56:30.464  INFO 80094 --- [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-07-11 12:09:43.634  INFO 80094 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-07-11 12:09:44.089  INFO 80094 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-07-11 12:09:46.951  INFO 81567 --- [main] tw.com.younite.YouNiteApplication        : Starting YouNiteApplication using Java 20.0.1 on L20.r2003.tciii.org.tw with PID 81567 (/Users/zichengliu/finalTermProject/eeit64-younite/Back-End/target/classes started by zichengliu in /Users/zichengliu/finalTermProject/eeit64-younite/Back-End)
+2023-07-11 12:09:46.953  INFO 81567 --- [main] tw.com.younite.YouNiteApplication        : No active profile set, falling back to 1 default profile: "default"
+2023-07-11 12:09:47.828  INFO 81567 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-07-11 12:09:47.833  INFO 81567 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-11 12:09:47.834  INFO 81567 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-11 12:09:47.904  INFO 81567 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-11 12:09:47.905  INFO 81567 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 917 ms
+2023-07-11 12:09:48.819  INFO 81567 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-11 12:09:48.860  WARN 81567 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-07-11 12:09:48.992  INFO 81567 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-11 12:09:49.284  INFO 81567 --- [main] tw.com.younite.YouNiteApplication        : Started YouNiteApplication in 2.632 seconds (JVM running for 3.241)
+2023-07-11 12:10:25.158  INFO 81567 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-11 12:10:25.160  INFO 81567 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-11 12:10:25.169  INFO 81567 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
+2023-07-11 12:10:25.229  INFO 81567 --- [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-07-11 12:10:26.018  INFO 81567 --- [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.

@@ -1024,3 +1024,21 @@ org.apache.ibatis.executor.ExecutorException: No setter found for the keyPropert
 2023-07-11 11:56:29 INFO  [http-nio-8080-exec-2] org.springframework.web.servlet.FrameworkServlet: Completed initialization in 3 ms
 2023-07-11 11:56:29 INFO  [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource: HikariPool-1 - Starting...
 2023-07-11 11:56:30 INFO  [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource: HikariPool-1 - Start completed.
+2023-07-11 12:09:43 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource: HikariPool-1 - Shutdown initiated...
+2023-07-11 12:09:44 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource: HikariPool-1 - Shutdown completed.
+2023-07-11 12:09:46 INFO  [main] org.springframework.boot.StartupInfoLogger: Starting YouNiteApplication using Java 20.0.1 on L20.r2003.tciii.org.tw with PID 81567 (/Users/zichengliu/finalTermProject/eeit64-younite/Back-End/target/classes started by zichengliu in /Users/zichengliu/finalTermProject/eeit64-younite/Back-End)
+2023-07-11 12:09:46 INFO  [main] org.springframework.boot.SpringApplication: No active profile set, falling back to 1 default profile: "default"
+2023-07-11 12:09:47 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer: Tomcat initialized with port(s): 8080 (http)
+2023-07-11 12:09:47 INFO  [main] org.apache.juli.logging.DirectJDKLog: Starting service [Tomcat]
+2023-07-11 12:09:47 INFO  [main] org.apache.juli.logging.DirectJDKLog: Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-11 12:09:47 INFO  [main] org.apache.juli.logging.DirectJDKLog: Initializing Spring embedded WebApplicationContext
+2023-07-11 12:09:47 INFO  [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext: Root WebApplicationContext: initialization completed in 917 ms
+2023-07-11 12:09:48 INFO  [main] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping: Adding welcome page: class path resource [static/index.html]
+2023-07-11 12:09:48 WARN  [main] org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration: Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-07-11 12:09:48 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer: Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-11 12:09:49 INFO  [main] org.springframework.boot.StartupInfoLogger: Started YouNiteApplication in 2.632 seconds (JVM running for 3.241)
+2023-07-11 12:10:25 INFO  [http-nio-8080-exec-2] org.apache.juli.logging.DirectJDKLog: Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-11 12:10:25 INFO  [http-nio-8080-exec-2] org.springframework.web.servlet.FrameworkServlet: Initializing Servlet 'dispatcherServlet'
+2023-07-11 12:10:25 INFO  [http-nio-8080-exec-2] org.springframework.web.servlet.FrameworkServlet: Completed initialization in 9 ms
+2023-07-11 12:10:25 INFO  [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource: HikariPool-1 - Starting...
+2023-07-11 12:10:26 INFO  [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource: HikariPool-1 - Start completed.
