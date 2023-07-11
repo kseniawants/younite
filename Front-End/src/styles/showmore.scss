@@ -1,0 +1,16 @@
+.usersImg{
+  background-image: var(--bg-images);
+  background-position: center;
+  background-size: cover;
+  z-index: 999;
+  display: flex;
+  background-color: white;
+  height: 35vh;
+  width: 11vw;
+  justify-content: center;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 2px;
+  min-height: 240px;
+  min-width: 150px;
+}

@@ -119,7 +119,7 @@ function Home() {
             )}
             </>
             <div className='bg-pageMore d-flex mt-3'>
-              <a href=''>顯示更多...</a>
+            <Link to='/show/profession'>顯示更多...</Link>
             </div>
           </div>
         </section>
