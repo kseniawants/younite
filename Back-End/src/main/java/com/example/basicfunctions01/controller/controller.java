@@ -11,6 +11,6 @@ public class controller {
     @RequestMapping("/ss")
     public String index() {
         System.out.println("到此一遊2");
-        return "index";
+        return "";
     }
 }

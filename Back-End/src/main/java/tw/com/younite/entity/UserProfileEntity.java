@@ -47,5 +47,5 @@ public class UserProfileEntity extends UserEntity implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
     @ApiModelProperty(value = "程式")
-    private String city;
+    private String code;
 }
