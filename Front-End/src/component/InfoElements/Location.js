@@ -81,7 +81,10 @@ const LocationModal = (props) => {
   const getCityFromGeocode = (geocode) => {
     for (let i = 0; i < geocode.address_components.length; i++) {
       const addressComponent = geocode.address_components[i];
-      if (addressComponent.types.includes('administrative_area_level_2')) {
+      if (
+        addressComponent.types.includes('administrative_area_level_2') ||
+        addressComponent.types.includes('administrative_area_level_1')
+      ) {
         return addressComponent.long_name;
       }
     }

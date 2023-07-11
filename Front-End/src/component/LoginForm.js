@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Input } from './FormElements';
 import { LoginSocialFacebook, LoginSocialGoogle } from 'reactjs-social-login';
@@ -10,9 +10,10 @@ import AlertModal from './Modal/AlertModal';
 function LoginForm() {
   const [submitting, setSubmitting] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [showAlertModal, setShowAlertModal] = useState(false); //Alert 視窗
-  const [alertMessage, setAlertMessage] = useState(''); //Alert 訊息
-  const [AlertStateIcon, setAlertStateIcon] = useState(''); //Alert icon
+  //以下 Alert Modal
+  const [showAlertModal, setShowAlertModal] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [AlertStateIcon, setAlertStateIcon] = useState('');
 
   // 轉址判斷
   const navigate = useNavigate();
@@ -24,8 +25,8 @@ function LoginForm() {
     mode: 'onTouched',
   });
 
+  //Alert用
   const handleAlertRes = (response) => {
-    //Alert用
     setAlertMessage(response.data.message);
     setAlertStateIcon(response.data.state);
     setFormSubmitted(false);
@@ -43,8 +44,8 @@ function LoginForm() {
     });
   };
 
+  axios.defaults.withCredentials = true; //Axios 支援跨域請求和
   // 表單發送的按鈕
-  axios.defaults.withCredentials = true; //Axios 支援跨域請求和 Cookie 傳遞
   const onSubmit = async (data) => {
     console.log(data);
     try {
@@ -55,18 +56,35 @@ function LoginForm() {
         username: data.username,
         password: data.password,
       };
+
       axios.defaults.withCredentials = true;
+
       const response = await axios.post('/users/login', requestBody);
       console.log(requestBody);
       if (response.data.state === 200) {
         handleAlertRes(response);
         console.log(response);
+        console.log(response.data.data.token);
+
+        //把 token 存在這個變數中
+        // 將Token存儲在Cookie中
+        // const { token, expired } = response.data.data.token;
+        // document.cookie = `YouNitetoken=${token}; expires=${new Data(expired)}`;
+
+        const token = response.data.data.token;
+        document.cookie = `YouNiteToken=${token}; `;
+
+        // 設置Authorization標頭
+        axios.defaults.headers.common['Authorization'] = token;
+        axios.defaults.withCredentials = true;
+        //設定以後打給後端的 axios 的 headers 都會帶有這隻 token
+
         setTimeout(() => {
           navigate('/home');
         }, 2500);
       } else {
         handleAlertRes(response);
-        console.log(response);
+        // console.log(response);
         setTimeout(() => {
           navigate('/login');
         }, 2500);
@@ -77,6 +95,16 @@ function LoginForm() {
       setSubmitting(false);
     }
   };
+
+  useEffect(() => {
+    //取出token
+    const token = document.cookie
+      .split(';')
+      .find((row) => row.startsWith('YouNiteToken='))
+      ?.split('=')[1];
+    console.log(token);
+    axios.defaults.headers.common['Authorization'] = token;
+  });
 
   return (
     <div className='container p-0'>
@@ -125,45 +153,45 @@ function LoginForm() {
               </div>
               <div className='d-flex justify-content-center mt-4'>
                 {/* <Link to='/home'> */}
-                  {formSubmitted && (
-                    <div className={`fullscreen-overlay ${submitting ? 'show' : ''}`}>
-                      <svg
-                        version='1.1'
-                        id='L9'
-                        xmlns='http://www.w3.org/2000/svg'
-                        xmlnsXlink='http://www.w3.org/1999/xlink'
-                        x='0px'
-                        y='0px'
-                        viewBox='0 0 100 100'
-                        enableBackground='new 0 0 0 0'
-                        xmlSpace='preserve'
+                {formSubmitted && (
+                  <div className={`fullscreen-overlay ${submitting ? 'show' : ''}`}>
+                    <svg
+                      version='1.1'
+                      id='L9'
+                      xmlns='http://www.w3.org/2000/svg'
+                      xmlnsXlink='http://www.w3.org/1999/xlink'
+                      x='0px'
+                      y='0px'
+                      viewBox='0 0 100 100'
+                      enableBackground='new 0 0 0 0'
+                      xmlSpace='preserve'
+                    >
+                      <path
+                        fill='#fff'
+                        d='M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50'
                       >
-                        <path
-                          fill='#fff'
-                          d='M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50'
-                        >
-                          <animateTransform
-                            attributeName='transform'
-                            attributeType='XML'
-                            type='rotate'
-                            dur='0.5s'
-                            from='0 50 50'
-                            to='360 50 50'
-                            repeatCount='indefinite'
-                          />
-                        </path>
-                      </svg>
-                    </div>
-                  )}
-                  <button
-                    type='submit'
-                    className='btn btn-primary py-3 px-7 rounded-2 d-flex align-items-center justify-content-center'
-                    disabled={submitting}
-                    style={{ color: '#fff', width: '113px', height: '38px' }}
-                    onClick={handleSubmit(onSubmit)}
-                  >
-                    {submitting ? '正在登入...' : '登入'}
-                  </button>
+                        <animateTransform
+                          attributeName='transform'
+                          attributeType='XML'
+                          type='rotate'
+                          dur='0.5s'
+                          from='0 50 50'
+                          to='360 50 50'
+                          repeatCount='indefinite'
+                        />
+                      </path>
+                    </svg>
+                  </div>
+                )}
+                <button
+                  type='submit'
+                  className='btn btn-primary py-3 px-7 rounded-2 d-flex align-items-center justify-content-center'
+                  disabled={submitting}
+                  style={{ color: '#fff', width: '113px', height: '38px' }}
+                  onClick={handleSubmit(onSubmit)}
+                >
+                  {submitting ? '正在登入...' : '登入'}
+                </button>
                 {/* </Link> */}
               </div>
               <div className='pt-3 pb-1 d-flex flex-column align-items-center justify-content-center'>

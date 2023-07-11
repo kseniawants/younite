@@ -1,80 +1,79 @@
-2023-07-11 02:22:55.454  WARN 31688 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2h4m18s561ms496µs700ns).
-2023-07-11 02:51:20.196  INFO 1676 --- [main] tw.com.younite.YouNiteApplication        : Starting YouNiteApplication using Java 20.0.1 on 22zl with PID 1676 (D:\22ZL\EEIT_64_Project\eeit64-younite\Back-End\target\classes started by lisa5 in D:\22ZL\EEIT_64_Project\eeit64-younite\Back-End)
-2023-07-11 02:51:20.199  INFO 1676 --- [main] tw.com.younite.YouNiteApplication        : No active profile set, falling back to 1 default profile: "default"
-2023-07-11 02:51:22.456  INFO 1676 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2023-07-11 02:51:22.472  INFO 1676 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-07-11 02:51:22.473  INFO 1676 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.75]
-2023-07-11 02:51:22.621  INFO 1676 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-07-11 02:51:22.622  INFO 1676 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2368 ms
-2023-07-11 02:51:24.631  WARN 1676 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+2023-07-11 02:22:55 WARN  [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool$HouseKeeper: HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2h4m18s561ms496µs700ns).
+2023-07-11 02:51:20 INFO  [main] org.springframework.boot.StartupInfoLogger: Starting YouNiteApplication using Java 20.0.1 on 22zl with PID 1676 (D:\22ZL\EEIT_64_Project\eeit64-younite\Back-End\target\classes started by lisa5 in D:\22ZL\EEIT_64_Project\eeit64-younite\Back-End)
+2023-07-11 02:51:20 INFO  [main] org.springframework.boot.SpringApplication: No active profile set, falling back to 1 default profile: "default"
+2023-07-11 02:51:22 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer: Tomcat initialized with port(s): 8080 (http)
+2023-07-11 02:51:22 INFO  [main] org.apache.juli.logging.DirectJDKLog: Starting service [Tomcat]
+2023-07-11 02:51:22 INFO  [main] org.apache.juli.logging.DirectJDKLog: Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-11 02:51:22 INFO  [main] org.apache.juli.logging.DirectJDKLog: Initializing Spring embedded WebApplicationContext
+2023-07-11 02:51:22 INFO  [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext: Root WebApplicationContext: initialization completed in 2368 ms
+2023-07-11 02:51:24 WARN  [main] org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration: 
 
 Using generated security password: 1463f1f4-dbe4-4491-a72d-893c5c6aef94
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-2023-07-11 02:51:24.736  WARN 1676 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
-2023-07-11 02:51:24.737  INFO 1676 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/**']
-2023-07-11 02:51:24.738  WARN 1676 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/storage/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
-2023-07-11 02:51:24.738  INFO 1676 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/storage/**']
-2023-07-11 02:51:24.738  WARN 1676 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/orders/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
-2023-07-11 02:51:24.739  INFO 1676 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/orders/**']
-2023-07-11 02:51:24.739  WARN 1676 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/employees/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
-2023-07-11 02:51:24.739  INFO 1676 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/employees/**']
-2023-07-11 02:51:24.740  WARN 1676 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/management/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
-2023-07-11 02:51:24.740  INFO 1676 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/management/**']
-2023-07-11 02:51:24.765  INFO 1676 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
-2023-07-11 02:51:24.912  INFO 1676 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@838e109, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7474196, org.springframework.security.web.context.SecurityContextPersistenceFilter@6b103db7, org.springframework.security.web.header.HeaderWriterFilter@57167ccb, org.springframework.web.filter.CorsFilter@11ee671f, org.springframework.security.web.authentication.logout.LogoutFilter@35260785, tw.com.younite.filter.JWTAuthenticationFilter@18209303, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1f12d5e0, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4d5ea776, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@57df09a7, org.springframework.security.web.session.SessionManagementFilter@47d4e28a, org.springframework.security.web.access.ExceptionTranslationFilter@55a055cc, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@57e57dc5]
-2023-07-11 02:51:25.105  WARN 1676 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2023-07-11 02:51:25.235  INFO 1676 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2023-07-11 02:51:25.863  INFO 1676 --- [main] tw.com.younite.YouNiteApplication        : Started YouNiteApplication in 6.195 seconds (JVM running for 11.22)
-2023-07-11 03:14:24.190  INFO 1676 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-07-11 03:14:24.191  INFO 1676 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2023-07-11 03:14:24.193  INFO 1676 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2023-07-11 03:14:24.236  INFO 1676 --- [http-nio-8080-exec-2] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [g_state={"i_l":0};] that contained an invalid cookie. That cookie will be ignored.
+2023-07-11 02:51:24 WARN  [main] org.springframework.security.config.annotation.web.builders.WebSecurity: You are asking Spring Security to ignore Ant [pattern='/users/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-11 02:51:24 INFO  [main] org.springframework.security.web.DefaultSecurityFilterChain: Will not secure Ant [pattern='/users/**']
+2023-07-11 02:51:24 WARN  [main] org.springframework.security.config.annotation.web.builders.WebSecurity: You are asking Spring Security to ignore Ant [pattern='/storage/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-11 02:51:24 INFO  [main] org.springframework.security.web.DefaultSecurityFilterChain: Will not secure Ant [pattern='/storage/**']
+2023-07-11 02:51:24 WARN  [main] org.springframework.security.config.annotation.web.builders.WebSecurity: You are asking Spring Security to ignore Ant [pattern='/orders/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-11 02:51:24 INFO  [main] org.springframework.security.web.DefaultSecurityFilterChain: Will not secure Ant [pattern='/orders/**']
+2023-07-11 02:51:24 WARN  [main] org.springframework.security.config.annotation.web.builders.WebSecurity: You are asking Spring Security to ignore Ant [pattern='/employees/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-11 02:51:24 INFO  [main] org.springframework.security.web.DefaultSecurityFilterChain: Will not secure Ant [pattern='/employees/**']
+2023-07-11 02:51:24 WARN  [main] org.springframework.security.config.annotation.web.builders.WebSecurity: You are asking Spring Security to ignore Ant [pattern='/management/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-11 02:51:24 INFO  [main] org.springframework.security.web.DefaultSecurityFilterChain: Will not secure Ant [pattern='/management/**']
+2023-07-11 02:51:24 INFO  [main] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping: Adding welcome page: class path resource [static/index.html]
+2023-07-11 02:51:24 INFO  [main] org.springframework.security.web.DefaultSecurityFilterChain: Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@838e109, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7474196, org.springframework.security.web.context.SecurityContextPersistenceFilter@6b103db7, org.springframework.security.web.header.HeaderWriterFilter@57167ccb, org.springframework.web.filter.CorsFilter@11ee671f, org.springframework.security.web.authentication.logout.LogoutFilter@35260785, tw.com.younite.filter.JWTAuthenticationFilter@18209303, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1f12d5e0, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4d5ea776, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@57df09a7, org.springframework.security.web.session.SessionManagementFilter@47d4e28a, org.springframework.security.web.access.ExceptionTranslationFilter@55a055cc, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@57e57dc5]
+2023-07-11 02:51:25 WARN  [main] org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration: Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-07-11 02:51:25 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer: Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-11 02:51:25 INFO  [main] org.springframework.boot.StartupInfoLogger: Started YouNiteApplication in 6.195 seconds (JVM running for 11.22)
+2023-07-11 03:14:24 INFO  [http-nio-8080-exec-1] org.apache.juli.logging.DirectJDKLog: Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-11 03:14:24 INFO  [http-nio-8080-exec-1] org.springframework.web.servlet.FrameworkServlet: Initializing Servlet 'dispatcherServlet'
+2023-07-11 03:14:24 INFO  [http-nio-8080-exec-1] org.springframework.web.servlet.FrameworkServlet: Completed initialization in 2 ms
+2023-07-11 03:14:24 INFO  [http-nio-8080-exec-2] org.apache.juli.logging.DirectJDKLog: A cookie header was received [g_state={"i_l":0};] that contained an invalid cookie. That cookie will be ignored.
  Note: further occurrences of this error will be logged at DEBUG level.
-2023-07-11 03:14:24.306  INFO 1676 --- [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-07-11 03:14:26.010  INFO 1676 --- [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-07-11 03:51:01.163  WARN 1676 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=35m35s32ms741µs700ns).
-2023-07-11 09:30:48.094  INFO 1676 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-07-11 09:30:48.098  INFO 1676 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2023-07-11 09:30:53.714  INFO 28332 --- [main] tw.com.younite.YouNiteApplication        : Starting YouNiteApplication using Java 20.0.1 on 22zl with PID 28332 (D:\22ZL\EEIT_64_Project\eeit64-younite\Back-End\target\classes started by lisa5 in D:\22ZL\EEIT_64_Project\eeit64-younite\Back-End)
-2023-07-11 09:30:53.719  INFO 28332 --- [main] tw.com.younite.YouNiteApplication        : No active profile set, falling back to 1 default profile: "default"
-2023-07-11 09:30:55.217  INFO 28332 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
-2023-07-11 09:30:55.225  INFO 28332 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-07-11 09:30:55.225  INFO 28332 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.75]
-2023-07-11 09:30:55.321  INFO 28332 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-07-11 09:30:55.321  INFO 28332 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1564 ms
-2023-07-11 09:30:56.392  WARN 28332 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+2023-07-11 03:14:24 INFO  [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource: HikariPool-1 - Starting...
+2023-07-11 03:14:26 INFO  [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource: HikariPool-1 - Start completed.
+2023-07-11 03:51:01 WARN  [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool$HouseKeeper: HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=35m35s32ms741µs700ns).
+2023-07-11 09:30:48 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource: HikariPool-1 - Shutdown initiated...
+2023-07-11 09:30:48 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource: HikariPool-1 - Shutdown completed.
+2023-07-11 09:30:53 INFO  [main] org.springframework.boot.StartupInfoLogger: Starting YouNiteApplication using Java 20.0.1 on 22zl with PID 28332 (D:\22ZL\EEIT_64_Project\eeit64-younite\Back-End\target\classes started by lisa5 in D:\22ZL\EEIT_64_Project\eeit64-younite\Back-End)
+2023-07-11 09:30:53 INFO  [main] org.springframework.boot.SpringApplication: No active profile set, falling back to 1 default profile: "default"
+2023-07-11 09:30:55 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer: Tomcat initialized with port(s): 8080 (http)
+2023-07-11 09:30:55 INFO  [main] org.apache.juli.logging.DirectJDKLog: Starting service [Tomcat]
+2023-07-11 09:30:55 INFO  [main] org.apache.juli.logging.DirectJDKLog: Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-11 09:30:55 INFO  [main] org.apache.juli.logging.DirectJDKLog: Initializing Spring embedded WebApplicationContext
+2023-07-11 09:30:55 INFO  [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext: Root WebApplicationContext: initialization completed in 1564 ms
+2023-07-11 09:30:56 WARN  [main] org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration: 
 
 Using generated security password: dc7f08cd-54e0-4efa-a18e-095106fa5269
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-2023-07-11 09:30:56.438  WARN 28332 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
-2023-07-11 09:30:56.438  INFO 28332 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/**']
-2023-07-11 09:30:56.439  WARN 28332 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/storage/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
-2023-07-11 09:30:56.439  INFO 28332 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/storage/**']
-2023-07-11 09:30:56.439  WARN 28332 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/orders/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
-2023-07-11 09:30:56.439  INFO 28332 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/orders/**']
-2023-07-11 09:30:56.439  WARN 28332 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/employees/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
-2023-07-11 09:30:56.439  INFO 28332 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/employees/**']
-2023-07-11 09:30:56.440  WARN 28332 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/management/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
-2023-07-11 09:30:56.440  INFO 28332 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/management/**']
-2023-07-11 09:30:56.457  INFO 28332 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
-2023-07-11 09:30:56.562  INFO 28332 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@838e109, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7474196, org.springframework.security.web.context.SecurityContextPersistenceFilter@53d9af1, org.springframework.security.web.header.HeaderWriterFilter@e645600, org.springframework.web.filter.CorsFilter@11ee671f, org.springframework.security.web.authentication.logout.LogoutFilter@4067634b, tw.com.younite.filter.JWTAuthenticationFilter@18209303, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4d5ea776, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@57ed02e6, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@57df09a7, org.springframework.security.web.session.SessionManagementFilter@1f12d5e0, org.springframework.security.web.access.ExceptionTranslationFilter@74c04377, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@57e57dc5]
-2023-07-11 09:30:56.693  WARN 28332 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
-2023-07-11 09:30:56.776  INFO 28332 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2023-07-11 09:30:57.151  INFO 28332 --- [main] tw.com.younite.YouNiteApplication        : Started YouNiteApplication in 3.753 seconds (JVM running for 7.926)
-2023-07-11 09:31:22.975  INFO 28332 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-07-11 09:31:22.975  INFO 28332 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2023-07-11 09:31:22.977  INFO 28332 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2023-07-11 09:31:23.000  INFO 28332 --- [http-nio-8080-exec-2] o.apache.tomcat.util.http.parser.Cookie  : A cookie header was received [g_state={"i_l":0};] that contained an invalid cookie. That cookie will be ignored.
+2023-07-11 09:30:56 WARN  [main] org.springframework.security.config.annotation.web.builders.WebSecurity: You are asking Spring Security to ignore Ant [pattern='/users/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-11 09:30:56 INFO  [main] org.springframework.security.web.DefaultSecurityFilterChain: Will not secure Ant [pattern='/users/**']
+2023-07-11 09:30:56 WARN  [main] org.springframework.security.config.annotation.web.builders.WebSecurity: You are asking Spring Security to ignore Ant [pattern='/storage/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-11 09:30:56 INFO  [main] org.springframework.security.web.DefaultSecurityFilterChain: Will not secure Ant [pattern='/storage/**']
+2023-07-11 09:30:56 WARN  [main] org.springframework.security.config.annotation.web.builders.WebSecurity: You are asking Spring Security to ignore Ant [pattern='/orders/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-11 09:30:56 INFO  [main] org.springframework.security.web.DefaultSecurityFilterChain: Will not secure Ant [pattern='/orders/**']
+2023-07-11 09:30:56 WARN  [main] org.springframework.security.config.annotation.web.builders.WebSecurity: You are asking Spring Security to ignore Ant [pattern='/employees/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-11 09:30:56 INFO  [main] org.springframework.security.web.DefaultSecurityFilterChain: Will not secure Ant [pattern='/employees/**']
+2023-07-11 09:30:56 WARN  [main] org.springframework.security.config.annotation.web.builders.WebSecurity: You are asking Spring Security to ignore Ant [pattern='/management/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-11 09:30:56 INFO  [main] org.springframework.security.web.DefaultSecurityFilterChain: Will not secure Ant [pattern='/management/**']
+2023-07-11 09:30:56 INFO  [main] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping: Adding welcome page: class path resource [static/index.html]
+2023-07-11 09:30:56 INFO  [main] org.springframework.security.web.DefaultSecurityFilterChain: Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@838e109, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7474196, org.springframework.security.web.context.SecurityContextPersistenceFilter@53d9af1, org.springframework.security.web.header.HeaderWriterFilter@e645600, org.springframework.web.filter.CorsFilter@11ee671f, org.springframework.security.web.authentication.logout.LogoutFilter@4067634b, tw.com.younite.filter.JWTAuthenticationFilter@18209303, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4d5ea776, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@57ed02e6, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@57df09a7, org.springframework.security.web.session.SessionManagementFilter@1f12d5e0, org.springframework.security.web.access.ExceptionTranslationFilter@74c04377, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@57e57dc5]
+2023-07-11 09:30:56 WARN  [main] org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration: Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-07-11 09:30:56 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer: Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-11 09:30:57 INFO  [main] org.springframework.boot.StartupInfoLogger: Started YouNiteApplication in 3.753 seconds (JVM running for 7.926)
+2023-07-11 09:31:22 INFO  [http-nio-8080-exec-1] org.apache.juli.logging.DirectJDKLog: Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-11 09:31:22 INFO  [http-nio-8080-exec-1] org.springframework.web.servlet.FrameworkServlet: Initializing Servlet 'dispatcherServlet'
+2023-07-11 09:31:22 INFO  [http-nio-8080-exec-1] org.springframework.web.servlet.FrameworkServlet: Completed initialization in 1 ms
+2023-07-11 09:31:23 INFO  [http-nio-8080-exec-2] org.apache.juli.logging.DirectJDKLog: A cookie header was received [g_state={"i_l":0};] that contained an invalid cookie. That cookie will be ignored.
  Note: further occurrences of this error will be logged at DEBUG level.
-2023-07-11 09:31:23.036  INFO 28332 --- [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-07-11 09:31:24.312  INFO 28332 --- [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-07-11 10:18:10.051  WARN 28332 --- [http-nio-8080-exec-6] com.amazonaws.util.Base64                : JAXB is unavailable. Will fallback to SDK implementation which may be less performant
-2023-07-11 10:18:10.537 ERROR 28332 --- [http-nio-8080-exec-6] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'profileId' in 'class tw.com.younite.entity.UserProfileEntity'] with root cause
-
+2023-07-11 09:31:23 INFO  [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource: HikariPool-1 - Starting...
+2023-07-11 09:31:24 INFO  [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource: HikariPool-1 - Start completed.
+2023-07-11 10:18:10 WARN  [http-nio-8080-exec-6] com.amazonaws.log.CommonsLog: JAXB is unavailable. Will fallback to SDK implementation which may be less performant
+2023-07-11 10:18:10 ERROR [http-nio-8080-exec-6] org.apache.juli.logging.DirectJDKLog: Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'profileId' in 'class tw.com.younite.entity.UserProfileEntity'] with root cause
 org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'profileId' in 'class tw.com.younite.entity.UserProfileEntity'
 	at org.apache.ibatis.reflection.Reflector.getGetInvoker(Reflector.java:373)
 	at org.apache.ibatis.reflection.MetaClass.getGetInvoker(MetaClass.java:163)
@@ -154,9 +153,7 @@ org.apache.ibatis.reflection.ReflectionException: There is no getter for propert
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:1623)
-
-2023-07-11 11:28:52.938 ERROR 28332 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'profileId' in 'class tw.com.younite.entity.UserProfileEntity'] with root cause
-
+2023-07-11 11:28:52 ERROR [http-nio-8080-exec-1] org.apache.juli.logging.DirectJDKLog: Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'profileId' in 'class tw.com.younite.entity.UserProfileEntity'] with root cause
 org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'profileId' in 'class tw.com.younite.entity.UserProfileEntity'
 	at org.apache.ibatis.reflection.Reflector.getGetInvoker(Reflector.java:373)
 	at org.apache.ibatis.reflection.MetaClass.getGetInvoker(MetaClass.java:163)
@@ -236,9 +233,7 @@ org.apache.ibatis.reflection.ReflectionException: There is no getter for propert
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:1623)
-
-2023-07-11 12:05:39.122 ERROR 28332 --- [http-nio-8080-exec-7] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'profileId' in 'class tw.com.younite.entity.UserProfileEntity'] with root cause
-
+2023-07-11 12:05:39 ERROR [http-nio-8080-exec-7] org.apache.juli.logging.DirectJDKLog: Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'profileId' in 'class tw.com.younite.entity.UserProfileEntity'] with root cause
 org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'profileId' in 'class tw.com.younite.entity.UserProfileEntity'
 	at org.apache.ibatis.reflection.Reflector.getGetInvoker(Reflector.java:373)
 	at org.apache.ibatis.reflection.MetaClass.getGetInvoker(MetaClass.java:163)
@@ -318,9 +313,7 @@ org.apache.ibatis.reflection.ReflectionException: There is no getter for propert
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:1623)
-
-2023-07-11 12:08:08.742 ERROR 28332 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException: Cannot invoke "Object.toString()" because the return value of "javax.servlet.http.HttpSession.getAttribute(String)" is null] with root cause
-
+2023-07-11 12:08:08 ERROR [http-nio-8080-exec-1] org.apache.juli.logging.DirectJDKLog: Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException: Cannot invoke "Object.toString()" because the return value of "javax.servlet.http.HttpSession.getAttribute(String)" is null] with root cause
 java.lang.NullPointerException: Cannot invoke "Object.toString()" because the return value of "javax.servlet.http.HttpSession.getAttribute(String)" is null
 	at tw.com.younite.controller.BaseController.getIDFromSession(BaseController.java:124)
 	at tw.com.younite.controller.UserProfileController.resetProfiles(UserProfileController.java:196)
@@ -378,9 +371,7 @@ java.lang.NullPointerException: Cannot invoke "Object.toString()" because the re
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:1623)
-
-2023-07-11 12:08:15.916 ERROR 28332 --- [http-nio-8080-exec-3] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException: Cannot invoke "tw.com.younite.entity.UserProfileEntity.getProfileAvatar()" because "originalProfile" is null] with root cause
-
+2023-07-11 12:08:15 ERROR [http-nio-8080-exec-3] org.apache.juli.logging.DirectJDKLog: Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException: Cannot invoke "tw.com.younite.entity.UserProfileEntity.getProfileAvatar()" because "originalProfile" is null] with root cause
 java.lang.NullPointerException: Cannot invoke "tw.com.younite.entity.UserProfileEntity.getProfileAvatar()" because "originalProfile" is null
 	at tw.com.younite.controller.UserProfileController.resetProfiles(UserProfileController.java:198)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
@@ -437,10 +428,9 @@ java.lang.NullPointerException: Cannot invoke "tw.com.younite.entity.UserProfile
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:1623)
-
-2023-07-11 12:08:24.846  WARN 28332 --- [http-nio-8080-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type '' not supported]
-2023-07-11 12:08:30.403  WARN 28332 --- [http-nio-8080-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'hobbies' for method parameter type List is not present]
-2023-07-11 12:08:36.989  WARN 28332 --- [http-nio-8080-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type '' not supported]
-2023-07-11 12:08:56.415  WARN 28332 --- [http-nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type '' not supported]
-2023-07-11 12:09:20.585  WARN 28332 --- [http-nio-8080-exec-10] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type '' not supported]
-2023-07-11 12:09:33.580  INFO 28332 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-07-11 12:08:24 WARN  [http-nio-8080-exec-4] org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver: Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type '' not supported]
+2023-07-11 12:08:30 WARN  [http-nio-8080-exec-5] org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver: Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'hobbies' for method parameter type List is not present]
+2023-07-11 12:08:36 WARN  [http-nio-8080-exec-7] org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver: Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type '' not supported]
+2023-07-11 12:08:56 WARN  [http-nio-8080-exec-9] org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver: Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type '' not supported]
+2023-07-11 12:09:20 WARN  [http-nio-8080-exec-10] org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver: Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type '' not supported]
+2023-07-11 12:09:33 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource: HikariPool-1 - Shutdown initiated...

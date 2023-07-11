@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import Logo from '../assets/logo/logo-type.png';
 import '../styles/component/nav.scss';
-// import UserImage from '../assets/images/sia.png';
 import ChatBotModal from './Modal/ChatBotModal';
 import NotificationCollapse from '../pages/NotificationCollapse';
 import axios from 'axios';
@@ -31,10 +30,14 @@ function SideNav() {
   const [post, setPost] = useState(null);
   useEffect(() => {
     axios.defaults.withCredentials = true;
-    axios.get('/users/profile').then((response) => {
-      setPost(response.data);
-      // console.log(response.data)
-    });
+    axios
+      .get('/users/profile')
+      .then((response) => {
+        setPost(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   if (post === null) return null;
