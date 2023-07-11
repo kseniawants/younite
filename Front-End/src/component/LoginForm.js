@@ -44,7 +44,6 @@ function LoginForm() {
     });
   };
 
-  axios.defaults.withCredentials = true; //Axios 支援跨域請求和
   // 表單發送的按鈕
   const onSubmit = async (data) => {
     console.log(data);
@@ -56,8 +55,6 @@ function LoginForm() {
         username: data.username,
         password: data.password,
       };
-
-      axios.defaults.withCredentials = true;
 
       const response = await axios.post('/users/login', requestBody);
       console.log(requestBody);
@@ -76,7 +73,6 @@ function LoginForm() {
 
         // 設置Authorization標頭
         axios.defaults.headers.common['Authorization'] = token;
-        axios.defaults.withCredentials = true;
         //設定以後打給後端的 axios 的 headers 都會帶有這隻 token
 
         setTimeout(() => {

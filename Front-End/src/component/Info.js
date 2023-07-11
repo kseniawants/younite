@@ -70,7 +70,6 @@ function Info() {
       formData.append('hobbies', str);
 
       //註冊 API ( 寫入資料 )
-      axios.defaults.withCredentials = true;
       const response = await axios.post('/users/profile', formData, {
         headers: {
           'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>',

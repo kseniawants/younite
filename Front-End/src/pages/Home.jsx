@@ -10,8 +10,7 @@ import axios from 'axios';
 function Home() {
   const [post1, setPost1] = useState([]);
   const [post2, setPost2] = useState([]);
-  
-  axios.defaults.withCredentials = true;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -29,7 +28,6 @@ function Home() {
     fetchData();
   }, []);
 
-  
   return (
     <>
       <section className='container mt-4'>
@@ -54,28 +52,37 @@ function Home() {
           <div className='bg-pageMain col me-3'>
             <h6>共同興趣</h6>
             <>
-            {post1.data ? (
-              post1.data.slice(0, 2).map((item, index) => (
-                <div key={index} className='user-card px-2 py-2 row'>
-                  <div className='col d-flex align-items-center'>
-                    <img src={item.profileAvatar} alt='Your Picture' className='mb-1 user-card-image' />
-                    <h6 className='ms-3'>{item.name}</h6>
-                    <h6 className='ms-2 text-radio'>{item.age}</h6>
+              {post1.data ? (
+                post1.data.slice(0, 2).map((item, index) => (
+                  <div key={index} className='user-card px-2 py-2 row'>
+                    <div className='col d-flex align-items-center'>
+                      <img
+                        src={item.profileAvatar}
+                        alt='Your Picture'
+                        className='mb-1 user-card-image'
+                      />
+                      <h6 className='ms-3'>{item.name}</h6>
+                      <h6 className='ms-2 text-radio'>{item.age}</h6>
+                    </div>
+                    <div className='row mt-1 text-nowrap'>
+                      {item.interests &&
+                        item.interests.slice(0, 3).map((interest, i) => (
+                          <button
+                            key={i}
+                            type='button'
+                            className='btn btn-outline-primary btn-sm col-3 m-1 rounded-pill btn-block'
+                          >
+                            #{interest}
+                          </button>
+                        ))}
+                    </div>
                   </div>
-                  <div className='row mt-1 text-nowrap'>
-                    {item.interests && item.interests.slice(0, 3).map((interest, i) => (
-                      <button key={i} type='button' className='btn btn-outline-primary btn-sm col-3 m-1 rounded-pill btn-block'>
-                        #{interest}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              ))
-            ) : (
-              <>
-                <UserCard />
-                <UserCard />
-              </>
+                ))
+              ) : (
+                <>
+                  <UserCard />
+                  <UserCard />
+                </>
               )}
             </>
             <div className='bg-pageMore d-flex mt-3'>
@@ -83,8 +90,8 @@ function Home() {
             </div>
           </div>
           <div className='bg-pageMain col'>
-            <Link to="/store">
-              <i className='fa-solid fa-user-lock' style={{color:'#82898D'}}></i>
+            <Link to='/store'>
+              <i className='fa-solid fa-user-lock' style={{ color: '#82898D' }}></i>
             </Link>
             <h6>誰喜歡你</h6>
             <div className='user-lock'>
@@ -94,29 +101,34 @@ function Home() {
           <div className='bg-pageMain col ms-3'>
             <h6>類似職業</h6>
             <>
-            {post2.data ? (
-              post2.data.slice(0, 2).map((item, index) => (
-                <div key={index} className='user-card px-2 py-2 row'>
-                  <div className='col d-flex align-items-center'>
-                    <img src={item.avatar} alt='Your Picture' className='mb-1 user-card-image' />
-                    <h6 className='ms-3'>{item.name}</h6>
-                    <h6 className='ms-2 text-radio'>{item.age}</h6>
+              {post2.data ? (
+                post2.data.slice(0, 2).map((item, index) => (
+                  <div key={index} className='user-card px-2 py-2 row'>
+                    <div className='col d-flex align-items-center'>
+                      <img src={item.avatar} alt='Your Picture' className='mb-1 user-card-image' />
+                      <h6 className='ms-3'>{item.name}</h6>
+                      <h6 className='ms-2 text-radio'>{item.age}</h6>
+                    </div>
+                    <div className='row mt-1 text-nowrap'>
+                      {item.interests &&
+                        item.interests.slice(0, 3).map((interest, i) => (
+                          <button
+                            key={i}
+                            type='button'
+                            className='btn btn-outline-primary btn-sm col-3 m-1 rounded-pill btn-block'
+                          >
+                            #{interest}
+                          </button>
+                        ))}
+                    </div>
                   </div>
-                  <div className='row mt-1 text-nowrap'>
-                    {item.interests && item.interests.slice(0, 3).map((interest, i) => (
-                      <button key={i} type='button' className='btn btn-outline-primary btn-sm col-3 m-1 rounded-pill btn-block'>
-                        #{interest}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              ))
-            ) : (
-              <>
-                <UserCard />
-                <UserCard />
-              </>
-            )}
+                ))
+              ) : (
+                <>
+                  <UserCard />
+                  <UserCard />
+                </>
+              )}
             </>
             <div className='bg-pageMore d-flex mt-3'>
               <a href=''>顯示更多...</a>

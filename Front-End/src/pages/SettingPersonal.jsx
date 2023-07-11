@@ -68,7 +68,6 @@ function SettingPersonal() {
       formData.append('photos', data.photoWall);
       formData.append('hobbies', str);
 
-      axios.defaults.withCredentials = true;
       const response = await axios.put('/users/profile', formData, {
         headers: {
           'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>',
@@ -242,7 +241,6 @@ function SettingPersonal() {
     selfIntro: '',
   });
 
-  axios.defaults.withCredentials = true;
   const fetchData = () => {
     axios
       .get('/users/profile')
@@ -264,7 +262,6 @@ function SettingPersonal() {
         setValue('selfIntro', userData.data.selfIntro);
         setSelectedButtonLabel(userData.data.datingGoal);
         setSelectedLocation(userData.data.location);
-        axios.defaults.withCredentials = true;
       })
       .catch((error) => {
         console.error(error);
@@ -273,7 +270,6 @@ function SettingPersonal() {
 
   const [hobby, setHobby] = useState({});
 
-  axios.defaults.withCredentials = true;
   const fetchData2 = () => {
     axios
       .get('/users/interest')
