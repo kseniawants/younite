@@ -141,6 +141,7 @@ public class FriendService implements IFriendService {
 
 
 
+
     public Boolean checkMatched(Integer userID, Integer friendID) {
         FriendEntity friend = friendMapper.getSpecificFriend(userID, friendID);
         if (friend == null) {
