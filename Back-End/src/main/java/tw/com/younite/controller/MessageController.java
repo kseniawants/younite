@@ -22,7 +22,7 @@ public class MessageController extends BaseController {
         iMessageService.insertMessage(messageEntity);
         return new JSONResult<>(OK);
     }
-    @GetMapping("/{roomId}")
+    @GetMapping("/find/{roomId}")
     public ResponseEntity<List<MessageEntity>> findMessage(HttpSession session,@PathVariable("roomId") Integer roomId){
         List<MessageEntity> list= iMessageService.getMessages(roomId);
         return ResponseEntity.ok(list);
