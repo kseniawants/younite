@@ -229,7 +229,6 @@ java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check th
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
 	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:426)
-<<<<<<< HEAD
 	at jdk.proxy2/jdk.proxy2.$Proxy88.insert(Unknown Source)
 	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:271)
 	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:60)
@@ -237,7 +236,6 @@ java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check th
 	at jdk.proxy2/jdk.proxy2.$Proxy91.insertProfile(Unknown Source)
 	at tw.com.younite.service.impl.UserProfileServiceImpl.insertProfile(UserProfileServiceImpl.java:40)
 	at tw.com.younite.controller.UserProfileController.insertProfile(UserProfileController.java:123)
-=======
 	at jdk.proxy2/jdk.proxy2.$Proxy85.insert(Unknown Source)
 	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:271)
 	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:60)
@@ -245,7 +243,6 @@ java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check th
 	at jdk.proxy2/jdk.proxy2.$Proxy90.insertMessage(Unknown Source)
 	at tw.com.younite.service.impl.MessageService.insertMessage(MessageService.java:16)
 	at tw.com.younite.controller.MessageController.addmessage(MessageController.java:20)
->>>>>>> origin/dev
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
 	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
@@ -266,15 +263,12 @@ java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check th
 	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
-<<<<<<< HEAD
 	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:214)
 	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:186)
 	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354)
 	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
-=======
->>>>>>> origin/dev
 	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
 	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
@@ -303,7 +297,6 @@ java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check th
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:1623)
-<<<<<<< HEAD
 2023-07-11 11:28:52 ERROR [http-nio-8080-exec-1] org.apache.juli.logging.DirectJDKLog: Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'profileId' in 'class tw.com.younite.entity.UserProfileEntity'] with root cause
 org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'profileId' in 'class tw.com.younite.entity.UserProfileEntity'
 	at org.apache.ibatis.reflection.Reflector.getGetInvoker(Reflector.java:373)
@@ -316,7 +309,6 @@ org.apache.ibatis.reflection.ReflectionException: There is no getter for propert
 	at org.apache.ibatis.executor.statement.RoutingStatementHandler.parameterize(RoutingStatementHandler.java:64)
 	at com.baomidou.mybatisplus.core.executor.MybatisSimpleExecutor.prepareStatement(MybatisSimpleExecutor.java:97)
 	at com.baomidou.mybatisplus.core.executor.MybatisSimpleExecutor.doUpdate(MybatisSimpleExecutor.java:53)
-=======
 2023-07-11 11:43:42 ERROR [http-nio-8080-exec-4] org.apache.juli.logging.DirectJDKLog: Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.jdbc.BadSqlGrammarException: 
 ### Error updating database.  Cause: java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', null,null)' at line 3
 ### The error may exist in file [/Users/zichengliu/finalTermProject/eeit64-younite/Back-End/target/classes/mapper/MessageMapper.xml]
@@ -339,7 +331,6 @@ java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check th
 	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:47)
 	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:74)
 	at com.baomidou.mybatisplus.core.executor.MybatisSimpleExecutor.doUpdate(MybatisSimpleExecutor.java:54)
->>>>>>> origin/dev
 	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
 	at com.baomidou.mybatisplus.core.executor.MybatisCachingExecutor.update(MybatisCachingExecutor.java:83)
 	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)
@@ -347,7 +338,6 @@ java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check th
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
 	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:426)
-<<<<<<< HEAD
 	at jdk.proxy2/jdk.proxy2.$Proxy88.insert(Unknown Source)
 	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:271)
 	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:60)
@@ -355,7 +345,6 @@ java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check th
 	at jdk.proxy2/jdk.proxy2.$Proxy91.insertProfile(Unknown Source)
 	at tw.com.younite.service.impl.UserProfileServiceImpl.insertProfile(UserProfileServiceImpl.java:40)
 	at tw.com.younite.controller.UserProfileController.insertProfile(UserProfileController.java:123)
-=======
 	at jdk.proxy2/jdk.proxy2.$Proxy85.insert(Unknown Source)
 	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:271)
 	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:60)
@@ -363,7 +352,6 @@ java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check th
 	at jdk.proxy2/jdk.proxy2.$Proxy90.insertMessage(Unknown Source)
 	at tw.com.younite.service.impl.MessageService.insertMessage(MessageService.java:16)
 	at tw.com.younite.controller.MessageController.addmessage(MessageController.java:20)
->>>>>>> origin/dev
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
 	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
@@ -384,15 +372,12 @@ java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check th
 	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
-<<<<<<< HEAD
 	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:214)
 	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:186)
 	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354)
 	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
-=======
->>>>>>> origin/dev
 	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
 	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
@@ -421,7 +406,6 @@ java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check th
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:1623)
-<<<<<<< HEAD
 2023-07-11 12:05:39 ERROR [http-nio-8080-exec-7] org.apache.juli.logging.DirectJDKLog: Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'profileId' in 'class tw.com.younite.entity.UserProfileEntity'] with root cause
 org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'profileId' in 'class tw.com.younite.entity.UserProfileEntity'
 	at org.apache.ibatis.reflection.Reflector.getGetInvoker(Reflector.java:373)
@@ -434,7 +418,6 @@ org.apache.ibatis.reflection.ReflectionException: There is no getter for propert
 	at org.apache.ibatis.executor.statement.RoutingStatementHandler.parameterize(RoutingStatementHandler.java:64)
 	at com.baomidou.mybatisplus.core.executor.MybatisSimpleExecutor.prepareStatement(MybatisSimpleExecutor.java:97)
 	at com.baomidou.mybatisplus.core.executor.MybatisSimpleExecutor.doUpdate(MybatisSimpleExecutor.java:53)
-=======
 2023-07-11 11:44:09 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource: HikariPool-1 - Shutdown initiated...
 2023-07-11 11:44:10 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource: HikariPool-1 - Shutdown completed.
 2023-07-11 11:44:14 INFO  [main] org.springframework.boot.StartupInfoLogger: Starting YouNiteApplication using Java 20.0.1 on L20.r2003.tciii.org.tw with PID 78796 (/Users/zichengliu/finalTermProject/eeit64-younite/Back-End/target/classes started by zichengliu in /Users/zichengliu/finalTermProject/eeit64-younite/Back-End)
@@ -475,7 +458,6 @@ java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check th
 	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:47)
 	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:74)
 	at com.baomidou.mybatisplus.core.executor.MybatisSimpleExecutor.doUpdate(MybatisSimpleExecutor.java:54)
->>>>>>> origin/dev
 	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
 	at com.baomidou.mybatisplus.core.executor.MybatisCachingExecutor.update(MybatisCachingExecutor.java:83)
 	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)
@@ -483,7 +465,6 @@ java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check th
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
 	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:426)
-<<<<<<< HEAD
 	at jdk.proxy2/jdk.proxy2.$Proxy88.insert(Unknown Source)
 	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:271)
 	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:60)
@@ -491,7 +472,6 @@ java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check th
 	at jdk.proxy2/jdk.proxy2.$Proxy91.insertProfile(Unknown Source)
 	at tw.com.younite.service.impl.UserProfileServiceImpl.insertProfile(UserProfileServiceImpl.java:40)
 	at tw.com.younite.controller.UserProfileController.insertProfile(UserProfileController.java:123)
-=======
 	at jdk.proxy2/jdk.proxy2.$Proxy85.insert(Unknown Source)
 	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:271)
 	at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:60)
@@ -499,7 +479,6 @@ java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check th
 	at jdk.proxy2/jdk.proxy2.$Proxy90.insertMessage(Unknown Source)
 	at tw.com.younite.service.impl.MessageService.insertMessage(MessageService.java:16)
 	at tw.com.younite.controller.MessageController.addmessage(MessageController.java:20)
->>>>>>> origin/dev
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
 	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
@@ -520,15 +499,12 @@ java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check th
 	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
-<<<<<<< HEAD
 	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:214)
 	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:186)
 	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354)
 	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
-=======
->>>>>>> origin/dev
 	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
 	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
@@ -557,12 +533,10 @@ java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check th
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:1623)
-<<<<<<< HEAD
 2023-07-11 12:08:08 ERROR [http-nio-8080-exec-1] org.apache.juli.logging.DirectJDKLog: Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException: Cannot invoke "Object.toString()" because the return value of "javax.servlet.http.HttpSession.getAttribute(String)" is null] with root cause
 java.lang.NullPointerException: Cannot invoke "Object.toString()" because the return value of "javax.servlet.http.HttpSession.getAttribute(String)" is null
 	at tw.com.younite.controller.BaseController.getIDFromSession(BaseController.java:124)
 	at tw.com.younite.controller.UserProfileController.resetProfiles(UserProfileController.java:196)
-=======
 2023-07-11 11:44:53 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource: HikariPool-1 - Shutdown initiated...
 2023-07-11 11:44:53 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource: HikariPool-1 - Shutdown completed.
 2023-07-11 11:45:01 INFO  [main] org.springframework.boot.StartupInfoLogger: Starting YouNiteApplication using Java 20.0.1 on L20.r2003.tciii.org.tw with PID 78872 (/Users/zichengliu/finalTermProject/eeit64-younite/Back-End/target/classes started by zichengliu in /Users/zichengliu/finalTermProject/eeit64-younite/Back-End)
@@ -617,7 +591,6 @@ java.sql.SQLIntegrityConstraintViolationException: Column 'senderId' cannot be n
 	at jdk.proxy2/jdk.proxy2.$Proxy90.insertMessage(Unknown Source)
 	at tw.com.younite.service.impl.MessageService.insertMessage(MessageService.java:16)
 	at tw.com.younite.controller.MessageController.addmessage(MessageController.java:20)
->>>>>>> origin/dev
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
 	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
@@ -629,13 +602,10 @@ java.sql.SQLIntegrityConstraintViolationException: Column 'senderId' cannot be n
 	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072)
 	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965)
 	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
-<<<<<<< HEAD
 	at org.springframework.web.servlet.FrameworkServlet.doPut(FrameworkServlet.java:920)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:558)
-=======
 	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:555)
->>>>>>> origin/dev
 	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209)
@@ -643,15 +613,12 @@ java.sql.SQLIntegrityConstraintViolationException: Column 'senderId' cannot be n
 	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
-<<<<<<< HEAD
 	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:214)
 	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:186)
 	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354)
 	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
-=======
->>>>>>> origin/dev
 	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
 	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
@@ -680,11 +647,9 @@ java.sql.SQLIntegrityConstraintViolationException: Column 'senderId' cannot be n
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:1623)
-<<<<<<< HEAD
 2023-07-11 12:08:15 ERROR [http-nio-8080-exec-3] org.apache.juli.logging.DirectJDKLog: Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException: Cannot invoke "tw.com.younite.entity.UserProfileEntity.getProfileAvatar()" because "originalProfile" is null] with root cause
 java.lang.NullPointerException: Cannot invoke "tw.com.younite.entity.UserProfileEntity.getProfileAvatar()" because "originalProfile" is null
 	at tw.com.younite.controller.UserProfileController.resetProfiles(UserProfileController.java:198)
-=======
 2023-07-11 11:46:14 ERROR [http-nio-8080-exec-4] org.apache.juli.logging.DirectJDKLog: Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.dao.DataIntegrityViolationException: 
 ### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'senderId' cannot be null
 ### The error may exist in file [/Users/zichengliu/finalTermProject/eeit64-younite/Back-End/target/classes/mapper/MessageMapper.xml]
@@ -721,7 +686,6 @@ java.sql.SQLIntegrityConstraintViolationException: Column 'senderId' cannot be n
 	at jdk.proxy2/jdk.proxy2.$Proxy90.insertMessage(Unknown Source)
 	at tw.com.younite.service.impl.MessageService.insertMessage(MessageService.java:16)
 	at tw.com.younite.controller.MessageController.addmessage(MessageController.java:20)
->>>>>>> origin/dev
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:578)
 	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
@@ -733,13 +697,10 @@ java.sql.SQLIntegrityConstraintViolationException: Column 'senderId' cannot be n
 	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072)
 	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965)
 	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
-<<<<<<< HEAD
 	at org.springframework.web.servlet.FrameworkServlet.doPut(FrameworkServlet.java:920)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:558)
-=======
 	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:555)
->>>>>>> origin/dev
 	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
 	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209)
@@ -747,15 +708,12 @@ java.sql.SQLIntegrityConstraintViolationException: Column 'senderId' cannot be n
 	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
-<<<<<<< HEAD
 	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:214)
 	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:186)
 	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354)
 	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
 	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
-=======
->>>>>>> origin/dev
 	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
 	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
 	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
@@ -784,14 +742,12 @@ java.sql.SQLIntegrityConstraintViolationException: Column 'senderId' cannot be n
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:1623)
-<<<<<<< HEAD
 2023-07-11 12:08:24 WARN  [http-nio-8080-exec-4] org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver: Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type '' not supported]
 2023-07-11 12:08:30 WARN  [http-nio-8080-exec-5] org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver: Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'hobbies' for method parameter type List is not present]
 2023-07-11 12:08:36 WARN  [http-nio-8080-exec-7] org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver: Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type '' not supported]
 2023-07-11 12:08:56 WARN  [http-nio-8080-exec-9] org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver: Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type '' not supported]
 2023-07-11 12:09:20 WARN  [http-nio-8080-exec-10] org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver: Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type '' not supported]
 2023-07-11 12:09:33 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource: HikariPool-1 - Shutdown initiated...
-=======
 2023-07-11 11:49:17 WARN  [http-nio-8080-exec-5] org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver: Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'multipart/form-data;boundary=--------------------------800650895929310893266496;charset=UTF-8' not supported]
 2023-07-11 11:50:15 ERROR [http-nio-8080-exec-7] org.apache.juli.logging.DirectJDKLog: Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.dao.DataIntegrityViolationException: 
 ### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Column 'senderId' cannot be null
@@ -1247,6 +1203,7 @@ org.apache.ibatis.executor.ExecutorException: No setter found for the keyPropert
 2023-07-11 11:56:29 INFO  [http-nio-8080-exec-2] org.springframework.web.servlet.FrameworkServlet: Completed initialization in 3 ms
 2023-07-11 11:56:29 INFO  [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource: HikariPool-1 - Starting...
 2023-07-11 11:56:30 INFO  [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource: HikariPool-1 - Start completed.
+<<<<<<< HEAD
 >>>>>>> origin/dev
 2023-07-11 12:24:12 INFO  [main] org.springframework.boot.StartupInfoLogger: Starting YouNiteApplication using Java 20.0.1 on 22zl with PID 26272 (D:\22ZL\EEIT_64_Project\eeit64-younite\Back-End\target\classes started by lisa5 in D:\22ZL\EEIT_64_Project\eeit64-younite\Back-End)
 2023-07-11 12:24:12 INFO  [main] org.springframework.boot.SpringApplication: No active profile set, falling back to 1 default profile: "default"
@@ -1497,3 +1454,23 @@ java.sql.SQLException: Data truncated for column 'sexual_orientation' at row 1
 	at java.base/java.lang.Thread.run(Thread.java:1623)
 2023-07-11 12:33:04 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource: HikariPool-1 - Shutdown initiated...
 2023-07-11 12:33:05 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource: HikariPool-1 - Shutdown completed.
+=======
+2023-07-11 12:09:43 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource: HikariPool-1 - Shutdown initiated...
+2023-07-11 12:09:44 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource: HikariPool-1 - Shutdown completed.
+2023-07-11 12:09:46 INFO  [main] org.springframework.boot.StartupInfoLogger: Starting YouNiteApplication using Java 20.0.1 on L20.r2003.tciii.org.tw with PID 81567 (/Users/zichengliu/finalTermProject/eeit64-younite/Back-End/target/classes started by zichengliu in /Users/zichengliu/finalTermProject/eeit64-younite/Back-End)
+2023-07-11 12:09:46 INFO  [main] org.springframework.boot.SpringApplication: No active profile set, falling back to 1 default profile: "default"
+2023-07-11 12:09:47 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer: Tomcat initialized with port(s): 8080 (http)
+2023-07-11 12:09:47 INFO  [main] org.apache.juli.logging.DirectJDKLog: Starting service [Tomcat]
+2023-07-11 12:09:47 INFO  [main] org.apache.juli.logging.DirectJDKLog: Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-11 12:09:47 INFO  [main] org.apache.juli.logging.DirectJDKLog: Initializing Spring embedded WebApplicationContext
+2023-07-11 12:09:47 INFO  [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext: Root WebApplicationContext: initialization completed in 917 ms
+2023-07-11 12:09:48 INFO  [main] org.springframework.boot.autoconfigure.web.servlet.WelcomePageHandlerMapping: Adding welcome page: class path resource [static/index.html]
+2023-07-11 12:09:48 WARN  [main] org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration: Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-07-11 12:09:48 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer: Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-11 12:09:49 INFO  [main] org.springframework.boot.StartupInfoLogger: Started YouNiteApplication in 2.632 seconds (JVM running for 3.241)
+2023-07-11 12:10:25 INFO  [http-nio-8080-exec-2] org.apache.juli.logging.DirectJDKLog: Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-11 12:10:25 INFO  [http-nio-8080-exec-2] org.springframework.web.servlet.FrameworkServlet: Initializing Servlet 'dispatcherServlet'
+2023-07-11 12:10:25 INFO  [http-nio-8080-exec-2] org.springframework.web.servlet.FrameworkServlet: Completed initialization in 9 ms
+2023-07-11 12:10:25 INFO  [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource: HikariPool-1 - Starting...
+2023-07-11 12:10:26 INFO  [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource: HikariPool-1 - Start completed.
+>>>>>>> origin/dev
