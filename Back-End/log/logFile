@@ -276,3 +276,14 @@ java.lang.ClassCastException: class java.lang.String cannot be cast to class org
 2023-07-12 15:07:33.503  INFO 12308 --- [http-nio-8080-exec-4] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
 2023-07-12 15:07:55.553  INFO 12308 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2023-07-12 15:07:55.970  INFO 12308 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-07-12 15:45:20.258  INFO 18028 --- [main] tw.com.younite.YouNiteApplication        : Starting YouNiteApplication using Java 17.0.6 on DESKTOP-TVDDHJO with PID 18028 (C:\Users\user\OneDrive\Desktop\eeit64-younite\Back-End\target\classes started by user in C:\Users\user\OneDrive\Desktop\eeit64-younite\Back-End)
+2023-07-12 15:45:20.261  INFO 18028 --- [main] tw.com.younite.YouNiteApplication        : No active profile set, falling back to 1 default profile: "default"
+2023-07-12 15:45:21.523  INFO 18028 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-07-12 15:45:21.531  INFO 18028 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-12 15:45:21.533  INFO 18028 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-12 15:45:22.061  INFO 18028 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-12 15:45:22.061  INFO 18028 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1756 ms
+2023-07-12 15:45:23.211  INFO 18028 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-12 15:45:23.264  WARN 18028 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-07-12 15:45:23.354  INFO 18028 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-12 15:45:23.740  INFO 18028 --- [main] tw.com.younite.YouNiteApplication        : Started YouNiteApplication in 3.867 seconds (JVM running for 4.948)
