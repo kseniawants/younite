@@ -43,7 +43,7 @@ public class PayServiceImpl implements PayService {
         obj.setReturnURL("https://42e0-2401-e180-8920-7f0-e01f-295e-c461-42d.ngrok-free.app/callback");
         // OrderResultURL   : 選填 消費者完成付費後。重新導向的位置
 
-//        obj.setOrderResultURL("https://42e0-2401-e180-8920-7f0-e01f-295e-c461-42d.ngrok-free.app/");
+        obj.setOrderResultURL("http://localhost:8080/redirectPost");
         obj.setNeedExtraPaidInfo("N");
         String form = all.aioCheckOut(obj, null);
         System.out.println(form);
