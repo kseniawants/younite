@@ -25,6 +25,7 @@ public class FriendProfileController extends BaseController{
         List<FriendsProfileEntity> data= ifriendProfileService.getFriendProfile(userid);
         List<FriendsProfileEntity> data2= ifriendProfileService.getFriendProfile2(userid);
         data.addAll(data2);
+
         return ResponseEntity.ok(data);
     }
     @PutMapping("/setLast")
