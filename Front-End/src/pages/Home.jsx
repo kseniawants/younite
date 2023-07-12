@@ -4,12 +4,14 @@ import '../styles/home.scss';
 import PeoplePhoto from '../component/User/PeoplePhoto';
 import UserCard from '../component/User/UserCard';
 import { Link } from 'react-router-dom';
-// import UserImage from '../assets/images/sia.png';
 import axios from 'axios';
+import UserModal from '../component/Modal/UserMoadl';
+import userImge from '../assets/images/sia.png'
 
 function Home() {
   const [post1, setPost1] = useState([]);
   const [post2, setPost2] = useState([]);
+  // const [isUserModalVisible, setUserModalVisible] = useState(false);
   
   axios.defaults.withCredentials = true;
   useEffect(() => {
@@ -28,7 +30,23 @@ function Home() {
 
     fetchData();
   }, []);
+  
+  const [userModalStates, setUserModalStates] = useState(false);
 
+  const handleUserButtonClick = (event, item) => {
+    event.preventDefault();
+    setUserModalStates((prevState) => ({
+      ...prevState,
+      [item.userID]: {
+        isOpen: true,
+        data: item,
+      },
+    }));
+  };
+  
+  const handleCloseModal = () => {
+    setUserModalStates(false) 
+  };  
   
   return (
     <>
@@ -56,9 +74,9 @@ function Home() {
             <>
             {post1.data ? (
               post1.data.slice(0, 2).map((item, index) => (
-                <div key={index} className='user-card px-2 py-2 row'>
+                <div key={index} className='user-card px-2 py-2 row' onClick={(event) => handleUserButtonClick(event, item)}>
                   <div className='col d-flex align-items-center'>
-                    <img src={item.profileAvatar} alt='Your Picture' className='mb-1 user-card-image' />
+                    <img src={item.profileAvatar || userImge} alt='Your Picture' className='mb-1 user-card-image' />
                     <h6 className='ms-3'>{item.name}</h6>
                     <h6 className='ms-2 text-radio'>{item.age}</h6>
                   </div>
@@ -92,13 +110,13 @@ function Home() {
             </div>
           </div>
           <div className='bg-pageMain col ms-3'>
-            <h6>類似職業</h6>
+            <h6>共同職業</h6>
             <>
             {post2.data ? (
               post2.data.slice(0, 2).map((item, index) => (
-                <div key={index} className='user-card px-2 py-2 row'>
+                <div key={index} className='user-card px-2 py-2 row' onClick={(event) => handleUserButtonClick(event, item)}>
                   <div className='col d-flex align-items-center'>
-                    <img src={item.avatar} alt='Your Picture' className='mb-1 user-card-image' />
+                    <img src={item.avatar || userImge} alt='Your Picture' className='mb-1 user-card-image' />
                     <h6 className='ms-3'>{item.name}</h6>
                     <h6 className='ms-2 text-radio'>{item.age}</h6>
                   </div>
@@ -123,6 +141,16 @@ function Home() {
             </div>
           </div>
         </section>
+        {Object.keys(userModalStates).map((userID) => (
+          userModalStates[userID].isOpen && (
+            <UserModal
+              key={userID}
+              userID={userID}
+              closeModal={() => handleCloseModal(userID)}
+              data={userModalStates[userID].data}
+            />
+          )
+        ))}
       </section>
     </>
   );
