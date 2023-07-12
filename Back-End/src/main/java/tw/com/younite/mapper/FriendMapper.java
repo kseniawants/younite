@@ -1,6 +1,6 @@
 package tw.com.younite.mapper;
 import tw.com.younite.entity.FriendEntity;
-import tw.com.younite.entity.FriendWithFullName;
+
 
 import java.util.List;
 
