@@ -1,74 +1,116 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import StoreCarousels from '../component/Store/StoreCarousels';
-import StoreCard from '../component/Store/StoreCard';
 import '../styles/component/bdGradient.scss';
 import '../styles/store.scss';
-import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 
 function Store() {
-  const [selectedButton, setSelectedButton] = useState(null);
+  const [prices, setPrices] = useState([]);
+  const [selected, setSelected] = useState(null); // 新增 selected 狀態
 
-  const handleButtonClick = (buttonId, buttonLabel) => {
-    console.log('選擇的目標:', buttonLabel);
-    setSelectedButton(buttonId); // 更新选中状态
+  useEffect(() => {
+    //初次開啟執行
+    axios.defaults.withCredentials = true;
+    axios
+      .get('/items')
+      .then((response) => {
+        setPrices(response.data.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  const handleRadioChange = (event) => {
+    setSelected(event.target.value); // 更新選擇的值
+  };
+
+  const handleButtonClick = () => {
+    if (selected) {
+      const selectedItem = prices.find((item) => item.id === Number(selected));
+      const itemId = selectedItem.id;
+      console.log(itemId);
+
+      const formData = new FormData();
+      formData.append('itemId', itemId);
+
+      axios.defaults.withCredentials = true;
+      axios
+        .post('/orders', formData)
+        .then((response) => {
+          console.log(formData);
+          // 將回傳的數據保存在 response.data 中
+          const data = response.data;
+          const newWindow = window.open('', '_blank'); //
+          const htmlContent = `
+            <!DOCTYPE html>
+            <html>
+              <body>
+                ${data} 
+              </body>
+            </html>
+          `;
+
+          newWindow.document.write(htmlContent); // 將HTML寫到新的window
+          newWindow.document.close(); // 關閉文檔輸入流
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+          console.log(`{ itemId: ${itemId} }`);
+        });
+    }
   };
 
   return (
-    <>
-      <section className='container mt-4'>
-        <section className='row d-flex '>
-          <StoreCarousels />
-        </section>
-        <section className='row d-flex mt-4 p-3 justify-content-center'>
-        <ButtonToolbar
-              aria-label='Toolbar with button groups'
-              className='d-flex justify-content-center my-3 container-fluid'
-            >
-              <div className='mb-2 row'>
-                <ButtonGroup className='col-4' aria-label='First group'>
-                  <Button
-                    variant={selectedButton === 'btnradio1' ? 'outline-primary' : 'outline-radio'}
-                    onClick={() => handleButtonClick('btnradio1', '長期伴侶')}
-                    autoComplete='off'
-                    className='btnradio'
-                  >
-                    <StoreCard/>
-                  </Button>
-                </ButtonGroup>
-                <ButtonGroup className='col-4' aria-label='Second group'>
-                  <Button
-                    variant={selectedButton === 'btnradio2' ? 'outline-primary' : 'outline-radio'}
-                    onClick={() => handleButtonClick('btnradio2', '短期關係')}
-                    autoComplete='off'
-                    className='btnradio'
-                  >
-                    <span>短期關係</span>
-                    <br />
-                    <span>但不排斥長期</span>
-                  </Button>
-                </ButtonGroup>
-                <ButtonGroup className='col-4' aria-label='Third group'>
-                  <Button
-                    variant={selectedButton === 'btnradio3' ? 'outline-primary' : 'outline-radio'}
-                    onClick={() => handleButtonClick('btnradio3', '長期關係')}
-                    autoComplete='off'
-                    className='btnradio'
-                  >
-                    <span>長期關係</span>
-                    <br />
-                    <span>但不排斥短期</span>
-                  </Button>
-                </ButtonGroup>
-              </div>
-          </ButtonToolbar>
-        </section>
-        <div className='row d-flex justify-content-center'>
-          <button type='button' className='col-2 btn-lg btn btn-primary text-white mt-2'>
-            立刻訂閱
-          </button>
-        </div>
+    <section className='container mt-4'>
+      <section className='row d-flex '>
+        <StoreCarousels />
       </section>
-    </>
+      <section className='row d-flex  p-3 justify-content-center'>
+        <section
+          className='row btn-group-vertical d-flex align-content: space-around;'
+          role='group'
+          aria-label='Vertical radio toggle button group'
+        >
+          {prices.map((item) => (
+            <div
+              key={item.id}
+              // 檢查是否為選取的項目，添加 'selected' CSS class
+              className='col-4 store-card m-3 d-flex p-0'
+            >
+              <input
+                type='radio'
+                className='btn-check'
+                name='btn-radio'
+                id={`btn-radio${item.id}`}
+                autoComplete='off'
+                value={item.id} // 將選項的 ID 設為 value
+                onChange={handleRadioChange}
+              />
+              <label
+                className='btn h-100 d-flex align-items-center'
+                htmlFor={`btn-radio${item.id}`}
+              >
+                <div>
+                  <h4>{item.itemName}</h4>
+                  <h4 className='store-price'> ${item.price}</h4>
+                </div>
+              </label>
+            </div>
+          ))}
+        </section>
+      </section>
+      <div className='row d-flex justify-content-center'>
+        <button
+          type='button'
+          className='col-2 btn-lg btn btn-primary text-white'
+          onClick={handleButtonClick}
+        >
+          立刻訂閱
+        </button>
+      </div>
+    </section>
   );
 }
 

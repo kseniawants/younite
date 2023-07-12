@@ -29,6 +29,8 @@ public class UserProfileEntity extends UserEntity implements Serializable {
     private String selfIntro;
     @ApiModelProperty(value = "使用者地點位置")
     private String location;
+    @ApiModelProperty(value = "使用者所在城市")
+    private String city;
     @ApiModelProperty(value = "使用者個人頭像")
     private String profileAvatar;
     @ApiModelProperty(value = "使用者語音介紹")

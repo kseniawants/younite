@@ -7,7 +7,7 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.Date;
 
-@ApiModel(description = "個人資料設置")
+@ApiModel(description = "個人資料設置的Entity")
 @Data
 public class BaseEntity implements Serializable {
     @ApiModelProperty(value = "創建資料時間點")
