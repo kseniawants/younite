@@ -15,4 +15,11 @@ public class FriendProfileService implements IFriendProfileService {
     public List<FriendsProfileEntity> getFriendProfile(Integer userid) {
         return  friendProfileMapper.getFriendProfile(userid);
     }
+
+    @Override
+    public List<FriendsProfileEntity> getFriendProfile2(Integer friendID) {
+        return friendProfileMapper.getFriendProfile2(friendID);
+    }
+
+
 }

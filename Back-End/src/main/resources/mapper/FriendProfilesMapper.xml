@@ -11,12 +11,6 @@
         <result column="unread_count" property="unread"></result>
     </resultMap>
 
-<!--    <update id="setLast">-->
-<!--        UPDATE `friend_messages`-->
-<!--        SET `last_message` = #{lastmessage}-->
-<!--        WHERE `user_id_1` = #{firstUserID}-->
-<!--        AND `user_id_2` = #{secondUserID}-->
-<!--    </update>-->
 
 
     <select id="getFriendProfile" resultMap="FriendProfileEntityMap" >
@@ -24,7 +18,11 @@
         FROM  `friend_messages` f join `profiles` p on p.`user_id`=f.`friend_id`
         WHERE f.`user_id` =  #{userid}
     </select>
-
+    <select id="getFriendProfile2" resultMap="FriendProfileEntityMap" >
+        SELECT `full_name`,`friend_id`,`last_message`,`profile_avatar`,`unread_count`
+        FROM  `friend_messages` f join `profiles` p on p.`user_id`=f.`user_id`
+        WHERE f.`friend_id` =  #{friendID}
+    </select>
 
 
 
