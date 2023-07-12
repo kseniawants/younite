@@ -128,4 +128,5 @@
           AND `user_id_2` = #{secondUserID}
     </update>
 
+
 </mapper>

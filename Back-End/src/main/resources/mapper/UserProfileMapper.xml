@@ -30,6 +30,18 @@
         WHERE `user_id` = #{userId}
     </select>
 
+    <select id="getPreferredGender" resultMap="UserProfileEntityMap">
+        SELECT preferred_gender
+        FROM profiles
+        WHERE `user_id` = #{userId}
+    </select>
+
+    <select id="getProfilesByPreferredGender" resultMap="UserProfileEntityMap">
+        SELECT *
+        FROM profiles
+        WHERE `gender` = #{gender}
+    </select>
+
     <insert
             id="insertProfile"
             useGeneratedKeys="true" keyProperty="profileId">

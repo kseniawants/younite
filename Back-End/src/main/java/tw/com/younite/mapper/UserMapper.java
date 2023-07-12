@@ -5,6 +5,8 @@ import tw.com.younite.entity.UserEntity;
 import tw.com.younite.entity.UserProfileEntity;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 public interface UserMapper {
     /**
@@ -41,6 +43,10 @@ public interface UserMapper {
     void updateVipById(Integer id, Date vipExpiry , Boolean unlocked);
 
     void lockedVipById(Integer id, Boolean unlocked);
+
+    List<UserEntity> getAllUsers();
+
+    List<Map<String, Object>> trial();
 
 
 }

@@ -79,5 +79,4 @@ public class PayController extends BaseController{
     public void redirect(HttpServletResponse response) throws Exception{
         response.sendRedirect("/complete.html");
     }
-
 }

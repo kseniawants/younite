@@ -127,7 +127,8 @@ public class UserProfileServiceImpl implements IUserProfileService {
         List<Map<String, Object>> results = new ArrayList<>();
         if (profileLists != null) {
             for (UserProfileEntity profile: profileLists) {
-                if (Objects.equals(profile.getGender(), preferredGender)) {
+                if (Objects.equals(profile.getGender(), preferredGender)
+                        || preferredGender.equals("Other")) {
                     Map<String, Object> userProfile = new HashMap<>();
                     Integer ID = profile.getUserId();
                     userProfile.put("userID", ID);
@@ -135,10 +136,26 @@ public class UserProfileServiceImpl implements IUserProfileService {
                     userProfile.put("avatar", profile.getProfileAvatar());
                     userProfile.put("age", tools.calculateAge(profile.getBirthday()));
                     userProfile.put("interests", tools.parseInterestEntities(interestMapper.getInterests(ID)));
+                    userProfile.put("distance", tools.parseDistance(currentUserProfile, profile));
                     results.add(userProfile);
                 }
             }
         }
         return results;
+    }
+
+    @Override
+    public String getPreferredGender(Integer userID) {
+        return userProfileMapper.getPreferredGender(userID);
+    }
+
+    @Override
+    public List<Integer> getProfdilesByPreferredGender(String gender) {
+        List<UserProfileEntity> list = userProfileMapper.getProfilesByPreferredGender(gender);
+        List<Integer> matchResult = new ArrayList<>();
+        for (UserProfileEntity userProfile: list) {
+            matchResult.add(userProfile.getUserId());
+        }
+        return matchResult;
     }
 }

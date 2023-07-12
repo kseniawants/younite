@@ -43,6 +43,17 @@
         WHERE `id` = #{id}
     </select>
 
+    <select id="getAllUsers" resultMap="UserEntityMap">
+        SELECT *
+        FROM `users`
+    </select>
+
+    <select id="trial" resultMap="UserEntityMap">
+        SELECT u.id, p.full_name
+        FROM users u
+                 JOIN profiles p on p.user_id = u.id;
+    </select>
+
     <insert
             id="register"
             useGeneratedKeys="true" keyProperty="id">
