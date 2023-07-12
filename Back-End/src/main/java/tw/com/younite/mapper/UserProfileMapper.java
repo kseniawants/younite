@@ -13,4 +13,6 @@ public interface UserProfileMapper {
     UserProfileEntity getByFullName(String fullName);
     UserProfileEntity getBlockedID(Integer userID);
     List<UserProfileEntity> getProfilesByProfession(Integer userId, String professions);
+    String getPreferredGender(Integer userId);
+    List<UserProfileEntity> getProfilesByPreferredGender(String gender);
 }

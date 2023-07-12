@@ -284,6 +284,7 @@ public class UserProfileController extends BaseController {
         }
     }
 
+
     private void uploadFile(MultipartFile file, UserProfileEntity userProfile, String folderName) {
         AmazonFileVO amazonFileModel = null;
         String filePath = "";

@@ -42,6 +42,17 @@ public class AmazonS3Controller extends BaseController{
         return new JSONResult(OK);
     }
 
+//    @PostMapping(value = "/upload")
+//    public JSONResult<String> uploadMessage(@RequestParam("file") MultipartFile file) {
+//        AmazonFileVO amazonFileModel = null;
+//        try {
+//            amazonFileModel = amazonUploadService.upload(file, "avatar");
+//            System.out.println("amazonFileModel = " + amazonFileModel.getFilePath());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return new JSONResult(OK, );
+//    }
     //這會動喔
 
     @ApiOperation("上傳")
