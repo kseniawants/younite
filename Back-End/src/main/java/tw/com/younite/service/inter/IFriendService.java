@@ -14,4 +14,12 @@ public interface IFriendService {
     void setVideoChatFunction(Integer userID, Integer friendID);
     void setVoiceChatFunction(Integer userID, Integer friendID);
     void setImageSendFunction(Integer userID, Integer friendID);
+
+    void VideoSent(Integer userID, Integer friendID);
+    void VideoAccepted(Integer userID, Integer friendID);
+    void VoiceSent(Integer userID, Integer friendID);
+    void VoiceAccepted(Integer userID, Integer friendID);
+    void ImageSent(Integer userID, Integer friendID);
+    void ImageAccepted(Integer userID, Integer friendID);
+
 }

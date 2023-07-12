@@ -140,13 +140,63 @@ public class FriendService implements IFriendService {
     }
 
 
-
-
     public Boolean checkMatched(Integer userID, Integer friendID) {
         FriendEntity friend = friendMapper.getSpecificFriend(userID, friendID);
         if (friend == null) {
             throw new NoMatchedException("");
         }
         return true;
+    }
+
+
+    @Override
+    public void VideoSent(Integer userID, Integer friendID) {
+        friendMapper.updateVideoSent(userID, friendID);
+
+    }
+
+    @Override
+    public void VideoAccepted(Integer userID, Integer friendID) {
+        for (int i = 0; i < 2; i++) {
+            Integer currentUserID = (i == 0) ? userID : friendID;
+            Integer currentFriendID = (i == 0) ? friendID : userID;
+            FriendEntity friend = friendMapper.getSpecificFriend(currentUserID, currentFriendID);
+            friendMapper.updateVideoAccepted(friend);
+        }
+
+    }
+
+    @Override
+    public void VoiceSent(Integer userID, Integer friendID) {
+        friendMapper.updateVoiceSent(userID, friendID);
+
+    }
+
+    @Override
+    public void VoiceAccepted(Integer userID, Integer friendID) {
+        for (int i = 0; i < 2; i++) {
+            Integer currentUserID = (i == 0) ? userID : friendID;
+            Integer currentFriendID = (i == 0) ? friendID : userID;
+            FriendEntity friend = friendMapper.getSpecificFriend(currentUserID, currentFriendID);
+            friendMapper.updateVoiceAccepted(friend);
+        }
+
+    }
+
+    @Override
+    public void ImageSent(Integer userID, Integer friendID) {
+        friendMapper.updateImageSent(userID, friendID);
+
+    }
+
+    @Override
+    public void ImageAccepted(Integer userID, Integer friendID) {
+        for (int i = 0; i < 2; i++) {
+            Integer currentUserID = (i == 0) ? userID : friendID;
+            Integer currentFriendID = (i == 0) ? friendID : userID;
+            FriendEntity friend = friendMapper.getSpecificFriend(currentUserID, currentFriendID);
+            friendMapper.updateImageAccepted(friend);
+        }
+
     }
 }
