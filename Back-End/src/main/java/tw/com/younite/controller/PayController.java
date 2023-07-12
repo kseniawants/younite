@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Calendar;
 import java.util.Date;
@@ -70,6 +71,11 @@ public class PayController extends BaseController{
         }
         // 返回給綠界的回應，例如 "1|OK"
         return "1|OK";
+    }
+
+    @PostMapping("/redirectPost")
+    public void redirect(HttpServletResponse response) throws Exception {
+        response.sendRedirect("/complete.html");
     }
 
 

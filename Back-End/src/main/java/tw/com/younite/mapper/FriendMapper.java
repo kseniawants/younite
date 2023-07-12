@@ -1,5 +1,6 @@
 package tw.com.younite.mapper;
 import tw.com.younite.entity.FriendEntity;
+import tw.com.younite.entity.FriendWithFullName;
 
 import java.util.List;
 
@@ -16,4 +17,5 @@ public interface FriendMapper {
     FriendEntity getInvitationStatus(Integer firstUserID,
                                      Integer secondUserID,
                                      Integer invitationStatus);
+
 }

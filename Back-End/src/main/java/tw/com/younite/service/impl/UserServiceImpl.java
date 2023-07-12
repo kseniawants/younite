@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 import tw.com.younite.service.exception.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -147,6 +149,13 @@ public class UserServiceImpl implements IUserService {
         return result;
     }
 
-
-
+    @Override
+    public List<Integer> getAllUsers() {
+        List<Integer> userIDList = new ArrayList<>();
+        List<UserEntity> entities = userMapper.getAllUsers();
+        for (UserEntity entity: entities) {
+            userIDList.add(entity.getId());
+        }
+        return userIDList;
+    }
 }

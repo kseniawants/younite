@@ -39,6 +39,15 @@
           AND p.gender = #{gender}
     </select>
 
+    <select id="findAllUsersByInterests" resultMap="InterestEntityMap">
+        SELECT p.*, i.interest
+        FROM profiles p
+                 JOIN interests i ON p.user_id = i.user_id
+        WHERE i.interest
+            LIKE CONCAT("%", #{interest}, "%")
+          AND p.user_id != #{userID}
+    </select>
+
     <delete id="removeInterests">
         DELETE
         FROM `interests`

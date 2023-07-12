@@ -43,8 +43,8 @@ public class InterestMapperTestCase {
         List<InterestEntity> interestEntityList = interestMapper.getInterests(286);
 
         for (InterestEntity interestEntity : interestEntityList) {
-            List<InterestEntity> resultList = interestMapper.findUsersByInterests(interestEntity.getInterest(), 286);
-
+            List<InterestEntity> resultList = interestMapper.findUsersByInterests(interestEntity.getInterest(), 286, "male");
+            System.out.println("resultList = " + resultList);
             if (!resultList.isEmpty()) {
                 // 将结果添加到已有的结果中
                 for (InterestEntity result : resultList) {
