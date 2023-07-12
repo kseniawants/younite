@@ -76,9 +76,7 @@ public class PayController extends BaseController{
     }
 
     @PostMapping("/redirectPost")
-    public void redirect(HttpServletResponse response) throws Exception {
+    public void redirect(HttpServletResponse response) throws Exception{
         response.sendRedirect("/complete.html");
     }
-
-
 }

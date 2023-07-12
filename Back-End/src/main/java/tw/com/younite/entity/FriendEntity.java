@@ -25,6 +25,18 @@ public class FriendEntity {
     private Boolean isInvitationSent;
     @ApiModelProperty(value = "是否有無接受好友邀請")
     private Boolean isInvitationAccepted;
+    @ApiModelProperty(value = "是否發送視訊邀請")
+    private Boolean isVideoSent;
+    @ApiModelProperty(value = "是否接受視訊邀請")
+    private Boolean isVideoAccepted;
+    @ApiModelProperty(value = "是否發送語音邀請")
+    private Boolean isVoiceSent;
+    @ApiModelProperty(value = "是否接受語音邀請")
+    private Boolean isVoiceAccepted;
+    @ApiModelProperty(value = "是否發送圖片邀請")
+    private Boolean isImageSent;
+    @ApiModelProperty(value = "是否接受圖片邀請")
+    private Boolean isImageAccepted;
     @ApiModelProperty(value = "邀請狀態")
     private Integer invitationStatus;
     @ApiModelProperty(value = "發生時間")
