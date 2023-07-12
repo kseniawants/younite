@@ -1,15 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../styles/landing.scss';
 import { Link } from 'react-router-dom';
 import Logo from '../assets/logo/whit-logo-type.png';
 
 function landingPage() {
-  const [token, setToken] = useState();
-  if (!token) {
-    {
-      return <Login setToken={setToken} />;
-    }
-  }
   return (
     <main className='test'>
       <img src={Logo} alt='logo' className='position-absolute top-10 start-10 mt-3 ms-3' />
