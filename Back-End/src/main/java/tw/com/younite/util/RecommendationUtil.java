@@ -26,9 +26,10 @@ public class RecommendationUtil {
 
     public List<Map<String, Object>> recommendation(Integer currentUserID) {
         //Phase 1: 冷啟動階段(新註冊用戶，喜歡人數<=10時，採用普通興趣篩選)
+        UserProfileEntity currentProfile = userProfileService.getUserProfile(currentUserID);
         List<Integer> likedList = likeService.getLikedUserList(currentUserID);
         int likedSize = likedList.size();
-        String preferredGender = userProfileService.getUserProfile(currentUserID).getPreferredGender();
+        String preferredGender = currentProfile.getPreferredGender();
 
         if (likedSize <= THRESHOLD) {
             List<Map<String, Object>> recommendList = interestService.findUserProfilesByInterests(currentUserID);
@@ -89,7 +90,7 @@ public class RecommendationUtil {
                 if (comparingList.contains(target)) {
                     int existingScore = scoring.getOrDefault("score", 0);
                     //將分數更新，公式為相似度 * 1
-                    int score = scoresList.get(i).get("similarity");
+                    int score = similarityList.get(i).get("similarity");
                     int newScore = existingScore + score;
                     scoring.put("score", newScore);
                 }
@@ -114,7 +115,7 @@ public class RecommendationUtil {
             recommendations.put("dating", profile.getDatingGoal());
             recommendations.put("voice", profile.getVoiceIntro());
             recommendations.put("selfIntro", profile.getSelfIntro());
-            recommendations.put("distance", profile.getSelfIntro());
+            recommendations.put("distance", tools.parseDistance(currentProfile, profile));
             recommendationsList.add(recommendations);
         }
         return recommendationsList;
