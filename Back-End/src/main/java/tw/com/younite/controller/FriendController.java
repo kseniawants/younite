@@ -4,7 +4,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tw.com.younite.entity.FriendEntity;
 import tw.com.younite.service.exception.InvitationNotFoundException;
 import tw.com.younite.service.inter.IFriendService;
 import tw.com.younite.util.JSONResult;
@@ -53,4 +55,5 @@ public class FriendController extends BaseController {
         List<Integer> data = iFriendService.getFriendsList(userID);
         return new JSONResult<>(OK, data);
     }
+
 }

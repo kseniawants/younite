@@ -11,6 +11,8 @@ import ChatRoom from './pages/ChatRoom';
 import Store from './pages/Store';
 import ShowMore from './component/ShowMore';
 import LikeShowMore from './pages/LikeShowMore';
+import InterestsShowMore from './pages/InterestsShowMore';
+import ProfessionShowMore from './pages/ProfessionShowMore'
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
           <Route path='/home' element={<Home />}></Route>
           <Route path='/show' element={<ShowMore />}>
             <Route path='/show/like' element={<LikeShowMore />}></Route>
+            <Route path='/show/interest' element={<InterestsShowMore />}></Route>
+            <Route path='/show/profession' element={<ProfessionShowMore />}></Route>
           </Route>
           <Route path='/setting' element={<SettingPersonal />}></Route>
           <Route path='/store' element={<Store />}></Route>
