@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tw.com.younite.entity.FriendEntity;
 import tw.com.younite.service.exception.InvitationNotFoundException;
+import tw.com.younite.service.impl.TokenServiceImpl;
 import tw.com.younite.service.inter.IFriendService;
 import tw.com.younite.util.JSONResult;
 
@@ -26,12 +27,18 @@ public class FriendController extends BaseController {
 
     @Autowired
     IFriendService iFriendService;
+
+    @Autowired
+    TokenServiceImpl token;
+
+
     @ApiOperation("設置好友邀請狀態")
     @PutMapping("/users/invitation/{friendID}/{status}")
     public JSONResult<Void> setInvitationStatus(@ApiParam(value = "傳入好友邀請狀態;視訊、語音、圖片", required = true)HttpSession session,
                                                 @PathVariable Integer status,
                                                 @PathVariable Integer friendID) {
-        Integer userID = getIDFromSession(session);
+        String account = token.getAccount();
+        Integer userID = token.getIdFromAccountString(account);
         switch (status) {
             case VIDEO_CHAT_INVITATION, VOICE_CHAT_INVITATION, IMAGE_INVITATION -> iFriendService.setInvitationStatus(userID, friendID, status);
             case VIDEO_CHAT_INVITATION_ACCEPT -> iFriendService.setVideoChatFunction(userID, friendID);
@@ -44,7 +51,8 @@ public class FriendController extends BaseController {
     @ApiOperation("好友清單")
     @GetMapping("/users/friends")
     public JSONResult<List<Integer>> getFriendList(@ApiParam(value = "傳出好友清單", required = true)HttpSession session) {
-        Integer userID = getIDFromSession(session);
+        String account = token.getAccount();
+        Integer userID = token.getIdFromAccountString(account);
         List<Integer> data = iFriendService.getFriendsList(userID);
         return new JSONResult<>(OK, data);
     }

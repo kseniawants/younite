@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import tw.com.younite.entity.UserProfileEntity;
 import tw.com.younite.service.impl.InterestService;
+import tw.com.younite.service.impl.TokenServiceImpl;
 import tw.com.younite.service.inter.IInterestService;
 import tw.com.younite.util.JSONResult;
 
@@ -23,6 +24,9 @@ public class InterestController extends BaseController {
     @Autowired
     IInterestService interestService;
 
+    @Autowired
+    TokenServiceImpl token;
+
     @ApiOperation("查詢指定用戶興趣")
     @GetMapping("/users/interest/{userID}")
     public JSONResult<List<String>> getUserInterest(@ApiParam(value = "查詢指定個興趣，並回傳", required = true)
@@ -35,7 +39,8 @@ public class InterestController extends BaseController {
     @GetMapping("/users/interest")
     public JSONResult<List<String>> getCurrentUserInterest(@ApiParam(value = "查詢現在用戶興趣，並回傳", required = true)
                                                            HttpSession session) {
-        Integer userID = getIDFromSession(session);
+        String account = token.getAccount();
+        Integer userID = token.getIdFromAccountString(account);
         List<String> data = interestService.getInterests(userID);
         return new JSONResult<>(OK, data);
     }
@@ -44,7 +49,8 @@ public class InterestController extends BaseController {
     @GetMapping("/users/mutualInterests")
     public JSONResult<List<Map<String, Object>>> getMutualInterests(@ApiParam(value = "查詢類似興趣用戶資料，並回傳", required = true)
                                                                     HttpSession session) {
-        Integer userID = getIDFromSession(session);
+        String account = token.getAccount();
+        Integer userID = token.getIdFromAccountString(account);
         List<Map<String, Object>> data = interestService.findUserProfilesByInterests(userID);
         return new JSONResult<>(OK, data);
     }

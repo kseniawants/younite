@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tw.com.younite.entity.FriendMsgTempEntity;
 import tw.com.younite.entity.FriendsProfileEntity;
+import tw.com.younite.service.impl.TokenServiceImpl;
 import tw.com.younite.service.inter.IFriendProfileService;
 import tw.com.younite.service.inter.IFriendTempService;
 import tw.com.younite.util.JSONResult;
@@ -23,12 +24,16 @@ public class FriendProfileController extends BaseController{
     IFriendProfileService ifriendProfileService;
     @Autowired
     IFriendTempService iFriendTempService;
+    @Autowired
+    TokenServiceImpl token;
+
     @ApiOperation("好友列表拿取")
     @GetMapping("/friendList")
     public ResponseEntity<List<FriendsProfileEntity>> getProfiles(@ApiParam(value = "拿到好友列表", required = true)HttpSession session){
-        Integer userid =(Integer) session.getAttribute("id");
-        List<FriendsProfileEntity> data= ifriendProfileService.getFriendProfile(userid);
-        List<FriendsProfileEntity> data2= ifriendProfileService.getFriendProfile2(userid);
+        String account = token.getAccount();
+        Integer userID = token.getIdFromAccountString(account);
+        List<FriendsProfileEntity> data= ifriendProfileService.getFriendProfile(userID);
+        List<FriendsProfileEntity> data2= ifriendProfileService.getFriendProfile2(userID);
         data.addAll(data2);
 
         return ResponseEntity.ok(data);

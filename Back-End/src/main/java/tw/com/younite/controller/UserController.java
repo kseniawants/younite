@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import tw.com.younite.entity.LoginResponse;
 import tw.com.younite.entity.UserEntity;
 import tw.com.younite.service.impl.TokenServiceImpl;
 import tw.com.younite.service.inter.IUserService;
@@ -15,7 +16,9 @@ import tw.com.younite.util.JSONResult;
 //import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import tw.com.younite.util.JwtUtil;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
@@ -87,13 +90,21 @@ public class UserController extends BaseController {
 
     @ApiOperation("用戶登入")
     @PostMapping("/users/login")
-    public JSONResult<UserEntity> login(@ApiParam(value = "傳入用戶登入資料",
-            required = true)HttpSession session, @RequestBody UserEntity user) {
+    public JSONResult<LoginResponse> login(HttpServletRequest request, @RequestBody UserEntity user) {
         UserEntity data = iUserService.login(user);
+        HttpSession session = request.getSession();
         session.setAttribute("id", data.getId());
         session.setAttribute("username", data.getUsername());
-        return new JSONResult<UserEntity>(OK,"登入成功", data);
+
+        // Generate JWT token
+        String token = JwtUtil.generateToken(data);
+
+        // Create the LoginResponse object with user and token
+        LoginResponse loginResponse = new LoginResponse(data, token);
+
+        return new JSONResult<>(OK, "登入成功", loginResponse);
     }
+
 
     @ApiOperation("修改用戶密碼")
     @PutMapping("/users/resetPassword")

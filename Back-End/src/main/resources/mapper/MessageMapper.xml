@@ -18,13 +18,10 @@
         VALUES (#{senderId}, #{receiverId}, #{messageType}, #{roomId}, #{messageContent})
     </insert>
 
-
     <select id="getMessages" resultMap="MessageEntityMap" >
         SELECT *
         FROM  `RoomMessages`
         WHERE `roomId` =  #{roomId}
     </select>
-
-
 
 </mapper>
