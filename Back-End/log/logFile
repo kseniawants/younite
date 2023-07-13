@@ -26,3 +26,14 @@
 2023-07-13 09:49:00.714  INFO 4036 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2023-07-13 09:49:00.715  INFO 4036 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2023-07-13 09:49:00.719  INFO 4036 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2023-07-13 10:32:05.435  INFO 37768 --- [main] tw.com.younite.YouNiteApplication        : Starting YouNiteApplication using Java 20.0.1 on L20.r2003.tciii.org.tw with PID 37768 (/Users/zichengliu/finalTermProject/eeit64-younite/Back-End/target/classes started by zichengliu in /Users/zichengliu/finalTermProject/eeit64-younite/Back-End)
+2023-07-13 10:32:05.438  INFO 37768 --- [main] tw.com.younite.YouNiteApplication        : No active profile set, falling back to 1 default profile: "default"
+2023-07-13 10:32:06.391  INFO 37768 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-07-13 10:32:06.397  INFO 37768 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-13 10:32:06.397  INFO 37768 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-13 10:32:06.463  INFO 37768 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-13 10:32:06.463  INFO 37768 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 969 ms
+2023-07-13 10:32:07.405  INFO 37768 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-13 10:32:07.445  WARN 37768 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-07-13 10:32:07.528  INFO 37768 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-13 10:32:07.822  INFO 37768 --- [main] tw.com.younite.YouNiteApplication        : Started YouNiteApplication in 2.939 seconds (JVM running for 3.667)
