@@ -5,6 +5,7 @@ import Select from 'react-select';
 import { useForm, Controller } from 'react-hook-form';
 import { RadioButtonGroups, InfoInput } from '../component/InfoElements/FromElement';
 import { Button, Divider } from 'antd';
+import { useNavigate } from 'react-router-dom';
 import Avatar from '../component/InfoElements/Avatar';
 import PhotoWall from '../component/InfoElements/PhotoWall';
 import LocationModal from '../component/InfoElements/Location';
@@ -17,6 +18,7 @@ function SettingPersonal() {
   const [showAlertModal, setShowAlertModal] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [AlertStateIcon, setAlertStateIcon] = useState('');
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -73,11 +75,16 @@ function SettingPersonal() {
       });
       console.log(response.data);
 
-      if (response.data.state == 200) {
+      if (response.data.state == 204) {
         handleAlertRes(response);
-        
+        setTimeout(() => {
+          navigate('/home');
+        }, 2500);
       } else {
         handleAlertRes(response);
+        setTimeout(() => {
+          navigate('/setting');
+        }, 2500);
       }
     } catch (error) {
       console.error(error);
