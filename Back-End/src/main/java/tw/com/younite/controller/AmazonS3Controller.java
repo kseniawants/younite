@@ -2,6 +2,7 @@ package tw.com.younite.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.web.bind.annotation.*;
@@ -65,7 +66,8 @@ public class AmazonS3Controller extends BaseController{
     //這會動喔
     @ApiOperation("下載檔案")
     @GetMapping("/download/{fileName}")
-    public JSONResult<ByteArrayResource> download(@PathVariable String fileName) {
+    public JSONResult<ByteArrayResource> download(@ApiParam(value = "拿取下載檔案", required = true)
+                                                      @PathVariable String fileName) {
         byte[] data = service.downloadFile(fileName);
         ByteArrayResource resource = new ByteArrayResource(data);
         return new JSONResult<>(OK, resource);
