@@ -1,5 +1,6 @@
 package tw.com.younite.service.impl;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import tw.com.younite.entity.OrdersEntity;
 import tw.com.younite.mapper.ItemMapper;
 import tw.com.younite.mapper.OrdersMapper;
@@ -23,6 +24,7 @@ public class PayServiceImpl implements PayService {
 
 
     @Override
+    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     public String ecpayCheckout(Integer id) {
 
 
@@ -38,8 +40,9 @@ public class PayServiceImpl implements PayService {
         obj.setTotalAmount(String.valueOf(order.getAmount()));
         obj.setTradeDesc("Thank you");
         obj.setItemName(itemName);
-        obj.setReturnURL("https://d2d9-118-163-218-100.ngrok-free.app/callback");
+        obj.setReturnURL("https://2948-118-163-218-100.ngrok-free.app/callback");
         // OrderResultURL   : 選填 消費者完成付費後。重新導向的位置
+
         obj.setOrderResultURL("http://localhost:8080/redirectPost");
         obj.setNeedExtraPaidInfo("N");
         String form = all.aioCheckOut(obj, null);
