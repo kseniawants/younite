@@ -7,6 +7,7 @@ import tw.com.younite.entity.AmazonFileVO;
 import tw.com.younite.entity.UserPhotosEntity;
 import tw.com.younite.entity.UserProfileEntity;
 import tw.com.younite.service.exception.*;
+import tw.com.younite.service.impl.TokenServiceImpl;
 import tw.com.younite.service.inter.AmazonUploadService;
 import tw.com.younite.service.inter.IInterestService;
 import tw.com.younite.service.inter.IUserPhotosService;
@@ -49,6 +50,9 @@ public class UserProfileController extends BaseController {
 
     @Autowired
     private IInterestService interestService;
+
+    @Autowired
+    private TokenServiceImpl token;
 
     /**
      *
@@ -96,7 +100,8 @@ public class UserProfileController extends BaseController {
                                           @RequestParam(required = false) MultipartFile voice,
                                           MultipartFile avatar,
                                           @RequestParam(required = false) MultipartFile[] photos) {
-        Integer userID = getIDFromSession(session);
+        String account = token.getAccount();
+        Integer userID = token.getIdFromAccountString(account);
         if (iUserProfileService.getUserProfile(userID) == null) {
             userProfile.setUserId(userID);
         } else {
@@ -129,7 +134,8 @@ public class UserProfileController extends BaseController {
     @ApiOperation("封鎖使用者黑名單")
     @PostMapping("/users/blockUser")
     public JSONResult<Void> blockUser(@ApiParam(value = "要被封鎖的使用者ID匯入", required = true) HttpSession session, Integer blockedUserID) {
-        Integer userID = getIDFromSession(session);
+        String account = token.getAccount();
+        Integer userID = token.getIdFromAccountString(account);
         if (iUserProfileService.getBlockedID(userID).contains(blockedUserID)) {
             throw new BlockedIDAlreadyExistsException("此用戶已在黑名單內");
         }
@@ -140,7 +146,8 @@ public class UserProfileController extends BaseController {
     @ApiOperation("取消封鎖使用者黑名單")
     @PostMapping("/users/unblockUser")
     public JSONResult<Void> unblockUser(@ApiParam(value = "要取消封鎖在黑名單內的使用者ID匯入", required = true) HttpSession session, Integer unblockedUserID) {
-        Integer userID = getIDFromSession(session);
+        String account = token.getAccount();
+        Integer userID = token.getIdFromAccountString(account);
         if (!iUserProfileService.getBlockedID(userID).contains(unblockedUserID)) {
             throw new BlockedUserNotFoundException();
         }
@@ -151,7 +158,8 @@ public class UserProfileController extends BaseController {
     @ApiOperation("查詢黑名單")
     @GetMapping("/users/getBlokedID")
     public JSONResult<List<Integer>> getBlockedList(@ApiParam(value = "查詢黑名單的資料回傳", required = true) HttpSession session) {
-        Integer userID = getIDFromSession(session);
+        String account = token.getAccount();
+        Integer userID = token.getIdFromAccountString(account);
         List<Integer> data = iUserProfileService.getBlockedID(userID);
         return new JSONResult<>(OK, data);
     }
@@ -159,7 +167,8 @@ public class UserProfileController extends BaseController {
     @ApiOperation("查詢個人資料")
     @GetMapping("/users/profile")
     public JSONResult<UserProfileEntity> getUserProfile(@ApiParam(value = "查詢個人資料回傳", required = true) HttpSession session) {
-        Integer userID = getIDFromSession(session);
+        String account = token.getAccount();
+        Integer userID = token.getIdFromAccountString(account);
         UserProfileEntity data = iUserProfileService.getUserProfile(userID);
         return new JSONResult<>(OK,  data);
     }
@@ -176,7 +185,8 @@ public class UserProfileController extends BaseController {
     @GetMapping("/users/profiles/profession")
     public JSONResult<List<Map<String, Object>>> getProfilesByProfession(@ApiParam(value = "接收ID才取得相同興趣的使用者", required = true)
                                                                          HttpSession session) {
-        Integer userID = getIDFromSession(session);
+        String account = token.getAccount();
+        Integer userID = token.getIdFromAccountString(account);
         List<Map<String, Object>> data = iUserProfileService.getProfilesByProfession(userID);
         return new JSONResult<>(OK,"透過職業取得其他用戶資料成功", data);
     }
@@ -191,7 +201,8 @@ public class UserProfileController extends BaseController {
                                           @RequestParam(value = "voice", required = false) MultipartFile voice,
                                           @RequestParam(value = "avatar", required = false) MultipartFile avatar,
                                           @RequestParam(value = "photos", required = false) MultipartFile[] photos) {
-        Integer userID = getIDFromSession(session);
+        String account = token.getAccount();
+        Integer userID = token.getIdFromAccountString(account);
         UserProfileEntity originalProfile = iUserProfileService.getUserProfile(userID);
         if (originalProfile == null) {
             throw new ProfileNotFoundException("用戶資料不存在，請先創建!");

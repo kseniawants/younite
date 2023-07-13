@@ -12,5 +12,8 @@ public interface IUserService {
     UserEntity getUserByID(Integer id);
     List<Integer> getAllUsers();
 
+    UserEntity getUserByUsername(String username);
+
+
 
 }
