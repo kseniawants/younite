@@ -2,6 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tw.com.younite.mapper.UserPhotosMapper">
+    
+    <cache-ref namespace="tw.com.younite.mapper.UserMapper"/>
     <resultMap id="UserPhotosEntityMap" type="tw.com.younite.entity.UserPhotosEntity">
         <id column="profile_id" property="profileID"></id>
         <result column="photo_id" property="photoID"></result>

@@ -14,9 +14,11 @@ import tw.com.younite.service.inter.IFriendService;
 import tw.com.younite.service.inter.IUserLikeService;
 import tw.com.younite.service.inter.IUserService;
 import tw.com.younite.util.JSONResult;
+import tw.com.younite.util.RecommendationUtil;
 
 import java.util.List;
 import java.util.Date;
+import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 @Api(tags ="使用者喜歡配對的對象功能")
@@ -32,6 +34,9 @@ public class UserLikeController extends BaseController {
 
     @Autowired
     IFriendService iFriendService;
+
+    @Autowired
+    RecommendationUtil recommend;
 
     @ApiOperation("新增喜歡的對象")
     @PostMapping("/users/like")
@@ -111,6 +116,13 @@ public class UserLikeController extends BaseController {
             , @PathVariable Integer likedUserID) {
         iUserLikeService.deleteLikedUser(userID, likedUserID);
         return new JSONResult<>(OK, "已成功自喜歡列表移除您所選的用戶");
+    }
+
+    @ApiOperation("推薦你可能喜歡用戶")
+    @GetMapping("/users/recommendation/{userID}")
+    public JSONResult<List<Map<String, Object>>> recommendation (@ApiParam(value = "推薦現在使用者", required = true)@PathVariable Integer userID) {
+        List<Map<String, Object>> data = recommend.recommendation(userID);
+        return new JSONResult<>(OK, "獲取推薦用戶成功!", data);
     }
 
 }

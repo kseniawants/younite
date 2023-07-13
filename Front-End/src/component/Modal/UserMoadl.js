@@ -64,7 +64,6 @@ function UserModal({ closeModal, userID, data }) {
       const response = await axios.post(`/users/like`, requestBody);
       console.log(response.data);
       if (response.data.state === 200) {
-        
         console.log('成功了吧');
       } else {
         console.log('API 請求失敗');
