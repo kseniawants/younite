@@ -1,5 +1,8 @@
 package tw.com.younite.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,20 +13,21 @@ import tw.com.younite.util.JSONResult;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
-
+@Api(tags ="聊天室對話")
 @RestController
 @RequestMapping("/message")
 public class MessageController extends BaseController {
     @Autowired
     IMessageService iMessageService;
-
+    @ApiOperation("新增訊息")
     @PostMapping("/add")
-    public JSONResult<Void> addmessage(HttpSession session, @RequestBody MessageEntity messageEntity) {
+    public JSONResult<Void> addmessage(@ApiParam(value = "新增聊天訊息", required = true)HttpSession session, @RequestBody MessageEntity messageEntity) {
         iMessageService.insertMessage(messageEntity);
         return new JSONResult<>(OK);
     }
+    @ApiOperation("拿聊天室資料")
     @GetMapping("/find/{roomId}")
-    public ResponseEntity<List<MessageEntity>> findMessage(HttpSession session,@PathVariable("roomId") Integer roomId){
+    public ResponseEntity<List<MessageEntity>> findMessage(@ApiParam(value = "拿到聊天室所有訊息", required = true)HttpSession session,@PathVariable("roomId") Integer roomId){
         List<MessageEntity> list= iMessageService.getMessages(roomId);
         return ResponseEntity.ok(list);
     }
