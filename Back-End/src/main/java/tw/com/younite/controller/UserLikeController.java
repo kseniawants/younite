@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 
 @Api(tags ="使用者喜歡配對的對象功能")
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class UserLikeController extends BaseController {
 
     @Autowired

@@ -13,7 +13,7 @@
     <insert
             id="insertLike"
             useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO LIKES
+        INSERT INTO likes
             (`user_id`, `liked_user_id`, `created_at`)
         VALUES (#{userID}, #{likedUserID}, #{likedAt})
     </insert>
@@ -22,7 +22,7 @@
             id="getLikedUsers"
             resultMap="UserLikeEntityMap">
         SELECT *
-            FROM LIKES
+            FROM likes
         WHERE `user_id` = #{userID}
     </select>
 
@@ -30,13 +30,13 @@
             id="likesTracker"
             resultMap="UserLikeEntityMap" >
         SELECT *
-        FROM LIKES
+        FROM likes
         WHERE `liked_user_id` = #{likedUserID}
     </select>
 
     <delete id="removeLikedUsers">
         DELETE
-        FROM `LIKES`
+        FROM `likes`
         WHERE `user_id` = #{userID}
           AND `liked_user_id` = #{likedUserID}
     </delete>
