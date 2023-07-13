@@ -11,7 +11,7 @@ import userImge from '../assets/images/sia.png'
 function Home() {
   const [post1, setPost1] = useState([]);
   const [post2, setPost2] = useState([]);
-  // const [isUserModalVisible, setUserModalVisible] = useState(false);
+  const [likedUsers, setLikedUsers] = useState([]);
   
   axios.defaults.withCredentials = true;
   useEffect(() => {
@@ -19,10 +19,11 @@ function Home() {
       try {
         const response1 = await axios.get('/users/mutualInterests');
         const response2 = await axios.get('/users/profiles/profession');
+        const likedUsersResponse = await axios.get('/users/getLikedUsers'); // 獲取使用者的邀請紀錄
         setPost1(response1.data);
         setPost2(response2.data);
-        console.log(response1.data);
-        console.log(response2.data);
+        setLikedUsers(likedUsersResponse.data); // 設定使用者的邀請紀錄
+        console.log(likedUsersResponse.data);
       } catch (error) {
         console.error(error);
       }
@@ -148,6 +149,7 @@ function Home() {
               userID={userID}
               closeModal={() => handleCloseModal(userID)}
               data={userModalStates[userID].data}
+              likedUsers={likedUsers} // 傳遞使用者的邀請紀錄
             />
           )
         ))}
