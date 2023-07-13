@@ -65,15 +65,22 @@ public class InterestService implements IInterestService {
     @Override
     public List<Map<String, Object>> findUserProfilesByInterests(Integer userID) {
         List<Map<String, Object>> userProfiles = new ArrayList<>();
+        UserProfileEntity currentProfile = userProfileMapper.getProfileByID(userID);
         // 取得現在使用者想看的性别
-        String gender = userProfileMapper.getProfileByID(userID).getPreferredGender();
+        String gender = currentProfile.getPreferredGender();
         // 取得現在使用者的興趣
         List<InterestEntity> interestEntityList = interestMapper.getInterests(userID);
 
         Set<Integer> addedUserIDs = new HashSet<>(); // 紀錄已添加過的用戶
 
         for (InterestEntity interestEntity : interestEntityList) {
-            List<InterestEntity> resultList = interestMapper.findUsersByInterests(interestEntity.getInterest(), userID, gender);
+            List<InterestEntity> resultList;
+            if (!gender.equals("Other")) {
+                resultList = interestMapper.findUsersByInterests(interestEntity.getInterest(), userID, gender);
+            } else {
+                resultList = interestMapper.findAllUsersByInterests(interestEntity.getInterest(), userID);
+            }
+
 
             if (!resultList.isEmpty()) {
                 // 把查詢結果加入List
@@ -91,7 +98,7 @@ public class InterestService implements IInterestService {
                         userProfileMap.put("dating", userProfile.getDatingGoal());
                         userProfileMap.put("voice", userProfile.getVoiceIntro());
                         userProfileMap.put("selfIntro", userProfile.getSelfIntro());
-                        userProfileMap.put("distance", userProfile.getSelfIntro());
+                        userProfileMap.put("distance", tools.parseDistance(currentProfile, userProfile));
                         userProfiles.add(userProfileMap);
                         addedUserIDs.add(userProfile.getUserId());
                     } else {

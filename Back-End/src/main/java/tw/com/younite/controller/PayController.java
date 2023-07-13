@@ -20,8 +20,6 @@ import java.util.Calendar;
 import java.util.Date;
 @Api(tags ="綠界支付")
 @RestController
-//@CrossOrigin(origins = "*")
-
 @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class PayController extends BaseController{
     @Autowired

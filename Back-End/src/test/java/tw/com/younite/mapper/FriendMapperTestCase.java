@@ -90,6 +90,4 @@ public class FriendMapperTestCase {
         System.out.println("friend = " + friend);
     }
 
-
-
 }

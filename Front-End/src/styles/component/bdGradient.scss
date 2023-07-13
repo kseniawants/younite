@@ -4,9 +4,8 @@
   margin-left: 10%;
   background-image: url('../../assets/images/bgc.png'), url('../../assets/images/bgc.png');
   background-repeat: no-repeat, no-repeat;
-  /* background-position: calc(100% - 50rem) calc(100% - 20rem), calc(100% + 60rem) calc(100% + 50rem); */
-  /* background-position: calc(100% - 500px) calc(100% - 200px), calc(100% + 900px) calc(100% + 700px); */
   background-position: calc(100% - 1000px) calc(100% - 400px), calc(100% + 300px) calc(100% + 250px);
+  background-attachment: fixed, fixed;
 
   .bg-pageMain {
     padding: 1.25rem;

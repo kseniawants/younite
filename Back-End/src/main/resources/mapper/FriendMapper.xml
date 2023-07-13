@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tw.com.younite.mapper.FriendMapper">
+    <cache-ref namespace="tw.com.younite.mapper.UserMapper"/>
     <resultMap id="FriendEntityMap" type="tw.com.younite.entity.FriendEntity">
         <id column="id" property="id"></id>
         <result column="user_id_1" property="firstUserID"></result>
@@ -127,5 +128,6 @@
         WHERE `user_id_1` = #{firstUserID}
           AND `user_id_2` = #{secondUserID}
     </update>
+
 
 </mapper>

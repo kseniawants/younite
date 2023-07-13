@@ -638,6 +638,7 @@ function SettingPersonal() {
                       className='form-control'
                       id='selfIntro'
                       rows='3'
+                      maxLength={40}
                       {...register('selfIntro')}
                       value={formDatas.selfIntro}
                       onChange={handleChanges}

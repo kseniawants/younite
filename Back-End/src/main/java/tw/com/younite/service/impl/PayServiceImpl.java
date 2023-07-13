@@ -47,6 +47,7 @@ public class PayServiceImpl implements PayService {
         obj.setNeedExtraPaidInfo("N");
         String form = all.aioCheckOut(obj, null);
         System.out.println(form);
+
         // 注入mTradeNo到订单表
         ordersMapper.addTradeNo(id, mTradeNo);
         // 回傳form訂單 並自動將使用者導到 綠界
