@@ -39,7 +39,7 @@ public class PayServiceImpl implements PayService {
         obj.setMerchantTradeDate(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date()));
         obj.setTotalAmount(String.valueOf(order.getAmount()));
         obj.setTradeDesc("Thank you");
-        obj.setItemName("itemName");
+        obj.setItemName(itemName);
         obj.setReturnURL("https://2948-118-163-218-100.ngrok-free.app/callback");
         // OrderResultURL   : 選填 消費者完成付費後。重新導向的位置
 
