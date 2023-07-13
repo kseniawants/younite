@@ -11,6 +11,7 @@ import tw.com.younite.service.exception.InvitationNotFoundException;
 import tw.com.younite.service.inter.IFriendService;
 import tw.com.younite.util.JSONResult;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 @Api(tags ="處理好友功能")
@@ -55,5 +56,6 @@ public class FriendController extends BaseController {
         List<Integer> data = iFriendService.getFriendsList(userID);
         return new JSONResult<>(OK, data);
     }
+
 
 }

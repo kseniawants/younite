@@ -40,7 +40,7 @@ public class PayServiceImpl implements PayService {
         obj.setTotalAmount(String.valueOf(order.getAmount()));
         obj.setTradeDesc("Thank you");
         obj.setItemName("itemName");
-        obj.setReturnURL("https://42e0-2401-e180-8920-7f0-e01f-295e-c461-42d.ngrok-free.app/callback");
+        obj.setReturnURL("https://2948-118-163-218-100.ngrok-free.app/callback");
         // OrderResultURL   : 選填 消費者完成付費後。重新導向的位置
 
         obj.setOrderResultURL("http://localhost:8080/redirectPost");
