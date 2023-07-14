@@ -7,15 +7,11 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import UserModal from '../component/Modal/UserMoadl';
 import userImge from '../assets/images/sia.png';
-import token from '../TokenUtil.js';
 
 function Home() {
   const [post1, setPost1] = useState([]);
   const [post2, setPost2] = useState([]);
   const [likedUsers, setLikedUsers] = useState([]);
-
-  axios.defaults.withCredentials = true;
-  axios.defaults.headers.common['Authorization'] = token;
   useEffect(() => {
     const fetchData = async () => {
       try {

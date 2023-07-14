@@ -56,7 +56,7 @@ function LoginForm() {
         username: data.username,
         password: data.password,
       };
-      axios.defaults.withCredentials = true;
+
       const response = await axios.post('/users/login', requestBody);
       console.log(requestBody);
       if (response.data.state === 200) {
