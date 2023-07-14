@@ -20,7 +20,7 @@ import java.util.Calendar;
 import java.util.Date;
 @Api(tags ="綠界支付")
 @RestController
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+@CrossOrigin(origins = "*")
 public class PayController extends BaseController{
     @Autowired
     private OrdersService ordersService;
@@ -42,7 +42,6 @@ public class PayController extends BaseController{
         return aioCheckOutOneTime;
     }
     @ApiOperation("綠界訂單資料回傳至網頁")
-    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     @PostMapping("/callback")
     public String ecpayReturn(@ApiParam(value = "綠界回傳值", required = true)
                                   HttpServletRequest request) {
@@ -67,7 +66,7 @@ public class PayController extends BaseController{
                     (newOrder.getMTradeNo(),newOrder.getItemId(),newOrder.getPurchased());
             Integer userId = newOrder.getUserId();
             userMapper.updateVipById(userId, vipdate , true);
-//            System.out.println("vipdate = " + vipdate);
+            System.out.println("vipdate = " + vipdate);
         } else {
             System.out.println("fail!");
         }
@@ -75,12 +74,8 @@ public class PayController extends BaseController{
         return "1|OK";
     }
 
-//    @PostMapping("/redirectPost")
-//    @CrossOrigin(origins = "http://localhost:3000,http://localhost:8080", allowCredentials = "true")
-//    public void redirect(HttpServletResponse response) throws Exception{
-//        response.sendRedirect("http://localhost:3000/home");
-//    }
-//
-//
-
+    @PostMapping("/redirectPost")
+    public void redirect(HttpServletResponse response) throws Exception{
+        response.sendRedirect("http://localhost:3000/home");
+    }
 }

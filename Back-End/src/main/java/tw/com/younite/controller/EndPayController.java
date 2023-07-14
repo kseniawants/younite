@@ -13,13 +13,13 @@ import java.io.IOException;
 public class EndPayController {
 
 
-        @PostMapping("/redirectPost")
-        @ResponseBody
-        public String index(HttpServletResponse response) throws IOException {
-            response.addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-            response.sendRedirect("http://localhost:3000/home");
-            return null;
-        }
+//        @PostMapping("/redirectPost")
+//        @ResponseBody
+//        public String index(HttpServletResponse response) throws IOException {
+//            response.addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+//            response.sendRedirect("http://localhost:3000/home");
+//            return null;
+//        }
 
 //    @RequestMapping("/redirectPost")
 //    @CrossOrigin(origins = "*")
