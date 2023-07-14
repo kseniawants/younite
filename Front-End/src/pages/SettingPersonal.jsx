@@ -42,10 +42,12 @@ function SettingPersonal() {
   const onSubmit = async (data) => {
     try {
       data.photoWall = photoWallValue.map((file) => file.originFileObj);
-      const avatarData = data.profileAvatar ? (data.profileAvatar[0].originFileObj || data.profileAvatar) : null;
+      const avatarData = data.profileAvatar
+        ? data.profileAvatar[0]?.originFileObj || data.profileAvatar
+        : null;
       setSubmitting(true);
       await submitForm(data);
-      // console.log(data.photoWall);
+      console.log(data.photoWall);
       console.log(data);
       console.log(avatarData);
       let str = [];
@@ -57,7 +59,8 @@ function SettingPersonal() {
       formData.append('gender', data.gender);
       formData.append('sexualOrientation', data.sexualOrientation);
       formData.append('location', JSON.stringify(data.location));
-      formData.append('selfIntro', data.selfIntro);
+      formData.append('city', data.city);
+      formData.append('selfIntro', data.textareaFieldName);
       formData.append('preferredGender', data.preferredGender);
       formData.append('datingGoal', data.datingGoal);
       formData.append('avatar', avatarData);
@@ -67,7 +70,6 @@ function SettingPersonal() {
       formData.append('photos', data.photoWall);
       formData.append('hobbies', str);
 
-      axios.defaults.withCredentials = true;
       const response = await axios.put('/users/profile', formData, {
         headers: {
           'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>',
@@ -174,6 +176,7 @@ function SettingPersonal() {
   const [isLocationSelected, setLocationSelected] = useState(false);
   const [selectedButtonLabel, setSelectedButtonLabel] = useState(null); // 新增选中的按钮标签状态
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [, setCity] = useState(null);
 
   const handleInfoModalButtonClick = () => {
     setInfoModalVisible(true);
@@ -188,12 +191,14 @@ function SettingPersonal() {
     setLocationModalVisible(false);
   };
 
-  const handleDialogOk = (selectedLocation) => {
+  const handleDialogOk = (selectedLocation, city) => {
     // 传入选中按钮的标签
     setLocationModalVisible(false);
     setLocationSelected(true);
     setSelectedLocation(selectedLocation); // 更新选中的按钮标签
+    setCity(city);
     setValue('location', selectedLocation); // 使用setValue更新Controller的值
+    setValue('city', city); // 设置city的值
   };
 
   const handleDialogOk1 = (selectedButtonLabel) => {
@@ -213,10 +218,7 @@ function SettingPersonal() {
     const file = event.target.files[0];
     const fileName = file.name;
     const fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
-
-    // 检查文件扩展名是否为音频格式
     if (fileExtension === 'mp3' || fileExtension === 'wav') {
-      // 在这里执行您的音频文件上传逻辑
       console.log('Uploaded audio file:', file);
     } else {
       console.log('Invalid file format. Please select an MP3 or WAV file.');
@@ -243,13 +245,9 @@ function SettingPersonal() {
     professions: '',
     datingGoal: '',
     location: '',
+    city: '',
     selfIntro: '',
   });
-
-  const [defaultValue, setDefaultValue] = useState(formDatas.professions
-    ? profession.find((option) => option.label === formDatas.professions)
-    : profession[0]);
-  const [birthdayDate, setBirthdayDate] = useState(formDatas.birthday.split('T')[0]);
 
   const fetchData = () => {
     axios
@@ -258,65 +256,50 @@ function SettingPersonal() {
         const userData = response.data;
         setformDatas(userData.data);
         console.log(userData.data);
-        
-        setBirthdayDate(userData.data.birthday.split('T')[0]);
-        setDefaultValue(userData.data.professions
-          ? profession.find((option) => option.label === userData.data.professions)
-          : profession[0]);
-        
         setValue('fullName', userData.data.fullName);
         setValue('phone', userData.data.phone);
-        setValue('birthday', userData.data.birthday.split('T')[0]);
+        setValue('birthday', birthdayDate);
         setValue('gender', userData.data.gender);
         setValue('sexualOrientation', userData.data.sexualOrientation);
         setValue('preferredGender', userData.data.preferredGender);
-        setValue('professions', profession.find((option) => option.label === userData.data.professions));
+        setValue('professions', userData.data.professions);
         setValue('datingGoal', userData.data.datingGoal);
         setValue('location', userData.data.location);
+        setValue('city', userData.data.city);
         setValue('profileAvatar', userData.data.profileAvatar);
         setValue('selfIntro', userData.data.selfIntro);
         setSelectedButtonLabel(userData.data.datingGoal);
         setSelectedLocation(userData.data.location);
-        
-        axios.defaults.withCredentials = true;
       })
       .catch((error) => {
         console.error(error);
       });
-  };  
+  };
 
-  const [hobbyOptions, setHobbyOptions] = useState({
-    hobbies: ''
-  });
+  const [hobby, setHobby] = useState({});
 
   const fetchData2 = () => {
     axios
       .get('/users/interest')
       .then((response) => {
-        const hobbyArray = response.data.data.map((item) => item.trim());
-  
-        const options = hobbyArray.map((item) => {
-          const matchedHobby = hobbies.find((hobby) => hobby.label === item);
-          if (matchedHobby) {
-            return { value: matchedHobby.value, label: matchedHobby.label };
-          }
-          return null;
-        });
-  
-        setHobbyOptions(options);
-        console.log(options);
-        setValue('hobbies', options);
+        setHobby(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.error(error);
       });
-  };  
-  
+  };
+
   useEffect(() => {
     fetchData();
     fetchData2();
   }, []);
-  
+
+  const defaultValue = formDatas.professions
+    ? profession.find((option) => option.label === formDatas.professions)
+    : profession[0];
+  const birthdayDate = formDatas.birthday.split('T')[0];
+
   const handleChanges = (e) => {
     const { name, value } = e.target;
     setformDatas((prevData) => ({
@@ -392,9 +375,11 @@ function SettingPersonal() {
                       }}
                       value={birthdayDate}
                       onChange={(e) => {
-                        const updatedValue = e.target.value; // 获取输入框的值
-                        setBirthdayDate(updatedValue); // 更新生日状态值
-                        setValue('birthday', updatedValue); // 更新表单值
+                        const updatedBirthday = e.target.value;
+                        setformDatas((prevData) => ({
+                          ...prevData,
+                          birthday: updatedBirthday,
+                        }));
                       }}
                     />
                   </div>
@@ -423,8 +408,10 @@ function SettingPersonal() {
                           placeholder='選擇職業'
                           value={defaultValue}
                           onChange={(selectedOption) => {
-                            field.onChange(selectedOption); // 更新表單值
-                            setDefaultValue(selectedOption); // 更新狀態值
+                            setformDatas((prevData) => ({
+                              ...prevData,
+                              professions: selectedOption.label,
+                            }));
                           }}
                         />
                       )}
@@ -498,7 +485,7 @@ function SettingPersonal() {
                       name='hobbies'
                       control={control}
                       rules={{ required: '請選擇興趣' }}
-                      defaultValue={hobbyOptions}
+                      defaultValue={[]}
                       render={({ field }) => (
                         <Select
                           {...field}
@@ -513,11 +500,7 @@ function SettingPersonal() {
                             }),
                           }}
                           placeholder='新增興趣'
-                          value={hobbyOptions}
-                          onChange={(selectedOptions) => {
-                            field.onChange(selectedOptions); // 更新表單值
-                            setHobbyOptions(selectedOptions); // 更新狀態值
-                          }}
+                          value={hobby}
                         />
                       )}
                     />

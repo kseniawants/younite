@@ -1,14 +1,16 @@
 package tw.com.younite.service.impl;
 
+<<<<<<< HEAD
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+=======
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+>>>>>>> origin/dev
 import tw.com.younite.entity.UserEntity;
 import tw.com.younite.mapper.UserMapper;
-import tw.com.younite.service.inter.IUserService;
-import tw.com.younite.service.exception.DuplicatedUsernameException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.util.DigestUtils;
 import tw.com.younite.service.exception.*;
+import tw.com.younite.service.inter.IUserService;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,6 +24,9 @@ import java.util.UUID;
 public class UserServiceImpl implements IUserService {
     @Autowired
     private UserMapper userMapper;
+    //加密方式
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -101,18 +106,8 @@ public class UserServiceImpl implements IUserService {
     }
 
 
-
-    private String getMD5Password(String password, String salt) {
-        for (int i = 0; i < 5; i++) {
-            password = DigestUtils.md5DigestAsHex((salt + password + salt).getBytes()).toUpperCase();
-        }
-        return password;
-    }
-
     @Override
-    public void resetPassword (Integer id,
-                              String oldPassword,
-                              String newPassword) {
+    public void resetPassword(Integer id, String oldPassword, String newPassword) {
         UserEntity result = userMapper.getUserByID(id);
         if (result == null) {
             throw new UserNotFoundException();
@@ -128,21 +123,6 @@ public class UserServiceImpl implements IUserService {
             throw new UpdateException();
         }
     }
-
-    private void checkPassword(String uncheckPassword, UserEntity user) throws PasswordNotMatchException {
-        //資料庫中的密碼
-        String databasePassword = user.getPassword();
-        //待確認密碼加密
-        String salt = user.getSalt();
-        String password = getMD5Password(uncheckPassword, salt);
-        System.out.println("uncheckPassword = " + uncheckPassword);
-        System.out.println("password = " + password);
-        System.out.println("databasePassword = " + databasePassword);
-        if (!databasePassword.equals(password)) {
-            throw new PasswordNotMatchException("密碼錯誤");
-        }
-    }
-
     @Override
     public UserEntity getUserByID(Integer id) {
         UserEntity result = userMapper.getUserByID(id);
@@ -153,6 +133,8 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+<<<<<<< HEAD
+=======
     public List<Integer> getAllUsers() {
         List<Integer> userIDList = new ArrayList<>();
         List<UserEntity> entities = userMapper.getAllUsers();
@@ -163,6 +145,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+>>>>>>> origin/dev
     public UserEntity getUserByUsername(String username) {
         UserEntity result = userMapper.getByUsername(username);
         if (result == null) {
@@ -171,3 +154,5 @@ public class UserServiceImpl implements IUserService {
         return result;
     }
 }
+
+

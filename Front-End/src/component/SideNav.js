@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo/logo-type.png';
 import '../styles/component/nav.scss';
-// import UserImage from '../assets/images/sia.png';
 import ChatBotModal from './Modal/ChatBotModal';
 import NotificationCollapse from '../pages/NotificationCollapse';
 import axios from 'axios';
@@ -28,32 +27,38 @@ function SideNav() {
     setIsActive(false);
   };
 
-  axios.defaults.withCredentials = true;
-
   // 初始化 post 狀態為一個空物件
   const [post, setPost] = useState(null);
 
   useEffect(() => {
-    axios.defaults.withCredentials = true;
-    axios.get('/users/profile').then((response) => {
-      setPost(response.data);
-      console.log(response.data)
-    });
+    axios
+      .get('/users/profile')
+      .then((response) => {
+        setPost(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    axios.defaults.withCredentials = true;
-
-    axios.post('/users/logout').then((response) => {
-      console.log(response);
-      // 登出成功後的處理
-      navigate('/'); // 導航到登入頁面
-    }).catch((error) => {
-      console.error(error);
-      // 處理登出失敗的情況
-    });
+    axios
+      .post('/users/logout')
+      .then((response) => {
+        console.log(response);
+        // 清除儲存的 Token
+        document.cookie = 'YouNiteToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        // 清除 Authorization 的 headers
+        delete axios.defaults.headers.common['Authorization'];
+        // 登出成功後的處理
+        navigate('/'); // 導航到登入頁面
+      })
+      .catch((error) => {
+        console.error(error);
+        // 處理登出失敗的情況
+      });
   };
 
   return (
@@ -61,7 +66,11 @@ function SideNav() {
       <nav className='bg-secondary d-flex p-0 justify-content-between flex-column align-items-center'>
         <figure className='text-decoration-none mt-5 d-flex flex-column align-items-center'>
           <img src={Logo} alt='YouNite-Logo' className='mb-5' style={{ height: '20px' }} />
-          <img src={post && post.data.profileAvatar} alt='Picture' className='mb-1 nav-user-image' />
+          <img
+            src={post && post.data.profileAvatar}
+            alt='Picture'
+            className='mb-1 nav-user-image'
+          />
           <h6 className='text-black nav-text mt-2'>{post && post.data.fullName}</h6>
         </figure>
 

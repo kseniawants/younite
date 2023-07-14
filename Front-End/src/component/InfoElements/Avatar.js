@@ -9,7 +9,6 @@ const Avatar = ({ onFileChange }) => {
   const [fileList, setFileList] = useState([]);
 
   useEffect(() => {
-    axios.defaults.withCredentials = true;
     axios
       .get('http://localhost:8080/users/profile')
       .then((response) => {
