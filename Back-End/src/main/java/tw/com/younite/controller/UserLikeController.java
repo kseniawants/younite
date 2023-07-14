@@ -127,8 +127,10 @@ public class UserLikeController extends BaseController {
     }
 
     @ApiOperation("推薦你可能喜歡用戶")
-    @GetMapping("/users/recommendation/{userID}")
-    public JSONResult<List<Map<String, Object>>> recommendation (@ApiParam(value = "推薦現在使用者", required = true)@PathVariable Integer userID) {
+    @GetMapping("/users/recommendation/")
+    public JSONResult<List<Map<String, Object>>> recommendation () {
+        String account = token.getAccount();
+        Integer userID = token.getIdFromAccountString(account);
         List<Map<String, Object>> data = recommend.recommendation(userID);
         return new JSONResult<>(OK, "獲取推薦用戶成功!", data);
     }
