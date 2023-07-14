@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import '../styles/showmore.scss'
 import userImge from '../assets/images/sia.png'
-import axios from 'axios';
+import { Link } from 'react-router-dom';
 import UserModal from '../component/Modal/UserMoadl';
+import axios from 'axios';
 
 const InterestsShowMore = () => {
   const [post, setPost] = useState([]);
+  const [likedUsers, setLikedUsers] = useState([]);
   
   axios.defaults.withCredentials = true;
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get('/users/mutualInterests');
+        const likedUsersResponse = await axios.get('/users/getLikedUsers'); // 獲取使用者的邀請紀錄
+        setLikedUsers(likedUsersResponse.data); // 設定使用者的邀請紀錄
         setPost(response.data);
         console.log(response.data);
       } catch (error) {
@@ -43,6 +47,9 @@ const InterestsShowMore = () => {
     <>
     <div className='bg-pageTitle d-flex'>
       <h6>共同興趣</h6>
+      <Link to='/home'>
+        <i className="fa-solid fa-arrow-left fa-xl"></i>
+      </Link>
     </div>
     <div className='d-flex' style={{ flexWrap: 'wrap' }}>
       {post.data ? (
@@ -78,6 +85,7 @@ const InterestsShowMore = () => {
               userID={userID}
               closeModal={() => handleCloseModal(userID)}
               data={userModalStates[userID].data}
+              likedUsers={likedUsers} // 傳遞使用者的邀請紀錄
             />
           )
         ))}

@@ -3,7 +3,11 @@ package tw.com.younite.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import tw.com.younite.entity.LoginResponse;
 import tw.com.younite.entity.UserEntity;
+import tw.com.younite.service.impl.TokenServiceImpl;
 import tw.com.younite.service.inter.IUserService;
 import tw.com.younite.util.EncryptionUtils;
 import tw.com.younite.util.JSONResult;
@@ -12,7 +16,9 @@ import tw.com.younite.util.JSONResult;
 //import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import tw.com.younite.util.JwtUtil;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
@@ -32,6 +38,9 @@ public class UserController extends BaseController {
     @Autowired
     private EncryptionUtils encryptionUtils;
 
+    @Autowired
+    private TokenServiceImpl token;
+
     @ApiOperation("用ID獲取相應使用者資訊")
     @GetMapping("/users/getUser/{userID}")
     public JSONResult<UserEntity> getUser(@ApiParam(value = "傳出以ID尋找的使用者資訊", required = true)
@@ -42,8 +51,9 @@ public class UserController extends BaseController {
     @ApiOperation("獲取當前用戶資訊(需先登入)")
     @GetMapping("/users/getUser")
     public JSONResult<UserEntity> getCurrentUser(@ApiParam(value = "傳出使用者資訊", required = true)HttpSession session) {
-        Integer userID = getIDFromSession(session);
-        UserEntity user = iUserService.getUserByID(userID);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        UserEntity user = iUserService.getUserByUsername(username);
         return new JSONResult<UserEntity>(OK, user);
     }
 
@@ -56,7 +66,6 @@ public class UserController extends BaseController {
                                     @RequestBody UserEntity user, HttpSession session) {
         iUserService.reg(user);
         session.setAttribute("id", user.getId());
-        System.out.println("userID: " + getIDFromSession(session));
         return new JSONResult<>(CREATE_OK, "註冊成功");
 
     }
@@ -81,14 +90,21 @@ public class UserController extends BaseController {
 
     @ApiOperation("用戶登入")
     @PostMapping("/users/login")
-    public JSONResult<UserEntity> login(@ApiParam(value = "傳入用戶登入資料",
-            required = true)HttpSession session, @RequestBody UserEntity user) {
+    public JSONResult<LoginResponse> login(HttpServletRequest request, @RequestBody UserEntity user) {
         UserEntity data = iUserService.login(user);
-        //TODO: 把username改成profiles中的full name.
+        HttpSession session = request.getSession();
         session.setAttribute("id", data.getId());
         session.setAttribute("username", data.getUsername());
-        return new JSONResult<UserEntity>(OK,"登入成功", data);
+
+        // Generate JWT token
+        String token = JwtUtil.generateToken(data);
+
+        // Create the LoginResponse object with user and token
+        LoginResponse loginResponse = new LoginResponse(data, token);
+
+        return new JSONResult<>(OK, "登入成功", loginResponse);
     }
+
 
     @ApiOperation("修改用戶密碼")
     @PutMapping("/users/resetPassword")

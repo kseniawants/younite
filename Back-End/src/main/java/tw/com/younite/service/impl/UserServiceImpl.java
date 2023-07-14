@@ -1,5 +1,6 @@
 package tw.com.younite.service.impl;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import tw.com.younite.entity.UserEntity;
 import tw.com.younite.mapper.UserMapper;
 import tw.com.younite.service.inter.IUserService;
@@ -21,6 +22,9 @@ import java.util.UUID;
 public class UserServiceImpl implements IUserService {
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public void reg(UserEntity user) {
@@ -45,11 +49,10 @@ public class UserServiceImpl implements IUserService {
         /** 密碼加密處理, 加密方法: md5
          form: salt value + password + salt value */
 
-        String oldPassword = user.getPassword();
         String saltValue = UUID.randomUUID().toString().toUpperCase();
         user.setSalt(saltValue);
-        String md5Password = getMD5Password(oldPassword, saltValue);
-        user.setPassword(md5Password);
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
         /** 加入資料庫前，補全部分資料: */
         Date date = new Date();
         user.setVipExpiry(date);
@@ -76,15 +79,15 @@ public class UserServiceImpl implements IUserService {
         String password = user.getPassword();
         UserEntity result = userMapper.getByUsername(username);
 
+
         if (result == null) {
             throw new UserNotFoundException("帳號不存在");
         }
-        String databasePassword = result.getPassword();
-        String salt = result.getSalt();
-        String MD5Password = getMD5Password(password, salt);
-        if (!MD5Password.equals(databasePassword)) {
+
+        if (!passwordEncoder.matches(password, result.getPassword())) {
             throw new PasswordNotMatchException("密碼錯誤!");
         }
+
         UserEntity newUser = new UserEntity();
         newUser.setId(result.getId());
         newUser.setUsername(result.getUsername());
@@ -95,8 +98,6 @@ public class UserServiceImpl implements IUserService {
             userMapper.lockedVipById(result.getId(), false);
         }
         return newUser;
-
-
     }
 
 
@@ -116,11 +117,13 @@ public class UserServiceImpl implements IUserService {
         if (result == null) {
             throw new UserNotFoundException();
         }
-        //確認輸入的舊密碼和資料庫中的密碼是否相同
-        checkPassword(oldPassword, result);
-        //輸入的新密碼進行加密
-        String newMD5Password = getMD5Password(newPassword, result.getSalt());
-        Integer row = userMapper.updatePasswordByID(id, newMD5Password, new Date());
+
+        if (!passwordEncoder.matches(oldPassword, result.getPassword())) {
+            throw new PasswordNotMatchException("密碼錯誤");
+        }
+
+        String encodedPassword = passwordEncoder.encode(newPassword);
+        Integer row = userMapper.updatePasswordByID(id, encodedPassword, new Date());
         if (row != 1) {
             throw new UpdateException();
         }
@@ -157,5 +160,14 @@ public class UserServiceImpl implements IUserService {
             userIDList.add(entity.getId());
         }
         return userIDList;
+    }
+
+    @Override
+    public UserEntity getUserByUsername(String username) {
+        UserEntity result = userMapper.getByUsername(username);
+        if (result == null) {
+            throw new UserNotFoundException("使用者不存在");
+        }
+        return result;
     }
 }
