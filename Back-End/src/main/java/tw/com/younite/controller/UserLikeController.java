@@ -7,19 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tw.com.younite.entity.FriendEntity;
 import tw.com.younite.entity.UserLikeEntity;
+import tw.com.younite.entity.UserProfileEntity;
 import tw.com.younite.service.exception.DuplicatedLikedUserException;
 import tw.com.younite.service.exception.FriendExceedLimitException;
 import tw.com.younite.service.exception.UserNotFoundException;
 import tw.com.younite.service.impl.TokenServiceImpl;
-import tw.com.younite.service.inter.IFriendService;
-import tw.com.younite.service.inter.IUserLikeService;
-import tw.com.younite.service.inter.IUserService;
+import tw.com.younite.service.inter.*;
+import tw.com.younite.util.DataTransferUtil;
 import tw.com.younite.util.JSONResult;
 import tw.com.younite.util.RecommendationUtil;
 
-import java.util.List;
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
 import javax.servlet.http.HttpSession;
 
 @Api(tags ="使用者喜歡配對的對象功能")
@@ -37,10 +35,19 @@ public class UserLikeController extends BaseController {
     IFriendService iFriendService;
 
     @Autowired
+    IUserProfileService iUserProfileService;
+
+    @Autowired
+    IInterestService interestService;
+
+    @Autowired
     RecommendationUtil recommend;
 
     @Autowired
     TokenServiceImpl token;
+
+    @Autowired
+    DataTransferUtil tools;
 
     @ApiOperation("新增喜歡的對象")
     @PostMapping("/users/like")
@@ -101,6 +108,30 @@ public class UserLikeController extends BaseController {
         Integer userID = token.getIdFromAccountString(account);
         List<Integer> data = iUserLikeService.getLikedUserList(userID);
         return new JSONResult<>(OK, data);
+    }
+
+    @ApiOperation("獲取使用者被喜歡的用戶列表")
+        @GetMapping("/users/likesTrackerProfiles")
+    public JSONResult<List<Map<String, Object>>> getLikedProfiles() {
+        String account = token.getAccount();
+        Integer userID = token.getIdFromAccountString(account);
+        List<Integer> likedUsersList = iUserLikeService.likesTracker(userID);
+        List<Map<String, Object>> result = new ArrayList<>();
+        for (Integer likedUser: likedUsersList) {
+            UserProfileEntity profile = iUserProfileService.getUserProfile(likedUser);
+            Map<String, Object> userProfileMap = new HashMap<>();
+            userProfileMap.put("name", profile.getFullName());
+            userProfileMap.put("userID", likedUser);
+            userProfileMap.put("profileAvatar", profile.getProfileAvatar());
+            userProfileMap.put("age", tools.calculateAge(profile.getBirthday()));
+            userProfileMap.put("interests", interestService.getInterests(likedUser));
+            userProfileMap.put("city", profile.getCity());
+            userProfileMap.put("dating", profile.getDatingGoal());
+            userProfileMap.put("voice", profile.getVoiceIntro());
+            userProfileMap.put("selfIntro", profile.getSelfIntro());
+            result.add(userProfileMap);
+        }
+        return new JSONResult<>(OK, result);
     }
 
     @ApiOperation("追蹤指定用戶被喜歡的次數")
