@@ -46,6 +46,7 @@ function Info() {
       for (let i = 0; i < data.hobbies.length; i++) {
         str.push(data.hobbies[i].label);
       }
+      
       data.photoWall = photoWallValue.map((file) => file.originFileObj);
       setSubmitting(true);
       setFormSubmitted(true);
@@ -66,7 +67,9 @@ function Info() {
       formData.append('birthday', data.birthday);
       formData.append('professions', data.profession.label);
       formData.append('phone', data.tel);
-      formData.append('photos', data.photoWall);
+      data.photoWall.forEach((file) => {
+        formData.append('photos', file, file.name);
+      });
       formData.append('hobbies', str);
 
       //註冊 API ( 寫入資料 )
@@ -514,6 +517,7 @@ function Info() {
               className='form-control'
               id='exampleFormControlTextarea1'
               rows='3'
+              maxLength={40}
               {...register('textareaFieldName')}
             ></textarea>
           </div>

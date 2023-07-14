@@ -17,10 +17,10 @@ public class UserProfileServiceTestCase {
     @Test
     public void testResetProfileService() {
         UserProfileEntity userProfile = iUserProfileService.getUserProfile(98);
-        Integer id = userProfile.getUserID();
+        Integer id = userProfile.getUserId();
         userProfile.setFullName("哈林老師");
         userProfile.setSexualOrientation("Lesbian");
-        userProfile.setUserID(id);
+        userProfile.setUserId(id);
         iUserProfileService.resetUserProfile(userProfile);
     }
 

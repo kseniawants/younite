@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Calendar;
 import java.util.Date;
@@ -74,5 +75,12 @@ public class PayController extends BaseController{
         return "1|OK";
     }
 
+//    @PostMapping("/redirectPost")
+//    @CrossOrigin(origins = "http://localhost:3000,http://localhost:8080", allowCredentials = "true")
+//    public void redirect(HttpServletResponse response) throws Exception{
+//        response.sendRedirect("http://localhost:3000/home");
+//    }
+//
+//
 
 }

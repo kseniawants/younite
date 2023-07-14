@@ -11,6 +11,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -73,7 +75,11 @@ public class UserMapperTestCase {
     public void testGetByTradeNo () {
         OrdersEntity order = ordersMapper.getByTradeNo("Y1688538055138");
         System.out.println("order = " + order);
+    }
 
-
+    @Test
+    public void trial() {
+        List<Map<String, Object>> result = userMapper.trial();
+        System.out.println("result = " + result);
     }
 }

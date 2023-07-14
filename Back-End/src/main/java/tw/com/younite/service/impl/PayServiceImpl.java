@@ -39,14 +39,15 @@ public class PayServiceImpl implements PayService {
         obj.setMerchantTradeDate(new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new java.util.Date()));
         obj.setTotalAmount(String.valueOf(order.getAmount()));
         obj.setTradeDesc("Thank you");
-        obj.setItemName("itemName");
-        obj.setReturnURL("https://42e0-2401-e180-8920-7f0-e01f-295e-c461-42d.ngrok-free.app/callback");
+        obj.setItemName(itemName);
+        obj.setReturnURL("https://8277-2001-b011-8003-3847-c4fe-8751-d61f-83d5.ngrok-free.app/callback");
         // OrderResultURL   : 選填 消費者完成付費後。重新導向的位置
 
-//        obj.setOrderResultURL("https://42e0-2401-e180-8920-7f0-e01f-295e-c461-42d.ngrok-free.app/");
+        obj.setOrderResultURL("http://localhost:8080/redirectPost");
         obj.setNeedExtraPaidInfo("N");
         String form = all.aioCheckOut(obj, null);
         System.out.println(form);
+
         // 注入mTradeNo到订单表
         ordersMapper.addTradeNo(id, mTradeNo);
         // 回傳form訂單 並自動將使用者導到 綠界

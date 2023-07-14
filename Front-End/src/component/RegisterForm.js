@@ -52,7 +52,7 @@ function RegisterForm() {
         password: data.password,
       };
 
-      const cookieReq = {
+      const request = {
         username: data.username,
         password: data.password,
       };
@@ -60,21 +60,17 @@ function RegisterForm() {
       setFormSubmitted(true);
       await submitForm();
 
+      axios.defaults.withCredentials = true;
       const response = await axios.post('/users/register', requestBody);
       console.log(response.data);
 
       if (response.data.state === 201) {
         handleAlertRes(response);
         console.log('成功了吧');
-
-        const loginRes = await axios.post('users/login', cookieReq);
-        console.log(cookieReq);
-
-        const token = loginRes.data.data.token;
-        document.cookie = `YouNiteToken=${token}; `;
-
+        const token_response = await axios.post('/users/login', request);
+        const token = token_response.data.data.token;
+        document.cookie = `token=${token}; path=/;`;
         axios.defaults.headers.common['Authorization'] = token;
-
         setTimeout(() => {
           navigate('/personal');
         }, 2500);

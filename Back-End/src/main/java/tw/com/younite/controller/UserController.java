@@ -4,18 +4,25 @@ package tw.com.younite.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
 import tw.com.younite.entity.LoginResponse;
 import tw.com.younite.entity.UserEntity;
+import tw.com.younite.service.impl.TokenServiceImpl;
 import tw.com.younite.service.inter.IUserService;
 import tw.com.younite.util.EncryptionUtils;
 import tw.com.younite.util.JSONResult;
 import tw.com.younite.util.JwtUtil;
 
+//import io.swagger.annotations.Api;
+//import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import tw.com.younite.util.JwtUtil;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
 
@@ -29,6 +36,9 @@ public class UserController extends BaseController {
     @Autowired
     private EncryptionUtils encryptionUtils;
 
+    @Autowired
+    private TokenServiceImpl token;
+
     @ApiOperation("用ID獲取相應使用者資訊")
     @GetMapping("/users/getUser/{userID}")
     public JSONResult<UserEntity> getUser(@ApiParam(value = "傳出以ID尋找的使用者資訊", required = true)
@@ -39,7 +49,7 @@ public class UserController extends BaseController {
 
     @ApiOperation("獲取當前用戶資訊(需先登入)")
     @GetMapping("/users/getUser")
-    public JSONResult<UserEntity> getCurrentUser(@ApiParam(value = "傳出使用者資訊", required = true) HttpSession session) {
+    public JSONResult<UserEntity> getCurrentUser(@ApiParam(value = "傳出使用者資訊", required = true)HttpSession session) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         UserEntity user = iUserService.getUserByUsername(username);
@@ -52,7 +62,6 @@ public class UserController extends BaseController {
                                 HttpSession session) {
         iUserService.reg(user);
         session.setAttribute("id", user.getId());
-        System.out.println("userID: " + getIDFromSession(session));
         return new JSONResult<>(CREATE_OK, "註冊成功");
     }
 

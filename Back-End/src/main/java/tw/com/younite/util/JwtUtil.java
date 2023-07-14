@@ -59,8 +59,8 @@ public class JwtUtil {
                     .setSigningKey(SECRET)
                     .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
                     .getBody();
-            String userName = body.get("userName").toString();
-            return userName;
+            String user = body.get("user").toString();
+            return user;
         }catch (ExpiredJwtException e) {
             throw e;
         } catch (UnsupportedJwtException e) {

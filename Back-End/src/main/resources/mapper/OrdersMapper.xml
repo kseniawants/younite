@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tw.com.younite.mapper.OrdersMapper">
+    <cache-ref namespace="tw.com.younite.mapper.UserMapper"/>
     <resultMap id="OrdersEntityMap" type="tw.com.younite.entity.OrdersEntity">
         <id column="id" property="id"></id>
         <result column="user_id" property="userId"></result>

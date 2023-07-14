@@ -1,14 +1,20 @@
 package tw.com.younite.service.impl;
 
+<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+=======
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+>>>>>>> origin/dev
 import tw.com.younite.entity.UserEntity;
 import tw.com.younite.mapper.UserMapper;
 import tw.com.younite.service.exception.*;
 import tw.com.younite.service.inter.IUserService;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -19,6 +25,9 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private UserMapper userMapper;
     //加密方式
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
@@ -124,6 +133,19 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+<<<<<<< HEAD
+=======
+    public List<Integer> getAllUsers() {
+        List<Integer> userIDList = new ArrayList<>();
+        List<UserEntity> entities = userMapper.getAllUsers();
+        for (UserEntity entity: entities) {
+            userIDList.add(entity.getId());
+        }
+        return userIDList;
+    }
+
+    @Override
+>>>>>>> origin/dev
     public UserEntity getUserByUsername(String username) {
         UserEntity result = userMapper.getByUsername(username);
         if (result == null) {

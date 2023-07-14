@@ -1,5 +1,9 @@
 package tw.com.younite.util;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import tw.com.younite.entity.AmazonFileVO;
+import tw.com.younite.entity.UserProfileEntity;
+import tw.com.younite.service.inter.AmazonUploadService;
 import tw.com.younite.service.uploadException.FileStateException;
 import tw.com.younite.service.uploadException.FileUploadIOException;
 import org.springframework.stereotype.Component;
@@ -13,6 +17,29 @@ import java.util.UUID;
 
     @Component
     public class FileUploadUtil {
+
+        @Autowired
+        private AmazonUploadService amazonUploadService;
+
+        public static final List<String> AVATAR_TYPE = new ArrayList<>();
+        public static final List<String> VOICE_TYPE = new ArrayList<>();
+
+        static {
+            AVATAR_TYPE.add("image/jpeg");
+            AVATAR_TYPE.add("image/png");
+            AVATAR_TYPE.add("image/bmp");
+            AVATAR_TYPE.add("image/gif");
+            AVATAR_TYPE.add("image/svg");
+            AVATAR_TYPE.add("image/webp");
+        }
+
+        static {
+            VOICE_TYPE.add("audio/mpeg");
+            VOICE_TYPE.add("audio/wav");
+            VOICE_TYPE.add("audio/aac");
+        }
+
+        private static final String PREFIX = "https://younite-avatar-bucket.s3.ap-northeast-1.amazonaws.com/";
 
         public String uploadFile(MultipartFile file) {
             //TODO: check AWS S3 file uploading path
@@ -44,6 +71,23 @@ import java.util.UUID;
             }
             System.out.println(fileName);
             return "/avatar/" + fileName;
+        }
+
+        private void uploadFile(MultipartFile file, UserProfileEntity userProfile, String folderName) {
+            AmazonFileVO amazonFileModel = null;
+            String filePath = "";
+
+            try {
+                amazonFileModel = amazonUploadService.upload(file, folderName);
+                filePath = PREFIX + amazonFileModel.getFilePath();
+                if (AVATAR_TYPE.contains(file.getContentType())) {
+                    userProfile.setProfileAvatar(filePath);
+                } else if (VOICE_TYPE.contains(file.getContentType())) {
+                    userProfile.setVoiceIntro(filePath);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
     }

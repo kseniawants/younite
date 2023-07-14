@@ -6,6 +6,7 @@ import { FacebookLoginButton, GoogleLoginButton } from 'react-social-login-butto
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AlertModal from './Modal/AlertModal';
+// import { setToken } from '../lib/api';
 
 function LoginForm() {
   const [submitting, setSubmitting] = useState(false);
@@ -61,29 +62,13 @@ function LoginForm() {
       if (response.data.state === 200) {
         handleAlertRes(response);
         console.log(response);
-        console.log(response.data.data.token);
-
-        //把 token 存在這個變數中
-        // 將Token存儲在Cookie中
-        // const { token, expired } = response.data.data.token;
-        // document.cookie = `YouNitetoken=${token}; expires=${new Data(expired)}`;
-
         const token = response.data.data.token;
-        document.cookie = `YouNiteToken=${token}; `;
-
-        // 設置Authorization標頭
+        console.log(response);
+        navigate('/home');
+        document.cookie = `token=${token}; path=/;`;
         axios.defaults.headers.common['Authorization'] = token;
-        //設定以後打給後端的 axios 的 headers 都會帶有這隻 token
-
-        setTimeout(() => {
-          navigate('/home');
-        }, 2500);
-      } else {
         handleAlertRes(response);
-        // console.log(response);
-        setTimeout(() => {
-          navigate('/login');
-        }, 2500);
+        console.log(response);
       }
     } catch (error) {
       console.error(error);
@@ -232,6 +217,9 @@ function LoginForm() {
                 <Link to='/register'>
                   <span>立即註冊</span>
                 </Link>
+                <Link to='/register'>
+                  <span>忘記密碼</span>
+                </Link>
               </div>
             </div>
           </form>
@@ -241,5 +229,4 @@ function LoginForm() {
     </div>
   );
 }
-
 export default LoginForm;

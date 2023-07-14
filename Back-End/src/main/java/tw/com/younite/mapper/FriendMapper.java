@@ -1,6 +1,7 @@
 package tw.com.younite.mapper;
 import tw.com.younite.entity.FriendEntity;
 
+
 import java.util.List;
 
 public interface FriendMapper {
@@ -16,4 +17,11 @@ public interface FriendMapper {
     FriendEntity getInvitationStatus(Integer firstUserID,
                                      Integer secondUserID,
                                      Integer invitationStatus);
+    void updateVideoSent(Integer firstUserID, Integer secondUserID);
+    void updateVideoAccepted(FriendEntity friendEntity);
+    void updateVoiceSent(Integer firstUserID, Integer secondUserID);
+    void updateVoiceAccepted(FriendEntity friendEntity);
+    void updateImageSent(Integer firstUserID, Integer secondUserID);
+    void updateImageAccepted(FriendEntity friendEntity);
+
 }
