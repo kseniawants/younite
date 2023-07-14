@@ -20,7 +20,7 @@ import java.util.Calendar;
 import java.util.Date;
 @Api(tags ="綠界支付")
 @RestController
-@CrossOrigin(origins = "*")
+
 public class PayController extends BaseController{
     @Autowired
     private OrdersService ordersService;
@@ -32,6 +32,7 @@ public class PayController extends BaseController{
     private UserMapper userMapper;
     @ApiOperation("跳轉至綠界付款頁面及創立訂單")
     @PostMapping("/orders")
+    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     public String orders(@ApiParam(value = "傳入使用者ID與商品ID", required = true)
                              HttpSession session, Integer itemId) {
         Integer userId = getIDFromSession(session);
@@ -43,6 +44,7 @@ public class PayController extends BaseController{
     }
     @ApiOperation("綠界訂單資料回傳至網頁")
     @PostMapping("/callback")
+    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     public String ecpayReturn(@ApiParam(value = "綠界回傳值", required = true)
                                   HttpServletRequest request) {
         // 解析綠界回傳的參數
@@ -72,10 +74,5 @@ public class PayController extends BaseController{
         }
         // 返回給綠界的回應，例如 "1|OK"
         return "1|OK";
-    }
-
-    @PostMapping("/redirectPost")
-    public void redirect(HttpServletResponse response) throws Exception{
-        response.sendRedirect("http://localhost:3000/home");
     }
 }
