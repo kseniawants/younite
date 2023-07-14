@@ -1,9 +1,99 @@
-import React, { useState } from 'react';
-import FilterModal from '../component/Modal/FilterModal';
+import React, { useState, useEffect } from 'react'
+import '../styles/showmore.scss'
+import userImge from '../assets/images/sia.png'
+import UserModal from '../component/Modal/UserMoadl';
+import axios from 'axios';
 
 const LikeShowMore = () => {
-  const [openModal, setOpenModal] = useState(false); // Model 開關
-  const [fadeInModal, setFadeInModal] = useState(false); // 追蹤是否需要淡入
+
+  const [post, setPost] = useState([]);
+  const [likedUsers, setLikedUsers] = useState([]);
+  
+  axios.defaults.withCredentials = true;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/users/recommendation/');
+        const likedUsersResponse = await axios.get('/users/getLikedUsers'); // 獲取使用者的邀請紀錄
+        setLikedUsers(likedUsersResponse.data); // 設定使用者的邀請紀錄
+        setPost(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const [userModalStates, setUserModalStates] = useState(false);
+
+  const handleUserButtonClick = (event, item) => {
+    event.preventDefault();
+    setUserModalStates((prevState) => ({
+      ...prevState,
+      [item.userID]: {
+        isOpen: true,
+        data: item,
+      },
+    }));
+  };
+  
+  const handleCloseModal = () => {
+    setUserModalStates(false) 
+  };
+
+
+  return (
+    <>
+      <div className='bg-pageTitle d-flex'>
+          <h6>你可能喜歡</h6>
+          <button type='button' className='btn btn-primary btn-sm text-white'>
+              <i className='fa-solid fa-filter me-1' size='sm'></i>篩選
+          </button>
+      </div>
+      <div className='d-flex' style={{ flexWrap: 'wrap' }}>
+      {post.data ? (
+        post.data.map((item, index) => (
+          <section 
+            key={index}
+            className='usersImg ms-3 my-3 me-4' 
+            style={{'--bg-images': `url(${item.profileAvatar || userImge})`}}
+            onClick={(event) => handleUserButtonClick(event, item)}
+          >
+            <div className='mt-auto'>
+              <div className='d-flex ms-2'>
+                <h5 className='me-2 text-secondary'>{item.name}</h5>
+                <span className='mx-2 text-radio'>{item.age}</span>
+              </div>
+              <div className='text-nowrap'>
+                    {item.interests && item.interests.slice(0, 3).map((interest, i) => (
+                      <button key={i} type='button' className='btn btn-outline-radio btn-sm mx-1 mb-1 rounded-pill btn-block'>
+                        #{interest}
+                      </button>
+                    ))}
+              </div>
+            </div>
+          </section>
+        ))
+        ) : (
+          <p>loading</p>
+        )}
+        {Object.keys(userModalStates).map((userID) => (
+          userModalStates[userID].isOpen && (
+            <UserModal
+              key={userID}
+              userID={userID}
+              closeModal={() => handleCloseModal(userID)}
+              data={userModalStates[userID].data}
+              likedUsers={likedUsers} // 傳遞使用者的邀請紀錄
+            />
+          )
+        ))}
+    </div>
+    </>
+  )
+}
 
   const handleCloseModal = () => {
     setOpenModal(false);

@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 function getCookie(name) {
   const value = '; ' + document.cookie;
   const parts = value.split('; ' + name + '=');
@@ -8,9 +6,6 @@ function getCookie(name) {
   }
 }
 
-function setToken() {
-  const token = getCookie('token');
-  axios.defaults.headers.common['Authorization'] = token;
-}
+const token = getCookie('token');
 
-export default setToken;
+export default token;
