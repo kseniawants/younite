@@ -7,7 +7,7 @@ import Avatar from './InfoElements/Avatar';
 import PhotoWall from './InfoElements/PhotoWall';
 import LocationModal from './InfoElements/Location';
 import InfoModal from './Modal/InfoModal';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AlertModal from './Modal/AlertModal';
 
@@ -28,8 +28,8 @@ function Info() {
     mode: 'onTouched',
   });
 
+  //Alert用
   const handleAlertRes = (response) => {
-    //Alert用
     setAlertMessage(response.data.message);
     setAlertStateIcon(response.data.state);
     setFormSubmitted(false);
@@ -39,6 +39,7 @@ function Info() {
     }, 2500);
   };
 
+  // 表單發送
   const onSubmit = async (data) => {
     try {
       let str = [];
@@ -52,16 +53,17 @@ function Info() {
       await submitForm(data);
       const formData = new FormData();
       console.log(data.photoWall);
-      console.log(data.profileAvatar[0].originFileObj);
+      console.log(data.pic[0].originFileObj);
       console.log(data);
       formData.append('fullName', data.name);
       formData.append('gender', data.radioGender);
       formData.append('sexualOrientation', data.radioSO);
       formData.append('location', JSON.stringify(data.address));
+      formData.append('city', data.city);
       formData.append('selfIntro', data.textareaFieldName);
       formData.append('preferredGender', data.radioShow);
       formData.append('datingGoal', data.goal);
-      formData.append('avatar', data.profileAvatar[0].originFileObj);
+      formData.append('avatar', data.pic[0].originFileObj);
       formData.append('birthday', data.birthday);
       formData.append('professions', data.profession.label);
       formData.append('phone', data.tel);
@@ -69,7 +71,8 @@ function Info() {
         formData.append('photos', file, file.name);
       });
       formData.append('hobbies', str);
-      axios.defaults.withCredentials = true;
+
+      //註冊 API ( 寫入資料 )
       const response = await axios.post('/users/profile', formData, {
         headers: {
           'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>',
@@ -96,30 +99,29 @@ function Info() {
 
   const submitForm = () => {
     return new Promise((resolve) => {
+      // 模擬非同步，這裡使用 setTimeout 延遲 2 秒
       setTimeout(() => {
         resolve();
-      }, 1500);
+      }, 2500);
     });
   };
 
+  // 表單欄位
   const radioGender = [
     { label: '男生', value: 'Male' },
     { label: '女生', value: 'Female' },
     { label: '其他', value: 'Other' },
   ];
-
   const radioSO = [
     { label: '生理男', value: 'Man' },
     { label: '生理女', value: 'Woman' },
     { label: '雙性戀', value: 'Bisexual' },
   ];
-
   const radioShow = [
     { label: '男生', value: 'Male' },
     { label: '女生', value: 'Female' },
     { label: '所有人', value: 'Other' },
   ];
-
   const hobbies = [
     { value: 'music', label: '音樂' },
     { value: 'reading', label: '閱讀' },
@@ -151,7 +153,6 @@ function Info() {
     { value: 'puzzles', label: '解謎' },
     { value: 'languages', label: '學習語言' },
   ];
-
   const profession = [
     { value: 'doctor', label: '醫生' },
     { value: 'teacher', label: '教師/教育工作者' },
@@ -173,8 +174,9 @@ function Info() {
   const [isInfoModalVisible, setInfoModalVisible] = useState(false);
   const [isLocationModalVisible, setLocationModalVisible] = useState(false);
   const [isLocationSelected, setLocationSelected] = useState(false);
-  const [selectedButtonLabel, setSelectedButtonLabel] = useState(null); // 新增选中的按钮标签状态
+  const [selectedButtonLabel, setSelectedButtonLabel] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState(null);
+  const [, setCity] = useState(null);
 
   const handleInfoModalButtonClick = () => {
     setInfoModalVisible(true);
@@ -189,12 +191,13 @@ function Info() {
     setLocationModalVisible(false);
   };
 
-  const handleDialogOk = (selectedLocation) => {
-    // 传入选中按钮的标签
+  const handleDialogOk = (selectedLocation, city) => {
     setLocationModalVisible(false);
     setLocationSelected(true);
-    setSelectedLocation(selectedLocation); // 更新选中的按钮标签
-    setValue('address', selectedLocation); // 使用setValue更新Controller的值
+    setSelectedLocation(selectedLocation);
+    setCity(city);
+    setValue('address', selectedLocation); // 设置selectedLocation的值
+    setValue('city', city); // 设置city的值
   };
 
   const handleDialogOk1 = (selectedButtonLabel) => {
@@ -239,7 +242,7 @@ function Info() {
       <form className='row justify-content-center flex-md-row flex-column-reverse'>
         <div className='col-md-5'>
           <div className='pb-4 w-50'>
-            <i className='fa-solid fa-user text-black' />
+            <i className='fa-solid fa-user text-black personal' />
             <span className='text-danger p-1'>*</span>
             <Input
               id='name'
@@ -525,13 +528,13 @@ function Info() {
             <label className='mb-4'>大頭貼照片</label>
             <Controller
               control={control}
-              name='profileAvatar'
+              name='pic'
               rules={{ required: true }}
               render={({ field }) => (
                 <>
                   <Avatar
                     {...field}
-                    className={errors.profileAvatar ? 'is-invalid' : ''}
+                    className={errors.pic ? 'is-invalid' : ''}
                     // value={field.value}
                     onFileChange={(file) => {
                       field.onChange(file);
@@ -541,7 +544,7 @@ function Info() {
                 </>
               )}
             />
-            {errors.profileAvatar && <div className='invalid-feedback '>請上傳大頭照</div>}
+            {errors.pic && <div className='invalid-feedback '>請上傳大頭照</div>}
           </div>
           <div className='p-4 mb-4'>
             <label className='mb-4'>個人檔案照片</label>
@@ -550,7 +553,7 @@ function Info() {
         </div>
       </form>
       <div className='d-flex flex-column-reverse flex-md-row py-4 justify-content-center align-items-md-center align-items-center w-100'>
-        {/* <Link to='/home'> */}
+        <Link to='/home'>
           {formSubmitted && (
             <div className={`fullscreen-overlay ${submitting ? 'show' : ''}`}>
               <svg
@@ -589,7 +592,7 @@ function Info() {
           >
             {submitting ? '正在送出表單...' : '送出表單'}
           </button>
-        {/* </Link> */}
+        </Link>
       </div>
       <AlertModal message={alertMessage} showModal={showAlertModal} state={AlertStateIcon} />
     </div>

@@ -54,7 +54,6 @@ public class JwtUtil {
      * @return:
      */
     public static String validateToken(String token) {
-
         try {
             Map<String, Object> body = Jwts.parser()
                     .setSigningKey(SECRET)
