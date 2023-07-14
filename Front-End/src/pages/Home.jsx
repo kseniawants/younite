@@ -1,25 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/component/bdGradient.scss';
 import '../styles/home.scss';
-import PeoplePhoto from '../component/User/PeoplePhoto';
+// import PeoplePhoto from '../component/User/PeoplePhoto';
 import UserCard from '../component/User/UserCard';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import UserModal from '../component/Modal/UserMoadl';
 import userImge from '../assets/images/sia.png';
+import token from '../TokenUtil.js';
 
 function Home() {
   const [post1, setPost1] = useState([]);
   const [post2, setPost2] = useState([]);
+  const [post3, setPost3] = useState([]);
   const [likedUsers, setLikedUsers] = useState([]);
+
+  axios.defaults.withCredentials = true;
+  axios.defaults.headers.common['Authorization'] = token;
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response1 = await axios.get('/users/mutualInterests');
         const response2 = await axios.get('/users/profiles/profession');
         const likedUsersResponse = await axios.get('/users/getLikedUsers'); // 獲取使用者的邀請紀錄
+        const response3 = await axios.get('/users/recommendation/');
         setPost1(response1.data);
         setPost2(response2.data);
+        setPost3(response3.data);
         setLikedUsers(likedUsersResponse.data); // 設定使用者的邀請紀錄
         console.log(likedUsersResponse.data);
       } catch (error) {
@@ -55,13 +62,32 @@ function Home() {
             <h6>你可能喜歡</h6>
           </div>
           <div className='bg-pagePhoto d-flex mt-3 mb-3'>
-            <PeoplePhoto />
-            <PeoplePhoto />
-            <PeoplePhoto />
-            <PeoplePhoto />
-            <PeoplePhoto />
-            <PeoplePhoto />
-            <PeoplePhoto />
+            {post3.data ? (
+              post3.data.slice(0, 5).map((item, index) => (
+                <section 
+                  key={index}
+                  className='usersImg ms-3 my-3 me-4' 
+                  style={{'--bg-images': `url(${item.profileAvatar || userImge})`}}
+                  onClick={(event) => handleUserButtonClick(event, item)}
+                >
+                  <div className='mt-auto'>
+                    <div className='d-flex ms-2'>
+                      <h5 className='me-2 text-secondary'>{item.name}</h5>
+                      <span className='mx-2 text-radio'>{item.age}</span>
+                    </div>
+                    <div className='text-nowrap'>
+                          {item.interests && item.interests.slice(0, 3).map((interest, i) => (
+                            <button key={i} type='button' className='btn btn-outline-radio btn-sm mx-1 mb-1 rounded-pill btn-block'>
+                              #{interest}
+                            </button>
+                          ))}
+                    </div>
+                  </div>
+                </section>
+              ))
+              ) : (
+                <p>loading</p>
+              )}
           </div>
           <div className='bg-pageMore d-flex'>
             <Link to='/show/like'>顯示更多...</Link>
