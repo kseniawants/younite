@@ -4,6 +4,7 @@ package tw.com.younite.controller;
 import org.json.JSONObject;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
@@ -14,7 +15,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-
+@CrossOrigin("*")
 @ServerEndpoint("/msgServer2/{userId}/{room}")
 @Component
 @Scope("prototype")
