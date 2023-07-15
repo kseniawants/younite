@@ -21,7 +21,6 @@ import java.util.Calendar;
 import java.util.Date;
 @Api(tags ="綠界支付")
 @RestController
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class PayController extends BaseController{
     @Autowired
     private OrdersService ordersService;
@@ -51,6 +50,7 @@ public class PayController extends BaseController{
     }
     @ApiOperation("綠界訂單資料回傳至網頁")
     @PostMapping("/callback")
+
     @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     public String ecpayReturn(@ApiParam(value = "綠界回傳值", required = true)
                                   HttpServletRequest request) {

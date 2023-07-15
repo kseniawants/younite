@@ -3,10 +3,13 @@ import '../styles/showmore.scss';
 import userImge from '../assets/images/sia.png';
 import UserModal from '../component/Modal/UserMoadl';
 import axios from 'axios';
+import FilterModal from '../component/Modal/FilterModal';
 
 const LikeShowMore = () => {
   const [post, setPost] = useState([]);
   const [likedUsers, setLikedUsers] = useState([]);
+  const [openModal, setOpenModal] = useState(false); // Model 開關
+  const [fadeInModal, setFadeInModal] = useState(false); // 追蹤是否需要淡入
 
   axios.defaults.withCredentials = true;
   useEffect(() => {
@@ -42,11 +45,25 @@ const LikeShowMore = () => {
     setUserModalStates(false);
   };
 
+  const handleCloseModalFilter = () => {
+    setOpenModal(false);
+  };
+
+  const handleModalClick = () => {
+    setOpenModal(true);
+    setFadeInModal(true); //設置淡入為 true，觸發淡入效果
+  };
+
   return (
     <>
+      {openModal && <FilterModal closeModal={handleCloseModalFilter} fadeIn={fadeInModal} />}
       <div className='bg-pageTitle d-flex'>
         <h6>你可能喜歡</h6>
-        <button type='button' className='btn btn-primary btn-sm text-white'>
+        <button
+          type='button'
+          className='btn btn-primary btn-sm text-white'
+          onClick={handleModalClick}
+        >
           <i className='fa-solid fa-filter me-1' size='sm'></i>篩選
         </button>
       </div>
