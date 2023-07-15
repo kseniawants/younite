@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tw.com.younite.mapper.MessageMapper">
+    <cache-ref namespace="tw.com.younite.mapper.UserMapper"/>
     <resultMap id="MessageEntityMap" type="tw.com.younite.entity.MessageEntity">
         <id column="messageId" property="messageId"></id>
         <result column="senderId" property="senderId"></result>
@@ -17,13 +18,10 @@
         VALUES (#{senderId}, #{receiverId}, #{messageType}, #{roomId}, #{messageContent})
     </insert>
 
-
     <select id="getMessages" resultMap="MessageEntityMap" >
         SELECT *
         FROM  `RoomMessages`
         WHERE `roomId` =  #{roomId}
     </select>
-
-
 
 </mapper>

@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tw.com.younite.mapper.FriendProfileMapper">
+    <cache-ref namespace="tw.com.younite.mapper.UserMapper"/>
     <resultMap id="FriendProfileEntityMap" type="tw.com.younite.entity.FriendsProfileEntity">
         <id column="id" property="id"></id>
         <result column="user_id " property="userID"></result>

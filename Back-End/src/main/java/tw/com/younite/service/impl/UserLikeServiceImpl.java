@@ -36,7 +36,7 @@ public class UserLikeServiceImpl implements IUserLikeService {
 
     @Override
     public List<Integer> likesTracker(Integer likedUserID) {
-        List<UserLikeEntity> likedUserList = userLikeMapper.getLikedUsers(likedUserID);
+        List<UserLikeEntity> likedUserList = userLikeMapper.likesTracker(likedUserID);
         List<Integer> dataList = new ArrayList<>();
         for (UserLikeEntity userLikeEntity : likedUserList) {
             dataList.add(userLikeEntity.getUserID());
@@ -59,4 +59,5 @@ public class UserLikeServiceImpl implements IUserLikeService {
             throw new LikedUserNotFoundException("喜歡的用戶不存在，無法刪除");
         }
     }
+
 }

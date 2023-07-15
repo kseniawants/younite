@@ -1,9 +1,8 @@
 //包住中間的Bar
-import React from 'react'
-import Search from './Search'
+import React from 'react';
+import Search from './Search';
 import PropTypes from 'prop-types';
-import Messengers from './Messengers'
-
+import Messengers from './Messengers';
 
 const MessageBar = ({ chats, setCurrentChat }) => {
   return (
@@ -13,8 +12,8 @@ const MessageBar = ({ chats, setCurrentChat }) => {
         <p className='d-grid justify-content-center text-radio'>好友對話:10/25</p>
       </div>
       <div>
-        <Search/>
-        <Messengers chats={chats} setCurrentChat={setCurrentChat}/>
+        <Search />
+        <Messengers chats={chats} setCurrentChat={setCurrentChat} />
       </div>
     </div>
   );
@@ -25,4 +24,4 @@ MessageBar.propTypes = {
   setCurrentChat: PropTypes.func.isRequired,
 };
 
-export default MessageBar
+export default MessageBar;

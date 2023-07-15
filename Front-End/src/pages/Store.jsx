@@ -10,7 +10,6 @@ function Store() {
 
   useEffect(() => {
     //初次開啟執行
-    axios.defaults.withCredentials = true;
     axios
       .get('/items')
       .then((response) => {
@@ -34,7 +33,6 @@ function Store() {
       const formData = new FormData();
       formData.append('itemId', itemId);
 
-      axios.defaults.withCredentials = true;
       axios
         .post('/orders', formData)
         .then((response) => {

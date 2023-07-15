@@ -1,6 +1,7 @@
 package tw.com.younite.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import tw.com.younite.entity.UserProfileEntity;
 import tw.com.younite.service.inter.IInterestService;
 import tw.com.younite.service.inter.IUserLikeService;
@@ -9,6 +10,7 @@ import tw.com.younite.service.inter.IUserService;
 
 import java.util.*;
 
+@Component
 public class RecommendationUtil {
     public static final int THRESHOLD = 10;
 
