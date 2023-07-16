@@ -37,11 +37,21 @@
         WHERE `user_id` = #{userId}
     </select>
 
-    <select id="getProfilesByPreferredGender" resultMap="UserProfileEntityMap">
+    <select id="getProfilesByGender" resultMap="UserProfileEntityMap">
         SELECT *
         FROM profiles
         WHERE `gender` = #{gender}
+          AND `user_id` != #{userId}
     </select>
+
+    <select id="getProfilesByPreferredGender" resultMap="UserProfileEntityMap">
+        SELECT *
+        FROM profiles
+        WHERE `preferred_gender` = #{preferredGender}
+        AND `user_id` != #{userId}
+    </select>
+
+
 
     <insert
             id="insertProfile"

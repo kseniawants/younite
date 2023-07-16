@@ -36,16 +36,17 @@ public class RecommendationUtil {
         if (likedSize <= THRESHOLD) {
             List<Map<String, Object>> recommendList = interestService.findUserProfilesByInterests(currentUserID);
             recommendList.removeIf(recommendUsers -> likedList.contains(recommendUsers.get("userID")));
+            Collections.shuffle(recommendList);
             return recommendList;
         }
         //Phase 2: 喜歡用戶 > 10後，採用協同過濾演算法
         //Phase 2.1: 找出喜歡用戶重疊度高的使用者，並計算sim
         List<Map<String, Integer>> similarityList = new ArrayList<>();
-        List<Integer> allUsers = userService.getAllUsers();
+        List<Integer> allUsers = userProfileService.getProfilesByPreferredGender(currentUserID, preferredGender);
+        System.out.println("allUsers = " + allUsers);
         HashSet<Integer> internalSet = new HashSet<>(likedList);
         //Phase 2.1.1: 拿出所有用戶的likedUsers並逐一比對，並計算相似度
         for (Integer user : allUsers) {
-            if (preferredGender.equals(userProfileService.getPreferredGender(user))) {
                 Map<String, Integer> userMap = new HashMap<>();
                 HashSet<Integer> intersectionSet = new HashSet<>(internalSet);
                 HashSet<Integer> externalSet = new HashSet<>(likeService.getLikedUserList(user));
@@ -62,10 +63,21 @@ public class RecommendationUtil {
                 userMap.put("userID", user);
                 userMap.put("similarity", similarity);
                 similarityList.add(userMap);
-            }
         }
         //依據相似度分數做排序
         similarityList.sort(Comparator.comparing(m -> m.get("similarity")));
+        Boolean isAllZeros = true;
+        for (Map<String, Integer> sim: similarityList) {
+            if (sim.get("similarity") != 0) {
+                isAllZeros = false;
+                break;
+            } else {
+                List<Map<String, Object>> recommendList = interestService.findUserProfilesByInterests(currentUserID);
+                recommendList.removeIf(recommendUsers -> likedList.contains(recommendUsers.get("userID")));
+                Collections.shuffle(recommendList);
+                return recommendList;
+            }
+        }
 
         List<Map<String, Integer>> scoresList = new ArrayList<>();
         List<Integer> comparingList;
@@ -73,7 +85,7 @@ public class RecommendationUtil {
         if (preferredGender.equals("Other")) {
             comparingList = userService.getAllUsers();
         } else {
-            comparingList = userProfileService.getProfdilesByPreferredGender(preferredGender);
+            comparingList = userProfileService.getProfilesByPreferredGender(currentUserID, preferredGender);
         }
 
 

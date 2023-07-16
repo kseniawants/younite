@@ -50,9 +50,10 @@ public class UserController extends BaseController {
     @ApiOperation("獲取當前用戶資訊(需先登入)")
     @GetMapping("/users/getUser")
     public JSONResult<UserEntity> getCurrentUser(@ApiParam(value = "傳出使用者資訊", required = true)HttpSession session) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        UserEntity user = iUserService.getUserByUsername(username);
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = token.getAccount();
+        Integer userId = token.getIdFromAccountString(username);
+        UserEntity user = iUserService.getUserByID(userId);
         return new JSONResult<UserEntity>(OK, user);
     }
 

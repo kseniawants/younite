@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import tw.com.younite.entity.UserEntity;
 import tw.com.younite.entity.UserProfileEntity;
 import tw.com.younite.mapper.InterestMapper;
 import tw.com.younite.mapper.UserMapper;
@@ -150,11 +151,24 @@ public class UserProfileServiceImpl implements IUserProfileService {
     }
 
     @Override
-    public List<Integer> getProfdilesByPreferredGender(String gender) {
-        List<UserProfileEntity> list = userProfileMapper.getProfilesByPreferredGender(gender);
+    public List<Integer> getProfilesByPreferredGender(Integer userId,String preferredGender) {
+        List<UserEntity> userList = null;
+        List<UserProfileEntity> userProfileList = null;
+        if (preferredGender.equals("Other")) {
+            userList = userMapper.getAllUsers();
+        } else {
+            userProfileList = userProfileMapper.getProfilesByPreferredGender(userId, preferredGender);
+        }
+
         List<Integer> matchResult = new ArrayList<>();
-        for (UserProfileEntity userProfile: list) {
-            matchResult.add(userProfile.getUserId());
+        if (userList != null) {
+            for (UserEntity users: userList) {
+                matchResult.add(users.getId());
+            }
+        } else {
+            for (UserProfileEntity profiles: userProfileList) {
+                matchResult.add(profiles.getUserId());
+            }
         }
         return matchResult;
     }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import tw.com.younite.entity.InterestEntity;
 import tw.com.younite.entity.UserProfileEntity;
 import tw.com.younite.mapper.InterestMapper;
+import tw.com.younite.mapper.UserLikeMapper;
 import tw.com.younite.mapper.UserProfileMapper;
 import tw.com.younite.service.exception.InterestException;
 import tw.com.younite.service.exception.InterestsNotFoundException;
@@ -25,6 +26,9 @@ public class InterestService implements IInterestService {
 
     @Autowired
     UserProfileMapper userProfileMapper;
+
+    @Autowired
+    UserLikeMapper userLikeMapper;
 
     @Autowired
     DataTransferUtil tools;
@@ -87,6 +91,7 @@ public class InterestService implements IInterestService {
                 for (InterestEntity result : resultList) {
                     UserProfileEntity userProfile = userProfileMapper.getProfileByID(result.getUserID());
                     Integer userProfileID = userProfile.getUserId();
+                    if (userLikeMapper.getLikedUsers(userID).contains(userProfileID)) continue;
                     if (!addedUserIDs.contains(userProfile.getUserId())) {
                         Map<String, Object> userProfileMap = new HashMap<>();
                         userProfileMap.put("name", userProfile.getFullName());
@@ -116,6 +121,7 @@ public class InterestService implements IInterestService {
                 }
             }
         }
+        Collections.shuffle(userProfiles);
         return userProfiles;
     }
 
