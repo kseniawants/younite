@@ -37,7 +37,7 @@ function SideNav() {
     axios.defaults.withCredentials = true;
     axios.get('/users/profile').then((response) => {
       setPost(response.data);
-      console.log(response.data)
+      console.log(response.data);
     });
   }, []);
 
@@ -46,14 +46,17 @@ function SideNav() {
   const handleLogout = () => {
     axios.defaults.withCredentials = true;
 
-    axios.post('/users/logout').then((response) => {
-      console.log(response);
-      // 登出成功後的處理
-      navigate('/'); // 導航到登入頁面
-    }).catch((error) => {
-      console.error(error);
-      // 處理登出失敗的情況
-    });
+    axios
+      .post('/users/logout')
+      .then((response) => {
+        console.log(response);
+        // 登出成功後的處理
+        navigate('/'); // 導航到登入頁面
+      })
+      .catch((error) => {
+        console.error(error);
+        // 處理登出失敗的情況
+      });
   };
 
   return (
@@ -61,7 +64,11 @@ function SideNav() {
       <nav className='bg-secondary d-flex p-0 justify-content-between flex-column align-items-center'>
         <figure className='text-decoration-none mt-5 d-flex flex-column align-items-center'>
           <img src={Logo} alt='YouNite-Logo' className='mb-5' style={{ height: '20px' }} />
-          <img src={post && post.data.profileAvatar} alt='Picture' className='mb-1 nav-user-image' />
+          <img
+            src={post && post.data.profileAvatar}
+            alt='Picture'
+            className='mb-1 nav-user-image'
+          />
           <h6 className='text-black nav-text mt-2'>{post && post.data.fullName}</h6>
         </figure>
 

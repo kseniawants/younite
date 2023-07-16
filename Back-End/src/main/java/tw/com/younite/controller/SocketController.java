@@ -1,9 +1,11 @@
 package tw.com.younite.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import tw.com.younite.service.impl.UserServiceImpl;
 import tw.com.younite.service.inter.IUserService;
 
 import javax.websocket.*;
@@ -12,6 +14,7 @@ import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
+import java.sql.*;
 import java.util.*;
 
 @Controller
@@ -19,8 +22,7 @@ import java.util.*;
 @CrossOrigin(origins = "*")
 //@Component
 public class SocketController {
-    @Autowired
-    IUserService iUserService;
+
     private static Set<Session> sessions;
     private static Map<String, Set<Session>> roomMap;
 //    private CountDownLatch dataMessageLatch = new CountDownLatch(1);
@@ -44,9 +46,9 @@ public class SocketController {
     }
 
     @OnClose
-    public void onClose(Session session, @PathVariable("userID") Integer id) {
+    public void onClose(Session session, @PathParam("userID") Integer id) {
 //        System.out.println("onClose()");
-        iUserService.updateLogTime(id);
+        update(id);
         sessions.remove(session);
         removeUserFromAllRooms(session);
     }
@@ -151,4 +153,32 @@ public class SocketController {
         }
         return null;
     }
+    private void update(Integer id){
+        String url = "jdbc:mysql://younite-database.c7ta6ybbk9nu.ap-northeast-1.rds.amazonaws.com:3306/younite";
+        String username = "admin";
+        String password = "younite666";
+
+        // 建立資料庫連接
+        try (Connection conn = DriverManager.getConnection(url, username, password)) {
+            // 建立 PreparedStatement 物件
+            String sql = "UPDATE users SET log_time = ? WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            // 設定參數值
+            Timestamp newLogTime = new Timestamp(System.currentTimeMillis());
+            pstmt.setTimestamp(1, newLogTime);
+            pstmt.setInt(2, id);
+
+            // 執行更新操作
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("updateok: " + rowsAffected);
+            } else {
+                System.out.println("not found");
+            }
+            pstmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }}
 }

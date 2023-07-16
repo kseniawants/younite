@@ -6,7 +6,6 @@ import { FacebookLoginButton, GoogleLoginButton } from 'react-social-login-butto
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AlertModal from './Modal/AlertModal';
-// import { setToken } from '../lib/api';
 
 function LoginForm() {
   const [submitting, setSubmitting] = useState(false);
@@ -65,7 +64,7 @@ function LoginForm() {
         const token = response.data.data.token;
         console.log(response);
         navigate('/home');
-        document.cookie = `token=${token}; path=/;`;
+        document.cookie = `token=${encodeURIComponent(token)}; path=/;`;
         axios.defaults.headers.common['Authorization'] = token;
         handleAlertRes(response);
         console.log(response);

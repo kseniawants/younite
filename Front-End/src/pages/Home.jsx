@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import UserModal from '../component/Modal/UserMoadl';
 import userImge from '../assets/images/sia.png';
-import token from '../TokenUtil.js';
 
 function Home() {
   const [post1, setPost1] = useState([]);
@@ -15,8 +14,6 @@ function Home() {
   const [post3, setPost3] = useState([]);
   const [likedUsers, setLikedUsers] = useState([]);
 
-  axios.defaults.withCredentials = true;
-  axios.defaults.headers.common['Authorization'] = token;
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -64,10 +61,10 @@ function Home() {
           <div className='bg-pagePhoto d-flex mt-3 mb-3'>
             {post3.data ? (
               post3.data.slice(0, 5).map((item, index) => (
-                <section 
+                <section
                   key={index}
-                  className='usersImg ms-3 my-3 me-4' 
-                  style={{'--bg-images': `url(${item.profileAvatar || userImge})`}}
+                  className='usersImg ms-3 my-3 me-4'
+                  style={{ '--bg-images': `url(${item.profileAvatar || userImge})` }}
                   onClick={(event) => handleUserButtonClick(event, item)}
                 >
                   <div className='mt-auto'>
@@ -76,18 +73,23 @@ function Home() {
                       <span className='mx-2 text-radio'>{item.age}</span>
                     </div>
                     <div className='text-nowrap'>
-                          {item.interests && item.interests.slice(0, 3).map((interest, i) => (
-                            <button key={i} type='button' className='btn btn-outline-radio btn-sm mx-1 mb-1 rounded-pill btn-block'>
-                              #{interest}
-                            </button>
-                          ))}
+                      {item.interests &&
+                        item.interests.slice(0, 3).map((interest, i) => (
+                          <button
+                            key={i}
+                            type='button'
+                            className='btn btn-outline-radio btn-sm mx-1 mb-1 rounded-pill btn-block'
+                          >
+                            #{interest}
+                          </button>
+                        ))}
                     </div>
                   </div>
                 </section>
               ))
-              ) : (
-                <p>loading</p>
-              )}
+            ) : (
+              <p>loading</p>
+            )}
           </div>
           <div className='bg-pageMore d-flex'>
             <Link to='/show/like'>顯示更多...</Link>

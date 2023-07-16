@@ -19,6 +19,7 @@ import java.util.List;
 @Api(tags ="朋友聊天室")
 @RestController
 @RequestMapping("/getProfile")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class FriendProfileController extends BaseController{
     @Autowired
     IFriendProfileService ifriendProfileService;

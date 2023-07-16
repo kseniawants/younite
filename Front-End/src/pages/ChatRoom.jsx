@@ -12,7 +12,6 @@ const ChatRoom = () => {
   const [friendList, setFriendList] = useState([]);
   const [chatRoomInfo, setChatRoomInfo] = useState([]);
 
-  axios.defaults.withCredentials = true;
   useEffect(() => {
     const fetchData = async () => {
       try {

@@ -16,6 +16,7 @@ import java.util.List;
 @Api(tags ="聊天室對話")
 @RestController
 @RequestMapping("/message")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class MessageController extends BaseController {
     @Autowired
     IMessageService iMessageService;

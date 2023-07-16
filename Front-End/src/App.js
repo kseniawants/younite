@@ -12,7 +12,7 @@ import Store from './pages/Store';
 import ShowMore from './component/ShowMore';
 import LikeShowMore from './pages/LikeShowMore';
 import InterestsShowMore from './pages/InterestsShowMore';
-import ProfessionShowMore from './pages/ProfessionShowMore'
+import ProfessionShowMore from './pages/ProfessionShowMore';
 
 function App() {
   return (
