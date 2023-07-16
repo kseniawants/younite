@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Draggable from 'react-draggable';
 import '../../styles/Modal/filterModal.scss';
 
-function FilterModal({ closeModal }) {
+function FilterModal({ closeModal, handleFilter }) {
   // 移動視窗 程式碼 START
   const [position, setPosition] = useState({ x: undefined, y: undefined });
   const [fadeIn, setFadeIn] = useState(false); // 追蹤是否需要淡入
@@ -46,6 +46,11 @@ function FilterModal({ closeModal }) {
   const handleAgeInputChange = (e) => {
     const value = parseInt(e.target.value, 10);
     setRangeValAge(value);
+  };
+
+  const handleApplyFilter = () => {
+    closeModal();
+    handleFilter(rangeValDistance, rangeValAge); // 呼叫父元件傳遞的函數，並傳遞選擇的值
   };
 
   return (
@@ -124,6 +129,9 @@ function FilterModal({ closeModal }) {
 
               {/* ↑↑↑ 上面可以隨意更改，區塊直接用 col 來寫 ↑↑↑ */}
             </div>
+            <button type='button' className='btn btn-primary btn-sm text-white' onClick={handleApplyFilter}>
+              提交
+            </button>
           </div>
         </section>
       </Draggable>
@@ -133,6 +141,7 @@ function FilterModal({ closeModal }) {
 
 FilterModal.propTypes = {
   closeModal: PropTypes.func.isRequired,
+  handleFilter: PropTypes.func.isRequired,
 };
 
 export default FilterModal;
