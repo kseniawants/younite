@@ -1,326 +1,269 @@
-window.onload = function () {
-    // rtc.js
-    let user = Math.round(Math.random() * 1000) + "";
-    let room = sessionStorage.getItem('room');
-    let socket = null;
-    let socketRead = false;
-    let videoEnabled = true;
 
+show();
+// ===================以下是socket=======================
+const room = sessionStorage.getItem('room');
+// const room =2;
+const user = Math.round(Math.random() * 1000) + "";
+const socketUrl = `ws://192.168.0.155:8081/msgServer2/${user}/${room}`;
+let socket = null;
+let socketRead = false;
+let videoEnabled = true;
 
-    let localVideo = document.getElementById("local-video");
-    let remoteVideo = document.getElementById("remote-video");
-    let localStream = null;
-    let peerConnection = null;
-    let peerStarted = false;
-    let mediaConstraints = {
-        mandatory: {
-            OfferToReceiveAudio: false,
-            OfferToReceiveVideo: true,
-        },
-    };
-    $("#hangUp").on('click',()=>{hangUp();})
-    $("#videoIO").on('click',()=>{toggleVideo();})
-    $("#getRoom").on("click",  () => {
-        // startLocal();
+startVideo();
+document.addEventListener('DOMContentLoaded', () => {
+    socket = new WebSocket(socketUrl);
+    socket.addEventListener('open', () => {
+        // console.log("成功连接到服务器...");
+        socketRead = true;
     });
-    startVideo()
-        .then(() => {
-            startLocal(); // startVideo 完成後執行 startLocal
-        })
-        .catch((error) => {
-            console.error(error);
-        });
-     function  startLocal(){
-        // room = $("#room").val();
-        let socketUrl = "ws://localhost:8080/msgServer2/" + user + "/" + room;
-        // let socketUrl = "ws://10.0.104.120:8080/msgServer2/" + user + "/" + room;
-
-        socket = new WebSocket(socketUrl);
-        socket.onopen = function () {
-            console.log("connecting...");
-            socketRead = true;
-        };
-        socket.onclose = function (e) {
-            console.log("close: " + e.code);
-            socketRead = false;
-        };
-
-        socket.onmessage = function (res) {
-            let evt = JSON.parse(res.data);
-            // console.log(evt);
-            let intervalId;
-            if (evt.type === "offer") {
-                console.log(evt,"sdp")
-                intervalId = setInterval(function() {
-                    if (localStream !== null) {
-                        console.log("connect offer");
-                        onOffer(evt);
-                        clearInterval(intervalId);
-                    } else {
-                        console.log("localStream is null");
-                    }
-                }, 100);
-                console.log("get offer send ans");
-            }
-
-            else if (evt.type === "answer" && peerStarted) {
-                console.log("get ans send sdp");
-                        console.log("connect ans")
-                        onAnswer(evt);
-            } else if (evt.type === "candidate" && peerStarted) {
-                        console.log("connect candidate")
-                        onCandidate(evt);
-                console.log("accept ice..");
-            } else if (evt.type === "bye" && peerStarted) {
-                console.log("WebRTC disconnect");
-                stop();
-            }else if(evt.type==="connectNow"){
-                let timer = setTimeout(function() {
-                    if (localStream!=null) {
-                        connect();
-                        console.log("i send offer")
-                        clearTimeout(timer);
-                    }}, 1000);
-            }
-        };
-
-    }
-    function onOffer(evt) {
-        console.log("get offer...");
+    socket.addEventListener('close', (e) => {
+        console.log('与服务器连接关闭: ' + e.code);
+        socketRead = false;
+    });
+    socket.addEventListener('message', (res) => {
+        const evt = JSON.parse(res.data);
         console.log(evt);
-        setOffer(evt);
-        sendAnswer(evt);
-        peerStarted = true;
-    }
-
-    function onAnswer(evt) {
-        console.log("get ans...");
-        console.log(evt);
-        setAnswer(evt);
-    }
-
-    function onCandidate(evt) {
-        let candidate = new RTCIceCandidate({
-            sdpMLineIndex: evt.sdpMLineIndex,
-            sdpMid: evt.sdpMid,
-            candidate: evt.candidate,
-        });
-        console.log("get candidate...");
-        console.log(candidate);
-        peerConnection.addIceCandidate(candidate);
-
-    }
-
-    function sendSDP(sdp) {
-        let text = JSON.stringify(sdp);
-        console.log("send sdp.....");
-        console.log(text);
-        socket.send(text);
-    }
-
-    function sendCandidate(candidate) {
-        let text = JSON.stringify(candidate);
-        socket.send(text);
-    }
-
-    function startVideo() {
-        return new Promise((resolve, reject) => {
-            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                navigator.mediaDevices
-                    .getUserMedia({
-                        video: true,
-                        audio: true,
-                    })
-                    .then(function(stream) {
-                        localStream = stream;
-                        localVideo.srcObject = stream;
-                        localVideo.play();
-                        localVideo.volume = 0;
-                        resolve(); // 完成時呼叫 resolve()
-                    })
-                    .catch(function(error) {
-                        console.error("error: [error：" + error.code + "]");
-                        reject(error); // 發生錯誤時呼叫 reject()
-                    });
-            } else {
-                navigator.webkitGetUserMedia(
-                    {
-                        video: true,
-                        audio: true,
-                    },
-                    function(stream) {
-                        localStream = stream;
-                        localVideo.src = window.webkitURL.createObjectURL(stream);
-                        localVideo.play();
-                        localVideo.volume = 0;
-                        resolve(); // 完成時呼叫 resolve()
-                    },
-                    function(error) {
-                        console.error("error: [error code：" + error.code + "]");
-                        reject(error); // 發生錯誤時呼叫 reject()
-                    }
-                );
-            }
-        });
-    }
-
-    function prepareNewConnection() {
-        console.log('lol',localStream)
-        let pc_config = {
-            iceServers: [],
-        };
-        let peer = null;
-        try {
-            peer = new RTCPeerConnection(pc_config);
-        } catch (e) {
-            console.log("error establish，error：" + e.message);
+        if (evt.type === 'offer') {
+            console.log("接收到offer,set offer,send answer....");
+            onOffer(evt);
+        } else if (evt.type === 'answer' && peerStarted) {
+            console.log('get answer,set answer SDP');
+            onAnswer(evt);
+        } else if (evt.type === 'candidate' && peerStarted) {
+            console.log('get ice candidate..');
+            onCandidate(evt);
+        } else if (evt.type === 'bye' && peerStarted) {
+            console.log("WebRTC close");
+            stop();
         }
+    });
 
-        peer.onicecandidate = function (evt) {
-            if (evt.candidate) {
-                console.log(evt.candidate);
-                sendCandidate({
-                    type: "candidate",
-                    sdpMLineIndex: evt.candidate.sdpMLineIndex,
-                    sdpMid: evt.candidate.sdpMid,
-                    candidate: evt.candidate.candidate,
-                });
-            }
-        };
-        // peer.addStream(localStream);
-        localStream.getTracks().forEach(track => {
-            peer.addTrack(track, localStream);
-        });
-        // peer.addEventListener("addstream", onRemoteStreamAdded, false);
-        // peer.addEventListener("removestream", onRemoteStreamRemoved, false);
-        peer.addEventListener("track", onRemoteTrackAdded);
-        peer.addEventListener("removetrack", onRemoteTrackRemoved);
+    const startVideoButton = document.getElementById('startVideo');
+    // startVideoButton.addEventListener('click', startVideo);
 
-        // function onRemoteStreamAdded(event) {
-        //     remoteVideo.srcObject = event.stream;
-        // }
-        //
-        // function onRemoteStreamRemoved(event) {
-        //     console.log("remove remote");
-        //     remoteVideo.src = "";
-        // }
+    const connectButton = document.getElementById('connect');
+    connectButton.addEventListener('click', connect);
+
+    const hangUpButton = document.getElementById('hangUp');
+    hangUpButton.addEventListener('click', hangUp);
 
 
+});
 
+// ===================以上是socket=======================
 
-        return peer;
-    }
-    function onRemoteTrackRemoved(event) {
-        console.log("remove remote track");
-        const stream = remoteVideo.srcObject;
-        const tracks = event.streams[0].getTracks();
-
-        tracks.forEach(track => {
-            stream.removeTrack(track);
-        });
-    }
-    function onRemoteTrackAdded(event) {
-        remoteVideo.srcObject = event.streams[0];
-    }
-    function sendOffer() {
-        peerConnection = prepareNewConnection();
-        peerConnection.createOffer(
-            function (sessionDescription) {
-                peerConnection.setLocalDescription(sessionDescription);
-                // console.log("send: SDP");
-                console.log(sessionDescription);
-                sendSDP(sessionDescription);
-            },
-            function (err) {
-                console.log("offer failed");
-            },
-            mediaConstraints
-        );
-    }
-
-    function setOffer(evt) {
-        if (peerConnection) {
-            console.error("peerConnection already exists!");
-            return;
-        }
-        peerConnection = prepareNewConnection();
-        peerConnection.setRemoteDescription(new RTCSessionDescription(evt));
-    }
-
-    function sendAnswer(evt) {
-        console.log("send ans, create...");
-        if (!peerConnection) {
-            console.error("peerConnection does not exist!");
-            return;
-        }
-
-        peerConnection.createAnswer(
-            function (sessionDescription) {
-                peerConnection.setLocalDescription(sessionDescription);
-                console.log("send: SDP");
-                console.log(sessionDescription);
-                sendSDP(sessionDescription);
-            },
-            function () {
-                console.log("create ans failed");
-            },
-            mediaConstraints
-        );
-    }
-
-    function setAnswer(evt) {
-        if (!peerConnection) {
-            console.error("peerConnection does not exist!");
-            return;
-        }
-        peerConnection.setRemoteDescription(new RTCSessionDescription(evt));
-    }
-
-    function connect() {
-        if (!localStream) {
-            alert("Failed to get local stream.");
-        } else if (peerStarted || !socketRead) {
-            alert("Please refresh the page and try again.");
-        } else {
-            sendOffer();
-            peerStarted = true;
-        }
-    }
-
-    function hangUp() {
-        sendBye();
-        stop();
-    }
-
-    function stop() {
-        peerConnection.close();
-        peerConnection = null;
-        peerStarted = false;
-    }
-
-    function sendBye() {
-        let byeMessage = {
-            type: "bye",
-        };
-        let byeMessageStr = JSON.stringify(byeMessage);
-        socket.send(byeMessageStr);
-    }
-    function toggleVideo() {
-        videoEnabled = !videoEnabled; // Toggle video enable state
-        let videoio = document.getElementById("videoIO");
-        if (localStream) {
-            const videoTracks = localStream.getVideoTracks();
-            if (videoTracks.length > 0) {
-                videoTracks[0].enabled = videoEnabled; // Enable or disable video track
-                if (videoEnabled === false) {
-                    videoio.textContent = "open";
-                } else {
-                    videoio.textContent = "close";
-                }
-            }
-        }
+const localVideo = document.getElementById('local-video');
+const remoteVideo = document.getElementById('remote-video');
+let localStream = null;
+let peerConnection = null;
+let peerStarted = false;
+const mediaConstraints = {
+    'mandatory': {
+        'OfferToReceiveAudio': false,
+        'OfferToReceiveVideo': true
     }
 };
 
+//----------------------交换信息 -----------------------
 
+function onOffer(evt) {
+    console.log("get offer...");
+    console.log(evt);
+    setOffer(evt);
+    sendAnswer(evt);
+    peerStarted = true;
+}
 
+function onAnswer(evt) {
+    console.log("get Answer...");
+    console.log(evt);
+    setAnswer(evt);
+}
+
+function onCandidate(evt) {
+    const candidate = new RTCIceCandidate({
+        sdpMLineIndex: evt.sdpMLineIndex,
+        sdpMid: evt.sdpMid,
+        candidate: evt.candidate
+    });
+    console.log("accept Candidate...");
+    console.log(candidate);
+    peerConnection.addIceCandidate(candidate);
+}
+
+function sendSDP(sdp) {
+    const text = JSON.stringify(sdp);
+    console.log('send sdp.....');
+    console.log(text);
+    socket.send(text);
+}
+
+function sendCandidate(candidate) {
+    const text = JSON.stringify(candidate);
+    console.log(text);
+    socket.send(text);
+}
+
+//---------------------- 视频处理 -----------------------
+async function startVideo() {
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        localStream = stream;
+        localVideo.srcObject = stream;
+        localVideo.play();
+        localVideo.volume = 0;
+    } catch (error) {
+        console.error('error: [error code：' + error.code + ']');
+    }
+}
+
+function refreshPage() {
+    location.reload();
+}
+
+//---------------------- 处理连接 -----------------------
+function prepareNewConnection() {
+    const pc_config = {
+        iceServers: []
+    };
+    let peer = null;
+    try {
+        peer = new RTCPeerConnection(pc_config);
+    } catch (e) {
+        console.log("建立连接失败，错误：" + e.message);
+    }
+
+    peer.onicecandidate = function (evt) {
+        if (evt.candidate) {
+            console.log(evt.candidate);
+            sendCandidate({
+                type: "candidate",
+                sdpMLineIndex: evt.candidate.sdpMLineIndex,
+                sdpMid: evt.candidate.sdpMid,
+                candidate: evt.candidate.candidate
+            });
+        }
+    };
+
+    console.log('add local...');
+    peer.addStream(localStream);
+
+    peer.addEventListener("addstream", onRemoteStreamAdded, false);
+    peer.addEventListener("removestream", onRemoteStreamRemoved, false);
+
+    // 当接收到远程视频流时，使用本地video元素进行显示
+    function onRemoteStreamAdded(event) {
+        console.log("添加远程视频流");
+        // remoteVideo.src = window.URL.createObjectURL(event.stream);
+        remoteVideo.srcObject = event.stream;
+    }
+
+    // 当远程结束通信时，取消本地video元素中的显示
+    function onRemoteStreamRemoved(event) {
+        console.log("移除远程视频流");
+        remoteVideo.src = "";
+    }
+
+    return peer;
+}
+$("#videoIO").on('click',()=>{toggleVideo();})
+function toggleVideo() {
+    videoEnabled = !videoEnabled; // Toggle video enable state
+    let videoio = document.getElementById("videoIO");
+    if (localStream) {
+        const videoTracks = localStream.getVideoTracks();
+        if (videoTracks.length > 0) {
+            videoTracks[0].enabled = videoEnabled; // Enable or disable video track
+            if (videoEnabled === false) {
+                videoio.textContent = "open";
+            } else {
+                videoio.textContent = "close";
+            }
+        }
+    }
+}
+function sendOffer() {
+    peerConnection = prepareNewConnection();
+    peerConnection.createOffer(function (sessionDescription) { //成功时调用
+        peerConnection.setLocalDescription(sessionDescription);
+        console.log("send: SDP");
+        console.log(sessionDescription);
+        sendSDP(sessionDescription);
+    }, function (err) { //失败时调用
+        console.log("offer fail");
+    }, mediaConstraints);
+}
+
+function setOffer(evt) {
+    if (peerConnection) {
+        console.error('peerConnection已存在!');
+        return;
+    }
+    peerConnection = prepareNewConnection();
+    peerConnection.setRemoteDescription(new RTCSessionDescription(evt));
+}
+
+function sendAnswer(evt) {
+    console.log('发送Answer,创建远程会话描述...');
+    if (!peerConnection) {
+        console.error('peerConnection不存在!');
+        return;
+    }
+
+    peerConnection.createAnswer(function (sessionDescription) { //成功时
+        peerConnection.setLocalDescription(sessionDescription);
+        console.log("发送: SDP");
+        console.log(sessionDescription);
+        sendSDP(sessionDescription);
+    }, function () { //失败时
+        console.log("创建Answer失败");
+    }, mediaConstraints);
+}
+
+function setAnswer(evt) {
+    if (!peerConnection) {
+        console.error('peerConnection不存在!');
+        return;
+    }
+    peerConnection.setRemoteDescription(new RTCSessionDescription(evt));
+}
+
+//-------- 处理用户UI事件 -----
+// 开始建立连接
+function connect() {
+    if (!localStream) {
+        alert("no local.");
+    } else if (peerStarted || !socketRead) {
+        alert("refresh please.");
+    } else {
+        sendOffer();
+        peerStarted = true;
+        $("#connect").hide();
+        sessionStorage.setItem("accept","false");
+    }
+
+}
+
+// 停止连接
+function hangUp() {
+    console.log("hang up.");
+    let msg={
+        "type":"bye"
+    }
+    socket.send(JSON.stringify(msg));
+    stop();
+}
+
+function stop() {
+    peerConnection.close();
+    peerConnection = null;
+    peerStarted = false;
+}
+function show(){
+    if(sessionStorage.getItem("accept")==="true"){
+        $("#connect").show();
+    }else {
+        $("#connect").hide();
+
+    }
+}

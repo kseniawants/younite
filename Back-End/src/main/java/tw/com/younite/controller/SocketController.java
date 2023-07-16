@@ -1,7 +1,10 @@
 package tw.com.younite.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import tw.com.younite.service.inter.IUserService;
 
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
@@ -12,10 +15,12 @@ import java.nio.ByteBuffer;
 import java.util.*;
 
 @Controller
-@ServerEndpoint(value = "/websocket/{room}")
+@ServerEndpoint(value = "/websocket/{userID}/{room}")
 @CrossOrigin(origins = "*")
 //@Component
 public class SocketController {
+    @Autowired
+    IUserService iUserService;
     private static Set<Session> sessions;
     private static Map<String, Set<Session>> roomMap;
 //    private CountDownLatch dataMessageLatch = new CountDownLatch(1);
@@ -39,8 +44,9 @@ public class SocketController {
     }
 
     @OnClose
-    public void onClose(Session session) {
+    public void onClose(Session session, @PathVariable("userID") Integer id) {
 //        System.out.println("onClose()");
+        iUserService.updateLogTime(id);
         sessions.remove(session);
         removeUserFromAllRooms(session);
     }
