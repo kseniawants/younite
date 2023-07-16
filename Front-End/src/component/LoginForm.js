@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Input } from './FormElements';
 import { LoginSocialFacebook, LoginSocialGoogle } from 'reactjs-social-login';
@@ -11,10 +11,9 @@ import AlertModal from './Modal/AlertModal';
 function LoginForm() {
   const [submitting, setSubmitting] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
-  //以下 Alert Modal
-  const [showAlertModal, setShowAlertModal] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
-  const [AlertStateIcon, setAlertStateIcon] = useState('');
+  const [showAlertModal, setShowAlertModal] = useState(false); //Alert 視窗
+  const [alertMessage, setAlertMessage] = useState(''); //Alert 訊息
+  const [AlertStateIcon, setAlertStateIcon] = useState(''); //Alert icon
 
   // 轉址判斷
   const navigate = useNavigate();
@@ -26,8 +25,8 @@ function LoginForm() {
     mode: 'onTouched',
   });
 
-  //Alert用
   const handleAlertRes = (response) => {
+    //Alert用
     setAlertMessage(response.data.message);
     setAlertStateIcon(response.data.state);
     setFormSubmitted(false);
@@ -46,6 +45,7 @@ function LoginForm() {
   };
 
   // 表單發送的按鈕
+  axios.defaults.withCredentials = true; //Axios 支援跨域請求和 Cookie 傳遞
   const onSubmit = async (data) => {
     console.log(data);
     try {
@@ -76,16 +76,6 @@ function LoginForm() {
       setSubmitting(false);
     }
   };
-
-  useEffect(() => {
-    //取出token
-    const token = document.cookie
-      .split(';')
-      .find((row) => row.startsWith('YouNiteToken='))
-      ?.split('=')[1];
-    console.log(token);
-    axios.defaults.headers.common['Authorization'] = token;
-  });
 
   return (
     <div className='container p-0'>

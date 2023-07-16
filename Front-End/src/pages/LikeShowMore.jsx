@@ -3,11 +3,15 @@ import '../styles/showmore.scss'
 import userImge from '../assets/images/sia.png'
 import UserModal from '../component/Modal/UserMoadl';
 import axios from 'axios';
+import FilterModal from '../component/Modal/FilterModal';
 
 const LikeShowMore = () => {
 
   const [post, setPost] = useState([]);
+  const [filteredPost, setFilteredPost] = useState([]);
   const [likedUsers, setLikedUsers] = useState([]);
+  const [openModal, setOpenModal] = useState(false); // Model 開關
+  const [fadeInModal, setFadeInModal] = useState(false); // 追蹤是否需要淡入
   
   axios.defaults.withCredentials = true;
   useEffect(() => {
@@ -17,6 +21,7 @@ const LikeShowMore = () => {
         const likedUsersResponse = await axios.get('/users/getLikedUsers'); // 獲取使用者的邀請紀錄
         setLikedUsers(likedUsersResponse.data); // 設定使用者的邀請紀錄
         setPost(response.data);
+        setFilteredPost(response.data.data);
         console.log(response.data);
       } catch (error) {
         console.error(error);
@@ -25,6 +30,18 @@ const LikeShowMore = () => {
 
     fetchData();
   }, []);
+
+  const handleFilter = (distance, age) => {
+    console.log('distance:', distance);
+    console.log('age:', age);
+  
+    const filteredData = post.data.filter((item) => {
+      return item.distance <= distance && item.age <= age;
+    });
+  
+    setFilteredPost(filteredData);
+    console.log(filteredData);
+  };  
 
   const [userModalStates, setUserModalStates] = useState(false);
 
@@ -40,21 +57,36 @@ const LikeShowMore = () => {
   };
   
   const handleCloseModal = () => {
-    setUserModalStates(false) 
+    setUserModalStates(false);
   };
+
+  const handleCloseModalFilter = () => {
+    setOpenModal(false);
+  };
+
+  const handleModalClick = () => {
+    setOpenModal(true);
+    setFadeInModal(true); //設置淡入為 true，觸發淡入效果
+  };
+
 
 
   return (
     <>
+      {openModal && <FilterModal closeModal={handleCloseModalFilter} fadeIn={fadeInModal} handleFilter={handleFilter}/>}
       <div className='bg-pageTitle d-flex'>
           <h6>你可能喜歡</h6>
-          <button type='button' className='btn btn-primary btn-sm text-white'>
-              <i className='fa-solid fa-filter me-1' size='sm'></i>篩選
-          </button>
+          <button
+          type='button'
+          className='btn btn-primary btn-sm text-white'
+          onClick={handleModalClick}
+        >
+          <i className='fa-solid fa-filter me-1' size='sm'></i>篩選
+        </button>
       </div>
       <div className='d-flex' style={{ flexWrap: 'wrap' }}>
-      {post.data ? (
-        post.data.map((item, index) => (
+      {filteredPost ? (
+        filteredPost.map((item, index) => (
           <section 
             key={index}
             className='usersImg ms-3 my-3 me-4' 
