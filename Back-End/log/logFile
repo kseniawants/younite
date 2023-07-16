@@ -1190,3 +1190,829 @@ This generated password is for development use only. Your security configuration
 2023-07-16 15:28:17.206  INFO 54868 --- [http-nio-8080-exec-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
 2023-07-16 15:28:57.179  INFO 54868 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2023-07-16 15:28:57.712  INFO 54868 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-07-16 16:05:42.702  INFO 12914 --- [main] tw.com.younite.YouNiteApplication        : Starting YouNiteApplication using Java 20.0.1 on zichenglius-MacBook-Air.local with PID 12914 (/Users/zichengliu/finalTermProject/eeit64-younite/Back-End/target/classes started by zichengliu in /Users/zichengliu/finalTermProject/eeit64-younite/Back-End)
+2023-07-16 16:05:42.705  INFO 12914 --- [main] tw.com.younite.YouNiteApplication        : No active profile set, falling back to 1 default profile: "default"
+2023-07-16 16:05:43.733  INFO 12914 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-07-16 16:05:43.739  INFO 12914 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-16 16:05:43.739  INFO 12914 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-16 16:05:43.803  INFO 12914 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-16 16:05:43.803  INFO 12914 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1053 ms
+2023-07-16 16:05:44.796  WARN 12914 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: ba594add-6e74-482b-94f4-e729edc6b376
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2023-07-16 16:05:44.839  WARN 12914 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:05:44.839  INFO 12914 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/**']
+2023-07-16 16:05:44.839  WARN 12914 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/storage/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:05:44.839  INFO 12914 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/storage/**']
+2023-07-16 16:05:44.840  WARN 12914 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/orders/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:05:44.840  INFO 12914 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/orders/**']
+2023-07-16 16:05:44.840  WARN 12914 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/employees/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:05:44.840  INFO 12914 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/employees/**']
+2023-07-16 16:05:44.840  WARN 12914 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/management/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:05:44.840  INFO 12914 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/management/**']
+2023-07-16 16:05:44.840  WARN 12914 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/callback/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:05:44.840  INFO 12914 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/callback/**']
+2023-07-16 16:05:44.840  WARN 12914 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/home/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:05:44.840  INFO 12914 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/home/**']
+2023-07-16 16:05:44.840  WARN 12914 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/register']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:05:44.840  INFO 12914 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/register']
+2023-07-16 16:05:44.840  WARN 12914 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/profile']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:05:44.840  INFO 12914 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/profile']
+2023-07-16 16:05:44.840  WARN 12914 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/redirectPost']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:05:44.840  INFO 12914 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/redirectPost']
+2023-07-16 16:05:44.840  WARN 12914 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/items']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:05:44.840  INFO 12914 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/items']
+2023-07-16 16:05:44.857  INFO 12914 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-16 16:05:44.941  INFO 12914 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2dd08ff1, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@37dec463, org.springframework.security.web.context.SecurityContextPersistenceFilter@7e2a76be, org.springframework.security.web.header.HeaderWriterFilter@2066e897, org.springframework.web.filter.CorsFilter@3bf26810, org.springframework.security.web.authentication.logout.LogoutFilter@1b732dd, tw.com.younite.filter.JWTAuthenticationFilter@19213a74, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@20155dae, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@9763e61, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@30a791a6, org.springframework.security.web.session.SessionManagementFilter@205f52ea, org.springframework.security.web.access.ExceptionTranslationFilter@12bcf7c6, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@44618fe6]
+2023-07-16 16:05:45.043  WARN 12914 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-07-16 16:05:45.112  INFO 12914 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-07-16 16:05:45.122  INFO 12914 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2023-07-16 16:05:45.136 ERROR 12914 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+java.lang.IllegalStateException: Failed to register @ServerEndpoint class: class tw.com.younite.controller.SocketController
+	at org.springframework.web.socket.server.standard.ServerEndpointExporter.registerEndpoint(ServerEndpointExporter.java:159) ~[spring-websocket-5.3.27.jar:5.3.27]
+	at org.springframework.web.socket.server.standard.ServerEndpointExporter.registerEndpoints(ServerEndpointExporter.java:134) ~[spring-websocket-5.3.27.jar:5.3.27]
+	at org.springframework.web.socket.server.standard.ServerEndpointExporter.afterSingletonsInstantiated(ServerEndpointExporter.java:112) ~[spring-websocket-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:974) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:920) ~[spring-context-5.3.27.jar:5.3.27]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.27.jar:5.3.27]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147) ~[spring-boot-2.7.12.jar:2.7.12]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:731) ~[spring-boot-2.7.12.jar:2.7.12]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408) ~[spring-boot-2.7.12.jar:2.7.12]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) ~[spring-boot-2.7.12.jar:2.7.12]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303) ~[spring-boot-2.7.12.jar:2.7.12]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292) ~[spring-boot-2.7.12.jar:2.7.12]
+	at tw.com.younite.YouNiteApplication.main(YouNiteApplication.java:15) ~[classes/:na]
+Caused by: javax.websocket.DeploymentException: A parameter of type [class java.lang.Integer] was found on method[onClose] of class [java.lang.reflect.Method] that did not have a @PathParam annotation
+	at org.apache.tomcat.websocket.pojo.PojoMethodMapping.getPathParams(PojoMethodMapping.java:323) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.pojo.PojoMethodMapping.<init>(PojoMethodMapping.java:212) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.server.WsServerContainer.addEndpoint(WsServerContainer.java:142) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.server.WsServerContainer.addEndpoint(WsServerContainer.java:252) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.server.WsServerContainer.addEndpoint(WsServerContainer.java:210) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.springframework.web.socket.server.standard.ServerEndpointExporter.registerEndpoint(ServerEndpointExporter.java:156) ~[spring-websocket-5.3.27.jar:5.3.27]
+	... 12 common frames omitted
+
+2023-07-16 16:08:49.377  INFO 13226 --- [main] tw.com.younite.YouNiteApplication        : Starting YouNiteApplication using Java 20.0.1 on zichenglius-MacBook-Air.local with PID 13226 (/Users/zichengliu/finalTermProject/eeit64-younite/Back-End/target/classes started by zichengliu in /Users/zichengliu/finalTermProject/eeit64-younite/Back-End)
+2023-07-16 16:08:49.379  INFO 13226 --- [main] tw.com.younite.YouNiteApplication        : No active profile set, falling back to 1 default profile: "default"
+2023-07-16 16:08:50.343  INFO 13226 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-07-16 16:08:50.349  INFO 13226 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-16 16:08:50.349  INFO 13226 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-16 16:08:50.410  INFO 13226 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-16 16:08:50.410  INFO 13226 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 990 ms
+2023-07-16 16:08:51.350  WARN 13226 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 403ca8e3-620e-44e8-90a8-86317fa94127
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2023-07-16 16:08:51.394  WARN 13226 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:08:51.394  INFO 13226 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/**']
+2023-07-16 16:08:51.394  WARN 13226 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/storage/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:08:51.394  INFO 13226 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/storage/**']
+2023-07-16 16:08:51.394  WARN 13226 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/orders/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:08:51.394  INFO 13226 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/orders/**']
+2023-07-16 16:08:51.394  WARN 13226 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/employees/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:08:51.394  INFO 13226 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/employees/**']
+2023-07-16 16:08:51.394  WARN 13226 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/management/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:08:51.395  INFO 13226 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/management/**']
+2023-07-16 16:08:51.395  WARN 13226 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/callback/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:08:51.395  INFO 13226 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/callback/**']
+2023-07-16 16:08:51.395  WARN 13226 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/home/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:08:51.395  INFO 13226 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/home/**']
+2023-07-16 16:08:51.395  WARN 13226 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/register']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:08:51.395  INFO 13226 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/register']
+2023-07-16 16:08:51.395  WARN 13226 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/profile']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:08:51.395  INFO 13226 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/profile']
+2023-07-16 16:08:51.395  WARN 13226 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/redirectPost']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:08:51.395  INFO 13226 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/redirectPost']
+2023-07-16 16:08:51.395  WARN 13226 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/items']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:08:51.395  INFO 13226 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/items']
+2023-07-16 16:08:51.412  INFO 13226 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-16 16:08:51.495  INFO 13226 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@44618fe6, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2b15ba1a, org.springframework.security.web.context.SecurityContextPersistenceFilter@7e2a76be, org.springframework.security.web.header.HeaderWriterFilter@2066e897, org.springframework.web.filter.CorsFilter@796fe2b5, org.springframework.security.web.authentication.logout.LogoutFilter@1b732dd, tw.com.younite.filter.JWTAuthenticationFilter@5a6af2c4, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@20155dae, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@9763e61, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@123c48d0, org.springframework.security.web.session.SessionManagementFilter@205f52ea, org.springframework.security.web.access.ExceptionTranslationFilter@12bcf7c6, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3cc6f036]
+2023-07-16 16:08:51.599  WARN 13226 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-07-16 16:08:51.694  INFO 13226 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-16 16:08:52.010  INFO 13226 --- [main] tw.com.younite.YouNiteApplication        : Started YouNiteApplication in 2.962 seconds (JVM running for 3.594)
+2023-07-16 16:09:04.231  INFO 13226 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-16 16:09:04.232  INFO 13226 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-16 16:09:04.235  INFO 13226 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2023-07-16 16:12:13.660  INFO 13553 --- [main] tw.com.younite.YouNiteApplication        : Starting YouNiteApplication using Java 20.0.1 on zichenglius-MacBook-Air.local with PID 13553 (/Users/zichengliu/finalTermProject/eeit64-younite/Back-End/target/classes started by zichengliu in /Users/zichengliu/finalTermProject/eeit64-younite/Back-End)
+2023-07-16 16:12:13.666  INFO 13553 --- [main] tw.com.younite.YouNiteApplication        : No active profile set, falling back to 1 default profile: "default"
+2023-07-16 16:12:14.946  INFO 13553 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-07-16 16:12:14.952  INFO 13553 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-16 16:12:14.952  INFO 13553 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-16 16:12:15.019  INFO 13553 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-16 16:12:15.020  INFO 13553 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1283 ms
+2023-07-16 16:12:16.002  WARN 13553 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 453e2e27-296f-4663-a5c0-966574b5cfbf
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2023-07-16 16:12:16.052  WARN 13553 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:12:16.053  INFO 13553 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/**']
+2023-07-16 16:12:16.053  WARN 13553 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/storage/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:12:16.053  INFO 13553 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/storage/**']
+2023-07-16 16:12:16.053  WARN 13553 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/orders/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:12:16.053  INFO 13553 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/orders/**']
+2023-07-16 16:12:16.053  WARN 13553 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/employees/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:12:16.053  INFO 13553 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/employees/**']
+2023-07-16 16:12:16.053  WARN 13553 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/management/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:12:16.053  INFO 13553 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/management/**']
+2023-07-16 16:12:16.053  WARN 13553 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/callback/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:12:16.053  INFO 13553 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/callback/**']
+2023-07-16 16:12:16.053  WARN 13553 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/home/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:12:16.053  INFO 13553 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/home/**']
+2023-07-16 16:12:16.053  WARN 13553 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/register']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:12:16.053  INFO 13553 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/register']
+2023-07-16 16:12:16.054  WARN 13553 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/profile']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:12:16.054  INFO 13553 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/profile']
+2023-07-16 16:12:16.054  WARN 13553 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/redirectPost']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:12:16.054  INFO 13553 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/redirectPost']
+2023-07-16 16:12:16.054  WARN 13553 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/items']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:12:16.054  INFO 13553 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/items']
+2023-07-16 16:12:16.071  INFO 13553 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-16 16:12:16.155  INFO 13553 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6c19769c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@434d001d, org.springframework.security.web.context.SecurityContextPersistenceFilter@57f725b8, org.springframework.security.web.header.HeaderWriterFilter@24842b8e, org.springframework.web.filter.CorsFilter@36453773, org.springframework.security.web.authentication.logout.LogoutFilter@b842275, tw.com.younite.filter.JWTAuthenticationFilter@4db16677, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@28bc9749, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2066e897, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6abb44cb, org.springframework.security.web.session.SessionManagementFilter@34652065, org.springframework.security.web.access.ExceptionTranslationFilter@432eb882, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@185a0811]
+2023-07-16 16:12:16.261  WARN 13553 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-07-16 16:12:16.350  INFO 13553 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-16 16:12:16.665  INFO 13553 --- [main] tw.com.younite.YouNiteApplication        : Started YouNiteApplication in 3.564 seconds (JVM running for 4.725)
+2023-07-16 16:12:18.837  INFO 13553 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-16 16:12:18.837  INFO 13553 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-16 16:12:18.841  INFO 13553 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2023-07-16 16:15:00.451  INFO 13859 --- [main] tw.com.younite.YouNiteApplication        : Starting YouNiteApplication using Java 20.0.1 on zichenglius-MacBook-Air.local with PID 13859 (/Users/zichengliu/finalTermProject/eeit64-younite/Back-End/target/classes started by zichengliu in /Users/zichengliu/finalTermProject/eeit64-younite/Back-End)
+2023-07-16 16:15:00.453  INFO 13859 --- [main] tw.com.younite.YouNiteApplication        : No active profile set, falling back to 1 default profile: "default"
+2023-07-16 16:15:01.494  INFO 13859 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-07-16 16:15:01.501  INFO 13859 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-16 16:15:01.501  INFO 13859 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-16 16:15:01.567  INFO 13859 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-16 16:15:01.567  INFO 13859 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1061 ms
+2023-07-16 16:15:02.554  WARN 13859 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 5486fe0e-bb35-4981-9d71-093df78de96a
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2023-07-16 16:15:02.598  WARN 13859 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:15:02.598  INFO 13859 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/**']
+2023-07-16 16:15:02.599  WARN 13859 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/storage/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:15:02.599  INFO 13859 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/storage/**']
+2023-07-16 16:15:02.599  WARN 13859 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/orders/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:15:02.599  INFO 13859 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/orders/**']
+2023-07-16 16:15:02.599  WARN 13859 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/employees/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:15:02.599  INFO 13859 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/employees/**']
+2023-07-16 16:15:02.599  WARN 13859 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/management/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:15:02.599  INFO 13859 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/management/**']
+2023-07-16 16:15:02.599  WARN 13859 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/callback/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:15:02.599  INFO 13859 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/callback/**']
+2023-07-16 16:15:02.599  WARN 13859 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/home/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:15:02.599  INFO 13859 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/home/**']
+2023-07-16 16:15:02.599  WARN 13859 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/register']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:15:02.599  INFO 13859 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/register']
+2023-07-16 16:15:02.599  WARN 13859 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/profile']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:15:02.599  INFO 13859 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/profile']
+2023-07-16 16:15:02.599  WARN 13859 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/redirectPost']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:15:02.599  INFO 13859 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/redirectPost']
+2023-07-16 16:15:02.599  WARN 13859 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/items']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:15:02.599  INFO 13859 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/items']
+2023-07-16 16:15:02.600  WARN 13859 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/client.html']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:15:02.600  INFO 13859 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/client.html']
+2023-07-16 16:15:02.616  INFO 13859 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-16 16:15:02.696  INFO 13859 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6f976c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1324e70a, org.springframework.security.web.context.SecurityContextPersistenceFilter@24b8a393, org.springframework.security.web.header.HeaderWriterFilter@1123d461, org.springframework.web.filter.CorsFilter@3cc6f036, org.springframework.security.web.authentication.logout.LogoutFilter@3458dab6, tw.com.younite.filter.JWTAuthenticationFilter@72d16d6, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6c49ea0c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@17e6b7e4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7b0525a8, org.springframework.security.web.session.SessionManagementFilter@34f60be9, org.springframework.security.web.access.ExceptionTranslationFilter@5e763c07, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3dee3a6c]
+2023-07-16 16:15:02.802  WARN 13859 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-07-16 16:15:02.889  INFO 13859 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-16 16:15:03.201  INFO 13859 --- [main] tw.com.younite.YouNiteApplication        : Started YouNiteApplication in 3.122 seconds (JVM running for 3.652)
+2023-07-16 16:15:05.757  INFO 13859 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-16 16:15:05.758  INFO 13859 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-16 16:15:05.761  INFO 13859 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2023-07-16 16:16:09.719  INFO 13972 --- [main] tw.com.younite.YouNiteApplication        : Starting YouNiteApplication using Java 20.0.1 on zichenglius-MacBook-Air.local with PID 13972 (/Users/zichengliu/finalTermProject/eeit64-younite/Back-End/target/classes started by zichengliu in /Users/zichengliu/finalTermProject/eeit64-younite/Back-End)
+2023-07-16 16:16:09.722  INFO 13972 --- [main] tw.com.younite.YouNiteApplication        : No active profile set, falling back to 1 default profile: "default"
+2023-07-16 16:16:10.739  INFO 13972 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-07-16 16:16:10.745  INFO 13972 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-16 16:16:10.746  INFO 13972 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-16 16:16:10.819  INFO 13972 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-16 16:16:10.819  INFO 13972 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1053 ms
+2023-07-16 16:16:11.820  WARN 13972 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 2830d39f-b07b-4136-b141-62819225aee4
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2023-07-16 16:16:11.866  WARN 13972 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:16:11.867  INFO 13972 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/**']
+2023-07-16 16:16:11.867  WARN 13972 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/storage/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:16:11.867  INFO 13972 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/storage/**']
+2023-07-16 16:16:11.867  WARN 13972 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/orders/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:16:11.867  INFO 13972 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/orders/**']
+2023-07-16 16:16:11.867  WARN 13972 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/employees/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:16:11.867  INFO 13972 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/employees/**']
+2023-07-16 16:16:11.867  WARN 13972 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/management/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:16:11.868  INFO 13972 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/management/**']
+2023-07-16 16:16:11.868  WARN 13972 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/callback/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:16:11.868  INFO 13972 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/callback/**']
+2023-07-16 16:16:11.868  WARN 13972 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/home/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:16:11.868  INFO 13972 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/home/**']
+2023-07-16 16:16:11.868  WARN 13972 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/register']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:16:11.868  INFO 13972 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/register']
+2023-07-16 16:16:11.868  WARN 13972 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/profile']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:16:11.868  INFO 13972 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/profile']
+2023-07-16 16:16:11.868  WARN 13972 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/redirectPost']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:16:11.868  INFO 13972 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/redirectPost']
+2023-07-16 16:16:11.868  WARN 13972 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/items']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:16:11.868  INFO 13972 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/items']
+2023-07-16 16:16:11.868  WARN 13972 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/client.html']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:16:11.868  INFO 13972 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/client.html']
+2023-07-16 16:16:11.868  WARN 13972 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/js/websocketConn.js']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:16:11.868  INFO 13972 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/js/websocketConn.js']
+2023-07-16 16:16:11.887  INFO 13972 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-16 16:16:11.969  INFO 13972 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3dee3a6c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@62de20d3, org.springframework.security.web.context.SecurityContextPersistenceFilter@6b899971, org.springframework.security.web.header.HeaderWriterFilter@57f725b8, org.springframework.web.filter.CorsFilter@6109d880, org.springframework.security.web.authentication.logout.LogoutFilter@37c74e4e, tw.com.younite.filter.JWTAuthenticationFilter@4c9ef9c9, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7cec3975, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7e2a76be, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6f976c, org.springframework.security.web.session.SessionManagementFilter@1397b141, org.springframework.security.web.access.ExceptionTranslationFilter@3dbbed3e, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5e3cb58e]
+2023-07-16 16:16:12.073  WARN 13972 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-07-16 16:16:12.166  INFO 13972 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-16 16:16:12.487  INFO 13972 --- [main] tw.com.younite.YouNiteApplication        : Started YouNiteApplication in 3.079 seconds (JVM running for 3.696)
+2023-07-16 16:16:15.150  INFO 13972 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-16 16:16:15.151  INFO 13972 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-16 16:16:15.154  INFO 13972 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2023-07-16 16:17:29.984  INFO 14106 --- [main] tw.com.younite.YouNiteApplication        : Starting YouNiteApplication using Java 20.0.1 on zichenglius-MacBook-Air.local with PID 14106 (/Users/zichengliu/finalTermProject/eeit64-younite/Back-End/target/classes started by zichengliu in /Users/zichengliu/finalTermProject/eeit64-younite/Back-End)
+2023-07-16 16:17:29.987  INFO 14106 --- [main] tw.com.younite.YouNiteApplication        : No active profile set, falling back to 1 default profile: "default"
+2023-07-16 16:17:30.950  INFO 14106 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-07-16 16:17:30.956  INFO 14106 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-16 16:17:30.956  INFO 14106 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-16 16:17:31.025  INFO 14106 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-16 16:17:31.026  INFO 14106 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 991 ms
+2023-07-16 16:17:32.047  WARN 14106 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: c3153105-28a0-4fea-beba-354f0c82e636
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2023-07-16 16:17:32.109  WARN 14106 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:17:32.111  INFO 14106 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/**']
+2023-07-16 16:17:32.112  WARN 14106 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/storage/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:17:32.112  INFO 14106 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/storage/**']
+2023-07-16 16:17:32.112  WARN 14106 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/orders/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:17:32.112  INFO 14106 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/orders/**']
+2023-07-16 16:17:32.112  WARN 14106 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/employees/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:17:32.112  INFO 14106 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/employees/**']
+2023-07-16 16:17:32.112  WARN 14106 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/management/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:17:32.113  INFO 14106 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/management/**']
+2023-07-16 16:17:32.113  WARN 14106 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/callback/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:17:32.113  INFO 14106 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/callback/**']
+2023-07-16 16:17:32.113  WARN 14106 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/home/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:17:32.113  INFO 14106 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/home/**']
+2023-07-16 16:17:32.113  WARN 14106 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/register']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:17:32.113  INFO 14106 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/register']
+2023-07-16 16:17:32.113  WARN 14106 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/profile']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:17:32.114  INFO 14106 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/profile']
+2023-07-16 16:17:32.114  WARN 14106 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/redirectPost']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:17:32.114  INFO 14106 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/redirectPost']
+2023-07-16 16:17:32.114  WARN 14106 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/items']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:17:32.114  INFO 14106 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/items']
+2023-07-16 16:17:32.115  WARN 14106 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/client.html']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:17:32.115  INFO 14106 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/client.html']
+2023-07-16 16:17:32.115  WARN 14106 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/js/websocketConn.js']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:17:32.116  INFO 14106 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/js/websocketConn.js']
+2023-07-16 16:17:32.116  WARN 14106 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/websocket']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:17:32.116  INFO 14106 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/websocket']
+2023-07-16 16:17:32.150  INFO 14106 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-16 16:17:32.270  INFO 14106 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@72d16d6, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7b0525a8, org.springframework.security.web.context.SecurityContextPersistenceFilter@34f60be9, org.springframework.security.web.header.HeaderWriterFilter@12bcf7c6, org.springframework.web.filter.CorsFilter@4f2d8175, org.springframework.security.web.authentication.logout.LogoutFilter@3d05435c, tw.com.younite.filter.JWTAuthenticationFilter@44618fe6, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7e2a76be, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@20be793a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2b15ba1a, org.springframework.security.web.session.SessionManagementFilter@7cec3975, org.springframework.security.web.access.ExceptionTranslationFilter@54a5496f, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4c9ef9c9]
+2023-07-16 16:17:32.376  WARN 14106 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-07-16 16:17:32.463  INFO 14106 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-16 16:17:32.773  INFO 14106 --- [main] tw.com.younite.YouNiteApplication        : Started YouNiteApplication in 3.173 seconds (JVM running for 3.628)
+2023-07-16 16:17:34.119  INFO 14106 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-16 16:17:34.119  INFO 14106 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-16 16:17:34.121  INFO 14106 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-07-16 16:18:03.897  INFO 14162 --- [main] tw.com.younite.YouNiteApplication        : Starting YouNiteApplication using Java 20.0.1 on zichenglius-MacBook-Air.local with PID 14162 (/Users/zichengliu/finalTermProject/eeit64-younite/Back-End/target/classes started by zichengliu in /Users/zichengliu/finalTermProject/eeit64-younite/Back-End)
+2023-07-16 16:18:03.899  INFO 14162 --- [main] tw.com.younite.YouNiteApplication        : No active profile set, falling back to 1 default profile: "default"
+2023-07-16 16:18:04.982  INFO 14162 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-07-16 16:18:04.988  INFO 14162 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-16 16:18:04.988  INFO 14162 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-16 16:18:05.056  INFO 14162 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-16 16:18:05.056  INFO 14162 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1123 ms
+2023-07-16 16:18:06.093  WARN 14162 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: f4880ed0-1a7a-4894-8be9-06bb863e65df
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2023-07-16 16:18:06.144  WARN 14162 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:06.145  INFO 14162 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/**']
+2023-07-16 16:18:06.145  WARN 14162 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/storage/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:06.145  INFO 14162 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/storage/**']
+2023-07-16 16:18:06.145  WARN 14162 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/orders/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:06.145  INFO 14162 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/orders/**']
+2023-07-16 16:18:06.145  WARN 14162 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/employees/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:06.145  INFO 14162 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/employees/**']
+2023-07-16 16:18:06.145  WARN 14162 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/management/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:06.145  INFO 14162 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/management/**']
+2023-07-16 16:18:06.145  WARN 14162 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/callback/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:06.146  INFO 14162 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/callback/**']
+2023-07-16 16:18:06.146  WARN 14162 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/home/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:06.146  INFO 14162 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/home/**']
+2023-07-16 16:18:06.146  WARN 14162 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/register']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:06.146  INFO 14162 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/register']
+2023-07-16 16:18:06.146  WARN 14162 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/profile']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:06.146  INFO 14162 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/profile']
+2023-07-16 16:18:06.146  WARN 14162 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/redirectPost']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:06.146  INFO 14162 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/redirectPost']
+2023-07-16 16:18:06.146  WARN 14162 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/items']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:06.146  INFO 14162 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/items']
+2023-07-16 16:18:06.146  WARN 14162 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/client.html']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:06.146  INFO 14162 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/client.html']
+2023-07-16 16:18:06.146  WARN 14162 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/js/websocketConn.js']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:06.146  INFO 14162 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/js/websocketConn.js']
+2023-07-16 16:18:06.146  WARN 14162 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/websocket/3/3']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:06.146  INFO 14162 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/websocket/3/3']
+2023-07-16 16:18:06.165  INFO 14162 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-16 16:18:06.248  INFO 14162 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1324e70a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3cc6f036, org.springframework.security.web.context.SecurityContextPersistenceFilter@7e2a76be, org.springframework.security.web.header.HeaderWriterFilter@2066e897, org.springframework.web.filter.CorsFilter@72d16d6, org.springframework.security.web.authentication.logout.LogoutFilter@1b732dd, tw.com.younite.filter.JWTAuthenticationFilter@7b0525a8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@20155dae, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@9763e61, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4f2d8175, org.springframework.security.web.session.SessionManagementFilter@205f52ea, org.springframework.security.web.access.ExceptionTranslationFilter@12bcf7c6, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@62de20d3]
+2023-07-16 16:18:06.352  WARN 14162 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-07-16 16:18:06.452  INFO 14162 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-16 16:18:06.548  INFO 14162 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-16 16:18:06.548  INFO 14162 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-16 16:18:06.550  INFO 14162 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-07-16 16:18:06.851  INFO 14162 --- [main] tw.com.younite.YouNiteApplication        : Started YouNiteApplication in 3.319 seconds (JVM running for 3.84)
+2023-07-16 16:18:34.339 ERROR 14162 --- [http-nio-8080-exec-7] o.a.t.websocket.pojo.PojoEndpointBase    : Failed to call onClose method of POJO end point for POJO of type [tw.com.younite.controller.SocketController]
+
+java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:116) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
+	at org.apache.tomcat.websocket.pojo.PojoEndpointBase.onClose(PojoEndpointBase.java:101) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsSession.fireEndpointOnClose(WsSession.java:745) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsSession.onClose(WsSession.java:712) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsFrameBase.processDataControl(WsFrameBase.java:347) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsFrameBase.processData(WsFrameBase.java:279) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsFrameBase.processInputBuffer(WsFrameBase.java:130) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.server.WsFrameServer.onDataAvailable(WsFrameServer.java:84) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.server.WsFrameServer.doOnDataAvailable(WsFrameServer.java:183) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.server.WsFrameServer.notifyDataAvailable(WsFrameServer.java:163) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.server.WsHttpUpgradeHandler.upgradeDispatch(WsHttpUpgradeHandler.java:152) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.coyote.http11.upgrade.UpgradeProcessorInternal.dispatch(UpgradeProcessorInternal.java:60) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:57) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at java.base/java.lang.Thread.run(Thread.java:1623) ~[na:na]
+Caused by: java.lang.NullPointerException: Cannot invoke "tw.com.younite.service.inter.IUserService.updateLogTime(java.lang.Integer)" because "this.iUserService" is null
+	at tw.com.younite.controller.SocketController.onClose(SocketController.java:49) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	... 20 common frames omitted
+
+2023-07-16 16:18:41.793  INFO 14237 --- [main] tw.com.younite.YouNiteApplication        : Starting YouNiteApplication using Java 20.0.1 on zichenglius-MacBook-Air.local with PID 14237 (/Users/zichengliu/finalTermProject/eeit64-younite/Back-End/target/classes started by zichengliu in /Users/zichengliu/finalTermProject/eeit64-younite/Back-End)
+2023-07-16 16:18:41.795  INFO 14237 --- [main] tw.com.younite.YouNiteApplication        : No active profile set, falling back to 1 default profile: "default"
+2023-07-16 16:18:42.765  INFO 14237 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-07-16 16:18:42.771  INFO 14237 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-16 16:18:42.771  INFO 14237 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-16 16:18:42.840  INFO 14237 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-16 16:18:42.840  INFO 14237 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1002 ms
+2023-07-16 16:18:43.841  WARN 14237 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: b56c2aa3-55db-4a1b-8959-53a3ad6fe0aa
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2023-07-16 16:18:43.944  WARN 14237 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:43.946  INFO 14237 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/**']
+2023-07-16 16:18:43.947  WARN 14237 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/storage/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:43.948  INFO 14237 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/storage/**']
+2023-07-16 16:18:43.949  WARN 14237 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/orders/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:43.949  INFO 14237 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/orders/**']
+2023-07-16 16:18:43.949  WARN 14237 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/employees/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:43.950  INFO 14237 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/employees/**']
+2023-07-16 16:18:43.950  WARN 14237 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/management/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:43.950  INFO 14237 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/management/**']
+2023-07-16 16:18:43.950  WARN 14237 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/callback/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:43.950  INFO 14237 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/callback/**']
+2023-07-16 16:18:43.950  WARN 14237 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/home/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:43.950  INFO 14237 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/home/**']
+2023-07-16 16:18:43.950  WARN 14237 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/register']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:43.950  INFO 14237 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/register']
+2023-07-16 16:18:43.950  WARN 14237 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/profile']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:43.950  INFO 14237 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/profile']
+2023-07-16 16:18:43.950  WARN 14237 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/redirectPost']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:43.950  INFO 14237 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/redirectPost']
+2023-07-16 16:18:43.950  WARN 14237 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/items']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:43.950  INFO 14237 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/items']
+2023-07-16 16:18:43.950  WARN 14237 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/client.html']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:43.951  INFO 14237 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/client.html']
+2023-07-16 16:18:43.951  WARN 14237 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/js/websocketConn.js']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:43.951  INFO 14237 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/js/websocketConn.js']
+2023-07-16 16:18:43.951  WARN 14237 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/websocket/3/3']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:43.952  INFO 14237 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/websocket/3/3']
+2023-07-16 16:18:43.952  WARN 14237 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/websocket/4/3']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:18:43.953  INFO 14237 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/websocket/4/3']
+2023-07-16 16:18:43.988  INFO 14237 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-16 16:18:44.079  INFO 14237 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4c9ef9c9, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6f976c, org.springframework.security.web.context.SecurityContextPersistenceFilter@205f52ea, org.springframework.security.web.header.HeaderWriterFilter@3a116ca6, org.springframework.web.filter.CorsFilter@1324e70a, org.springframework.security.web.authentication.logout.LogoutFilter@7f894a6f, tw.com.younite.filter.JWTAuthenticationFilter@3cc6f036, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@29ccab93, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@417bfebd, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@72d16d6, org.springframework.security.web.session.SessionManagementFilter@453a30f8, org.springframework.security.web.access.ExceptionTranslationFilter@28bc9749, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6c56fff]
+2023-07-16 16:18:44.180  WARN 14237 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-07-16 16:18:44.268  INFO 14237 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-16 16:18:44.582  INFO 14237 --- [main] tw.com.younite.YouNiteApplication        : Started YouNiteApplication in 3.178 seconds (JVM running for 3.612)
+2023-07-16 16:18:46.283  INFO 14237 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-16 16:18:46.284  INFO 14237 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-16 16:18:46.285  INFO 14237 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-07-16 16:19:05.436 ERROR 14237 --- [http-nio-8080-exec-5] o.a.t.websocket.pojo.PojoEndpointBase    : Failed to call onClose method of POJO end point for POJO of type [tw.com.younite.controller.SocketController]
+
+java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:116) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
+	at org.apache.tomcat.websocket.pojo.PojoEndpointBase.onClose(PojoEndpointBase.java:101) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsSession.fireEndpointOnClose(WsSession.java:745) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsSession.onClose(WsSession.java:712) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsFrameBase.processDataControl(WsFrameBase.java:347) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsFrameBase.processData(WsFrameBase.java:279) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsFrameBase.processInputBuffer(WsFrameBase.java:130) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.server.WsFrameServer.onDataAvailable(WsFrameServer.java:84) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.server.WsFrameServer.doOnDataAvailable(WsFrameServer.java:183) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.server.WsFrameServer.notifyDataAvailable(WsFrameServer.java:163) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.server.WsHttpUpgradeHandler.upgradeDispatch(WsHttpUpgradeHandler.java:152) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.coyote.http11.upgrade.UpgradeProcessorInternal.dispatch(UpgradeProcessorInternal.java:60) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:57) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at java.base/java.lang.Thread.run(Thread.java:1623) ~[na:na]
+Caused by: java.lang.NullPointerException: Cannot invoke "tw.com.younite.service.inter.IUserService.updateLogTime(java.lang.Integer)" because "this.iUserService" is null
+	at tw.com.younite.controller.SocketController.onClose(SocketController.java:49) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	... 20 common frames omitted
+
+2023-07-16 16:20:03.880  INFO 14387 --- [main] tw.com.younite.YouNiteApplication        : Starting YouNiteApplication using Java 20.0.1 on zichenglius-MacBook-Air.local with PID 14387 (/Users/zichengliu/finalTermProject/eeit64-younite/Back-End/target/classes started by zichengliu in /Users/zichengliu/finalTermProject/eeit64-younite/Back-End)
+2023-07-16 16:20:03.882  INFO 14387 --- [main] tw.com.younite.YouNiteApplication        : No active profile set, falling back to 1 default profile: "default"
+2023-07-16 16:20:04.888  INFO 14387 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-07-16 16:20:04.894  INFO 14387 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-16 16:20:04.895  INFO 14387 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-16 16:20:04.963  INFO 14387 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-16 16:20:04.964  INFO 14387 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1047 ms
+2023-07-16 16:20:06.206  WARN 14387 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 4d2c804b-a961-40b7-9d46-fb43f47c4d40
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2023-07-16 16:20:06.248  WARN 14387 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:20:06.249  INFO 14387 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/**']
+2023-07-16 16:20:06.249  WARN 14387 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/storage/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:20:06.249  INFO 14387 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/storage/**']
+2023-07-16 16:20:06.249  WARN 14387 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/orders/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:20:06.249  INFO 14387 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/orders/**']
+2023-07-16 16:20:06.249  WARN 14387 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/employees/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:20:06.249  INFO 14387 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/employees/**']
+2023-07-16 16:20:06.249  WARN 14387 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/management/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:20:06.249  INFO 14387 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/management/**']
+2023-07-16 16:20:06.249  WARN 14387 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/callback/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:20:06.250  INFO 14387 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/callback/**']
+2023-07-16 16:20:06.250  WARN 14387 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/home/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:20:06.250  INFO 14387 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/home/**']
+2023-07-16 16:20:06.250  WARN 14387 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/register']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:20:06.250  INFO 14387 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/register']
+2023-07-16 16:20:06.250  WARN 14387 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/profile']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:20:06.250  INFO 14387 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/profile']
+2023-07-16 16:20:06.250  WARN 14387 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/redirectPost']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:20:06.250  INFO 14387 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/redirectPost']
+2023-07-16 16:20:06.250  WARN 14387 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/items']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:20:06.250  INFO 14387 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/items']
+2023-07-16 16:20:06.250  WARN 14387 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/client.html']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:20:06.250  INFO 14387 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/client.html']
+2023-07-16 16:20:06.250  WARN 14387 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/js/websocketConn.js']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:20:06.250  INFO 14387 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/js/websocketConn.js']
+2023-07-16 16:20:06.250  WARN 14387 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/websocket/3/3']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:20:06.250  INFO 14387 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/websocket/3/3']
+2023-07-16 16:20:06.250  WARN 14387 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/websocket/4/3']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:20:06.250  INFO 14387 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/websocket/4/3']
+2023-07-16 16:20:06.266  INFO 14387 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-16 16:20:06.348  INFO 14387 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@44618fe6, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2b15ba1a, org.springframework.security.web.context.SecurityContextPersistenceFilter@7cec3975, org.springframework.security.web.header.HeaderWriterFilter@28bc9749, org.springframework.web.filter.CorsFilter@796fe2b5, org.springframework.security.web.authentication.logout.LogoutFilter@400008bf, tw.com.younite.filter.JWTAuthenticationFilter@5a6af2c4, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@205f52ea, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@20155dae, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@123c48d0, org.springframework.security.web.session.SessionManagementFilter@30b9728f, org.springframework.security.web.access.ExceptionTranslationFilter@57f725b8, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3cc6f036]
+2023-07-16 16:20:06.446  WARN 14387 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-07-16 16:20:06.534  INFO 14387 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-16 16:20:06.849  INFO 14387 --- [main] tw.com.younite.YouNiteApplication        : Started YouNiteApplication in 3.222 seconds (JVM running for 4.11)
+2023-07-16 16:20:09.698  INFO 14387 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-16 16:20:09.699  INFO 14387 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-16 16:20:09.703  INFO 14387 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2023-07-16 16:20:14.661 ERROR 14387 --- [http-nio-8080-exec-5] o.a.t.websocket.pojo.PojoEndpointBase    : Failed to call onClose method of POJO end point for POJO of type [tw.com.younite.controller.SocketController]
+
+java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:116) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
+	at org.apache.tomcat.websocket.pojo.PojoEndpointBase.onClose(PojoEndpointBase.java:101) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsSession.fireEndpointOnClose(WsSession.java:745) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsSession.onClose(WsSession.java:712) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsFrameBase.processDataControl(WsFrameBase.java:347) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsFrameBase.processData(WsFrameBase.java:279) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsFrameBase.processInputBuffer(WsFrameBase.java:130) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.server.WsFrameServer.onDataAvailable(WsFrameServer.java:84) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.server.WsFrameServer.doOnDataAvailable(WsFrameServer.java:183) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.server.WsFrameServer.notifyDataAvailable(WsFrameServer.java:163) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.server.WsHttpUpgradeHandler.upgradeDispatch(WsHttpUpgradeHandler.java:152) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.coyote.http11.upgrade.UpgradeProcessorInternal.dispatch(UpgradeProcessorInternal.java:60) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:57) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at java.base/java.lang.Thread.run(Thread.java:1623) ~[na:na]
+Caused by: java.lang.NullPointerException: Cannot invoke "tw.com.younite.service.impl.UserServiceImpl.updateLogTime(java.lang.Integer)" because "this.userService" is null
+	at tw.com.younite.controller.SocketController.onClose(SocketController.java:49) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	... 20 common frames omitted
+
+2023-07-16 16:21:31.229  INFO 14538 --- [main] tw.com.younite.YouNiteApplication        : Starting YouNiteApplication using Java 20.0.1 on zichenglius-MacBook-Air.local with PID 14538 (/Users/zichengliu/finalTermProject/eeit64-younite/Back-End/target/classes started by zichengliu in /Users/zichengliu/finalTermProject/eeit64-younite/Back-End)
+2023-07-16 16:21:31.231  INFO 14538 --- [main] tw.com.younite.YouNiteApplication        : No active profile set, falling back to 1 default profile: "default"
+2023-07-16 16:21:32.203  INFO 14538 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-07-16 16:21:32.208  INFO 14538 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-16 16:21:32.208  INFO 14538 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-16 16:21:32.277  INFO 14538 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-16 16:21:32.278  INFO 14538 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1000 ms
+2023-07-16 16:21:33.210  WARN 14538 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 7cd11066-3118-463a-96a2-a683e968baca
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2023-07-16 16:21:33.256  WARN 14538 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:21:33.257  INFO 14538 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/**']
+2023-07-16 16:21:33.257  WARN 14538 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/storage/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:21:33.257  INFO 14538 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/storage/**']
+2023-07-16 16:21:33.257  WARN 14538 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/orders/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:21:33.257  INFO 14538 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/orders/**']
+2023-07-16 16:21:33.257  WARN 14538 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/employees/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:21:33.257  INFO 14538 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/employees/**']
+2023-07-16 16:21:33.257  WARN 14538 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/management/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:21:33.257  INFO 14538 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/management/**']
+2023-07-16 16:21:33.257  WARN 14538 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/callback/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:21:33.257  INFO 14538 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/callback/**']
+2023-07-16 16:21:33.258  WARN 14538 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/home/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:21:33.258  INFO 14538 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/home/**']
+2023-07-16 16:21:33.258  WARN 14538 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/register']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:21:33.258  INFO 14538 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/register']
+2023-07-16 16:21:33.258  WARN 14538 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/profile']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:21:33.258  INFO 14538 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/profile']
+2023-07-16 16:21:33.258  WARN 14538 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/redirectPost']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:21:33.258  INFO 14538 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/redirectPost']
+2023-07-16 16:21:33.258  WARN 14538 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/items']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:21:33.258  INFO 14538 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/items']
+2023-07-16 16:21:33.258  WARN 14538 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/client.html']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:21:33.258  INFO 14538 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/client.html']
+2023-07-16 16:21:33.258  WARN 14538 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/js/websocketConn.js']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:21:33.258  INFO 14538 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/js/websocketConn.js']
+2023-07-16 16:21:33.258  WARN 14538 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/websocket/3/3']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:21:33.258  INFO 14538 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/websocket/3/3']
+2023-07-16 16:21:33.258  WARN 14538 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/websocket/4/3']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:21:33.259  INFO 14538 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/websocket/4/3']
+2023-07-16 16:21:33.275  INFO 14538 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-16 16:21:33.354  INFO 14538 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@19213a74, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@30a791a6, org.springframework.security.web.context.SecurityContextPersistenceFilter@417bfebd, org.springframework.security.web.header.HeaderWriterFilter@1c98fe6f, org.springframework.web.filter.CorsFilter@719bb60d, org.springframework.security.web.authentication.logout.LogoutFilter@61be6051, tw.com.younite.filter.JWTAuthenticationFilter@5981f2c6, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2a4cb8ae, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@33399052, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@49639118, org.springframework.security.web.session.SessionManagementFilter@24b8a393, org.springframework.security.web.access.ExceptionTranslationFilter@64540344, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5454be]
+2023-07-16 16:21:33.454  WARN 14538 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-07-16 16:21:33.540  INFO 14538 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-16 16:21:33.885  INFO 14538 --- [main] tw.com.younite.YouNiteApplication        : Started YouNiteApplication in 3.014 seconds (JVM running for 3.522)
+2023-07-16 16:21:36.944  INFO 14538 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-16 16:21:36.944  INFO 14538 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-16 16:21:36.948  INFO 14538 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2023-07-16 16:21:57.116 ERROR 14538 --- [http-nio-8080-exec-9] o.a.t.websocket.pojo.PojoEndpointBase    : Failed to call onClose method of POJO end point for POJO of type [tw.com.younite.controller.SocketController]
+
+java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:116) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
+	at org.apache.tomcat.websocket.pojo.PojoEndpointBase.onClose(PojoEndpointBase.java:101) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsSession.fireEndpointOnClose(WsSession.java:745) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsSession.onClose(WsSession.java:712) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsFrameBase.processDataControl(WsFrameBase.java:347) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsFrameBase.processData(WsFrameBase.java:279) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsFrameBase.processInputBuffer(WsFrameBase.java:130) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.server.WsFrameServer.onDataAvailable(WsFrameServer.java:84) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.server.WsFrameServer.doOnDataAvailable(WsFrameServer.java:183) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.server.WsFrameServer.notifyDataAvailable(WsFrameServer.java:163) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.server.WsHttpUpgradeHandler.upgradeDispatch(WsHttpUpgradeHandler.java:152) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.coyote.http11.upgrade.UpgradeProcessorInternal.dispatch(UpgradeProcessorInternal.java:60) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:57) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at java.base/java.lang.Thread.run(Thread.java:1623) ~[na:na]
+Caused by: java.lang.NullPointerException: Cannot invoke "tw.com.younite.service.inter.IUserService.updateLogTime(java.lang.Integer)" because "this.iUserService" is null
+	at tw.com.younite.controller.SocketController.onClose(SocketController.java:50) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	... 20 common frames omitted
+
+2023-07-16 16:39:09.577  INFO 16290 --- [main] tw.com.younite.YouNiteApplication        : Starting YouNiteApplication using Java 20.0.1 on zichenglius-MacBook-Air.local with PID 16290 (/Users/zichengliu/finalTermProject/eeit64-younite/Back-End/target/classes started by zichengliu in /Users/zichengliu/finalTermProject/eeit64-younite/Back-End)
+2023-07-16 16:39:09.580  INFO 16290 --- [main] tw.com.younite.YouNiteApplication        : No active profile set, falling back to 1 default profile: "default"
+2023-07-16 16:39:12.895  INFO 16290 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-07-16 16:39:12.908  INFO 16290 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-16 16:39:12.909  INFO 16290 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-16 16:39:13.019  INFO 16290 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-16 16:39:13.019  INFO 16290 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3366 ms
+2023-07-16 16:39:14.431  WARN 16290 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: afe503e4-7b69-41ab-a2be-a90ae0a7e6e2
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2023-07-16 16:39:14.479  WARN 16290 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:39:14.479  INFO 16290 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/**']
+2023-07-16 16:39:14.480  WARN 16290 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/storage/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:39:14.480  INFO 16290 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/storage/**']
+2023-07-16 16:39:14.480  WARN 16290 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/orders/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:39:14.480  INFO 16290 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/orders/**']
+2023-07-16 16:39:14.480  WARN 16290 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/employees/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:39:14.480  INFO 16290 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/employees/**']
+2023-07-16 16:39:14.480  WARN 16290 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/management/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:39:14.480  INFO 16290 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/management/**']
+2023-07-16 16:39:14.480  WARN 16290 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/callback/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:39:14.481  INFO 16290 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/callback/**']
+2023-07-16 16:39:14.481  WARN 16290 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/home/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:39:14.481  INFO 16290 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/home/**']
+2023-07-16 16:39:14.481  WARN 16290 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/register']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:39:14.481  INFO 16290 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/register']
+2023-07-16 16:39:14.481  WARN 16290 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/profile']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:39:14.481  INFO 16290 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/profile']
+2023-07-16 16:39:14.481  WARN 16290 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/redirectPost']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:39:14.481  INFO 16290 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/redirectPost']
+2023-07-16 16:39:14.481  WARN 16290 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/items']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:39:14.481  INFO 16290 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/items']
+2023-07-16 16:39:14.481  WARN 16290 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/client.html']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:39:14.481  INFO 16290 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/client.html']
+2023-07-16 16:39:14.481  WARN 16290 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/js/websocketConn.js']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:39:14.482  INFO 16290 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/js/websocketConn.js']
+2023-07-16 16:39:14.482  WARN 16290 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/websocket/3/3']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:39:14.482  INFO 16290 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/websocket/3/3']
+2023-07-16 16:39:14.482  WARN 16290 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/websocket/4/3']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:39:14.482  INFO 16290 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/websocket/4/3']
+2023-07-16 16:39:14.501  INFO 16290 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-16 16:39:14.589  INFO 16290 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@195cbf5e, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4cb82b09, org.springframework.security.web.context.SecurityContextPersistenceFilter@4ebed2b3, org.springframework.security.web.header.HeaderWriterFilter@5b55c3d6, org.springframework.web.filter.CorsFilter@49665f92, org.springframework.security.web.authentication.logout.LogoutFilter@12bcf7c6, tw.com.younite.filter.JWTAuthenticationFilter@b68932b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5909285b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@42cd0fc6, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@77b27b57, org.springframework.security.web.session.SessionManagementFilter@5cf072ea, org.springframework.security.web.access.ExceptionTranslationFilter@111cbcda, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7d70ba18]
+2023-07-16 16:39:14.697  WARN 16290 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-07-16 16:39:14.789  INFO 16290 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-16 16:39:15.099  INFO 16290 --- [main] tw.com.younite.YouNiteApplication        : Started YouNiteApplication in 6.401 seconds (JVM running for 7.894)
+2023-07-16 16:39:19.262  INFO 16290 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-16 16:39:19.262  INFO 16290 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-16 16:39:19.265  INFO 16290 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2023-07-16 16:39:29.242 ERROR 16290 --- [http-nio-8080-exec-5] o.a.t.websocket.pojo.PojoEndpointBase    : Failed to call onClose method of POJO end point for POJO of type [tw.com.younite.controller.SocketController]
+
+java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:116) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
+	at org.apache.tomcat.websocket.pojo.PojoEndpointBase.onClose(PojoEndpointBase.java:101) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsSession.fireEndpointOnClose(WsSession.java:745) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsSession.onClose(WsSession.java:712) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsFrameBase.processDataControl(WsFrameBase.java:347) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsFrameBase.processData(WsFrameBase.java:279) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsFrameBase.processInputBuffer(WsFrameBase.java:130) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.server.WsFrameServer.onDataAvailable(WsFrameServer.java:84) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.server.WsFrameServer.doOnDataAvailable(WsFrameServer.java:183) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.server.WsFrameServer.notifyDataAvailable(WsFrameServer.java:163) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.server.WsHttpUpgradeHandler.upgradeDispatch(WsHttpUpgradeHandler.java:152) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.coyote.http11.upgrade.UpgradeProcessorInternal.dispatch(UpgradeProcessorInternal.java:60) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:57) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at java.base/java.lang.Thread.run(Thread.java:1623) ~[na:na]
+Caused by: java.lang.NullPointerException: Cannot invoke "tw.com.younite.service.inter.IUserService.updateLogTime(java.lang.Integer)" because "this.iUserService" is null
+	at tw.com.younite.controller.SocketController.onClose(SocketController.java:50) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	... 20 common frames omitted
+
+2023-07-16 16:53:18.788  INFO 17667 --- [main] tw.com.younite.YouNiteApplication        : Starting YouNiteApplication using Java 20.0.1 on zichenglius-MacBook-Air.local with PID 17667 (/Users/zichengliu/finalTermProject/eeit64-younite/Back-End/target/classes started by zichengliu in /Users/zichengliu/finalTermProject/eeit64-younite/Back-End)
+2023-07-16 16:53:18.791  INFO 17667 --- [main] tw.com.younite.YouNiteApplication        : No active profile set, falling back to 1 default profile: "default"
+2023-07-16 16:53:19.818  INFO 17667 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-07-16 16:53:19.823  INFO 17667 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-16 16:53:19.824  INFO 17667 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-16 16:53:19.892  INFO 17667 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-16 16:53:19.892  INFO 17667 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1043 ms
+2023-07-16 16:53:20.858  WARN 17667 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 565f390e-269f-408f-b80c-2670795017a2
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2023-07-16 16:53:20.902  WARN 17667 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:53:20.902  INFO 17667 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/**']
+2023-07-16 16:53:20.902  WARN 17667 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/storage/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:53:20.902  INFO 17667 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/storage/**']
+2023-07-16 16:53:20.903  WARN 17667 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/orders/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:53:20.903  INFO 17667 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/orders/**']
+2023-07-16 16:53:20.903  WARN 17667 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/employees/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:53:20.903  INFO 17667 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/employees/**']
+2023-07-16 16:53:20.903  WARN 17667 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/management/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:53:20.903  INFO 17667 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/management/**']
+2023-07-16 16:53:20.903  WARN 17667 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/callback/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:53:20.903  INFO 17667 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/callback/**']
+2023-07-16 16:53:20.903  WARN 17667 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/home/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:53:20.903  INFO 17667 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/home/**']
+2023-07-16 16:53:20.903  WARN 17667 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/register']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:53:20.903  INFO 17667 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/register']
+2023-07-16 16:53:20.903  WARN 17667 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/profile']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:53:20.903  INFO 17667 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/profile']
+2023-07-16 16:53:20.903  WARN 17667 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/redirectPost']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:53:20.903  INFO 17667 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/redirectPost']
+2023-07-16 16:53:20.903  WARN 17667 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/items']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:53:20.903  INFO 17667 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/items']
+2023-07-16 16:53:20.903  WARN 17667 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/client.html']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:53:20.903  INFO 17667 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/client.html']
+2023-07-16 16:53:20.904  WARN 17667 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/js/websocketConn.js']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:53:20.904  INFO 17667 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/js/websocketConn.js']
+2023-07-16 16:53:20.904  WARN 17667 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/websocket/3/3']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:53:20.904  INFO 17667 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/websocket/3/3']
+2023-07-16 16:53:20.904  WARN 17667 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/websocket/4/3']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 16:53:20.904  INFO 17667 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/websocket/4/3']
+2023-07-16 16:53:20.920  INFO 17667 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-16 16:53:21.003  INFO 17667 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@18f8e2e0, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@28d56028, org.springframework.security.web.context.SecurityContextPersistenceFilter@3a116ca6, org.springframework.security.web.header.HeaderWriterFilter@77ec9fdb, org.springframework.web.filter.CorsFilter@6c56fff, org.springframework.security.web.authentication.logout.LogoutFilter@6cb662e8, tw.com.younite.filter.JWTAuthenticationFilter@3dee3a6c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5e763c07, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1c98fe6f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@62de20d3, org.springframework.security.web.session.SessionManagementFilter@4a0c512b, org.springframework.security.web.access.ExceptionTranslationFilter@22368ddc, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4db16677]
+2023-07-16 16:53:21.100  WARN 17667 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-07-16 16:53:21.233  INFO 17667 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-16 16:53:21.577  INFO 17667 --- [main] tw.com.younite.YouNiteApplication        : Started YouNiteApplication in 3.157 seconds (JVM running for 3.937)
+2023-07-16 16:53:34.520  INFO 17667 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-16 16:53:34.520  INFO 17667 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-16 16:53:34.524  INFO 17667 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2023-07-16 16:53:41.095 ERROR 17667 --- [http-nio-8080-exec-5] o.a.t.websocket.pojo.PojoEndpointBase    : Failed to call onClose method of POJO end point for POJO of type [tw.com.younite.controller.SocketController]
+
+java.lang.reflect.InvocationTargetException: null
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:116) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
+	at org.apache.tomcat.websocket.pojo.PojoEndpointBase.onClose(PojoEndpointBase.java:101) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsSession.fireEndpointOnClose(WsSession.java:745) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsSession.onClose(WsSession.java:712) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsFrameBase.processDataControl(WsFrameBase.java:347) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsFrameBase.processData(WsFrameBase.java:279) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.WsFrameBase.processInputBuffer(WsFrameBase.java:130) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.server.WsFrameServer.onDataAvailable(WsFrameServer.java:84) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.server.WsFrameServer.doOnDataAvailable(WsFrameServer.java:183) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.server.WsFrameServer.notifyDataAvailable(WsFrameServer.java:163) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.websocket.server.WsHttpUpgradeHandler.upgradeDispatch(WsHttpUpgradeHandler.java:152) ~[tomcat-embed-websocket-9.0.75.jar:9.0.75]
+	at org.apache.coyote.http11.upgrade.UpgradeProcessorInternal.dispatch(UpgradeProcessorInternal.java:60) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:57) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.75.jar:9.0.75]
+	at java.base/java.lang.Thread.run(Thread.java:1623) ~[na:na]
+Caused by: java.lang.NullPointerException: Cannot invoke "tw.com.younite.service.inter.IUserService.updateLogTime(java.lang.Integer)" because "this.iUserService" is null
+	at tw.com.younite.controller.SocketController.onClose(SocketController.java:51) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	... 20 common frames omitted
+
+2023-07-16 16:55:32.063  INFO 17667 --- [http-nio-8080-exec-9] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-07-16 16:55:34.045  INFO 17667 --- [http-nio-8080-exec-9] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-07-16 17:16:31.398  INFO 17667 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-07-16 17:16:41.224  INFO 19988 --- [main] tw.com.younite.YouNiteApplication        : Starting YouNiteApplication using Java 20.0.1 on zichenglius-MacBook-Air.local with PID 19988 (/Users/zichengliu/finalTermProject/eeit64-younite/Back-End/target/classes started by zichengliu in /Users/zichengliu/finalTermProject/eeit64-younite/Back-End)
+2023-07-16 17:16:41.226  INFO 19988 --- [main] tw.com.younite.YouNiteApplication        : No active profile set, falling back to 1 default profile: "default"
+2023-07-16 17:16:42.221  INFO 19988 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-07-16 17:16:42.227  INFO 19988 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-16 17:16:42.227  INFO 19988 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-07-16 17:16:42.292  INFO 19988 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-16 17:16:42.292  INFO 19988 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1026 ms
+2023-07-16 17:16:43.258  WARN 19988 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: a0bf1a88-8a0f-4a67-bf18-ce834a32fefa
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2023-07-16 17:16:43.301  WARN 19988 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 17:16:43.302  INFO 19988 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/**']
+2023-07-16 17:16:43.302  WARN 19988 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/storage/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 17:16:43.302  INFO 19988 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/storage/**']
+2023-07-16 17:16:43.302  WARN 19988 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/orders/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 17:16:43.302  INFO 19988 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/orders/**']
+2023-07-16 17:16:43.302  WARN 19988 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/employees/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 17:16:43.302  INFO 19988 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/employees/**']
+2023-07-16 17:16:43.302  WARN 19988 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/management/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 17:16:43.302  INFO 19988 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/management/**']
+2023-07-16 17:16:43.302  WARN 19988 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/callback/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 17:16:43.302  INFO 19988 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/callback/**']
+2023-07-16 17:16:43.302  WARN 19988 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/home/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 17:16:43.302  INFO 19988 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/home/**']
+2023-07-16 17:16:43.302  WARN 19988 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/register']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 17:16:43.303  INFO 19988 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/register']
+2023-07-16 17:16:43.303  WARN 19988 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/users/profile']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 17:16:43.303  INFO 19988 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/users/profile']
+2023-07-16 17:16:43.303  WARN 19988 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/redirectPost']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 17:16:43.303  INFO 19988 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/redirectPost']
+2023-07-16 17:16:43.303  WARN 19988 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/items']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 17:16:43.303  INFO 19988 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/items']
+2023-07-16 17:16:43.303  WARN 19988 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/client.html']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 17:16:43.303  INFO 19988 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/client.html']
+2023-07-16 17:16:43.303  WARN 19988 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/js/websocketConn.js']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 17:16:43.303  INFO 19988 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/js/websocketConn.js']
+2023-07-16 17:16:43.303  WARN 19988 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/websocket/3/3']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 17:16:43.303  INFO 19988 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/websocket/3/3']
+2023-07-16 17:16:43.303  WARN 19988 --- [main] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/websocket/4/3']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-07-16 17:16:43.303  INFO 19988 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/websocket/4/3']
+2023-07-16 17:16:43.319  INFO 19988 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2023-07-16 17:16:43.400  INFO 19988 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@44618fe6, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2b15ba1a, org.springframework.security.web.context.SecurityContextPersistenceFilter@30b9728f, org.springframework.security.web.header.HeaderWriterFilter@56d5460f, org.springframework.web.filter.CorsFilter@796fe2b5, org.springframework.security.web.authentication.logout.LogoutFilter@6669cba, tw.com.younite.filter.JWTAuthenticationFilter@5a6af2c4, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@453a30f8, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@29ccab93, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@123c48d0, org.springframework.security.web.session.SessionManagementFilter@1c98fe6f, org.springframework.security.web.access.ExceptionTranslationFilter@34652065, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3cc6f036]
+2023-07-16 17:16:43.501  WARN 19988 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2023-07-16 17:16:43.592  INFO 19988 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-07-16 17:16:43.908  INFO 19988 --- [main] tw.com.younite.YouNiteApplication        : Started YouNiteApplication in 3.046 seconds (JVM running for 3.664)
+2023-07-16 17:16:51.159  INFO 19988 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-16 17:16:51.159  INFO 19988 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-16 17:16:51.163  INFO 19988 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
