@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import '../../styles/messageItem.scss';
 
 const MessageItem = ({ message, userImage, ownerImage, lastMessage }) => {
-  console.log(message, userImage, ownerImage);
+  // console.log(message, userImage, ownerImage);
 
   const displayImage = message.isOwner ? ownerImage : userImage;
   const displayImage1 = lastMessage.isOwner ? ownerImage : userImage;
@@ -22,11 +22,7 @@ const MessageItem = ({ message, userImage, ownerImage, lastMessage }) => {
         </div>
         <div className='messageContent'>
           <p>{message.text}</p>
-          <img
-            className=''
-            src={message.imageURL}
-            alt=''
-          />
+          <img className='' src={message.imageURL} alt='' />
         </div>
       </div>
       <div className={`message ${lastMessage.isOwner ? 'owner' : ''}`}>
