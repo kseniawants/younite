@@ -31,4 +31,12 @@ public class MessageController extends BaseController {
         List<MessageEntity> list= iMessageService.getMessages(roomId);
         return ResponseEntity.ok(list);
     }
+    @GetMapping("/find/unRead/{receive}/{send}")
+    public JSONResult<Integer> getUnread(@PathVariable("receive") Integer r ,@PathVariable("send") Integer sd){
+        MessageEntity ur =iMessageService.getUnreadNo(r,sd);
+        System.out.println("no:"+ur);
+        JSONResult<Integer> jsonResult =new JSONResult<>(OK);
+        jsonResult.setData(ur.getCount());
+        return jsonResult;
+    }
 }
