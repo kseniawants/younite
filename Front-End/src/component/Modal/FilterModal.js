@@ -10,7 +10,7 @@ function FilterModal({ closeModal }) {
   useEffect(() => {
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
-    const modalWidth = 400; // 假設 modal 寬度為 500px
+    const modalWidth = 500; // 假設 modal 寬度為 500px
     const modalHeight = 300; // 假設 modal 高度為 300px
     const initialX = (screenWidth - modalWidth) / 2;
     const initialY = (screenHeight - modalHeight) / 2;
@@ -32,20 +32,10 @@ function FilterModal({ closeModal }) {
   };
 
   //控制距離
-  const [rangeValDistance, setRangeValDistance] = useState(0); // 距離的 state 變數
-  const [rangeValAge, setRangeValAge] = useState(0); // 年齡的 state 變數
+  const [rangeVal, setRangeVal] = useState(0);
 
-  const updateRangeDistance = (e) => {
-    setRangeValDistance(e.target.value);
-  };
-
-  const updateRangeAge = (e) => {
-    setRangeValAge(e.target.value);
-  };
-
-  const handleAgeInputChange = (e) => {
-    const value = parseInt(e.target.value, 10);
-    setRangeValAge(value);
+  const updateRange = (e) => {
+    setRangeVal(e.target.value);
   };
 
   return (
@@ -66,62 +56,41 @@ function FilterModal({ closeModal }) {
                 ></button>
               </div>
               {/* ↓↓↓ 下面可以隨意更改，區塊直接用 col 來寫  ↓↓↓*/}
-              <div className='col d-flex align-items-center'>
-                <label htmlFor='customRange1' className='form-label mb-0'>
-                  距離
-                </label>
-                <span id='output' className='bg-lightblue text-primary rounded px-1 mx-3'>
-                  <input
-                    type='number'
-                    className='form-control text-primary'
-                    value={rangeValDistance}
-                    min='0'
-                    max='100'
-                    step='10'
-                    onChange={updateRangeDistance}
-                  />
+              <label htmlFor='customRange1' className='form-label'>
+                距離
+                <span id='output' className='bg-lightblue text-black rounded px-2 mx-3'>
+                  {rangeVal}
                 </span>
                 公里
-              </div>
+              </label>
               <input
                 type='range'
-                className='form-range mt-3'
+                className='form-range'
                 id='customRange1'
-                value={rangeValDistance}
+                value={rangeVal}
                 min='0'
                 max='999'
-                step='0'
-                onChange={updateRangeDistance}
+                step='10'
+                onChange={updateRange}
               />
               <hr className='mx-1' />
-              <div className='col d-flex align-items-center'>
-                <label htmlFor='customRange2' className='form-label mb-0'>
-                  年齡
-                </label>
-                <span id='output' className='bg-lightblue text-primary rounded px-1 mx-3'>
-                  <input
-                    type='number'
-                    className='form-control text-primary'
-                    value={rangeValAge}
-                    min='0'
-                    max='100'
-                    step='1'
-                    onChange={handleAgeInputChange}
-                  />
+              <label htmlFor='customRange1' className='form-label'>
+                年齡
+                <span id='output' className='bg-lightblue text-black rounded px-2 mx-3'>
+                  {rangeVal}
                 </span>
                 歲
-              </div>
+              </label>
               <input
                 type='range'
-                className='form-range mt-3'
-                id='customRange2'
-                value={rangeValAge}
+                className='form-range'
+                id='customRange1'
+                value={rangeVal}
                 min='0'
                 max='100'
                 step='1'
-                onChange={updateRangeAge}
+                onChange={updateRange}
               />
-
               {/* ↑↑↑ 上面可以隨意更改，區塊直接用 col 來寫 ↑↑↑ */}
             </div>
           </div>
