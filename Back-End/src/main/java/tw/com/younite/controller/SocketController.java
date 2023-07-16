@@ -12,7 +12,7 @@ import java.nio.ByteBuffer;
 import java.util.*;
 
 @Controller
-@ServerEndpoint(value = "/websocket/{room}")
+@ServerEndpoint(value = "/websocket/{userId}/{room}")
 @CrossOrigin(origins = "*")
 //@Component
 public class SocketController {

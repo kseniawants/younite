@@ -47,8 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const hangUpButton = document.getElementById('hangUp');
     hangUpButton.addEventListener('click', hangUp);
 
-    const refreshPageButton = document.getElementById('refreshPage');
-    refreshPageButton.addEventListener('click', refreshPage);
+
 });
 
 // ===================以上是socket=======================
@@ -239,7 +238,9 @@ function connect() {
     } else {
         sendOffer();
         peerStarted = true;
-        $("#connect").hide();    }
+        $("#connect").hide();
+        sessionStorage.setItem("accept","false");
+    }
 
 }
 
