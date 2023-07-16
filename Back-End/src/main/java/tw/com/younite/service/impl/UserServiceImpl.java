@@ -9,6 +9,8 @@ import tw.com.younite.entity.UserEntity;
 import tw.com.younite.mapper.UserMapper;
 import tw.com.younite.service.exception.*;
 import tw.com.younite.service.inter.IUserService;
+
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -144,6 +146,11 @@ public class UserServiceImpl implements IUserService {
             throw new UserNotFoundException("使用者不存在");
         }
         return result;
+    }
+
+    @Override
+    public void updateLogTime(Integer id) {
+        userMapper.updateLogTime(new Timestamp(System.currentTimeMillis()),id);
     }
 }
 

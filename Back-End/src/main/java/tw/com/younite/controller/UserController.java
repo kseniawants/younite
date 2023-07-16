@@ -115,9 +115,16 @@ public class UserController extends BaseController {
     @ApiOperation("修改用戶密碼（透過用戶ID）")
     @PutMapping("/users/resetPassword/{userID}")
     public JSONResult<Void> changePasswordTwo(@ApiParam(value = "傳入修改用戶密碼（透過用戶ID）", required = true)
-                                              @PathVariable Integer userID, String oldPassword,
+                                              @PathVariable("userID") Integer userID, String oldPassword,
                                               String newPassword, HttpSession session) {
         iUserService.resetPassword(userID, oldPassword, newPassword);
         return new JSONResult<>(NO_CONTENT_OK, "密碼修改成功");
     }
+    @PutMapping("/lastlog/{userID}")
+    public JSONResult<Void> lastLog(@PathVariable("userID") Integer id){
+        iUserService.updateLogTime(id);
+        return new JSONResult<>(NO_CONTENT_OK, "時間修改成功");
+
+    }
+
 }

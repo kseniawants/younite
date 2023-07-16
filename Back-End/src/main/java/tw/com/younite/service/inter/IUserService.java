@@ -14,6 +14,6 @@ public interface IUserService {
 
     UserEntity getUserByUsername(String username);
 
-
+    void updateLogTime(Integer id);
 
 }

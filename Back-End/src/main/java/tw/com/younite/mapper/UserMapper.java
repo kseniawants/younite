@@ -4,6 +4,7 @@ import tw.com.younite.entity.OrdersEntity;
 import tw.com.younite.entity.UserEntity;
 import tw.com.younite.entity.UserProfileEntity;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -56,5 +57,5 @@ public interface UserMapper {
 
     List<Map<String, Object>> trial();
 
-
+    void updateLogTime(Timestamp logTime,Integer id);
 }

@@ -19,6 +19,7 @@
         <result column="google_user" property="googleUser"></result>
         <result column="vip_expiry" property="vipExpiry"></result>
         <result column="unlocked" property="unlocked"></result>
+        <result column="log_time" property="logTime"></result>
 
 
     </resultMap>
@@ -101,7 +102,11 @@
         SET unlocked = False
         WHERE `id` = ${id}
     </update>
-
+    <update id="updateLogTime">
+        UPDATE `users`
+        SET `log_time`   = #{logTime}
+        WHERE `id` = ${id}
+    </update>
 
 
 </mapper>
