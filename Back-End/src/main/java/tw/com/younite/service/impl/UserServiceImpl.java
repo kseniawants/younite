@@ -1,5 +1,6 @@
 package tw.com.younite.service.impl;
 
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,7 +27,6 @@ public class UserServiceImpl implements IUserService {
     //加密方式
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
-
 
     @Override
     public void reg(UserEntity user) {
@@ -151,6 +151,15 @@ public class UserServiceImpl implements IUserService {
     @Override
     public void updateLogTime(Integer id) {
         userMapper.updateLogTime(new Timestamp(System.currentTimeMillis()),id);
+    }
+
+
+    //忘記密碼
+    @Override
+    public boolean checkEmailExists(String email) {
+        // 驗證輸入的電子郵件地址是否存在於使用者資料庫中
+        UserEntity user = userMapper.getByUserEmail(email);
+        return user != null;
     }
 }
 
