@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import '../../styles/messageItem.scss';
 
 const MessageItem = ({ message, userImage, ownerImage, lastMessage }) => {
-  // console.log(message, userImage, ownerImage);
-
   const displayImage = message.isOwner ? ownerImage : userImage;
   const displayImage1 = lastMessage.isOwner ? ownerImage : userImage;
 

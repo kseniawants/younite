@@ -25,8 +25,6 @@ const ChatRoom = () => {
           let room = await axios.get(`/getProfile/getRoom/${id}/${element.userid}`);
           roomList.push(room);
         });
-        // console.log('roomList', roomList);
-        // const roomState = roomList.data;
         const resChatRoomInfo = await axios.get('/message/find/32');
         setFriendList(resFriendList.data);
         setChatRoomInfo(resChatRoomInfo.data);
@@ -51,7 +49,16 @@ const ChatRoom = () => {
             <MessageBar friendList={friendList} />
           </div>
           <div className='col-9 text-white p-0'>
-            <Chat friendList={friendList} chatRoomInfo={chatRoomInfo} userInfo={userInfo} />
+            {userInfo &&
+              userInfo.data && ( // 添加條件判斷，确保userInfo和userInfo.data都存在时再渲染Chat组件
+                <Chat
+                  friendList={friendList}
+                  chatRoomInfo={chatRoomInfo}
+                  userInfo={userInfo}
+                  fullName={userInfo.data.fullName} // 將 fullName 設置為 userInfo.data.fullName
+                  profileAvatar={userInfo.data.profileAvatar}
+                />
+              )}
           </div>
         </div>
       </div>
