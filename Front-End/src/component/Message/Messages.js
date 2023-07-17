@@ -31,7 +31,6 @@ const Messages = ({ chatRoomInfo, friendList, userInfo }) => {
 Messages.propTypes = {
   friendList: PropTypes.array.isRequired,
   chatRoomInfo: PropTypes.array.isRequired,
-  currentChat: PropTypes.object,
   userInfo: PropTypes.array.isRequired,
 };
 

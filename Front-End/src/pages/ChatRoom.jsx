@@ -4,11 +4,9 @@ import SideNav from '../component/SideNav';
 import Chat from '../component/Message/Chat';
 import '../styles/chatroom.scss';
 import MessageBar from '../component/Message/MessageBar';
-import { ChatDatas } from '../component/Message/ChatDatas';
 import axios from 'axios';
 
 const ChatRoom = () => {
-  const [currentChat, setCurrentChat] = useState(ChatDatas[0]);
   const [friendList, setFriendList] = useState([]);
   const [chatRoomInfo, setChatRoomInfo] = useState([]);
   const [userInfo, setUserInfo] = useState();
@@ -18,8 +16,8 @@ const ChatRoom = () => {
       try {
         const resUserInfo = await axios.get('/users/profile');
         const resFriendList = await axios.get('/getProfile/friendList');
-        const id = resUserInfo.data.data.id;
-        console.log(id);
+        const id = resUserInfo.data.data.userId;
+        console.log('id', id);
         const friendLists = [];
         const roomList = [];
         resFriendList.data.forEach(async (element) => {
@@ -29,7 +27,7 @@ const ChatRoom = () => {
         });
         // console.log('roomList', roomList);
         // const roomState = roomList.data;
-        const resChatRoomInfo = await axios.get('/message/find/4');
+        const resChatRoomInfo = await axios.get('/message/find/32');
         setFriendList(resFriendList.data);
         setChatRoomInfo(resChatRoomInfo.data);
         setUserInfo(resUserInfo.data);
@@ -50,14 +48,14 @@ const ChatRoom = () => {
       <div className='container-fluid'>
         <div className='row chatroom-main'>
           <div className='col-3 bg-secondary chatroom-list'>
-            <MessageBar chats={ChatDatas} setCurrentChat={setCurrentChat} friendList={friendList} />
+            <MessageBar friendList={friendList} />
           </div>
           <div className='col-9 text-white p-0'>
             <Chat
-              currentChat={currentChat}
               friendList={friendList}
               chatRoomInfo={chatRoomInfo}
               userInfo={userInfo}
+              userId={id}
             />
           </div>
         </div>

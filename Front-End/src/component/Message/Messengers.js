@@ -3,9 +3,9 @@ import React from 'react';
 import '../../styles/all.scss';
 import PropTypes from 'prop-types';
 
-const Messengers = ({ setCurrentChat, friendList }) => {
+const Messengers = ({ friendList }) => {
   const handleSelect = (chat) => {
-    setCurrentChat(chat);
+    friendList(chat);
   };
 
   return (
@@ -18,7 +18,7 @@ const Messengers = ({ setCurrentChat, friendList }) => {
             id='userChat'
             style={{ cursor: 'pointer' }}
             key={friendList.userid}
-            onClick={() => handleSelect(friendList)}
+            onClick={() => handleSelect(friendList.userid)}
           >
             <img
               className='rounded-circle bg-dark'
@@ -37,7 +37,6 @@ const Messengers = ({ setCurrentChat, friendList }) => {
 };
 
 Messengers.propTypes = {
-  setCurrentChat: PropTypes.func.isRequired,
   friendList: PropTypes.array.isRequired,
 };
 
