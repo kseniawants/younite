@@ -18,7 +18,7 @@ const Chat = ({ currentChat, friendList, chatRoomInfo, userInfo }) => {
   };
 
   // useEffect(() => {
-  //   const ws = new WebSocket('ws://localhost:8080/websocket/" + roomid'); // 填寫 WebSocket 伺服器的 URL
+  //   const ws = new WebSocket(`'ws://localhost:8080/websocket/'`); // 填寫 WebSocket 伺服器的 URL
   //   ws.onopen = () => {
   //     console.log('WebSocket 連接成功');
   //   };
@@ -43,15 +43,15 @@ const Chat = ({ currentChat, friendList, chatRoomInfo, userInfo }) => {
           <img
             className='rounded-circle bg-secondary'
             style={{ height: '50px', width: '50px', objectFit: 'cover' }}
-            src={userInfo.profileAvatar}
+            src={friendList.profileAvatar}
             alt=''
           />
           <div className='mx-3'>
             <span className='text-dark' style={{ fontSize: '20px' }}>
-              {userInfo.fullName}
+              {friendList.fullName}
             </span>
             <p className='text-radio' style={{ fontSize: '12px' }}>
-              {/* {user.state} */}
+              {/* {friendList.state} 在線中判斷 */}
             </p>
           </div>
         </div>
@@ -89,7 +89,12 @@ const Chat = ({ currentChat, friendList, chatRoomInfo, userInfo }) => {
           </div>
         </div>
       </div>
-      <Messages currentChat={currentChat} chatRoomInfo={chatRoomInfo} />
+      <Messages
+        currentChat={currentChat}
+        chatRoomInfo={chatRoomInfo}
+        friendList={friendList}
+        userInfo={userInfo}
+      />
       <Inputs />
     </div>
   );

@@ -16,9 +16,20 @@ const ChatRoom = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const resUserInfo = await axios.get('/users/profile');
         const resFriendList = await axios.get('/getProfile/friendList');
+        const id = resUserInfo.data.data.id;
+        console.log(id);
+        const friendLists = [];
+        const roomList = [];
+        resFriendList.data.forEach(async (element) => {
+          friendLists.push({ id: element.userid, key: element.userid });
+          const room = await axios.get(`/getProfile/getRoom/${id}/${element.userid}`);
+          roomList.push(room);
+        });
+        // console.log('roomList', roomList);
+        // const roomState = roomList.data;
         const resChatRoomInfo = await axios.get('/message/find/4');
-        const resUserInfo = await axios.get('/users/getUser/333');
         setFriendList(resFriendList.data);
         setChatRoomInfo(resChatRoomInfo.data);
         setUserInfo(resUserInfo.data);

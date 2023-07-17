@@ -2,10 +2,9 @@
 import React from 'react';
 import MessageItem from './MessageItem';
 import '../../styles/messageItem.scss';
-import sia from '../../assets/images/sia.png';
 import PropTypes from 'prop-types';
 
-const Messages = ({ currentChat, chatRoomInfo }) => {
+const Messages = ({ chatRoomInfo, friendList, userInfo }) => {
   // console.log('Current chat in Messages', currentChat);
   return (
     <div
@@ -17,8 +16,11 @@ const Messages = ({ currentChat, chatRoomInfo }) => {
         <MessageItem
           key={message.messageId}
           message={message.messageContent}
-          userImage={currentChat.userInfo.photoURL}
-          ownerImage={sia}
+          userImage={friendList.profileAvatar}
+          ownerImage={userInfo.data.profileAvatar}
+          senderId={message.senderId}
+          receiverId={message.receiverId}
+          messageType={message.messageType}
           lastMessage={message.messageContent}
           chatRoomInfo={chatRoomInfo}
         />
@@ -27,8 +29,10 @@ const Messages = ({ currentChat, chatRoomInfo }) => {
   );
 };
 Messages.propTypes = {
+  friendList: PropTypes.array.isRequired,
   chatRoomInfo: PropTypes.array.isRequired,
   currentChat: PropTypes.object,
+  userInfo: PropTypes.array.isRequired,
 };
 
 export default Messages;
