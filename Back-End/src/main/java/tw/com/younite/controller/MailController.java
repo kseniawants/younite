@@ -8,7 +8,6 @@ import tw.com.younite.entity.UserEntity;
 import tw.com.younite.mapper.UserMapper;
 import tw.com.younite.service.inter.IUserService;
 import tw.com.younite.service.inter.MailService;
-
 import java.util.Random;
 
 @RestController
