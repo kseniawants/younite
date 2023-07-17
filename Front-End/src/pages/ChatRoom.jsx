@@ -22,7 +22,7 @@ const ChatRoom = () => {
         const roomList = [];
         resFriendList.data.forEach(async (element) => {
           friendLists.push({ id: element.userid, key: element.userid });
-          const room = await axios.get(`/getProfile/getRoom/${id}/${element.userid}`);
+          let room = await axios.get(`/getProfile/getRoom/${id}/${element.userid}`);
           roomList.push(room);
         });
         // console.log('roomList', roomList);

@@ -8,6 +8,7 @@ import axios from 'axios';
 import UserModal from '../component/Modal/UserMoadl';
 import userImge from '../assets/images/sia.png';
 
+
 function Home() {
   const [post1, setPost1] = useState([]);
   const [post2, setPost2] = useState([]);

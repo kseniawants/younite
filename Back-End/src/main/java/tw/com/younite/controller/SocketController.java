@@ -19,7 +19,7 @@ import java.util.*;
 
 @Controller
 @ServerEndpoint(value = "/websocket/{userID}/{room}")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 //@Component
 public class SocketController {
 
