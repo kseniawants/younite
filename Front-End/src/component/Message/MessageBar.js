@@ -4,16 +4,16 @@ import Search from './Search';
 import PropTypes from 'prop-types';
 import Messengers from './Messengers';
 
-const MessageBar = ({ chats, setCurrentChat, friendList }) => {
+const MessageBar = ({ chats, friendList }) => {
   return (
-    <div className=''>
+    <div>
       <div className='pt-3'>
         <h3 className='d-grid justify-content-center'>對話</h3>
         <p className='d-grid justify-content-center text-radio'>好友對話:10/25</p>
       </div>
       <div>
         <Search />
-        <Messengers chats={chats} setCurrentChat={setCurrentChat} friendList={friendList} />
+        <Messengers chats={chats} friendList={friendList} />
       </div>
     </div>
   );
@@ -21,7 +21,6 @@ const MessageBar = ({ chats, setCurrentChat, friendList }) => {
 
 MessageBar.propTypes = {
   chats: PropTypes.array.isRequired,
-  setCurrentChat: PropTypes.func.isRequired,
   friendList: PropTypes.array.isRequired,
 };
 
