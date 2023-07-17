@@ -1,22 +1,37 @@
-import React, {useState} from 'react'
-import Messages from './Messages'
-import Inputs from './Inputs'
+import React, { useState } from 'react';
+import Messages from './Messages';
+import Inputs from './Inputs';
 import Call from '../Modal/Call';
 import PropTypes from 'prop-types';
+// import axios from 'axios';
 
-const Chat = ({ currentChat }) => {
-  // 使用從 props 中取得的 currentChat 代替從 ChatDatas 取得的 user
-  const user = currentChat.userInfo; 
+const Chat = ({ currentChat, friendList, chatRoomInfo, userInfo }) => {
   const [isCallModalVisible, setCallModalVisible] = useState(false);
   const [isCallModalVisible1, setCallModalVisible1] = useState(false);
 
   const handleCallButtonClick = () => {
     setCallModalVisible(true);
-  };  
-  
+  };
+
   const handleCallButtonClick1 = () => {
     setCallModalVisible1(true);
-  }; 
+  };
+
+  // useEffect(() => {
+  //   const ws = new WebSocket('ws://localhost:8080/websocket/" + roomid'); // 填寫 WebSocket 伺服器的 URL
+  //   ws.onopen = () => {
+  //     console.log('WebSocket 連接成功');
+  //   };
+  //   ws.onmessage = (event) => {
+  //     console.log('接收到訊息:', event.data);
+  //   };
+  //   ws.onclose = () => {
+  //     console.log('WebSocket 連接關閉');
+  //   };
+  //   return () => {
+  //     ws.close();
+  //   };
+  // }, []);
 
   return (
     <div className='' style={{ flex: '2' }}>
@@ -28,35 +43,61 @@ const Chat = ({ currentChat }) => {
           <img
             className='rounded-circle bg-secondary'
             style={{ height: '50px', width: '50px', objectFit: 'cover' }}
-            src={user.photoURL}
+            src={userInfo.profileAvatar}
             alt=''
           />
           <div className='mx-3'>
-            <span className='text-dark' style={{fontSize:'20px'}}>{user.displayName}</span>
-            <p className='text-radio' style={{fontSize:'12px'}}>{user.state}</p>
+            <span className='text-dark' style={{ fontSize: '20px' }}>
+              {userInfo.fullName}
+            </span>
+            <p className='text-radio' style={{ fontSize: '12px' }}>
+              {/* {user.state} */}
+            </p>
           </div>
         </div>
-        <div className='d-flex' style={{gap: '20px'}}>
+        <div className='d-flex' style={{ gap: '20px' }}>
           <div>
-            <i className="fa-solid fa-phone text-dark fa-lg" style={{cursor: 'pointer'}} onClick={handleCallButtonClick}></i>
-            {isCallModalVisible && <Call currentChat={currentChat} closeModal={() => setCallModalVisible(false)} />}
+            <i
+              className='fa-solid fa-phone text-dark fa-lg'
+              style={{ cursor: 'pointer' }}
+              onClick={handleCallButtonClick}
+            ></i>
+            {isCallModalVisible && (
+              <Call
+                currentChat={currentChat}
+                friendList={friendList}
+                closeModal={() => setCallModalVisible(false)}
+              />
+            )}
           </div>
           <div>
-            <i className="fa-solid fa-video text-dark fa-lg" style={{ cursor: 'pointer' }} onClick={handleCallButtonClick1}></i>
-            {isCallModalVisible1 && <Call currentChat={currentChat} closeModal={() => setCallModalVisible1(false)} />}
+            <i
+              className='fa-solid fa-video text-dark fa-lg'
+              style={{ cursor: 'pointer' }}
+              onClick={handleCallButtonClick1}
+            ></i>
+            {isCallModalVisible1 && (
+              <Call
+                currentChat={currentChat}
+                friendList={friendList}
+                closeModal={() => setCallModalVisible1(false)}
+              />
+            )}
           </div>
           <div>
-            <i className="fa-solid fa-ellipsis text-dark fa-lg" style={{cursor: 'pointer'}}></i>
+            <i className='fa-solid fa-ellipsis text-dark fa-lg' style={{ cursor: 'pointer' }}></i>
           </div>
         </div>
       </div>
-      <Messages currentChat={currentChat}/>
-      <Inputs/>
+      <Messages currentChat={currentChat} chatRoomInfo={chatRoomInfo} />
+      <Inputs />
     </div>
   );
 };
 
 Chat.propTypes = {
+  chatRoomInfo: PropTypes.array.isRequired,
+  userInfo: PropTypes.array.isRequired,
   currentChat: PropTypes.shape({
     userInfo: PropTypes.shape({
       photoURL: PropTypes.string,
@@ -66,9 +107,14 @@ Chat.propTypes = {
     messages: PropTypes.arrayOf(
       PropTypes.shape({
         // 在此處填寫你的 message 物件的 shape
-      })
+      }),
     ),
+  }).isRequired,
+  friendList: PropTypes.shape({
+    profileAvatar: PropTypes.string,
+    fullName: PropTypes.string,
+    userid: PropTypes.string,
   }).isRequired,
 };
 
-export default Chat  
+export default Chat;

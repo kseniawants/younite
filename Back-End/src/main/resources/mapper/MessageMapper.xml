@@ -11,6 +11,7 @@
         <result column="roomId" property="roomId"></result>
         <result column="timestamp" property="timestamp"></result>
         <result column="messageContent" property="messageContent"></result>
+        <result column="count" property="count"></result>
     </resultMap>
 
     <insert id="insertMessage" useGeneratedKeys="true" keyProperty="messageId">
@@ -23,5 +24,8 @@
         FROM  `RoomMessages`
         WHERE `roomId` =  #{roomId}
     </select>
-
+<select id="getUnreadNo" resultMap="MessageEntityMap" resultType="int">
+    SELECT count(*) as count FROM `RoomMessages` WHERE `Timestamp` >
+    (SELECT log_time FROM users WHERE id=${receiverId}) and receiverId=${receiverId} AND senderId=${senderId};
+</select>
 </mapper>

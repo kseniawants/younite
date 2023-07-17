@@ -20,4 +20,11 @@ public class MessageService implements IMessageService {
     public List<MessageEntity> getMessages(Integer roomId) {
         return messageMapper.getMessages(roomId);
     }
+
+    @Override
+    public MessageEntity getUnreadNo(Integer receiverId, Integer senderId) {
+        System.out.println("ser:"+messageMapper.getUnreadNo(receiverId,senderId));
+        MessageEntity ms= messageMapper.getUnreadNo(receiverId,senderId);
+        return ms;
+    }
 }

@@ -36,12 +36,13 @@ function Store() {
 
       axios.defaults.withCredentials = true;
       axios
-        .post('/orders', formData)
+        .post('/orders', formData) 
         .then((response) => {
           console.log(formData);
           // 將回傳的數據保存在 response.data 中
           const data = response.data;
-          const newWindow = window.open('', '_blank'); //
+
+          const newWindow = window.open('', '_blank');
           const htmlContent = `
             <!DOCTYPE html>
             <html>
@@ -50,9 +51,9 @@ function Store() {
               </body>
             </html>
           `;
-
           newWindow.document.write(htmlContent); // 將HTML寫到新的window
           newWindow.document.close(); // 關閉文檔輸入流
+
           console.log(response.data);
         })
         .catch((error) => {
