@@ -177,8 +177,9 @@ public class SocketController {
             } else {
                 System.out.println("not found");
             }
-            pstmt.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }}
+
+     pstmt.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }}
 }

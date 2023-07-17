@@ -63,11 +63,13 @@ function LoginForm() {
         console.log(response);
         const token = response.data.data.token;
         console.log(response);
-        navigate('/home');
         document.cookie = `token=${encodeURIComponent(token)}; path=/;`;
         axios.defaults.headers.common['Authorization'] = token;
         handleAlertRes(response);
         console.log(response);
+        setTimeout(() => {
+          navigate('/home');
+        }, 2500);
       }
     } catch (error) {
       console.error(error);
@@ -202,12 +204,12 @@ function LoginForm() {
                 </LoginSocialFacebook>
               </div>
               <div className='text-dark text-center fw-normal'>
-                <span>還沒有帳號? </span>
+                <span className='ms-2'>還沒有帳號? </span>
                 <Link to='/register'>
                   <span>立即註冊</span>
                 </Link>
                 <Link to='/register'>
-                  <span>忘記密碼</span>
+                  <span className='ms-2'>忘記密碼</span>
                 </Link>
               </div>
             </div>

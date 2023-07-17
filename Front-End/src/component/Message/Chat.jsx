@@ -3,9 +3,9 @@ import Messages from './Messages';
 import Inputs from './Inputs';
 import Call from '../Modal/Call';
 import PropTypes from 'prop-types';
-import axios from 'axios';
+// import axios from 'axios';
 
-const Chat = ({ currentChat, friendList }) => {
+const Chat = ({ currentChat, friendList, chatRoomInfo, userInfo }) => {
   const [isCallModalVisible, setCallModalVisible] = useState(false);
   const [isCallModalVisible1, setCallModalVisible1] = useState(false);
 
@@ -17,7 +17,6 @@ const Chat = ({ currentChat, friendList }) => {
     setCallModalVisible1(true);
   };
 
-  axios.defaults.withCredentials = true;
   // useEffect(() => {
   //   const ws = new WebSocket('ws://localhost:8080/websocket/" + roomid'); // 填寫 WebSocket 伺服器的 URL
   //   ws.onopen = () => {
@@ -44,12 +43,12 @@ const Chat = ({ currentChat, friendList }) => {
           <img
             className='rounded-circle bg-secondary'
             style={{ height: '50px', width: '50px', objectFit: 'cover' }}
-            src={friendList.profileAvatar}
+            src={userInfo.profileAvatar}
             alt=''
           />
           <div className='mx-3'>
             <span className='text-dark' style={{ fontSize: '20px' }}>
-              {friendList.fullName}
+              {userInfo.fullName}
             </span>
             <p className='text-radio' style={{ fontSize: '12px' }}>
               {/* {user.state} */}
@@ -90,13 +89,15 @@ const Chat = ({ currentChat, friendList }) => {
           </div>
         </div>
       </div>
-      <Messages currentChat={currentChat} />
+      <Messages currentChat={currentChat} chatRoomInfo={chatRoomInfo} />
       <Inputs />
     </div>
   );
 };
 
 Chat.propTypes = {
+  chatRoomInfo: PropTypes.array.isRequired,
+  userInfo: PropTypes.array.isRequired,
   currentChat: PropTypes.shape({
     userInfo: PropTypes.shape({
       photoURL: PropTypes.string,

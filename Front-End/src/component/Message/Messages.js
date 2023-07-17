@@ -5,7 +5,7 @@ import '../../styles/messageItem.scss';
 import sia from '../../assets/images/sia.png';
 import PropTypes from 'prop-types';
 
-const Messages = ({ currentChat }) => {
+const Messages = ({ currentChat, chatRoomInfo }) => {
   // console.log('Current chat in Messages', currentChat);
   return (
     <div
@@ -13,19 +13,21 @@ const Messages = ({ currentChat }) => {
       id='messages'
       style={{ height: 'calc(100vh - 130px)' }}
     >
-      {currentChat.messages.map((message) => (
+      {chatRoomInfo.map((message) => (
         <MessageItem
-          key={message.id}
-          message={message}
+          key={message.messageId}
+          message={message.messageContent}
           userImage={currentChat.userInfo.photoURL}
           ownerImage={sia}
-          lastMessage={currentChat.lastMessage}
+          lastMessage={message.messageContent}
+          chatRoomInfo={chatRoomInfo}
         />
       ))}
     </div>
   );
 };
 Messages.propTypes = {
+  chatRoomInfo: PropTypes.array.isRequired,
   currentChat: PropTypes.object,
 };
 

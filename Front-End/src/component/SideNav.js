@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo/logo-type.png';
 import '../styles/component/nav.scss';
-// import UserImage from '../assets/images/sia.png';
 import ChatBotModal from './Modal/ChatBotModal';
 import NotificationCollapse from '../pages/NotificationCollapse';
 import axios from 'axios';
@@ -31,7 +30,7 @@ function SideNav() {
   axios.defaults.withCredentials = true;
 
   // 初始化 post 狀態為一個空物件
-  const [post, setPost] = useState(null);
+  const [post, setPost] = useState('');
 
   useEffect(() => {
     axios.defaults.withCredentials = true;

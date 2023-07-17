@@ -11,15 +11,17 @@ const ChatRoom = () => {
   const [currentChat, setCurrentChat] = useState(ChatDatas[0]);
   const [friendList, setFriendList] = useState([]);
   const [chatRoomInfo, setChatRoomInfo] = useState([]);
+  const [userInfo, setUserInfo] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const resFriendList = await axios.get('/getProfile/friendList');
         const resChatRoomInfo = await axios.get('/message/find/4');
+        const resUserInfo = await axios.get('/users/getUser/333');
         setFriendList(resFriendList.data);
-        console.log(resChatRoomInfo);
         setChatRoomInfo(resChatRoomInfo.data);
+        setUserInfo(resUserInfo.data);
       } catch (error) {
         console.error(error);
       }
@@ -29,6 +31,7 @@ const ChatRoom = () => {
 
   console.log('friendList', friendList);
   console.log('chatRoomInfo', chatRoomInfo);
+  console.log('userInfo', userInfo);
 
   return (
     <>
@@ -39,7 +42,12 @@ const ChatRoom = () => {
             <MessageBar chats={ChatDatas} setCurrentChat={setCurrentChat} friendList={friendList} />
           </div>
           <div className='col-9 text-white p-0'>
-            <Chat currentChat={currentChat} friendList={friendList} />
+            <Chat
+              currentChat={currentChat}
+              friendList={friendList}
+              chatRoomInfo={chatRoomInfo}
+              userInfo={userInfo}
+            />
           </div>
         </div>
       </div>

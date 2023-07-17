@@ -146,10 +146,11 @@ $(function () {
         audioBlobContainer = [];
 
         let roomid = $("#room").val();
+        let userid=$("#uid").val();
 
         console.log("connecting....");
         // webSocket = new WebSocket("ws://10.0.104.120:8080/websocket/" + roomid);
-        webSocket = new WebSocket("ws://localhost:8080/websocket/" + roomid);
+        webSocket = new WebSocket("ws://localhost:8080/websocket/" + userid+"/"+roomid);
 
         webSocket.roomId = roomid;
         $("#room").prop("disabled", true);
