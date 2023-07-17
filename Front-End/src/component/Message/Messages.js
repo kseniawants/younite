@@ -5,7 +5,6 @@ import '../../styles/messageItem.scss';
 import PropTypes from 'prop-types';
 
 const Messages = ({ chatRoomInfo, friendList, userInfo }) => {
-  // console.log('Current chat in Messages', currentChat);
   return (
     <div
       className='p-2 overflow-auto border-bottom'

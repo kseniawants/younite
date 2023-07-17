@@ -51,12 +51,7 @@ const ChatRoom = () => {
             <MessageBar friendList={friendList} />
           </div>
           <div className='col-9 text-white p-0'>
-            <Chat
-              friendList={friendList}
-              chatRoomInfo={chatRoomInfo}
-              userInfo={userInfo}
-              userId={id}
-            />
+            <Chat friendList={friendList} chatRoomInfo={chatRoomInfo} userInfo={userInfo} />
           </div>
         </div>
       </div>

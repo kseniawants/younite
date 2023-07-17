@@ -4,7 +4,7 @@ import Search from './Search';
 import PropTypes from 'prop-types';
 import Messengers from './Messengers';
 
-const MessageBar = ({ chats, friendList }) => {
+const MessageBar = ({ chats, friendList, handleSelectUser }) => {
   return (
     <div>
       <div className='pt-3'>
@@ -13,7 +13,7 @@ const MessageBar = ({ chats, friendList }) => {
       </div>
       <div>
         <Search />
-        <Messengers chats={chats} friendList={friendList} />
+        <Messengers chats={chats} friendList={friendList} handleSelectUser={handleSelectUser} />
       </div>
     </div>
   );

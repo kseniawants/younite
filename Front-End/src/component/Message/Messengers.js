@@ -4,8 +4,8 @@ import '../../styles/all.scss';
 import PropTypes from 'prop-types';
 
 const Messengers = ({ friendList }) => {
-  const handleSelect = (chat) => {
-    friendList(chat);
+  const handleSelect = (userid) => {
+    friendList(userid);
   };
 
   return (
@@ -18,7 +18,7 @@ const Messengers = ({ friendList }) => {
             id='userChat'
             style={{ cursor: 'pointer' }}
             key={friendList.userid}
-            onClick={() => handleSelect(friendList.userid)}
+            onClick={() => handleSelect(friendList)}
           >
             <img
               className='rounded-circle bg-dark'
