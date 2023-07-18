@@ -1,11 +1,10 @@
-//Chat.js
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import '../../styles/messageItem.scss';
 import Call from '../Modal/Call';
 
-const Chat = ({ friendList, chatRoomInfo, userInfo, fullName, profileAvatar }) => {
+const Chat = ({ friendList, chatRoomInfo, userInfo, selectData }) => {
   const [isCallModalVisible, setCallModalVisible] = useState(false);
   const [isCallModalVisible1, setCallModalVisible1] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
@@ -59,9 +58,8 @@ const Chat = ({ friendList, chatRoomInfo, userInfo, fullName, profileAvatar }) =
     setMessage('');
   };
 
-  //接之前的聊天紀錄
   const renderMessageItem = (message) => {
-    const displayImage = message.isOwner ? userInfo.data.profileAvatar : friendList.profileAvatar;
+    const displayImage = message.isOwner ? userInfo.profileAvatar : friendList.profileAvatar;
     const lastMessage = chatRoomInfo[chatRoomInfo.length - 1];
 
     return (
@@ -98,7 +96,7 @@ const Chat = ({ friendList, chatRoomInfo, userInfo, fullName, profileAvatar }) =
   };
 
   const handleFileInputChange = (event) => {
-    const uid = 333; // 替换为您的uid
+    const uid = 333;
     let webSocket;
     const file = event.target.files[0];
     console.log('Selected file:', file);
@@ -149,15 +147,15 @@ const Chat = ({ friendList, chatRoomInfo, userInfo, fullName, profileAvatar }) =
           <img
             className='rounded-circle bg-secondary'
             style={{ height: '50px', width: '50px', objectFit: 'cover' }}
-            src={profileAvatar}
+            src={selectData.profileAvatar}
             alt=''
           />
           <div className='mx-3'>
             <span className='text-dark' style={{ fontSize: '20px' }}>
-              {fullName}
+              {selectData.fullName}
             </span>
             <p className='text-radio' style={{ fontSize: '12px' }}>
-              {/* {userInfo.state} Online status check */}
+              {/* {userInfo.state} 在線狀態檢查 */}
             </p>
           </div>
         </div>
@@ -251,10 +249,9 @@ const Chat = ({ friendList, chatRoomInfo, userInfo, fullName, profileAvatar }) =
 
 Chat.propTypes = {
   chatRoomInfo: PropTypes.array.isRequired,
-  userInfo: PropTypes.array.isRequired,
-  friendList: PropTypes.array.isRequired,
-  fullName: PropTypes.string.isRequired,
-  profileAvatar: PropTypes.string.isRequired,
+  userInfo: PropTypes.object.isRequired,
+  friendList: PropTypes.object.isRequired,
+  selectData: PropTypes.object.isRequired, // Add selectData to the prop types
 };
 
 export default Chat;

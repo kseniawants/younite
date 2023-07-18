@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import Search from './Search';
 import PropTypes from 'prop-types';
 
-const MessageBar = ({ friendList, initialSelectData }) => {
+const MessageBar = ({ friendList, selectData: initialSelectData }) => {
   const [selectData, setSelectData] = useState(initialSelectData);
 
   const handleProfileClick = (fullName, profileAvatar, userid) => {
@@ -44,7 +44,7 @@ const MessageBar = ({ friendList, initialSelectData }) => {
         </div>
       </div>
     ));
-  }, [friendList]);
+  }, [friendList.join(', ')]);
 
   return (
     <div>
@@ -63,7 +63,7 @@ const MessageBar = ({ friendList, initialSelectData }) => {
 MessageBar.propTypes = {
   chats: PropTypes.array.isRequired,
   friendList: PropTypes.array.isRequired,
-  initialSelectData: PropTypes.object.isRequired,
+  selectData: PropTypes.object.isRequired,
 };
 
 export default MessageBar;
