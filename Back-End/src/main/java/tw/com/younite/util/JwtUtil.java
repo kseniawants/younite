@@ -15,7 +15,7 @@ public class JwtUtil {
     /**自己設定的秘鑰*/
     private static final String SECRET = "012345678909876543211213213123012345678909876543211213213123012345678909876543211213213123";
     /**前綴*/
-    public static final String TOKEN_PREFIX = "Bearer ";
+    public static final String TOKEN_PREFIX = "Bearer";
     /**表頭授權*/
     public static final String AUTHORIZATION = "Authorization";
 

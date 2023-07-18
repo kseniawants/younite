@@ -12,7 +12,6 @@ $(function () {
     let blobContainer = [];
     let imgSender = "";
 
-
     //audio
     let chunks = [];
     let isRecording = false;
@@ -145,7 +144,6 @@ $(function () {
             }
         }
     }
-
 
     //選擇性增加 : 文字輸入框，沒有webstock連線是沒辦法打字的
     let msgDiv = document.getElementById("msgDiv");
@@ -287,4 +285,4 @@ $(function () {
             let imageElement = document.createElement
         }
     }
-}
+})

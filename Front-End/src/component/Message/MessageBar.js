@@ -1,10 +1,51 @@
-// MessageBar.js
-import React from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Search from './Search';
 import PropTypes from 'prop-types';
-import Messengers from './Messengers';
 
-const MessageBar = ({ chats, friendList }) => {
+const MessageBar = ({ friendList, initialSelectData }) => {
+  const [selectData, setSelectData] = useState(initialSelectData);
+
+  const handleProfileClick = (fullName, profileAvatar, userid) => {
+    handleProfileData(fullName, profileAvatar, userid);
+  };
+
+  const handleSelect = (fullName, profileAvatar, userid) => {
+    handleProfileClick(fullName, profileAvatar, userid);
+  };
+
+  const handleProfileData = (fullName, profileAvatar, userid) => {
+    // 在这里处理接收到的数据
+    setSelectData({ fullName, profileAvatar, userid });
+  };
+
+  useEffect(() => {
+    console.log('selectData', selectData);
+  }, [selectData]);
+
+  // 使用useMemo缓存渲染的好友列表
+  const renderedFriendList = useMemo(() => {
+    return friendList.map((friend) => (
+      <div
+        className='p-2 d-flex align-items-center gap-2 '
+        id='userChat'
+        style={{ cursor: 'pointer' }}
+        key={friend.userid}
+        onClick={() => handleSelect(friend.fullName, friend.profileAvatar, friend.userid)}
+      >
+        <img
+          className='rounded-circle bg-dark'
+          style={{ height: '50px', width: '50px', objectFit: 'cover' }}
+          src={friend.profileAvatar}
+          alt=''
+        />
+        <div>
+          <span style={{ fontSize: '18px' }}>{friend.fullName}</span>
+          <p style={{ fontSize: '14px', color: '#949494' }}>{friend.lastMessage}</p>
+        </div>
+      </div>
+    ));
+  }, [friendList]);
+
   return (
     <div>
       <div className='pt-3'>
@@ -13,7 +54,7 @@ const MessageBar = ({ chats, friendList }) => {
       </div>
       <div>
         <Search />
-        <Messengers chats={chats} friendList={friendList} />
+        {renderedFriendList}
       </div>
     </div>
   );
@@ -22,6 +63,7 @@ const MessageBar = ({ chats, friendList }) => {
 MessageBar.propTypes = {
   chats: PropTypes.array.isRequired,
   friendList: PropTypes.array.isRequired,
+  initialSelectData: PropTypes.object.isRequired,
 };
 
 export default MessageBar;

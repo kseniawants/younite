@@ -22,7 +22,7 @@ function Store() {
   }, []);
 
   const handleRadioChange = (event) => {
-    setSelected(event.target.value); // 更新選擇的值
+    setSelected(event.target.value); //更新選擇的值
   };
 
   const handleButtonClick = () => {
@@ -36,7 +36,7 @@ function Store() {
 
       axios.defaults.withCredentials = true;
       axios
-        .post('/orders', formData) 
+        .post('/orders', formData)
         .then((response) => {
           console.log(formData);
           // 將回傳的數據保存在 response.data 中

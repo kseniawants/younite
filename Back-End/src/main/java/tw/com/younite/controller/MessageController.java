@@ -23,6 +23,7 @@ public class MessageController extends BaseController {
     @ApiOperation("新增訊息")
     @PostMapping("/add")
     public JSONResult<Void> addmessage(@ApiParam(value = "新增聊天訊息", required = true)HttpSession session, @RequestBody MessageEntity messageEntity) {
+        System.out.println("add msg");
         iMessageService.insertMessage(messageEntity);
         return new JSONResult<>(OK);
     }
