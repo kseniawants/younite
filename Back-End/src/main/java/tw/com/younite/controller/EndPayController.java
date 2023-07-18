@@ -15,7 +15,7 @@ import java.io.IOException;
 public class EndPayController {
         @PostMapping("/redirectPost")
         @ResponseBody
-        public String index(@ApiParam(value = "", required = true)
+        public String index(@ApiParam(value = "回應顯示頁面跳轉", required = true)
                                     HttpServletResponse response) throws IOException {
             response.sendRedirect("http://localhost:3000/home");
             return null;
