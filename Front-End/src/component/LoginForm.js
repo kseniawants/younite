@@ -208,7 +208,7 @@ function LoginForm() {
                 <Link to='/register'>
                   <span>立即註冊</span>
                 </Link>
-                <Link to='/register'>
+                <Link to='/forget'>
                   <span className='ms-2'>忘記密碼</span>
                 </Link>
               </div>
