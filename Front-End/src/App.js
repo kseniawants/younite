@@ -12,7 +12,8 @@ import Store from './pages/Store';
 import ShowMore from './component/ShowMore';
 import LikeShowMore from './pages/LikeShowMore';
 import InterestsShowMore from './pages/InterestsShowMore';
-import ProfessionShowMore from './pages/ProfessionShowMore'
+import ProfessionShowMore from './pages/ProfessionShowMore';
+import WhoLikeShowMore from './pages/WhoLikeShowMore';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path='/show/like' element={<LikeShowMore />}></Route>
             <Route path='/show/interest' element={<InterestsShowMore />}></Route>
             <Route path='/show/profession' element={<ProfessionShowMore />}></Route>
+            <Route path='/show/wholike' element={<WhoLikeShowMore />}></Route>
           </Route>
           <Route path='/setting' element={<SettingPersonal />}></Route>
           <Route path='/store' element={<Store />}></Route>

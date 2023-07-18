@@ -7,16 +7,16 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import UserModal from '../component/Modal/UserMoadl';
 import userImge from '../assets/images/sia.png';
-// import token from '../TokenUtil.js';
+
 
 function Home() {
   const [post1, setPost1] = useState([]);
   const [post2, setPost2] = useState([]);
   const [post3, setPost3] = useState([]);
+  const [post4, setPost4] = useState([]);
+  const [unlocked, setUnlocked] = useState(false); // 確認是否解鎖
   const [likedUsers, setLikedUsers] = useState([]);
 
-  axios.defaults.withCredentials = true;
-  // axios.defaults.headers.common['Authorization'] = token;
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -24,11 +24,15 @@ function Home() {
         const response2 = await axios.get('/users/profiles/profession');
         const likedUsersResponse = await axios.get('/users/getLikedUsers'); // 獲取使用者的邀請紀錄
         const response3 = await axios.get('/users/recommendation/');
+        const response4 = await axios.get('/users/getUser');
+        const response5 = await axios.get('/users/likesTrackerProfiles');
         setPost1(response1.data);
         setPost2(response2.data);
         setPost3(response3.data);
+        setUnlocked(response4.data.data.unlocked); // 設定解鎖狀態
+        console.log(response4.data.data.unlocked); // 設定解鎖狀態
+        setPost4(response5.data);
         setLikedUsers(likedUsersResponse.data); // 設定使用者的邀請紀錄
-        console.log(likedUsersResponse.data);
       } catch (error) {
         console.error(error);
       }
@@ -144,12 +148,59 @@ function Home() {
             </div>
           </div>
           <div className='bg-pageMain col'>
-            <Link to='/store'>
-              <i className='fa-solid fa-user-lock' style={{ color: '#82898D' }}></i>
-            </Link>
-            <h6>誰喜歡你</h6>
-            <div className='user-lock'>
-              <UserCard />
+            {unlocked ? (
+              <>
+                <h6>誰喜歡你</h6>
+                {post4.data &&
+                  post4.data.map((item, index) => (
+                    <div
+                      key={index}
+                      className='user-card px-2 py-2 row'
+                      onClick={(event) => handleUserButtonClick(event, item)}
+                    >
+                      <div className='col d-flex align-items-center'>
+                        <img
+                          src={item.profileAvatar || userImge}
+                          alt='Your Picture'
+                          className='mb-1 user-card-image'
+                        />
+                        <h6 className='ms-3'>{item.name}</h6>
+                        <h6 className='ms-2 text-radio'>{item.age}</h6>
+                      </div>
+                      <div className='row mt-1 text-nowrap'>
+                        {item.interests &&
+                          item.interests.slice(0, 3).map((interest, i) => (
+                            <button
+                              key={i}
+                              type='button'
+                              className='btn btn-outline-primary btn-sm col-3 m-1 rounded-pill btn-block'
+                            >
+                              #{interest}
+                            </button>
+                          ))}
+                      </div>
+                    </div>
+                  ))}
+                {/* : ( */}
+                <>
+                  <UserCard />
+                  <UserCard />
+                </>
+                {/* ) */}
+              </>
+            ) : (
+              <>
+                <Link to='/store'>
+                  <i className='fa-solid fa-user-lock' style={{ color: '#82898D' }}></i>
+                </Link>
+                <h6>誰喜歡你</h6>
+                <div className='user-lock'>
+                  <UserCard />
+                </div>
+              </>
+            )}
+            <div className='bg-pageMore d-flex mt-3'>
+              <Link to='/show/wholike'>顯示更多...</Link>
             </div>
           </div>
           <div className='bg-pageMain col ms-3'>
