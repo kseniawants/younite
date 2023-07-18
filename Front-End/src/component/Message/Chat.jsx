@@ -1,8 +1,9 @@
+//Chat.js
 import React, { useState, useEffect } from 'react';
-import Messages from './Messages';
-import Call from '../Modal/Call';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import '../../styles/messageItem.scss';
+import Call from '../Modal/Call';
 
 const Chat = ({ friendList, chatRoomInfo, userInfo, fullName, profileAvatar }) => {
   const [isCallModalVisible, setCallModalVisible] = useState(false);
@@ -22,15 +23,15 @@ const Chat = ({ friendList, chatRoomInfo, userInfo, fullName, profileAvatar }) =
     const fetchData = async () => {
       const resUserInfo = await axios.get('/users/profile');
       const id = resUserInfo.data.data.userId;
-      let ws = new WebSocket(`ws://localhost:8080/websocket/${id}/2`); // 填寫 WebSocket 伺服器的 URL
+      let ws = new WebSocket(`ws://localhost:8080/websocket/${id}/2`);
       ws.onopen = () => {
-        console.log('WebSocket 連接成功');
+        console.log('WebSocket connection successful');
       };
       ws.onmessage = (event) => {
-        console.log('接收到訊息:', event.data);
+        console.log('Received message:', event.data);
       };
       ws.onclose = (event) => {
-        console.log('WebSocket close：' + event.code + '，原因：' + event.reason);
+        console.log('WebSocket closed: ' + event.code + ', reason: ' + event.reason);
       };
       ws.onerror = () => {
         console.log('Error');
@@ -54,9 +55,88 @@ const Chat = ({ friendList, chatRoomInfo, userInfo, fullName, profileAvatar }) =
   };
 
   const handleSend = () => {
-    // 在這裡處理發送訊息的邏輯，例如調用API或通知父組件
     console.log('Sending message:', message);
     setMessage('');
+  };
+
+  //接之前的聊天紀錄
+  const renderMessageItem = (message) => {
+    const displayImage = message.isOwner ? userInfo.data.profileAvatar : friendList.profileAvatar;
+    const lastMessage = chatRoomInfo[chatRoomInfo.length - 1];
+
+    return (
+      <div key={message.messageId}>
+        <div className={`message ${message.isOwner ? 'owner' : ''}`}>
+          <div className='messageInfo'>
+            <img
+              className='rounded-circle bg-secondary'
+              style={{ height: '50px', width: '50px', objectFit: 'cover' }}
+              src={displayImage}
+              alt=''
+            />
+          </div>
+          <div className='messageContent'>
+            <p>{message.messageContent}</p>
+            <img className='' src={message.imageURL} alt='' />
+          </div>
+        </div>
+        <div className={`message ${lastMessage.isOwner ? 'owner' : ''}`}>
+          <div className='messageInfo'>
+            <img
+              className='rounded-circle bg-secondary'
+              style={{ height: '50px', width: '50px', objectFit: 'cover' }}
+              src={displayImage}
+              alt=''
+            />
+          </div>
+          <div className='messageContent'>
+            <p>{lastMessage.messageContent}</p>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const handleFileInputChange = (event) => {
+    const uid = 333; // 替换为您的uid
+    let webSocket;
+    const file = event.target.files[0];
+    console.log('Selected file:', file);
+    const formData = new FormData();
+    formData.append('file', file);
+    fetch('http://localhost:8080/storage/upload', {
+      method: 'POST',
+      body: formData,
+      headers: new Headers({
+        'Content-Type': '',
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        const msg = {
+          type: 'image',
+          data: res.data,
+          ud: uid,
+        };
+        webSocket.send(JSON.stringify(msg));
+        const msgtodb = {
+          senderId: 333,
+          receiverId: 6,
+          messageType: 'image',
+          roomId: 36,
+          messageContent: res.data,
+        };
+        fetch('http://localhost:8080/message/add', {
+          method: 'POST',
+          body: JSON.stringify(msgtodb),
+          headers: new Headers({
+            'Content-Type': 'application/json',
+          }),
+        });
+      })
+      .catch((error) => {
+        console.error('Error uploading file:', error);
+      });
   };
 
   return (
@@ -77,7 +157,7 @@ const Chat = ({ friendList, chatRoomInfo, userInfo, fullName, profileAvatar }) =
               {fullName}
             </span>
             <p className='text-radio' style={{ fontSize: '12px' }}>
-              {/* {userInfo.state} 在線中判斷 */}
+              {/* {userInfo.state} Online status check */}
             </p>
           </div>
         </div>
@@ -107,16 +187,31 @@ const Chat = ({ friendList, chatRoomInfo, userInfo, fullName, profileAvatar }) =
           </div>
         </div>
       </div>
-      <Messages chatRoomInfo={chatRoomInfo} friendList={friendList} userInfo={userInfo} />
+      <div
+        className='p-2 overflow-auto border-bottom'
+        id='messages'
+        style={{ height: 'calc(100vh - 130px)' }}
+      >
+        {chatRoomInfo.map((message) => renderMessageItem(message))}
+      </div>
       <div
         className='p-2 d-flex align-items-center justify-content-between'
         style={{ height: '50px' }}
       >
         <div className='ps-4'>
-          <i
-            className='fa-solid fa-paperclip text-radio fa-lg pe-4'
-            style={{ cursor: 'pointer' }}
-          ></i>
+          <label htmlFor='fileInput'>
+            <i
+              className='fa-solid fa-paperclip text-radio fa-lg pe-4'
+              style={{ cursor: 'pointer' }}
+            ></i>
+            <input
+              type='file'
+              id='fileInput'
+              style={{ display: 'none' }}
+              onChange={handleFileInputChange}
+            />
+          </label>
+
           <i
             className='fa-solid fa-photo-film text-radio fa-lg pe-4'
             style={{ cursor: 'pointer' }}
@@ -143,6 +238,7 @@ const Chat = ({ friendList, chatRoomInfo, userInfo, fullName, profileAvatar }) =
             placeholder='輸入文字'
             value={message}
             onChange={handleChange}
+            style={{ width: '700px' }}
           />
           <button className='bg-primary border-0' onClick={handleSend}>
             Send

@@ -39,6 +39,7 @@ public class SocketController {
     public void onOpen(Session session, @PathParam("room") String room) {
         System.out.println("onOpen()" + session.toString());
 //        session.setMaxIdleTimeout(10 * 1000);
+        session.setMaxIdleTimeout(0);
         if (sessions.add(session)) {
             addUserToRoom(room, session); // 加入指定的房間
         }
