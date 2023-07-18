@@ -14,6 +14,7 @@ import LikeShowMore from './pages/LikeShowMore';
 import InterestsShowMore from './pages/InterestsShowMore';
 import ProfessionShowMore from './pages/ProfessionShowMore';
 import WhoLikeShowMore from './pages/WhoLikeShowMore';
+import ForgetPassword from './component/ForgetPasword';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path='/login' element={<Login />}></Route>
         <Route path='/personal' element={<PersonalInfo />}></Route>
         <Route path='/chatroom' element={<ChatRoom />}></Route>
+        <Route path='/forget' element={<ForgetPassword />}></Route>
         <Route path='/' element={<HomeLayout />}>
           <Route path='/home' element={<Home />}></Route>
           <Route path='/show' element={<ShowMore />}>
