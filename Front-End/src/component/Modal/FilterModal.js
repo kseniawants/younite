@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import Draggable from 'react-draggable';
 import '../../styles/Modal/filterModal.scss';
 
-function FilterModal({ closeModal }) {
+function FilterModal({ closeModal, handleFilter }) {
   // 移動視窗 程式碼 START
   const [position, setPosition] = useState({ x: undefined, y: undefined });
   const [fadeIn, setFadeIn] = useState(false); // 追蹤是否需要淡入
   useEffect(() => {
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
-    const modalWidth = 500; // 假設 modal 寬度為 500px
+    const modalWidth = 400; // 假設 modal 寬度為 500px
     const modalHeight = 300; // 假設 modal 高度為 300px
     const initialX = (screenWidth - modalWidth) / 2;
     const initialY = (screenHeight - modalHeight) / 2;
@@ -32,10 +32,25 @@ function FilterModal({ closeModal }) {
   };
 
   //控制距離
-  const [rangeVal, setRangeVal] = useState(0);
+  const [rangeValDistance, setRangeValDistance] = useState(0); // 距離的 state 變數
+  const [rangeValAge, setRangeValAge] = useState(0); // 年齡的 state 變數
 
-  const updateRange = (e) => {
-    setRangeVal(e.target.value);
+  const updateRangeDistance = (e) => {
+    setRangeValDistance(e.target.value);
+  };
+
+  const updateRangeAge = (e) => {
+    setRangeValAge(e.target.value);
+  };
+
+  const handleAgeInputChange = (e) => {
+    const value = parseInt(e.target.value, 10);
+    setRangeValAge(value);
+  };
+
+  const handleApplyFilter = () => {
+    closeModal();
+    handleFilter(rangeValDistance, rangeValAge); // 呼叫父元件傳遞的函數，並傳遞選擇的值
   };
 
   return (
@@ -56,43 +71,67 @@ function FilterModal({ closeModal }) {
                 ></button>
               </div>
               {/* ↓↓↓ 下面可以隨意更改，區塊直接用 col 來寫  ↓↓↓*/}
-              <label htmlFor='customRange1' className='form-label'>
-                距離
-                <span id='output' className='bg-lightblue text-black rounded px-2 mx-3'>
-                  {rangeVal}
+              <div className='col d-flex align-items-center'>
+                <label htmlFor='customRange1' className='form-label mb-0'>
+                  距離
+                </label>
+                <span id='output' className='bg-lightblue text-primary rounded px-1 mx-3'>
+                  <input
+                    type='number'
+                    className='form-control text-primary'
+                    value={rangeValDistance}
+                    min='0'
+                    max='100'
+                    step='10'
+                    onChange={updateRangeDistance}
+                  />
                 </span>
                 公里
-              </label>
+              </div>
               <input
                 type='range'
-                className='form-range'
+                className='form-range mt-3'
                 id='customRange1'
-                value={rangeVal}
+                value={rangeValDistance}
                 min='0'
                 max='999'
-                step='10'
-                onChange={updateRange}
+                step='0'
+                onChange={updateRangeDistance}
               />
               <hr className='mx-1' />
-              <label htmlFor='customRange1' className='form-label'>
-                年齡
-                <span id='output' className='bg-lightblue text-black rounded px-2 mx-3'>
-                  {rangeVal}
+              <div className='col d-flex align-items-center'>
+                <label htmlFor='customRange2' className='form-label mb-0'>
+                  年齡
+                </label>
+                <span id='output' className='bg-lightblue text-primary rounded px-1 mx-3'>
+                  <input
+                    type='number'
+                    className='form-control text-primary'
+                    value={rangeValAge}
+                    min='0'
+                    max='100'
+                    step='1'
+                    onChange={handleAgeInputChange}
+                  />
                 </span>
                 歲
-              </label>
+              </div>
               <input
                 type='range'
-                className='form-range'
-                id='customRange1'
-                value={rangeVal}
+                className='form-range mt-3'
+                id='customRange2'
+                value={rangeValAge}
                 min='0'
                 max='100'
                 step='1'
-                onChange={updateRange}
+                onChange={updateRangeAge}
               />
+
               {/* ↑↑↑ 上面可以隨意更改，區塊直接用 col 來寫 ↑↑↑ */}
             </div>
+            <button type='button' className='btn btn-primary btn-sm text-white' onClick={handleApplyFilter}>
+              提交
+            </button>
           </div>
         </section>
       </Draggable>
@@ -102,6 +141,7 @@ function FilterModal({ closeModal }) {
 
 FilterModal.propTypes = {
   closeModal: PropTypes.func.isRequired,
+  handleFilter: PropTypes.func.isRequired,
 };
 
 export default FilterModal;

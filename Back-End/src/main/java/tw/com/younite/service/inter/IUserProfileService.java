@@ -14,5 +14,5 @@ public interface IUserProfileService {
     void unblockUser(Integer userID, Integer blockedUserID);
     List<Map<String, Object>> getProfilesByProfession(Integer userID);
     String getPreferredGender(Integer userID);
-    List<Integer> getProfdilesByPreferredGender(String gender);
+    List<Integer> getProfilesByPreferredGender(Integer userId, String preferredGender);
 }

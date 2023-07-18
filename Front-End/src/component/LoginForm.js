@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Input } from './FormElements';
 import { LoginSocialFacebook, LoginSocialGoogle } from 'reactjs-social-login';
@@ -6,15 +6,13 @@ import { FacebookLoginButton, GoogleLoginButton } from 'react-social-login-butto
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AlertModal from './Modal/AlertModal';
-// import { setToken } from '../lib/api';
 
 function LoginForm() {
   const [submitting, setSubmitting] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
-  //以下 Alert Modal
-  const [showAlertModal, setShowAlertModal] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
-  const [AlertStateIcon, setAlertStateIcon] = useState('');
+  const [showAlertModal, setShowAlertModal] = useState(false); //Alert 視窗
+  const [alertMessage, setAlertMessage] = useState(''); //Alert 訊息
+  const [AlertStateIcon, setAlertStateIcon] = useState(''); //Alert icon
 
   // 轉址判斷
   const navigate = useNavigate();
@@ -26,8 +24,8 @@ function LoginForm() {
     mode: 'onTouched',
   });
 
-  //Alert用
   const handleAlertRes = (response) => {
+    //Alert用
     setAlertMessage(response.data.message);
     setAlertStateIcon(response.data.state);
     setFormSubmitted(false);
@@ -46,6 +44,7 @@ function LoginForm() {
   };
 
   // 表單發送的按鈕
+  axios.defaults.withCredentials = true; //Axios 支援跨域請求和 Cookie 傳遞
   const onSubmit = async (data) => {
     console.log(data);
     try {
@@ -64,11 +63,13 @@ function LoginForm() {
         console.log(response);
         const token = response.data.data.token;
         console.log(response);
-        navigate('/home');
-        document.cookie = `token=${token}; path=/;`;
+        document.cookie = `token=${encodeURIComponent(token)}; path=/;`;
         axios.defaults.headers.common['Authorization'] = token;
         handleAlertRes(response);
         console.log(response);
+        setTimeout(() => {
+          navigate('/home');
+        }, 2500);
       }
     } catch (error) {
       console.error(error);
@@ -76,16 +77,6 @@ function LoginForm() {
       setSubmitting(false);
     }
   };
-
-  useEffect(() => {
-    //取出token
-    const token = document.cookie
-      .split(';')
-      .find((row) => row.startsWith('YouNiteToken='))
-      ?.split('=')[1];
-    console.log(token);
-    axios.defaults.headers.common['Authorization'] = token;
-  });
 
   return (
     <div className='container p-0'>
@@ -213,12 +204,12 @@ function LoginForm() {
                 </LoginSocialFacebook>
               </div>
               <div className='text-dark text-center fw-normal'>
-                <span>還沒有帳號? </span>
+                <span className='ms-2'>還沒有帳號? </span>
                 <Link to='/register'>
                   <span>立即註冊</span>
                 </Link>
                 <Link to='/register'>
-                  <span>忘記密碼</span>
+                  <span className='ms-2'>忘記密碼</span>
                 </Link>
               </div>
             </div>

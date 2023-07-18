@@ -1,7 +1,12 @@
 package tw.com.younite.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import tw.com.younite.service.impl.UserServiceImpl;
+import tw.com.younite.service.inter.IUserService;
 
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
@@ -9,13 +14,15 @@ import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
+import java.sql.*;
 import java.util.*;
 
 @Controller
-@ServerEndpoint(value = "/websocket/{room}")
-@CrossOrigin(origins = "*")
+@ServerEndpoint(value = "/websocket/{userID}/{room}")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 //@Component
 public class SocketController {
+
     private static Set<Session> sessions;
     private static Map<String, Set<Session>> roomMap;
 //    private CountDownLatch dataMessageLatch = new CountDownLatch(1);
@@ -32,6 +39,7 @@ public class SocketController {
     public void onOpen(Session session, @PathParam("room") String room) {
         System.out.println("onOpen()" + session.toString());
 //        session.setMaxIdleTimeout(10 * 1000);
+        session.setMaxIdleTimeout(0);
         if (sessions.add(session)) {
             addUserToRoom(room, session); // 加入指定的房間
         }
@@ -39,8 +47,9 @@ public class SocketController {
     }
 
     @OnClose
-    public void onClose(Session session) {
+    public void onClose(Session session, @PathParam("userID") Integer id) {
 //        System.out.println("onClose()");
+        update(id);
         sessions.remove(session);
         removeUserFromAllRooms(session);
     }
@@ -145,4 +154,33 @@ public class SocketController {
         }
         return null;
     }
+    private void update(Integer id){
+        String url = "jdbc:mysql://younite-database.c7ta6ybbk9nu.ap-northeast-1.rds.amazonaws.com:3306/younite";
+        String username = "admin";
+        String password = "younite666";
+
+        // 建立資料庫連接
+        try (Connection conn = DriverManager.getConnection(url, username, password)) {
+            // 建立 PreparedStatement 物件
+            String sql = "UPDATE users SET log_time = ? WHERE id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            // 設定參數值
+            Timestamp newLogTime = new Timestamp(System.currentTimeMillis());
+            pstmt.setTimestamp(1, newLogTime);
+            pstmt.setInt(2, id);
+
+            // 執行更新操作
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("updateok: " + rowsAffected);
+            } else {
+                System.out.println("not found");
+            }
+
+     pstmt.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }}
 }

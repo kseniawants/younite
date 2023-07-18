@@ -27,31 +27,28 @@ function SideNav() {
     setIsActive(false);
   };
 
+  axios.defaults.withCredentials = true;
+
   // 初始化 post 狀態為一個空物件
-  const [post, setPost] = useState(null);
+  const [post, setPost] = useState('');
 
   useEffect(() => {
-    axios
-      .get('/users/profile')
-      .then((response) => {
-        setPost(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    axios.defaults.withCredentials = true;
+    axios.get('/users/profile').then((response) => {
+      setPost(response.data);
+      console.log(response.data);
+    });
   }, []);
 
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    axios.defaults.withCredentials = true;
+
     axios
       .post('/users/logout')
       .then((response) => {
         console.log(response);
-        // 清除儲存的 Token
-        document.cookie = 'YouNiteToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-        // 清除 Authorization 的 headers
-        delete axios.defaults.headers.common['Authorization'];
         // 登出成功後的處理
         navigate('/'); // 導航到登入頁面
       })

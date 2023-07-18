@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 @ApiModel(description = "登入註冊的Entity")
 @Data
@@ -30,4 +31,5 @@ public class UserEntity extends BaseEntity implements Serializable {
     @ApiModelProperty(value = "使用者vip時間")
     private Date vipExpiry;
     private Boolean unlocked;
+    private Timestamp logTime;
 }

@@ -14,5 +14,6 @@ public interface UserProfileMapper {
     UserProfileEntity getBlockedID(Integer userID);
     List<UserProfileEntity> getProfilesByProfession(Integer userId, String professions);
     String getPreferredGender(Integer userId);
-    List<UserProfileEntity> getProfilesByPreferredGender(String gender);
+    List<UserProfileEntity> getProfilesByPreferredGender(Integer userId, String preferredGender);
+    List<UserProfileEntity> getProfilesByGender(Integer userId, String gender);
 }

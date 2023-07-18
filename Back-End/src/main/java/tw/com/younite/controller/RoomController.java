@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/room")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class RoomController extends BaseController{
     @Autowired
     IRoomService iRoomService;

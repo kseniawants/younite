@@ -12,4 +12,5 @@ public class MessageEntity {
     private Integer roomId;
     private Date timestamp;
     private String messageContent;
+    private Integer count;
 }
