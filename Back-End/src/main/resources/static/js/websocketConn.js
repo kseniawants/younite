@@ -285,4 +285,4 @@ $(function () {
             let imageElement = document.createElement
         }
     }
-}
+})
