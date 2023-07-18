@@ -30,7 +30,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     public static final String[] AUTH_WHITELIST = {
-            "/users/**","/storage/**","/orders/**","/employees/**","/management/**","/callback/**","/home/**","/users/register","/users/profile","/redirectPost","/items", "/websocket/**", "/msgServer2/**",
+            "/users/**","/storage/**","/orders/**","/employees/**","/management/**","/callback/**","/home/**","/users/register","/users/profile","/redirectPost","/items","/mail/**",
+            "/websocket/**", "/msgServer2/**",
             "/client.html","/message/add","/storage/uploadChat","/js/conn.js"
     };
     @Autowired

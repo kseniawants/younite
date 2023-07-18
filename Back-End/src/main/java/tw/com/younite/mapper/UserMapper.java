@@ -58,4 +58,11 @@ public interface UserMapper {
     List<Map<String, Object>> trial();
 
     void updateLogTime(Timestamp logTime,Integer id);
+
+    //忘記密碼
+    void updatePasswordByEmail(String email, String password);
+
+    void updateResetTokenByEmail(String email, String resetToken);
+
+    String tokenByEmail (String email);
 }
