@@ -26,6 +26,7 @@ function App() {
           <Route path='/login' element={<Login />}></Route>
           <Route path='/personal' element={<PersonalInfo />}></Route>
           <Route path='/chatroom' element={<ChatRoom />}></Route>
+          <Route path='/forget' element={<ForgetPassword />}></Route>
           <Route path='/' element={<HomeLayout />}>
             <Route path='/home' element={<Home />}></Route>
             <Route path='/show' element={<ShowMore />}>
