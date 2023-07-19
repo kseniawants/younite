@@ -20,7 +20,7 @@
   min-width: 300px;
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
@@ -30,35 +30,31 @@
     background-color: rgba(15, 14, 14, 0.4); /* 背景颜色，根据需要调整透明度 */
     z-index: -1; /* 将叠加层置于底部 */
   }
-  
+
   h4 {
-      margin-top: 10rem;
+    margin-top: 10rem;
   }
 
   .button1 {
-      border: 3px solid lightgray;
-      border-radius: 50%;
-      background-color: transparent;
-      padding: 0;
-      width: 4vw;
-      height: 8vh;
-    }
-  
-    .button2 {
-      border: none;
-      border-radius: 50%;
-      background: #FF451C;
-      padding: 0;
-      width: 4vw;
-      height: 8vh;
-    }
-  
+    border: 1.75px solid lightgray;
+    border-radius: 50%;
+    background-color: transparent;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+  }
+
+  .button2 {
+    border: none;
+    border-radius: 50%;
+    background: #ff451c;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+  }
+
   .button1 i,
   .button2 i {
-      font-size: 24px; 
+    font-size: 24px;
   }
-  
 }
-
-
-
