@@ -32,4 +32,7 @@ public class UserEntity extends BaseEntity implements Serializable {
     private Date vipExpiry;
     private Boolean unlocked;
     private Timestamp logTime;
+    @ApiModelProperty(value = "重置密碼驗證碼")
+    private String resetToken;
+
 }

@@ -16,4 +16,5 @@ public interface IUserService {
 
     void updateLogTime(Integer id);
 
+    boolean checkEmailExists(String email);
 }

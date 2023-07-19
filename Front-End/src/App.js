@@ -14,6 +14,7 @@ import LikeShowMore from './pages/LikeShowMore';
 import InterestsShowMore from './pages/InterestsShowMore';
 import ProfessionShowMore from './pages/ProfessionShowMore';
 import WhoLikeShowMore from './pages/WhoLikeShowMore';
+import ForgetPassword from './component/ForgetPasword';
 
 function App() {
   return (

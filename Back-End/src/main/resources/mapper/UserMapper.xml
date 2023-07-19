@@ -20,6 +20,7 @@
         <result column="vip_expiry" property="vipExpiry"></result>
         <result column="unlocked" property="unlocked"></result>
         <result column="log_time" property="logTime"></result>
+        <result column="reset_token" property="resetToken" />
 
 
     </resultMap>
@@ -61,7 +62,11 @@
         FROM users u
                  JOIN profiles p on p.user_id = u.id;
     </select>
-
+    <select id="tokenByEmail" resultType="string">
+        SELECT reset_token
+        FROM users
+        WHERE email = #{email}
+    </select>
     <insert
             id="register"
             useGeneratedKeys="true" keyProperty="id">
@@ -107,6 +112,15 @@
         SET `log_time`   = #{logTime}
         WHERE `id` = ${id}
     </update>
-
+    <update id="updatePasswordByEmail">
+        UPDATE users
+        SET password   = #{password}
+        WHERE email = #{email}
+    </update>
+    <update id="updateResetTokenByEmail">
+        UPDATE users
+        SET reset_token = #{resetToken}
+        WHERE email = #{email}
+    </update>
 
 </mapper>
