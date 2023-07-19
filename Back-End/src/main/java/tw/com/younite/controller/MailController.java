@@ -13,6 +13,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/mail")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class MailController {
 
     @Autowired
