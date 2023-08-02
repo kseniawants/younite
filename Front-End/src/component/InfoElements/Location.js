@@ -102,7 +102,7 @@ const LocationModal = (props) => {
               lng: 121.5654177 // 初始中心點經度
             }}
             zoom={14}
-            style={{ width: '28vw', height: '52vh' }}
+            style={{ width: '25vw', height: '52vh' }}
           >
             {selectedLocation && (
               <Marker position={selectedLocation} />
